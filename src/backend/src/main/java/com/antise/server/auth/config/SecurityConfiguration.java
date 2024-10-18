@@ -1,4 +1,4 @@
-package com.server.cocoapp.auth.config;
+package com.antise.server.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.server.cocoapp.auth.services.AuthFilterService;
+import com.antise.server.auth.services.AuthFilterService;
 
 import lombok.RequiredArgsConstructor;
 

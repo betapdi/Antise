@@ -1,4 +1,4 @@
-package com.server.cocoapp.auth.entities;
+package com.antise.server.auth.entities;
 
 import java.time.Instant;
 

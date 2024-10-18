@@ -1,11 +1,11 @@
-package com.server.cocoapp.config;
+package com.antise.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
 
-import com.server.cocoapp.utils.IntegerToUserRoleConverter;
-import com.server.cocoapp.utils.UserRoleToIntegerConverter;
+import com.antise.server.utils.IntegerToUserRoleConverter;
+import com.antise.server.utils.UserRoleToIntegerConverter;
 
 import java.util.Arrays;
 

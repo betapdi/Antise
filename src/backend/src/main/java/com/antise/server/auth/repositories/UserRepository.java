@@ -1,10 +1,10 @@
-package com.server.cocoapp.auth.repositories;
+package com.antise.server.auth.repositories;
 
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.server.cocoapp.auth.entities.User;
+import com.antise.server.auth.entities.User;
 
 public interface UserRepository extends MongoRepository<User, String> {
      

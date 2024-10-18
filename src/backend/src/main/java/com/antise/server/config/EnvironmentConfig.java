@@ -1,4 +1,4 @@
-package com.server.cocoapp.config;
+package com.antise.server.config;
 
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;

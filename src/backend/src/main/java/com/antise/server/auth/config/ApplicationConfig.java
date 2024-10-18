@@ -1,4 +1,4 @@
-package com.server.cocoapp.auth.config;
+package com.antise.server.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.server.cocoapp.auth.repositories.UserRepository;
+import com.antise.server.auth.repositories.UserRepository;
 
 @Configuration
 public class ApplicationConfig {

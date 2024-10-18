@@ -1,4 +1,4 @@
-package com.server.cocoapp.auth.utils;
+package com.antise.server.auth.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

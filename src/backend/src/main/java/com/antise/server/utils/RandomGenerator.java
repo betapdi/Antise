@@ -1,4 +1,4 @@
-package com.server.cocoapp.utils;
+package com.antise.server.utils;
 
 import java.util.Random;
 

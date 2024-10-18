@@ -1,4 +1,4 @@
-package com.server.cocoapp.auth.services;
+package com.antise.server.auth.services;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -6,10 +6,10 @@ import java.util.UUID;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.server.cocoapp.auth.entities.RefreshToken;
-import com.server.cocoapp.auth.entities.User;
-import com.server.cocoapp.auth.repositories.RefreshTokenRepository;
-import com.server.cocoapp.auth.repositories.UserRepository;
+import com.antise.server.auth.entities.RefreshToken;
+import com.antise.server.auth.entities.User;
+import com.antise.server.auth.repositories.RefreshTokenRepository;
+import com.antise.server.auth.repositories.UserRepository;
 
 @Service
 public class RefreshTokenService {

@@ -1,4 +1,4 @@
-package com.server.cocoapp.auth.services;
+package com.antise.server.auth.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
