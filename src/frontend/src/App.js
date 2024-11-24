@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import React, { Suspense } from 'react';
+import {
+  BrowserRouter, Navigate, Route, Routes
+} from "react-router-dom";
+
 import './App.css';
+import Authentication from './features/Authentication';
+import Header from './components/Header';
+
+const Job = React.lazy(() => import('./features/JobSeeking'));
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback = {<div>Loading...</div>}>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path = "/" element = {<Navigate to = "/manga" replace />} />
+            <Route path = "job/*" element = {<Job />} />
+            <Route path = "auth/*" element = {<Authentication />} />
+          </Routes>
+        </BrowserRouter>
+    </Suspense>
   );
 }
 
