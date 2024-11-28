@@ -13,6 +13,7 @@ export default function SignUpPage() {
             <div className="flex flex-col me-16">
               <h className="text-[32px] font-medium font-inter leading-10 mb-2">Create Account</h>
               <div className="text-gray text-base font-normal font-inter">Already have an account? <a href="/auth/login" className="text-blue hover:underline">Login</a></div>
+
             </div>
             <select className="border rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 py-0 pr-2">
               <option value="1">Employee</option>

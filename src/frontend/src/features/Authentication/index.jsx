@@ -7,6 +7,7 @@ import {
 import SignUpPage from './Page/Register';
 import LoginPage from "./Page/Login";
 
+
 const Authentication = (props) => {
   return (
     <div>
@@ -20,3 +21,4 @@ const Authentication = (props) => {
   )
 }
 export default Authentication
+
