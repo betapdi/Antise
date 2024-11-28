@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path = "/" element = {<Navigate to = "/manga" replace />} />
+            <Route path = "/" element = {<Navigate to = "auth/" replace />} />
             <Route path = "job/*" element = {<Job />} />
             <Route path = "auth/*" element = {<Authentication />} />
           </Routes>
