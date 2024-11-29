@@ -6,6 +6,7 @@ import {
   } from "react-router-dom";
 import SignUpPage from './Page/Register';
 import LoginPage from "./Page/Login";
+import ProfilePage from "./Page/Profile";
 
 
 const Authentication = (props) => {
@@ -15,6 +16,7 @@ const Authentication = (props) => {
         <Route exact path = '/' element = {<Navigate to = "/auth/register" replace />} />
         <Route path = "register" element = { <SignUpPage />} />
         <Route path = "login" element = { <LoginPage />} />
+        <Route path = "profile" element = { <ProfilePage />} />
         <Route path = "*" element = {<p>NONE</p>} />
       </Routes>
     </div>
