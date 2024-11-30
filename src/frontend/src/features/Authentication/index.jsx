@@ -4,8 +4,8 @@ import {
     Route,
     Navigate,
   } from "react-router-dom";
-import SignUpPage from './Page/Register';
-import LoginPage from "./Page/Login";
+import SignUpPage from './pages/Register';
+import LoginPage from "./pages/Login";
 
 
 const Authentication = (props) => {
