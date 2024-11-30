@@ -69,11 +69,12 @@ const ProfilePage = () => {
             </div>
             <div>
               <label className="block text-gray-700 mb-2">Education</label>
-              <input
-                type="text"
-                className="w-full border rounded-lg p-2"
-                placeholder="Fill University"
-              />
+              <select className="w-full border rounded-lg p-2">
+                <option value="">Select...</option>
+                <option value="undergrad">Undergraduate</option>
+                <option value="grad">Graduated</option>
+                <option value="higherEd">Higher Education</option>
+              </select>
             </div>
           </div>
           <div className="mt-4">

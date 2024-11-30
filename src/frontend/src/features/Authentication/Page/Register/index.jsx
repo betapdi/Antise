@@ -26,11 +26,8 @@ export default function SignUpPage() {
               </div>
               <div className="text-gray text-base font-normal font-inter mt-4">
                 Want to view your profile?{" "}
-                <a
-                  href="/auth/profile"
-                  className="text-green-600 hover:underline"
-                >
-                  Go to Profile
+                <a href="/job/profile" className="text-blue hover:underline">
+                  Profile
                 </a>
               </div>
             </div>
