@@ -1,9 +1,11 @@
 package com.antise.server.entities;
 
-import java.util.List;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.antise.server.classes.ApplicationStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,11 +21,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Company {
+public class Application {
     @Id
     private String id;
 
-    private String location;
+    private String jobId;
 
-    private List<HumanResource> employees;
+    private ApplicationStatus status;
+
+    private Date submittedDate;
 }

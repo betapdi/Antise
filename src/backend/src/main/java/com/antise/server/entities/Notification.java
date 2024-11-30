@@ -1,6 +1,6 @@
 package com.antise.server.entities;
 
-import java.util.List;
+import java.sql.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -19,11 +19,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Company {
+public class Notification {
     @Id
     private String id;
 
-    private String location;
+    private String title;
 
-    private List<HumanResource> employees;
+    private String message;
+
+    private String recipentId;
+
+    private String type;
+
+    private Date createdAt;
 }
