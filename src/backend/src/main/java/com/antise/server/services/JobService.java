@@ -14,6 +14,7 @@ import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
 import com.antise.server.dto.JobDto;
+import com.antise.server.entities.HumanResource;
 import com.antise.server.entities.Job;
 import com.antise.server.repositories.JobRepository;
 
@@ -90,8 +91,12 @@ public class JobService {
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
         if (user.getRole() == UserRole.HR && job.getHrId() != user.getUserId()) throw new ObjectOwnershipException();
 
+        HumanResource hr = (HumanResource)user;
+        hr.getJobList().remove(job);
+        userRepository.save(hr);
+
         jobRepository.delete(job);
 
-        return "Job with id " + job.getId() + " is deleted successfully";
+        return "Job with id " + jobId + " is deleted successfully";
     }
 }
