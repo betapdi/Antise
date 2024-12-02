@@ -1,23 +1,29 @@
-import React from 'react';
-import {
-  Route, Routes, Navigate
-} from "react-router-dom";
-import MainPage from './pages/Main';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import MainPage from "./pages/Main";
 import ProfilePage from "./pages/Profile";
+import PersonalPage from "./pages/Personal";
+import SocialLinksPage from "./pages/SocialLinks";
+import AccountSettingPage from "./pages/AccountSetting";
 
-const Manga = (props) => {
+const App = () => {
   return (
-    <div>
+    <Router>
       <Routes>
-        <Route exact path = '/' element = {<Navigate to = "/temp" replace />} />
-        <Route path = "/temp" element = {<MainPage/>} />
-        <Route path = "/profile" element = {<ProfilePage/>} />
-        <Route path = "*" element = {<p>NONE</p>} />
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+        <Route path="/dashboard" element={<MainPage />} />
+
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/personal" element={<PersonalPage />} />
+        <Route path="/social-links" element={<SocialLinksPage />} />
+        <Route path="/account-setting" element={<AccountSettingPage />} />
+
+        {/* Catch-all for undefined routes */}
+        <Route path="*" element={<p>Page not found</p>} />
       </Routes>
-    </div>
-  )
-}
+    </Router>
+  );
+};
 
-Manga.propTypes = {};
-
-export default Manga
+export default App;
