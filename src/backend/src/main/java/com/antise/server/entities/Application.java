@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.antise.server.classes.ApplicationStatus;
+import com.antise.server.dto.ApplicationDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,4 +31,11 @@ public class Application {
     private ApplicationStatus status;
 
     private Date submittedDate;
+
+    public void update(ApplicationDto applicationDto) {
+        if (applicationDto.getId() != null) id = applicationDto.getId();
+        if (applicationDto.getJobId() != null) jobId = applicationDto.getJobId();
+        if (applicationDto.getStatus() != null) status = applicationDto.getStatus();
+        if (applicationDto.getSubmittedDate() != null) submittedDate = applicationDto.getSubmittedDate();
+    }
 }
