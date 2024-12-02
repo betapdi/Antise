@@ -8,7 +8,7 @@ import AccountSettingPage from "./pages/AccountSetting";
 
 const App = () => {
   return (
-    <Router>
+    <div>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
@@ -22,7 +22,7 @@ const App = () => {
         {/* Catch-all for undefined routes */}
         <Route path="*" element={<p>Page not found</p>} />
       </Routes>
-    </Router>
+    </div>
   );
 };
 
