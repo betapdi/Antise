@@ -1,6 +1,9 @@
 import React from 'react'
 import Nav from '../../../../components/Nav'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Footer from '../../../../components/Footer';
+
 const jobs = [
     {
         title: "Senior UX Designer",
@@ -90,13 +93,14 @@ const companies = [
         location: "United States",
     },
 
-  ];
+];
   
 
 
 function HomePage() {
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 8; 
+    const navigate = useNavigate();
     // Calculate the index range for the current page
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -111,10 +115,17 @@ function HomePage() {
             setCurrentPage(newPage);
         }
     };
+    const handleSignInClick = () => {
+        navigate('/auth/login'); // Route for Sign In
+    };
+
+    const handleSignUpClick = () => {
+        navigate('/auth/register'); // Route for Sign Up
+    };
+    
     
     return (
         <div>
-            <Nav/> 
             <div className="flex flex-col w-full items-center justify-center bg-[#f7f7f8]">
                 <div className="flex flex-row justify-center items-center gap-16 mb-20">
                     <div className="flex-col justify-center items-center gap-8 flex">
@@ -324,7 +335,7 @@ function HomePage() {
                     {currentCompanies.map((company, index) => (
                         <div 
                             key={index} 
-                            className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex"
+                            className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
                         >
                             <div className="justify-start items-start gap-4 inline-flex">
                                 <img src={company.logo} alt={`${company.name} logo`} className="w-16 h-16" />
@@ -349,8 +360,8 @@ function HomePage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[248px] px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex">
-                                <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">
+                            <div className="w-[248px] px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex  hover:bg-[#0a65cc] hover:text-white group">
+                                <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal group-hover:text-white">
                                     Open Position
                                 </div>
                             </div>
@@ -358,36 +369,56 @@ function HomePage() {
                     ))}
                 </div>
             </div>
-            <div className='flex flex-row justify-center gap-16'>
-                <div className="h-[290px] p-[50px] bg-[#e4e5e8] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
+            <div className='flex flex-row justify-center gap-16 py-16'>
+                <div className="h-[290px] p-[30px] bg-[#e4e5e8] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
                     <div className="flex-col justify-start items-start gap-4 flex">
-                        <div className="w-[548px] text-[#181f33] text-[32px] font-medium font-['Inter'] leading-10">Become a Candidate</div>
+                        <div className="w-[500px] text-[#181f33] text-[32px] font-medium font-['Inter'] leading-10">Become a Candidate</div>
                         <div className="w-[312px] opacity-80 text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus a dolor convallis efficitur.</div>
                     </div>
-                    <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex">
-                        <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Register now</div>
+                    <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group">
+                        <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
+                                         onClick={()=>handleSignUpClick()}
+                        >
+                            Register now
+                        </div>
                         <img 
-                            src={require("../../../../image/arrow_right.png")} 
-                            alt="arrow_right" 
+                                src={require("../../../../image/arrow_right.png")} 
+                                alt="arrow_right" 
+                                className="h-4 group-hover:hidden"
+                        />
+                        <img 
+                                src={require("../../../../image/arrow_right_hover.png")} 
+                                alt="arrow_right_hover" 
+                                className="h-4 hidden group-hover:block"
                         />
                     </div>
                 </div>
-                <div className="h-[290px] p-[50px] bg-[#0851a3] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
+                <div className="h-[290px] p-[30px] bg-[#0851a3] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
                     <div className="flex-col justify-start items-start gap-4 flex">
-                        <div className="w-[548px] text-white text-[32px] font-medium font-['Inter'] leading-10">Become a Employers</div>
+                        <div className="w-[500px] text-white text-[32px] font-medium font-['Inter'] leading-10">Become a Employers</div>
                         <div className="w-[312px] opacity-80 text-white text-sm font-normal font-['Inter'] leading-tight">Cras in massa pellentesque, mollis ligula non, luctus dui. Morbi sed efficitur dolor. Pelque augue risus, aliqu.</div>    
                     </div>
-                    <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex">
-                        <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Register now</div>
+                    <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group">
+                        <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
+                                        onClick={()=>handleSignUpClick()}
+                        >
+                            Register now
+                        </div>
                         <img 
-                            src={require("../../../../image/arrow_right.png")} 
-                            alt="arrow_right" 
+                                src={require("../../../../image/arrow_right.png")} 
+                                alt="arrow_right" 
+                                className="h-4 group-hover:hidden"
+                        />
+                        <img 
+                                src={require("../../../../image/arrow_right_hover.png")} 
+                                alt="arrow_right_hover" 
+                                className="h-4 hidden group-hover:block"
                         />
                     </div>
                 </div>
 
             </div>
-
+            <Footer/>
         </div>
         
     )

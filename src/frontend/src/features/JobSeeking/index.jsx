@@ -5,10 +5,11 @@ import {
 import MainPage from './pages/Main';
 import ProfilePage from "./pages/Profile";
 import HomePage from './pages/HomePage';
-
+import Header from '../../components/Header';
 const Manga = (props) => {
   return (
     <div>
+      <Header/>
       <Routes>
         <Route exact path = '/' element = {<Navigate to = "/temp" replace />} />
         <Route path = "/temp" element = {<MainPage/>} />

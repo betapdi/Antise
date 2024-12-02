@@ -14,7 +14,6 @@ function App() {
   return (
     <Suspense fallback = {<div>Loading...</div>}>
         <BrowserRouter>
-          <Header />
           <Routes>
             <Route path = "/" element = {<Navigate to = "auth/" replace />} />
             <Route path = "job/*" element = {<Job />} />
