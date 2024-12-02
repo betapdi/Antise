@@ -127,12 +127,10 @@ function HomePage() {
     return (
         <div>
             <div className="flex flex-col w-full items-center justify-center bg-[#f7f7f8]">
-                <div className="flex flex-row justify-center items-center gap-16 mb-20">
-                    <div className="flex-col justify-center items-center gap-8 flex">
-                        <div className="flex-col justify-start items-start flex">
-                            <div className="w-[652px] text-[#18191c] text-[56px] font-medium font-['Inter'] leading-[64px]">Find a job that suits your interest & skills.</div>
-                            <div className="w-[536px] text-[#bccce0] text-lg font-normal font-['Inter'] leading-7">Aliquam vitae turpis in diam convallis finibus in at risus. Nullam in scelerisque leo, eget sollicitudin velit bestibulum.</div>
-                        </div>
+                <div className="flex-row justify-center items-center gap-10 flex mb-20">
+                    <div className="flex-col justify-start items-start gap-8 flex">
+                            <div className="w-[32rem] text-[#18191c] text-[56px] font-medium font-['Inter'] leading-[64px]">Find a job that suits your interest & skills.</div>
+                            <div className="w-[25rem] text-[#bccce0] text-lg font-normal font-['Inter'] leading-7">Aliquam vitae turpis in diam convallis finibus in at risus. Nullam in scelerisque leo, eget sollicitudin velit bestibulum.</div>
                     </div>
                     <img src={require("../../../../image/homepage_img.png")} alt="hero_image"/>
                 </div>
