@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.antise.server.classes.Contact;
 import com.antise.server.classes.JobStatus;
 import com.antise.server.classes.SocialMedia;
+import com.antise.server.dto.JobDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,4 +43,11 @@ public class Job {
     private Contact contactInformation;
 
     private List<SocialMedia> socialMedias; 
+
+    private String hrId;
+
+    public void update(JobDto dto) {
+        if (dto.getAddress() != null) address = dto.getAddress();
+        if (dto.getDescription() != null) description = dto.getDescription();
+    }
 }
