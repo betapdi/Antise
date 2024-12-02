@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 const ProfilePage = () => {
   return (
@@ -69,12 +69,11 @@ const ProfilePage = () => {
             </div>
             <div>
               <label className="block text-gray-700 mb-2">Education</label>
-              <select className="w-full border rounded-lg p-2">
-                <option value="">Select...</option>
-                <option value="undergrad">Undergraduate</option>
-                <option value="grad">Graduated</option>
-                <option value="higherEd">Higher Education</option>
-              </select>
+              <input
+                type="text"
+                className="w-full border rounded-lg p-2"
+                placeholder="Fill University"
+              />
             </div>
           </div>
           <div className="mt-4">
