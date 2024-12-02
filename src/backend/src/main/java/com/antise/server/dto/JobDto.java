@@ -35,6 +35,8 @@ public class JobDto {
 
     private List<SocialMedia> socialMedias;
 
+    private String hrId;
+
     public void update(Job job) {
         if (job.getId() != null) id = job.getId();
         if (job.getAddress() != null) address = job.getAddress();
