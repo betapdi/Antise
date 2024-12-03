@@ -118,7 +118,6 @@ function DetailJob() {
     };
     return (
         <div>
-            <Nav />
             <div className="w-full h-[76px] px-[300px] bg-[#f1f2f4] flex justify-center items-center mb-10">
                 <div className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7">Job Details</div>
             </div>

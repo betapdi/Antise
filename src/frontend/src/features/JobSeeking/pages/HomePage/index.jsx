@@ -1,5 +1,4 @@
 import React from 'react'
-import Nav from '../../../../components/Nav'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../../../components/Footer';
@@ -114,9 +113,6 @@ function HomePage() {
         if (newPage >= 0 && newPage < Math.ceil(companies.length / itemsPerPage)) {
             setCurrentPage(newPage);
         }
-    };
-    const handleSignInClick = () => {
-        navigate('/auth/login'); // Route for Sign In
     };
 
     const handleSignUpClick = () => {

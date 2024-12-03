@@ -2,8 +2,8 @@ import * as React from "react";
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen flex flex-row gap-32">
-      <div className="w-1/3 flex ms-24 justify-between items-center">
+    <div className="w-screen h-screen justify-center items-center flex flex-row gap-20">
+      <div className="w-1/2 flex justify-between items-center">
         <div className="flex flex-col">
           <div className="flex flex-row items-center mb-10">
             <img
@@ -13,7 +13,7 @@ export default function SignUpPage() {
             />
             <div className="text-black text-1xl font-inter pt-2">Antise</div>
           </div>
-          <div className="flex flex-row items-center mb-8">
+          <div className="flex flex-row items-center justify-between mb-8">
             <div className="flex flex-col me-16">
               <h className="text-[32px] font-medium font-inter leading-10 mb-2">
                 Create Account
@@ -25,9 +25,9 @@ export default function SignUpPage() {
                 </a>
               </div>
             </div>
-            <select className="border rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 py-0 pr-2">
-              <option value="1">Employee</option>
-              <option value="2">Employer</option>
+            <select id="role" class="bg-white border border-gray/100 text-black rounded-lg p-2">
+              <option value="Employee">Employee</option>
+              <option value="Employer">Employer</option>
             </select>
           </div>
           <form className="space-y-2 mb-8">
