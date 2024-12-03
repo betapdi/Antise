@@ -7,6 +7,7 @@ import ProfilePage from "./pages/Profile";
 import HomePage from './pages/HomePage';
 import Header from '../../components/Header';
 import DetailJob from './pages/DetailJob';
+import DetailCompany from './pages/DetailCompany';
 
 const Manga = (props) => {
   return (
@@ -18,6 +19,7 @@ const Manga = (props) => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/homePage" element={<HomePage />} />
         <Route path="/DetailJob" element={<DetailJob />} />
+        <Route path="/DetailCompany" element={<DetailCompany />} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>

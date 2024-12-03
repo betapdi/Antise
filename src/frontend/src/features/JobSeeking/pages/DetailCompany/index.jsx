@@ -97,7 +97,7 @@ const jobs = [
     },
 ];
 
-function DetailJob() {
+function DetailCompany() {
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const itemsPerPage = 6;
@@ -117,97 +117,22 @@ function DetailJob() {
     };
     return (
         <div className="w-full flex flex-col justify-center items-center">
-            <div className="w-3/4 flex flex-col justify-center items-center mt-20 mb-20">
-                {/* Job Title */}
+            <div className="w-3/4 flex flex-col justify-center items-center mt-10 mb-20">
+                {/*  Company Title */}
                 <div className='flex flex-row justify-between items-start w-full max-w-7xl gap-10'>
-                    <div className="flex-row justify-start items-center gap-10 flex">
-                        <img className="w-24 h-24 rounded-[100px]" src="https://via.placeholder.com/96x96" />
-                        <div className="flex-col justify-start items-start gap-[13px] inline-flex">
-                            <div className="justify-start items-center gap-2 inline-flex">
-                                <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">Senior UX Designer</div>
-                                <div className="px-3 py-[3px] bg-[#ffeded] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                    <div className="text-[#ff4e4e] text-sm font-normal font-['Inter'] leading-tight">Featured</div>
-                                </div>
-                                <div className="px-3 py-[3px] bg-[#e8f1ff] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                    <div className="text-[#0065ff] text-sm font-normal font-['Inter'] leading-tight">Full Time</div>
-                                </div>
-                            </div>
-                            <div className="justify-start items-center gap-5 inline-flex">
-                                <div className="justify-start items-center gap-2 flex">
-                                    <div className="w-5 h-5 relative">
-                                        <img
-                                            src={require(`../../../../image/icon_link.svg`).default}
-                                            alt="icon"
-                                            className="transition-opacity duration-300 group-hover:opacity-0">
-                                        </img>
-                                    </div>
-                                    <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">https://instagram.com</div>
-                                </div>
-                                <div className="justify-start items-center gap-1.5 flex">
-                                    <div className="w-6 h-6 relative">
-                                        <img
-                                            src={require(`../../../../image/icon_phone.svg`).default}
-                                            alt="icon"
-                                            className="transition-opacity duration-300 group-hover:opacity-0">
-                                        </img>
-                                    </div>
-                                    <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">(406) 555-0120</div>
-                                </div>
-                                <div className="justify-start items-center gap-1.5 flex">
-                                    <div className="w-6 h-6 justify-center items-center flex">
-                                        <div className="w-6 h-6 relative">
-                                            <img
-                                                src={require(`../../../../image/icon_envelop.svg`).default}
-                                                alt="icon"
-                                                className="transition-opacity duration-300 group-hover:opacity-0">
-                                            </img>
-                                        </div>
-                                    </div>
-                                    <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">career@instagram.com</div>
-                                </div>
+                    <div className="w-full h-40 p-10 bg-white rounded-xl border border-[#e4e5e8] justify-between items-center inline-flex">
+                        <div className="justify-start items-center gap-6 flex">
+                            <img className="w-20 h-20 rounded-md" src="https://via.placeholder.com/80x80" />
+                            <div className="flex-col justify-start items-start gap-2.5 inline-flex">
+                                <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">Twitter</div>
+                                <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Information Technology (IT)</div>
                             </div>
                         </div>
-                    </div>
-                    <div className="flex-col justify-center items-end gap-3 inline-flex">
-                        <div className="justify-center items-center gap-3 inline-flex">
-                            {/* <div className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex">
-                                <div className="w-6 h-6 justify-center items-center flex">
-                                    <div className="w-6 h-6 relative">
-                                        <img
-                                            src={require(`../../../../image/bookmark.png`)}
-                                            alt="icon"
-                                        />
-                                    </div>
-                                </div>
-                            </div> */}
-
-                            <div
-                                className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex"
-                                onClick={() => setIsClicked(!isClicked)}
-                            >
-                                <div className="w-6 h-6 justify-center items-center flex">
-                                    <div className="w-6 h-6 relative">
-                                        <img
-                                            src={require(`../../../../image/${isClicked ? 'bookmark_click.png' : 'bookmark.png'}`)}
-                                            alt="icon"
-                                        />
-                                    </div>
-                                </div>
+                        <div className="px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex">
+                            <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">View Open Position</div>
+                            <div className="w-6 h-6 relative">
+                                <img src={require(`../../../../image/arrow_right_hover.png`)} alt="icon" />
                             </div>
-
-                            <div className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex">
-                                <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
-                                <div className="w-6 h-6 relative">
-                                    <img
-                                        src={require(`../../../../image/arrow_right_hover.png`)}
-                                        alt="icon"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="justify-start items-start inline-flex">
-                            <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Job expire in:</div>
-                            <div className="text-[#e05050] text-sm font-medium font-['Inter'] leading-tight"> June 30, 2021</div>
                         </div>
                     </div>
                 </div>
@@ -217,12 +142,12 @@ function DetailJob() {
                     {/* Job Description */}
                     <div className="w-3/5 flex-col justify-start items-start gap-8 inline-flex">
                         <div className="flex-col justify-start items-start gap-4 flex">
-                            <div className="text-black text-lg font-medium font-['Inter'] leading-7">Job Description</div>
+                            <div className="text-black text-lg font-medium font-['Inter'] leading-7">Description</div>
                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Integer aliquet pretium consequat. Donec et sapien id leo accumsan pellentesque eget maximus tellus. Duis et est ac leo rhoncus tincidunt vitae vehicula augue. Donec in suscipit diam. Pellentesque quis justo sit amet arcu commodo sollicitudin. Integer finibus blandit condimentum. Vivamus sit amet ligula ullamcorper, pulvinar ante id, tristique erat. Quisque sit amet aliquam urna. Maecenas blandit felis id massa sodales finibus. Integer bibendum eu nulla eu sollicitudin. Sed lobortis diam tincidunt accumsan faucibus. Quisque blandit augue quis turpis auctor, dapibus euismod ante ultricies. Ut non felis lacinia turpis feugiat euismod at id magna. Sed ut orci arcu. Suspendisse sollicitudin faucibus aliquet.</div>
                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Nam dapibus consectetur erat in euismod. Cras urna augue, mollis venenatis augue sed, porttitor aliquet nibh. Sed tristique dictum elementum. Nulla imperdiet sit amet quam eget lobortis. Etiam in neque sit amet orci interdum tincidunt.</div>
                         </div>
                         <div className="flex-col justify-start items-start gap-4 flex">
-                            <div className="text-black text-lg font-medium font-['Inter'] leading-7">Responsibilities</div>
+                            <div className="text-black text-lg font-medium font-['Inter'] leading-7">Company Benefits</div>
                             <div className="flex-col justify-start items-start gap-3 flex">
                                 <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Quisque semper gravida est et consectetur.</div>
                                 <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Curabitur blandit lorem velit, vitae pretium leo placerat eget.</div>
@@ -237,21 +162,19 @@ function DetailJob() {
                         </div>
                     </div>
 
-                    {/* Job Overview */}
+                    {/* Company Overview */}
                     <div className="w-2/5 flex-col justify-start items-start gap-6 inline-flex">
                         <div className="w-full p-8 bg-white rounded-lg border-2 border-[#e7f0fa]">
-                            <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose mb-6">
-                                Job Overview
-                            </div>
-                            <div className="grid grid-cols-3 gap-x-16 gap-y-10">
-                                {/* Job Posted */}
+                            {/* Company Overview */}
+                            <div className="grid grid-cols-2 gap-x-16 gap-y-10">
+                                {/* Founded in */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8 flex justify-center items-center">
                                         <img src={require(`../../../../image/icon_calendar.png`)} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                            Job Posted:
+                                            FOUNDED IN:
                                         </div>
                                         <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
                                             14 June, 2021
@@ -259,130 +182,85 @@ function DetailJob() {
                                     </div>
                                 </div>
 
-                                {/* Job Expire */}
+                                {/* Organization type */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8 flex justify-center items-center">
                                         <img src={require(`../../../../image/icon_timer.png`)} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                            Job Expire In:
+                                            ORGANIZATION TYPE:
                                         </div>
                                         <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                            14 July, 2021
+                                            Private Company
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Education */}
-                                <div className="flex flex-col items-start gap-4">
-                                    <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_briefcase.png`)} alt="icon" />
-                                    </div>
-                                    <div className="flex flex-col items-start gap-1">
-                                        <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                            Education:
-                                        </div>
-                                        <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                            Graduation
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Salary */}
+                                {/* Team size */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
                                         <img src={require(`../../../../image/icon_wallet.png`)} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                            Salary:
+                                            TEAM SIZE:
                                         </div>
                                         <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                            $50k-80k/month
+                                            120-300 Candidates
                                         </div>
                                     </div>
                                 </div>
 
-                                {/* Location */}
-                                <div className="flex flex-col items-start gap-4">
-                                    <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_location.png`)} alt="icon" />
-                                    </div>
-                                    <div className="flex flex-col items-start gap-1">
-                                        <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                            Location:
-                                        </div>
-                                        <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                            New York, USA
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Job Type */}
+                                {/* Industry types */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
                                         <img src={require(`../../../../image/icon_briefcase.png`)} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                            Job Type:
+                                            INDUSTRY TYPES:
                                         </div>
                                         <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                            Full Time
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Experience */}
-                                <div className="flex flex-col items-start gap-4">
-                                    <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_briefcase.png`)} alt="icon" />
-                                    </div>
-                                    <div className="flex flex-col items-start gap-1">
-                                        <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                            Experience:
-                                        </div>
-                                        <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                            10-15 Years
+                                            Technology
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="w-full p-8 rounded-xl border-2 border-[#e7f0fa] flex-col justify-start items-start gap-8 flex">
-                            <div className="justify-start items-center gap-4 inline-flex">
-                                <img className="rounded-md" src="https://via.placeholder.com/64x64" />
-                                <div className="flex-col justify-start items-start gap-2 inline-flex">
-                                    <div className="text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">Instagram</div>
-                                    <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Social networking service</div>
+                        {/* Contact Information */}
+                        <div className="w-full flex flex-col p-5 rounded-xl border-2 border-[#e7f0fa] justify-start items-start gap-4">
+                            <div className="text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">Contact Information</div>
+                            <div className="justify-start items-start gap-4 inline-flex">
+                                <div className="w-8 h-8 justify-center items-center flex">
+                                    <div className="w-8 h-8 relative">
+                                        <img src={require(`../../../../image/icon_globe.svg`).default} alt="icon" />
+                                    </div>
+                                </div>
+                                <div className="flex-col justify-start items-start gap-1 inline-flex">
+                                    <div className="text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">Website</div>
+                                    <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">www.estherhoward.com</div>
                                 </div>
                             </div>
-                            <div className="w-full flex-col justify-start items-start gap-y-5 flex">
-                                <div className="w-full justify-between items-center inline-flex">
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Founded in:</div>
-                                    <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">March 21, 2006</div>
+                            <div className="w-full h-[0px] border border-[#e4e5e8]"></div>
+                            <div className="justify-start items-start gap-4 inline-flex">
+                                <div className="w-8 h-8 relative">
+                                    <img src={require(`../../../../image/icon_phone_blue.svg`).default} alt="icon" />
                                 </div>
-                                <div className="w-full justify-between items-center inline-flex">
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Organization type:</div>
-                                    <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">Private Company</div>
+                                <div className="flex-col justify-start items-start gap-1 inline-flex">
+                                    <div className="text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">Phone</div>
+                                    <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">+1-202-555-0141</div>
                                 </div>
-                                <div className="w-full justify-between items-center inline-flex">
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Company size:</div>
-                                    <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">120-300 Employers</div>
+                            </div>
+                            <div className="w-full h-[0px] border border-[#e4e5e8]"></div>
+                            <div className="justify-start items-start gap-4 inline-flex">
+                                <div className="w-8 h-8 relative">
+                                    <img src={require(`../../../../image/icon_envelope_blue.svg`).default} alt="icon" />
                                 </div>
-                                <div className="w-full justify-between items-center inline-flex">
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Phone:</div>
-                                    <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">(406) 555-0120</div>
-                                </div>
-                                <div className="w-full justify-between items-center inline-flex">
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Email:</div>
-                                    <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">twitter@gmail.com</div>
-                                </div>
-                                <div className="w-full justify-between items-center inline-flex">
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Website:</div>
-                                    <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">https://twitter.com</div>
+                                <div className="flex-col justify-start items-start gap-1 inline-flex">
+                                    <div className="text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">Email address</div>
+                                    <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">esther.howard@gmail.com</div>
                                 </div>
                             </div>
                         </div>
@@ -395,7 +273,7 @@ function DetailJob() {
                 <div className="flex items-center mb-10 gap-[50rem]">
                     {/* Related Jobs Heading */}
                     <div className="text-[#181f33] text-[40px] font-medium font-['Inter'] leading-[48px] mt-10">
-                        Related Jobs
+                        Open Positions
                     </div>
                     {/* Navigation Arrows */}
                     <div className="justify-start items-start gap-4 flex mt-10">
@@ -478,4 +356,4 @@ function DetailJob() {
     )
 }
 
-export default DetailJob
+export default DetailCompany
