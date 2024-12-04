@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "../components/SideBar";
-import Settings from "../components/Settings";
+import Sidebar from "../Component/SideBar";
+import Settings from "../Component/Settings";
 
-const SettingsPage = () => {
+const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center">
@@ -17,4 +17,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default Dashboard;
