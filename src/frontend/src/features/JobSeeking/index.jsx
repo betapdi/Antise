@@ -23,9 +23,7 @@ const Manga = (props) => {
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
-Manga.propTypes = {};
-
-export default Manga
+export default App;
