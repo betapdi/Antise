@@ -8,8 +8,6 @@ import HomePage from './pages/HomePage';
 import Header from '../../components/Header';
 import DetailJob from './pages/DetailJob';
 import ListJob from './pages/ListJob';
-import FilterTable from './pages/ListJob/filter';
-
 const Manga = (props) => {
   return (
     <div>
@@ -20,8 +18,8 @@ const Manga = (props) => {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/homePage" element={<HomePage />} />
         <Route path="/DetailJob" element={<DetailJob />} />
-        <Route path="/ListJob" element={<ListJob isSearch ={1} />} />
-        <Route path="/ListJob/filter" element={<FilterTable />} />
+        <Route path="/ListJob" element={<ListJob isSearch ={0} />} />
+        <Route path="/ListJob/search" element={<ListJob isSearch ={1} />} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>

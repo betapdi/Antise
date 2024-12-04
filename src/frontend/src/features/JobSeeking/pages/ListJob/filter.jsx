@@ -53,8 +53,7 @@ function FilterTable({ onFilterChange , isCloseChange}) {
     };
     
     return (
-    <div className="w-screen h-screen flex items-center justify-center">
-        <div className="w-2/3 max-w-[1000px] bg-white flex flex-col justify-center items-center rounded-lg shadow-xl me-4">
+    <div className="w-full bg-white flex flex-col justify-center items-center rounded-lg shadow-xl">
         <div className="h-16 w-full flex flex-row items-center justify-end border border-[#EDEFF5]">
             <button className="h-10 w-full max-w-[150px] px-4 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex border-b-2 border-gray/100 my-2 me-4">
                 <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
@@ -69,14 +68,14 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                 </div>
             </button>
         </div>
-            <div className='flex flex-row sm:gap-4 md:gap-8 lg:gap-12 mb-4 mt-2'>
+        <div className='flex flex-row justify-start sm:gap-4 md:gap-8 lg:gap-12 mb-4 mt-2'>
                 <div className='flex flex-col gap-2'>
                     <h1 className=' text-[#181f33] text-lg font-medium font-inter leading-7'>Experience</h1>
                     <div className="flex flex-col gap-1">
                     {experienceLevels.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="radio" id={item.id} name="experience" value={item.value} />
-                            <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
+                            <input type="radio" id={item.id} class="accent-blue" name="experience" value={item.value} />
+                            <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter'] checked:bg-blue cursor-pointer form-radio">{item.label}</label>
                         </div>
                         ))}
                     </div>
@@ -86,7 +85,7 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {salary.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="radio" id={item.id} name="salary" value={item.value} />
+                            <input type="radio" id={item.id} class="accent-blue" name="salary" value={item.value} />
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
                         </div>
                         ))}
@@ -97,8 +96,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {type.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="checkbox" id={item.id} name="type" value={item.value} />
-                            <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
+                            <input type="checkbox" id={item.id} class="accent-blue" name="type" value={item.value} />
+                            <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter'] peer-checked:text-blue cursor-pointer">{item.label}</label>
                         </div>
                         ))}
                     </div>
@@ -108,7 +107,7 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {education.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="checkbox" id={item.id} name="type" value={item.value} />
+                            <input type="checkbox" id={item.id} class="accent-blue" name="type" value={item.value} />
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
                         </div>
                         ))}
@@ -119,16 +118,16 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {level.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="radio" id={item.id} name="level" value={item.value} />
+                            <input type="radio" id={item.id} class="accent-blue" name="level" value={item.value} />
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
                         </div>
                         ))}
                     </div>
                 </div>
-            </div>
-
         </div>
+
     </div>
+    
   )
 }
 

@@ -152,8 +152,8 @@ function ListJob({isSearch}) {
         </div>
         {/* Filter Modal */}
         {isFilterOpen && (
-             <div className="fixed inset-0 z-30 flex justify-center items-center">
-                <div className="rounded-lg p-6 shadow-lg">
+            <div className="w-full fixed inset-0 z-30 flex justify-center items-center bg-black bg-opacity-50">
+                <div className="max-h-screen w-2/3 flex justify-center overflow-y-auto bg-white rounded-lg shadow-lg">
                     <FilterTable onFilterChange={handleFilterChange} isCloseChange={handleClose}/>
                 </div>
             </div>

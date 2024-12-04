@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import ApplyForm from '../../../../components/Form/applyform';
 
 
 const jobs = [
@@ -100,6 +101,12 @@ const jobs = [
 function DetailJob() {
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
+    const [isFormOpen, setIsFormOpen] = useState(false);
+
+
+    const handleClose = () => {
+        setIsFormOpen(false);
+    };
     const itemsPerPage = 6;
     // Calculate the index range for the current page
     const startIndex = currentPage * itemsPerPage;
@@ -117,7 +124,7 @@ function DetailJob() {
     };
     return (
         <div className="w-full flex flex-col justify-center items-center">
-            <div className="w-3/4 flex flex-col justify-center items-center mt-20 mb-20">
+            <div className="w-3/4 mx-auto flex flex-col justify-center items-center mt-20 mb-20">
                 {/* Job Title */}
                 <div className='flex flex-row justify-between items-start w-full max-w-7xl gap-10'>
                     <div className="flex-row justify-start items-center gap-10 flex">
@@ -195,15 +202,15 @@ function DetailJob() {
                                 </div>
                             </div>
 
-                            <div className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex">
+                            <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
+                                onClick={() => setIsFormOpen(true)}
+                            >
                                 <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
-                                <div className="w-6 h-6 relative">
-                                    <img
-                                        src={require(`../../../../image/arrow_right_hover.png`)}
-                                        alt="icon"
-                                    />
-                                </div>
-                            </div>
+                                <img
+                                    src={require(`../../../../image/arrow_right_hover.png`)}
+                                    alt="icon"
+                                />
+                            </button>
                         </div>
                         <div className="justify-start items-start inline-flex">
                             <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Job expire in:</div>
@@ -474,6 +481,14 @@ function DetailJob() {
                     </div>
                 </div>
             </div>
+            {isFormOpen && (
+                <div className="w-screen fixed inset-0 z-30 flex justify-center items-center bg-black bg-opacity-50">
+                    <div className="max-h-screen w-full max-w-lg overflow-y-auto bg-white rounded-lg shadow-lg">
+                        <ApplyForm isCloseChange={handleClose} />
+                    </div>
+                </div>
+            
+            )}
         </div>
     )
 }

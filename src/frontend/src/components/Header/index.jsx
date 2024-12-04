@@ -1,29 +1,47 @@
-import React from 'react'
-import Nav from '../Nav'
+import React from 'react';
+import Nav from '../Nav';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
+  const location = useLocation();
+
   return (
-    <div className='w-full flex flex-col justify-center bg-[#f1f2f4]'> 
-      <div className='w-full flex items-center justify-center'>
-        <div className='w-[65rem] flex items-center justify-start'> 
-          <div className="h-12 justify-start items-center inline-flex"> 
+    <div className="w-full flex flex-col justify-center bg-[#f1f2f4]">
+      <div className="w-full flex items-center justify-center">
+        <div className="w-[65rem] flex items-center justify-start">
+          <div className="h-12 justify-start items-center inline-flex">
             <div className="justify-start gap-6 flex">
-              <div className="py-3.5 bg-[#f1f2f4] justify-start items-center gap-1 flex">
-                <div className="text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight">Home</div>
-              </div>
-              <div className="py-3.5 bg-[#f1f2f4] shadow-inner justify-start items-center gap-1 flex">
-                <div className="text-[#0a65cc] text-sm font-medium font-['Inter'] leading-tight">Find Job</div>
-              </div>
-              <div className="py-3.5 bg-[#f1f2f4] justify-start items-center gap-1 flex">
-                <div className="text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight">Find Employers</div>
-              </div>
+              <Link
+                to="/job/homepage"
+                className={`py-3.5 ${
+                  location.pathname === '/job/homepage' ? 'text-blue' : 'text-[#5e6670]'
+                } font-normal font-['Inter'] leading-tight`}
+              >
+                Home
+              </Link>
+              <Link
+                to="/job/listjob/search"
+                className={`py-3.5 ${
+                  location.pathname === '/job/ListJob/search' ? 'text-blue' : 'text-[#5e6670]'
+                } font-normal font-['Inter'] leading-tight`}
+              >
+                Find Job
+              </Link>
+              <Link
+                to="/"
+                className={`py-3.5 ${
+                  location.pathname === '/' ? 'text-blue' : 'text-[#5e6670]'
+                } font-normal font-['Inter'] leading-tight`}
+              >
+                Find Employees
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      <Nav isAuthen={1}/>
-    </div> 
-  )
-}
+      <Nav isAuthen={1} />
+    </div>
+  );
+};
 
-export default Header
+export default Header;
