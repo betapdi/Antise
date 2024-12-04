@@ -81,66 +81,6 @@ const ProfilePage = () => {
           <div className="mx-auto p-4 bg-white shadow-md rounded-lg h-full">
             <h1 className="text-2xl font-semibold mb-6">Settings</h1>
 
-            {/* Buttons Section */}
-            <div className="justify-center items-center gap-2 inline-flex">
-              <Link to="/job/personal">
-                <div className={getButtonClass("/job/personal")}>
-                  <div className="justify-center items-center flex">
-                  <img
-                    src={require("../../../../image/User.png")}
-                    alt="logo"
-                    className="h-auto mr-2"
-                  />
-                  </div>
-                  <div className="text-[#767f8c] text-sm font-semibold font-['Inter'] leading-tight">
-                    Personal
-                  </div>
-                </div>
-              </Link>
-              <Link to="/job/profile">
-                <div className={getButtonClass("/job/profile-info")}>
-                  <div className="justify-center items-center flex">
-                  <img
-                    src={require("../../../../image/UserCircle.png")}
-                    alt="logo"
-                    className="h-auto mr-2"
-                  />
-                  </div>
-                  <div className="text-[#0a65cc] text-sm font-semibold font-['Inter'] leading-tight">
-                    Profile
-                  </div>
-                </div>
-              </Link>
-              <Link to="/job/social-links">
-                <div className={getButtonClass("/job/social-links")}>
-                  <div className="justify-center items-center flex">
-                  <img
-                    src={require("../../../../image/GlobeSimple.png")}
-                    alt="logo"
-                    className="h-auto mr-2"
-                  />
-                  </div>
-                  <div className="text-[#767f8c] text-sm font-semibold font-['Inter'] leading-tight">
-                    Social Links
-                  </div>
-                </div>
-              </Link>
-              <Link to="/job/account-settings">
-                <div className={getButtonClass("/job/account-settings")}>
-                  <div className="justify-center items-center flex">
-                  <img
-                    src={require("../../../../image/GearSix.png")}
-                    alt="logo"
-                    className="h-auto mr-2"
-                  />
-                  </div>
-                  <div className="text-[#767f8c] text-sm font-semibold font-['Inter'] leading-tight">
-                    Account Settings
-                  </div>
-                </div>
-              </Link>
-            </div>
-
       {/* Profile Form */}
       <form className="space-y-6">
         <div className="grid grid-cols-2 gap-4">

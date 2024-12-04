@@ -26,8 +26,8 @@ export default function SignUpPage() {
               </div>
               <div className="text-gray text-base font-normal font-inter mt-4">
                 Want to view your profile?{" "}
-                <a href="/job/profile" className="text-blue hover:underline">
-                  Profile
+                <a href="/job/settings" className="text-blue hover:underline">
+                  Settings
                 </a>
               </div>
             </div>
