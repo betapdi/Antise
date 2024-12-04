@@ -1,97 +1,200 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const ProfilePage = () => {
+  const location = useLocation();
+
+  // Highlight active button by comparing the current path
+  const getButtonClass = (path) => {
+    return location.pathname === path
+      ? "h-12 px-5 py-3 bg-white shadow-inner justify-start items-center gap-2 inline-flex border-l-4 border-blue-600"
+      : "h-12 px-5 py-3 bg-white shadow-inner justify-start items-center gap-2 inline-flex";
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 flex">
-      {/* Sidebar */}
-      <aside className="w-1/4 bg-white p-6 shadow-lg">
-        <div className="text-2xl font-bold mb-6">MyJob</div>
-        <nav>
-          <ul className="space-y-4">
-            <li className="text-blue-600 font-medium">Overview</li>
-            <li>Applied Jobs</li>
-            <li>Favorite Jobs</li>
-            <li className="flex justify-between items-center">
-              <span>Job Alert</span>
-              <span className="bg-blue-600 text-white text-xs px-2 py-1 rounded-full">09</span>
-            </li>
-            <li>Settings</li>
-          </ul>
-        </nav>
-        <button className="mt-8 text-gray-600 text-sm flex items-center">
-          <span>Log-out</span>
-        </button>
-      </aside>
-
-      {/* Main Content */}
-      <main className="flex-1 p-8">
-        <header className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-semibold">Settings</h1>
-        </header>
-
-        {/* Tabs */}
-        <div className="mb-6 border-b">
-          <ul className="flex space-x-6">
-            <li className="text-blue-600 border-b-2 border-blue-600 pb-2">Personal</li>
-            <li className="text-gray-600">Profile</li>
-            <li className="text-gray-600">Social Links</li>
-            <li className="text-gray-600">Account Setting</li>
-          </ul>
+    <div className="min-h-screen bg-gray-100 flex justify-center">
+      <div className="flex w-full max-w-screen-xl">
+        {/* Left Column (Sidebar) */}
+        <div className="w-1/4 bg-white shadow-lg border-r border-[#adb5bd]">
+          <div className="p-6">
+            <div className="w-[248px] text-[#9199a3] text-xs font-medium font-['Inter'] leading-[18px] mb-6">
+              CANDIDATE DASHBOARD
+            </div>
+            <nav>
+              <ul className="space-y-4">
+                <li>
+                  <Link to="/job/overview" className="flex items-center text-gray-700 hover:text-blue-600 font-medium">
+                  <img
+                    src={require("../../../../image/Stack.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  /> Overview
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/job/applied" className="flex items-center text-gray-700 hover:text-blue-600">
+                  <img
+                    src={require("../../../../image/Briefcase.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  /> Applied Jobs
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/job/favorites" className="flex items-center text-gray-700 hover:text-blue-600">
+                  <img
+                    src={require("../../../../image/BookmarkSimple.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  /> Favorite Jobs
+                  </Link>
+                </li>
+                <li>
+                <Link to="/job/alerts" className="flex items-center text-gray-700 hover:text-blue-600 relative">
+                  <img
+                    src={require("../../../../image/BellRinging.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  />
+                  <span>Job Alert</span>
+                  <div className="absolute right-0 bg-[#e7f0fa] text-[#18191c] text-xs font-medium font-['Inter'] rounded-sm px-2 py-1">
+                    09
+                  </div>
+                </Link>
+              </li>
+                <li>
+                  <Link to="/job/settings" className="flex items-center text-[#0a65cc] font-semibold">
+                  <img
+                    src={require("../../../../image/Gear.png")}
+                    alt="logo"
+                    className="w-auto h-auto mr-2"
+                  /> Settings
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
 
-        {/* Profile Form */}
-        <form className="bg-white p-6 rounded-lg shadow-md">
-          <div className="grid grid-cols-2 gap-4">
-            {/* Left Column */}
-            <div>
-              <label className="block text-gray-700 mb-2">Nationality</label>
-              <select className="w-full border rounded-lg p-2">
-                <option value="">Select...</option>
-                <option value="vn">Vietnam</option>
-                <option value="us">USA</option>
-              </select>
+        {/* Main Content */}
+        <div className="w-3/4 overflow-y-auto">
+          <div className="mx-auto p-4 bg-white shadow-md rounded-lg h-full">
+            <h1 className="text-2xl font-semibold mb-6">Settings</h1>
+
+            {/* Buttons Section */}
+            <div className="justify-center items-center gap-2 inline-flex">
+              <Link to="/job/personal">
+                <div className={getButtonClass("/job/personal")}>
+                  <div className="justify-center items-center flex">
+                  <img
+                    src={require("../../../../image/User.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  />
+                  </div>
+                  <div className="text-[#767f8c] text-sm font-semibold font-['Inter'] leading-tight">
+                    Personal
+                  </div>
+                </div>
+              </Link>
+              <Link to="/job/profile">
+                <div className={getButtonClass("/job/profile-info")}>
+                  <div className="justify-center items-center flex">
+                  <img
+                    src={require("../../../../image/UserCircle.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  />
+                  </div>
+                  <div className="text-[#0a65cc] text-sm font-semibold font-['Inter'] leading-tight">
+                    Profile
+                  </div>
+                </div>
+              </Link>
+              <Link to="/job/social-links">
+                <div className={getButtonClass("/job/social-links")}>
+                  <div className="justify-center items-center flex">
+                  <img
+                    src={require("../../../../image/GlobeSimple.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  />
+                  </div>
+                  <div className="text-[#767f8c] text-sm font-semibold font-['Inter'] leading-tight">
+                    Social Links
+                  </div>
+                </div>
+              </Link>
+              <Link to="/job/account-settings">
+                <div className={getButtonClass("/job/account-settings")}>
+                  <div className="justify-center items-center flex">
+                  <img
+                    src={require("../../../../image/GearSix.png")}
+                    alt="logo"
+                    className="h-auto mr-2"
+                  />
+                  </div>
+                  <div className="text-[#767f8c] text-sm font-semibold font-['Inter'] leading-tight">
+                    Account Settings
+                  </div>
+                </div>
+              </Link>
             </div>
-            <div>
-              <label className="block text-gray-700 mb-2">Date of Birth</label>
-              <input
-                type="date"
-                className="w-full border rounded-lg p-2"
-                placeholder="dd/mm/yyyy"
-              />
-            </div>
-            <div>
-              <label className="block text-gray-700 mb-2">Gender</label>
-              <select className="w-full border rounded-lg p-2">
-                <option value="">Select...</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-gray-700 mb-2">Education</label>
-              <input
-                type="text"
-                className="w-full border rounded-lg p-2"
-                placeholder="Fill University"
-              />
-            </div>
+
+      {/* Profile Form */}
+      <form className="space-y-6">
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 mb-2">Nationality</label>
+            <select className="w-full border rounded-lg p-2">
+              <option value="">Select...</option>
+              <option value="vn">Vietnam</option>
+              <option value="us">USA</option>
+            </select>
           </div>
-          <div className="mt-4">
-            <label className="block text-gray-700 mb-2">Biography</label>
-            <textarea
-              rows="4"
+          <div>
+            <label className="block text-gray-700 mb-2">Date of Birth</label>
+            <input
+              type="date"
               className="w-full border rounded-lg p-2"
-              placeholder="Write down your biography here..."
-            ></textarea>
+              placeholder="dd/mm/yyyy"
+            />
           </div>
-          <button
-            type="submit"
-            className="mt-6 bg-blue-600 text-white px-6 py-2 rounded-lg"
-          >
-            Save Changes
-          </button>
-        </form>
-      </main>
+          <div>
+            <label className="block text-gray-700 mb-2">Gender</label>
+            <select className="w-full border rounded-lg p-2">
+              <option value="">Select...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-2">Education</label>
+            <input
+              type="text"
+              className="w-full border rounded-lg p-2"
+              placeholder="Fill University"
+            />
+          </div>
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-2">Biography</label>
+          <textarea
+            rows="4"
+            className="w-full border rounded-lg p-2"
+            placeholder="Write down your biography here..."
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white px-6 py-2 rounded-lg mt-4"
+        >
+          Save Changes
+        </button>
+      </form>
+    </div>
+    </div>
+    </div>
     </div>
   );
 };
