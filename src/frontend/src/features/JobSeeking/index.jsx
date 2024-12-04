@@ -1,20 +1,26 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import MainPage from "./pages/Main";
-import SettingsPage from "./pages/Settings";
-
-const App = () => {
+import React from 'react';
+import {
+  Route, Routes, Navigate
+} from "react-router-dom";
+import MainPage from './pages/Main';
+import ProfilePage from "./pages/Profile";
+import HomePage from './pages/HomePage';
+import Header from '../../components/Header';
+import DetailJob from './pages/DetailJob';
+import ListJob from './pages/ListJob';
+const Manga = (props) => {
   return (
     <div>
+      <Header />
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
-        <Route path="/dashboard" element={<MainPage />} />
-
-        <Route path="/settings" element={<SettingsPage />} />
-
-        {/* Catch-all for undefined routes */}
-        <Route path="*" element={<p>Page not found</p>} />
+        <Route exact path='/' element={<Navigate to="/temp" replace />} />
+        <Route path="/temp" element={<MainPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/homePage" element={<HomePage />} />
+        <Route path="/DetailJob" element={<DetailJob />} />
+        <Route path="/ListJob" element={<ListJob isSearch ={0} />} />
+        <Route path="/ListJob/search" element={<ListJob isSearch ={1} />} />
+        <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>
   );

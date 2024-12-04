@@ -2,8 +2,8 @@ import * as React from "react";
 
 export default function SignUpPage() {
   return (
-    <div className="min-h-screen flex flex-row gap-32">
-      <div className="w-1/3 flex ms-24 justify-between">
+    <div className="w-screen h-screen justify-center items-center flex flex-row gap-20">
+      <div className="w-1/2 flex justify-between items-center">
         <div className="flex flex-col">
           <div className="flex flex-row items-center mb-10">
             <img
@@ -13,7 +13,7 @@ export default function SignUpPage() {
             />
             <div className="text-black text-1xl font-inter pt-2">Antise</div>
           </div>
-          <div className="flex flex-row items-center mb-8">
+          <div className="flex flex-row items-center justify-between mb-8">
             <div className="flex flex-col me-16">
               <h className="text-[32px] font-medium font-inter leading-10 mb-2">
                 Create Account
@@ -24,16 +24,10 @@ export default function SignUpPage() {
                   Login
                 </a>
               </div>
-              <div className="text-gray text-base font-normal font-inter mt-4">
-                Want to view your profile?{" "}
-                <a href="/job/settings" className="text-blue hover:underline">
-                  Settings
-                </a>
-              </div>
             </div>
-            <select className="border rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-400 py-0 pr-2">
-              <option value="1">Employee</option>
-              <option value="2">Employer</option>
+            <select id="role" class="bg-white border border-gray/100 text-black rounded-lg p-2">
+              <option value="Employee">Employee</option>
+              <option value="Employer">Employer</option>
             </select>
           </div>
           <form className="space-y-2 mb-8">
@@ -72,22 +66,14 @@ export default function SignUpPage() {
             <span className="text-white text-1xl">→</span>
           </button>
           <div className="my-4 text-center text-gray">or</div>
-          <div className="flex justify-between mb-3">
-            <button className="w-full mr-2 bg-white py-2 rounded-md text-sm border border-[#b8b6b6] pl-1 inline-flex items-center">
-              <img
-                src={require("../../../../image/logo_fb.png")}
-                alt="Facebook"
-                className="mr-2"
-              />
-              Sign up with Facebook
-            </button>
-            <button className="w-full ml-2 bg-white py-2 rounded-md text-sm border border-[#b8b6b6] pl-1 inline-flex items-center">
+          <div className="flex justify-center items-center mb-3 w-full">
+            <button className="bg-white py-2 px-8 rounded-md text-sm border border-gray/100 flex items-center justify-center">
               <img
                 src={require("../../../../image/logo_gg.png")}
                 alt="Google"
                 className="mr-2"
               />
-              Sign up with Google
+              <span className="font-['Inter'] font-normal">Sign up with Google</span>
             </button>
           </div>
         </div>

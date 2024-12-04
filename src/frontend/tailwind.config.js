@@ -8,7 +8,8 @@ module.exports = {
       'black': '#18191C',
       'gray': '#5E6670',
       'white': '#FFFFFF',
-      'gray/100': '#E4E5E8'
+      'gray/100': '#E4E5E8',
+      'red': '#FF0000',
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'], 

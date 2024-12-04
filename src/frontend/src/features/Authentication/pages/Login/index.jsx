@@ -2,8 +2,8 @@ import * as React from "react";
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex flex-row gap-32">
-      <div className="w-1/3 flex ms-24 justify-between">
+    <div className="w-screen h-screen justify-center items-center flex flex-row gap-20">
+      <div className="w-1/3 flex ms-24 justify-between items-center">
         <div className="flex flex-col">
           <div className="flex flex-row items-center mb-10">
             <img src={require("../../../../image/logo_job.png")} alt="logo" className="h-auto" />
