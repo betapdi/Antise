@@ -100,13 +100,13 @@ const jobs = [
     },
 ];
 
-function ListJob({jobs}) {
+function ListJob({jobs, numberOfJobs}) {
     return (
         <div>
             {/*Display how many job are there, for example, display Favorite Job (13) */}
 
             <span className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7">Favorite job </span>
-            <span className="text-[#9199a3] text-base font-normal font-['Inter'] leading-normal">({jobs.length})</span>
+            <span className="text-[#9199a3] text-base font-normal font-['Inter'] leading-normal">({numberOfJobs})</span>
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
                 {jobs.map((job, index) => (
@@ -194,7 +194,7 @@ const FavoriteJobs = () => {
     return (
         <div>
             <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
-                <ListJob jobs={currentJobs} />
+                <ListJob jobs={currentJobs} numberOfJobs={jobs.length} />
             </div>
             <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 {/* Previous Page Button */}
