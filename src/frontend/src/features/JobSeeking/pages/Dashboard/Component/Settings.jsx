@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 const Settings = () => {
   return (
-    <div className="w-full overflow-y-auto">
+    <div className="w-full overflow-y-auto ml-8">
       <div className="w-full flex-col justify-start items-start gap-4 flex">
         <h1 className="text-[#18191c] text-2xl font-medium leading-loose font-inter">
           Settings
@@ -79,94 +79,6 @@ const Settings = () => {
                         A photo larger than 400 pixels work best. Max photo size 5 MB.
                       </p>
                     </div>
-                </Form>
-              </div>
-            )}
-          </Formik>
-        </div>
-        
-        <h2 className="text-[#18191c] text-lg font-medium leading-7">
-          Contact Information
-        </h2>
-
-        <div className="flex-col justify-start items-start gap-2 flex w-full ">
-            {/* Map Location */}
-            <div className="flex-col justify-start items-start gap-2 inline-flex w-full ">
-              <label className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Map Location
-              </label>
-              <input
-                type="text"
-                className="h-12 relative bg-white rounded-md border border-[#e4e5e8] w-full"
-                placeholder="Enter location"
-                style={{ paddingLeft: "10px" }}
-              />
-               {/* Phone */}
-            
-              <label className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Phone
-              </label>
-              <input
-                type="text" 
-                className="h-12 relative bg-white rounded-md border border-[#e4e5e8] w-full"
-                placeholder="Enter phone number"
-                style={{ paddingLeft: "10px" }}
-              />
-
-            {/* Email */}
-              <label className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Email
-              </label>
-              <div className="relative w-full">
-              <input
-                type="email"
-                className="h-12 relative bg-white rounded-md border border-[#e4e5e8] w-full"
-                placeholder="Enter email address"
-                style={{ paddingLeft: "50px" }}
-              />
-              <img
-                src={require("../../../../../image/Envelope.png")}
-                alt="email icon"
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6"
-              />
-              </div>
-
-            {/* Biography */}
-              <label className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Biography
-              </label>
-              <textarea
-                className="w-full h-32 bg-white rounded-md border border-[#e4e5e8] justify-start items-center inline-flex"
-                placeholder="Tell us something about yourself"
-                style={{ paddingLeft: "10px" }}
-              ></textarea>
-            </div>
-            <div>
-            </div>
-
-           
-          </div>
-          <h2 className="text-[#18191c] text-lg font-medium leading-7">
-          Your CV/Resume
-          </h2>
-          <div className="flex-col justify-start items-start gap-2 flex w-full ">
-            {/* CV/Resume */}
-            <div className="flex-col justify-start items-start gap-2 inline-flex w-full ">
-              <label className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                CV/Resume
-              </label>
-              <div className=" p-5 bg-white rounded-md border-2 border-[#e4e5e8] justify-start items-center gap-3 inline-flex">
-                <img
-                  src={require("../../../../../image/PlusCircle_hover.png")}
-                  alt="logo"
-                  className="h-auto"
-                />
-                <div className="text-center">
-                  <span className="text-[#18191c] text-sm font-medium">
-                    Add CV/Resume
-                  </span>
-                  <div className="text-center text-[#767f8c] text-xs leading-[18px]">
-                Only PDF. Max file size 5 MB.
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">

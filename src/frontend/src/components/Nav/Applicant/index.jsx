@@ -122,7 +122,7 @@ function Nav({isAuthen}) {
                 </div>
             ) : (
 
-                <div className="me-5 justify-end gap-2 flex">
+                <div className="justify-end gap-2 flex">
                     <button
                         className="px-6 py-3 bg-white border border-[#0a65cc] rounded-[3px] justify-center items-center gap-3 flex"
                         onClick={handleSignInClick}
