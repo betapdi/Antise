@@ -20,7 +20,7 @@ const Manga = (props) => {
         <Route path="/detailjob" element={<DetailJob />} />
         <Route path="/listjob" element={<ListJob isSearch ={0} />} />
         <Route path="/listjob/search" element={<ListJob isSearch ={1} />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/uploadCV" element={<UploadCV />} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
