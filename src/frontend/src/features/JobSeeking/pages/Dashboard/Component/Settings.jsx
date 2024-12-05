@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 const Settings = () => {
   return (
-    <div className="w-full overflow-y-auto ml-8">
+    <div className="w-full overflow-y-auto">
       <div className="w-full flex-col justify-start items-start gap-4 flex">
         <h1 className="text-[#18191c] text-2xl font-medium leading-loose font-inter">
           Settings
@@ -263,7 +263,7 @@ const Settings = () => {
               </label>
               <div className=" p-5 bg-white rounded-md border-2 border-[#e4e5e8] justify-start items-center gap-3 inline-flex">
                 <img
-                  src={require("../../../../../image/PlusCircle.png")}
+                  src={require("../../../../../image/PlusCircle_hover.png")}
                   alt="logo"
                   className="h-auto"
                 />

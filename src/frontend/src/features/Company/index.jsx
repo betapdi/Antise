@@ -5,6 +5,7 @@ import {
 
 import AddCompany from './pages/AddCompany';
 import NavCompany from '../../components/Nav/Company';
+import Dashboard from './pages/Dashboard';
 
 
 const Company = (props) => {
@@ -15,6 +16,7 @@ const Company = (props) => {
       <Routes>
         <Route exact path='/' element={<Navigate to="/company/AddCompany" replace />} />
         <Route path="/AddCompany" element={<AddCompany/>} />
+        <Route path="/Dashboard" element={<Dashboard/>} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>

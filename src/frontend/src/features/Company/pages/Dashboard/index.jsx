@@ -1,6 +1,8 @@
 import React from "react";
-import Settings from './Component/Settings';
-import Sidebar from './Component/SideBar';
+import Sidebar from "./Component/Sidebar";
+import PostJob from "./Component/PostJob";
+import MyJob from "./Component/MyJob";
+
 
 const Dashboard = () => {
   return (
@@ -10,7 +12,7 @@ const Dashboard = () => {
           <Sidebar />
         </div>
         <div className="w-3/4">
-          <Settings />
+            <MyJob/>
         </div>
       </div>
     </div>

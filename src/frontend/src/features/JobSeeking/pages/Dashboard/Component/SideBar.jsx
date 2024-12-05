@@ -7,7 +7,7 @@ const Sidebar = () => {
       <div className="w-full bg-white">
                 <div className="p-6">
                   <div className="w-full text-[#9199a3] text-xs font-medium font-['Inter'] leading-[18px] mb-6">
-                    CANDIDATE DASHBOARD
+                    CANDIDATE DASHBOFARD
                   </div>
                   <nav>
                     <ul className="space-y-4">
@@ -32,7 +32,7 @@ const Sidebar = () => {
                         </div>
                       </li>
                       <li>
-                        <div to="/job/favorites" className="flex items-center text-[#767F8C] hover:text-blue">
+                        <div className="flex items-center text-[#767F8C] hover:text-blue">
                           <img
                             src={require("../../../../../image/BookmarkSimple.png")}
                             alt="logo"
