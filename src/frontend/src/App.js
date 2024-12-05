@@ -5,7 +5,6 @@ import {
 
 import './App.css';
 import Authentication from './features/Authentication';
-import Header from './components/Header';
 
 const Job = React.lazy(() => import('./features/JobSeeking'));
 const Company = React.lazy(() => import('./features/Company'));

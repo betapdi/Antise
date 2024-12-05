@@ -22,7 +22,7 @@ function Nav({isAuthen}) {
         <div className="w-full py-5 gap-20 items-center bg-white flex justify-center">
             <div className="flex gap-4">
                 <div className="justify-start items-center gap-2 flex">
-                    <img src={require("../../image/logo_job.png")} alt="logo" />
+                    <img src={require("../../../image/logo_job.png")} alt="logo" />
                     <div className="text-[#18191c] text-2xl font-semibold font-inter leading-10">Antise</div>
                 </div>
                 

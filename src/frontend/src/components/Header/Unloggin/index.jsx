@@ -1,8 +1,8 @@
 import React from 'react';
-import Nav from '../Nav';
+import Nav from '../../Nav/Applicant';
 import { Link, useLocation } from 'react-router-dom';
 
-const Header = () => {
+const HeaderUnloggin = () => {
   const location = useLocation();
 
   return (
@@ -39,9 +39,9 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <Nav isAuthen={1} />
+      <Nav isAuthen={0} /> 
     </div>
   );
 };
 
-export default Header;
+export default HeaderUnloggin;
