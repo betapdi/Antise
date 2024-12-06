@@ -18,19 +18,18 @@ public class ServerApplication {
 		SpringApplication.run(ServerApplication.class, args);
 	}
 
-	@Bean
-	public WebMvcConfigurer corsConfigurer() {
-      	return new WebMvcConfigurer() {
-			@Override
-			public void addCorsMappings(@NonNull CorsRegistry registry) {
-				registry.addMapping("/**")
-						.allowedOrigins("http://localhost:3000") 
-						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-						.allowedHeaders("*")
-						.allowCredentials(true);
-			}
-      	};
-   	}
+	// @Bean
+	// public WebMvcConfigurer corsConfigurer() {
+    //   	return new WebMvcConfigurer() {
+	// 		@Override
+	// 		public void addCorsMappings(@NonNull CorsRegistry registry) {
+	// 			registry.addMapping("/**")
+	// 					.allowedOriginPatterns("*")
+	// 					.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+	// 					.allowedHeaders("*");
+	// 		}
+    //   	};
+   	// }
 
 	// @Bean
 	// CommandLineRunner runner(UserRepository userRepository, ReviewRepository reviewRepository, LocationRepository locationRepository) {

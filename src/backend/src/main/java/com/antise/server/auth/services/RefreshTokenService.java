@@ -38,8 +38,8 @@ public class RefreshTokenService {
 
             refreshTokenRepository.save(refToken);
             
-            user.setRefreshToken(refToken);
-            userRepository.save(user);
+            // user.setRefreshToken(refToken);
+            // userRepository.save(user);
         }
 
         return refToken;

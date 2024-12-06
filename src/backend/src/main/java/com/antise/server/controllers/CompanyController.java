@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.antise.server.auth.services.AuthService;
+import com.antise.server.auth.services.JwtService;
+import com.antise.server.auth.services.RefreshTokenService;
 import com.antise.server.dto.CompanyDto;
 import com.antise.server.services.CompanyService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -19,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +32,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("api/v1/company")
-@AllArgsConstructor
 public class CompanyController {
     
     private final CompanyService companyService;
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @GetMapping("/getAll")
     public ResponseEntity<List<CompanyDto>> getAllCompanies() throws IOException {
@@ -45,7 +52,7 @@ public class CompanyController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CompanyDto> createCompany(@RequestPart("company") CompanyDto company, @AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity<CompanyDto> createCompany(@RequestPart("company") CompanyDto company, @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
         CompanyDto response = companyService.createCompany(company, userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
