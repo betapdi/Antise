@@ -1,9 +1,8 @@
 import axios from 'axios';
 import queryString from 'query-string';
-import { auth } from '../firebase/firebase-config';
 
 const axiosPrivate = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
+  baseURL: "http://172.28.102.169:8080/api/v1",
   headers: {
     'Content-Type': 'application/json',
   },
@@ -14,7 +13,7 @@ const axiosPrivate = axios.create({
 });
 
 axiosPrivate.interceptors.request.use(async (config) => {
-  const token = await auth.currentUser.getIdToken();
+  const token = localStorage.getItem('accessToken');
   config.headers['Authorization'] = 'Bearer ' + token;
   
   return config;

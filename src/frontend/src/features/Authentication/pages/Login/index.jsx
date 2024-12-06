@@ -1,6 +1,14 @@
 import * as React from "react";
+import userApi from "../../../../api/userApi";
 
 export default function LoginPage() {
+
+  const handleLogin = () => {
+    const data = {"email": "lecongquochan@gmail.com", "password": "123"};
+    const value = userApi.loginUser(data);
+    console.log(value);
+  }
+
   return (
     <div className="w-screen h-screen justify-center items-center flex flex-row gap-20">
       <div className="w-1/3 flex ms-24 justify-between items-center">
@@ -27,7 +35,7 @@ export default function LoginPage() {
                 className="w-full px-2 py-2  border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 border-[#b8b6b6]"
               />
           </form>
-          <button className="w-full rounded-sm bg-blue text-white py-3 flex items-center justify-center">
+          <button className="w-full rounded-sm bg-blue text-white py-3 flex items-center justify-center" onClick={() => handleLogin()}>
             <div className="text-white text-base font-semibold font-inter leading-normal mr-2">
             Sign in
             </div>
