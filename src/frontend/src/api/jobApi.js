@@ -23,7 +23,7 @@ const jobApi = {
       
         // Convert rawData to FormData
         const formData = new FormData();
-        formData.append('job', rawData);
+        formData.append('job', new Blob([JSON.stringify(rawData)], {type: 'application/json'}));
       
         // Send as multipart/form-data
         return axiosPrivate.post(url, formData, {

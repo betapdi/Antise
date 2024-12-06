@@ -1,8 +1,24 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import jobApi from '../../../../../api/jobApi';
 
 const PostJob = () => {
+  const navigate = useNavigate();
+  const handleClick = async() =>{
+      const title = document.querySelector('input[name="jobTitle"]').value;
+      const description = document.querySelector('textarea[name="description"]').value;
+      const responsibility = document.querySelector('textarea[name="responsibilities"]').value;
+  
+      const rawData = {
+          title, description, responsibility
+      }
+      console.log(rawData);
+      const value = await jobApi.createJob(rawData);
+      console.log(value);
+      navigate("/company/postjobsuccess");
+  }
   return (
     <Formik
         initialValues={{
@@ -214,8 +230,8 @@ const PostJob = () => {
                 </label>
                 <Field
                     as="textarea"
-                        id="description"
-                        name="description"
+                        id="responsibilities"
+                        name="responsibilities"
                         placeholder="Add your job responsibilities..."
                         className="block w-full border border-gray/100 rounded px-3 py-2"
                         rows="4"
@@ -227,7 +243,7 @@ const PostJob = () => {
                 />
             </div>
             <div className="flex justify-end">
-                <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
+                <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex text-white text-base font-semibold font-['Inter'] capitalize leading-normal" onClick={handleClick}>
                     Post Job
                     <img
                         src={require(`../../../../../image/arrow_right_hover.png`)}

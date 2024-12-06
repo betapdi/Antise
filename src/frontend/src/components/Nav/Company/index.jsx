@@ -1,6 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function NavCompany() {
+    const navigate = useNavigate();
+    const handleNavigateToPostJob = () => {
+      navigate("/post-job");
+    };
+
   return (
     <div className="w-full py-5 gap-20 items-center bg-white flex justify-center">
         <div className="flex flex-row justify-between max-w-screen-xl w-[90%]">
@@ -20,7 +26,10 @@ function NavCompany() {
                         </svg>
                         <span className="animate-ping absolute top-1 right-0.5 block h-1 w-1 rounded-full ring-2 ring-[#E05151] bg-[#E05151]"></span>
                     </button>
-                    <button className="h-12 px-6 py-3 rounded-[3px] border-2 border-[#0a65cc] justify-center items-center gap-3 text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal inline-flex hover:bg-[#0a65cc] hover:text-white">
+                    <button
+                        className="h-12 px-6 py-3 rounded-[3px] border-2 border-[#0a65cc] justify-center items-center gap-3 text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal inline-flex hover:bg-[#0a65cc] hover:text-white"
+                        onClick={handleNavigateToPostJob} // Navigate to Post Job
+                    >
                         Post a Job
                     </button>
                     <img className="w-12 h-12 rounded-full" src="https://via.placeholder.com/48x48" />
