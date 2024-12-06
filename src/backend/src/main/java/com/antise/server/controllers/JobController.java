@@ -8,13 +8,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.antise.server.auth.entities.User;
 import com.antise.server.dto.JobDto;
 import com.antise.server.services.JobService;
 
-import io.micrometer.core.ipc.http.HttpSender.Response;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.HttpStatus;
@@ -24,8 +21,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestParam;
-
 
 @RestController
 @RequestMapping("api/v1/job")
@@ -34,8 +29,15 @@ public class JobController {
     private final JobService jobService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<JobDto>> getAllJobs() {
+    public ResponseEntity<List<JobDto>> getAllJobs() throws IOException {
         return ResponseEntity.ok(jobService.getAllJobs());
+    }
+
+    @GetMapping("/get/{jobId}")
+    public ResponseEntity<JobDto> getJob(@PathVariable("jobId") String jobId) throws IOException {
+        JobDto response = jobService.getJob(jobId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
  
     @PostMapping("/create")

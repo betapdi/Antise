@@ -16,10 +16,14 @@ import lombok.AllArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("api/v1/company")
@@ -29,7 +33,21 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<CompanyDto>> getAllCompanies(@RequestParam String param) {
+    public ResponseEntity<List<CompanyDto>> getAllCompanies() throws IOException {
         return ResponseEntity.ok(companyService.getAllCompanies());
+    }
+
+    @GetMapping("/get/{companyId}")
+    public ResponseEntity<CompanyDto> getCompany(@PathVariable("companyId") String companyId) {
+        CompanyDto response = companyService.getCompany(companyId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<CompanyDto> createCompany(@RequestPart("company") CompanyDto company, @AuthenticationPrincipal UserDetails userDetails) {
+        CompanyDto response = companyService.createCompany(company, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

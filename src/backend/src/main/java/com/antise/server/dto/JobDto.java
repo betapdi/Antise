@@ -1,10 +1,9 @@
 package com.antise.server.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.antise.server.classes.Contact;
-import com.antise.server.classes.JobStatus;
-import com.antise.server.classes.SocialMedia;
+import com.antise.server.entities.Application;
 import com.antise.server.entities.Job;
 
 import lombok.AllArgsConstructor;
@@ -19,27 +18,52 @@ import lombok.Setter;
 public class JobDto {
     private String id;
 
+    private String title;
+
     private String description;
 
-    private String benefits;
+    private String responsibility;
 
-    private String companyVision;
+    private Long postedDate;
 
-    private String address;
+    private Long expiredDate;
 
-    private Long postDate;
+    private String companyId;
 
-    private JobStatus status;
+    private String salaryRange;
 
-    private Contact contactInformation;
+    private String location;
 
-    private List<SocialMedia> socialMedias;
+    private String education;
 
-    private String hrId;
+    private String jobType;
+
+    private String experience;
+
+    private List<ApplicationDto> applications;
 
     public void update(Job job) {
         if (job.getId() != null) id = job.getId();
-        if (job.getAddress() != null) address = job.getAddress();
-        
+        if (job.getTitle() != null) title = job.getTitle();
+        if (job.getDescription() != null) description = job.getDescription();
+        if (job.getResponsibility() != null) responsibility = job.getResponsibility();
+        if (job.getPostedDate() != null) postedDate = job.getPostedDate();
+        if (job.getExpiredDate() != null) expiredDate = job.getExpiredDate();
+        if (job.getCompanyId() != null) companyId = job.getCompanyId();
+        if (job.getSalaryRange() != null) salaryRange = job.getSalaryRange();
+        if (job.getLocation() != null) location = job.getLocation();
+        if (job.getEducation() != null) education = job.getEducation();
+        if (job.getJobType() != null) jobType = job.getJobType();
+        if (job.getExperience() != null) experience = job.getExperience();
+        if (job.getApplications() != null) {
+            applications = new ArrayList<>();
+
+            for (Application application : job.getApplications()) {
+                ApplicationDto dto = new ApplicationDto();
+                dto.update(application);
+
+                applications.add(dto);
+            }
+        }
     }
 }
