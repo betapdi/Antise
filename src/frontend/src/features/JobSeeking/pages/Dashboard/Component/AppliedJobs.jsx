@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { date } from "yup";
 
 const jobs = [
     {
