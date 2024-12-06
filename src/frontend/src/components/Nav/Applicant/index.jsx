@@ -22,7 +22,7 @@ function Nav({isAuthen}) {
         <div className="w-full py-5 gap-20 items-center bg-white flex justify-center">
             <div className="flex gap-4">
                 <div className="justify-start items-center gap-2 flex">
-                    <img src={require("../../image/logo_job.png")} alt="logo" />
+                    <img src={require("../../../image/logo_job.png")} alt="logo" />
                     <div className="text-[#18191c] text-2xl font-semibold font-inter leading-10">Antise</div>
                 </div>
                 
@@ -122,7 +122,7 @@ function Nav({isAuthen}) {
                 </div>
             ) : (
 
-                <div className="me-5 justify-end gap-2 flex">
+                <div className="justify-end gap-2 flex">
                     <button
                         className="px-6 py-3 bg-white border border-[#0a65cc] rounded-[3px] justify-center items-center gap-3 flex"
                         onClick={handleSignInClick}

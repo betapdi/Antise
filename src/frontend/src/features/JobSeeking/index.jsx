@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import MainPage from './pages/Main';
 import HomePage from './pages/HomePage';
-import Header from '../../components/Header';
+import HeaderUnloggin from '../../components/Header/Unloggin';
 import DetailJob from './pages/DetailJob';
 import ListJob from './pages/ListJob';
 import Dashboard from './pages/Dashboard';
@@ -12,7 +12,7 @@ import UploadCV from '../../components/Form/uploadCV';
 const Manga = (props) => {
   return (
     <div>
-      <Header />
+      <HeaderUnloggin />
       <Routes>
         <Route exact path='/' element={<Navigate to="/temp" replace />} />
         <Route path="/temp" element={<MainPage />} />
@@ -20,7 +20,7 @@ const Manga = (props) => {
         <Route path="/detailjob" element={<DetailJob />} />
         <Route path="/listjob" element={<ListJob isSearch ={0} />} />
         <Route path="/listjob/search" element={<ListJob isSearch ={1} />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/uploadCV" element={<UploadCV />} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
