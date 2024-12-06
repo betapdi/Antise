@@ -27,13 +27,11 @@ import jakarta.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 public class User implements UserDetails {
     @Id
-    private String userId;
+    private String id;
     
-    private String name;
-
     private String phoneNumber;
 
     private String imageName;

@@ -1,4 +1,4 @@
-package com.exceptions;
+package com.antise.server.exceptions;
 
 public class UserRoleNotQualifiedException extends RuntimeException {
     

@@ -1,8 +1,10 @@
 package com.antise.server.dto;
 
+import com.antise.server.auth.entities.User;
 import com.antise.server.entities.Company;
-import com.antise.server.entities.HumanResource;
+import com.antise.server.entities.Job;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -14,16 +16,48 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CompanyDto {
-    private String id;
+public class CompanyDto extends UserDto {
+    private String name;
+
+    private String logoUrl;
+
+    private String bannerUrl;
+
+    private String description;
+
+    private String benefit;
 
     private String location;
 
-    private List<HumanResource> employees;
+    private String organizationType;
+
+    private String companyUrl;
+
+    private List<JobDto> jobList;
+
+    private Boolean verified;
 
     public void update(Company company) {
-        if (company.getId() != null) id = company.getId();
+        // System.out.println(company.getRefreshToken());
+        this.update((User)company);
+        if (company.getName() != null) name = company.getName();
+        if (company.getLogoName() != null) logoUrl = "/file/" + company.getLogoName();
+        if (company.getBannerName() != null) bannerUrl = "/file/" + company.getBannerName();
+        if (company.getDescription() != null) description = company.getDescription();
+        if (company.getBenefit() != null) benefit = company.getBenefit();
         if (company.getLocation() != null) location = company.getLocation();
-        if (company.getEmployees() != null) employees = company.getEmployees();
+        if (company.getOrganizationType() != null) organizationType = company.getOrganizationType();
+        if (company.getCompanyUrl() != null) companyUrl = company.getCompanyUrl();
+        if (company.getVerified() != null) verified = company.getVerified();
+        if (company.getJobList() != null) {
+            jobList = new ArrayList<>();
+
+            for (Job job : company.getJobList()) {
+                JobDto dto = new JobDto();
+                dto.update(job);
+
+                jobList.add(dto);
+            }
+        }
     }
 }
