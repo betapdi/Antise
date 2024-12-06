@@ -1,6 +1,24 @@
 import * as React from "react";
+import userApi from "../../../../api/userApi";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
+  const navigate = useNavigate();
+  const handleSignUp = async () => {
+    const email = document.querySelector('input[type="email"]').value;;
+    const password = document.querySelector('input[type="password"]').value;
+    const rawData = {
+      "email": email,
+      "password": password
+    }
+    const value = await userApi.registerUser(rawData);
+    console.log(value);
+    console.log(value.accessToken);
+    localStorage.setItem('accessToken', value.accessToken);
+    localStorage.setItem('refreshToken', value.refreshToken);
+    navigate("/company/AddCompany");
+
+}
   return (
     <div className="w-screen h-screen justify-center items-center flex flex-row gap-20">
       <div className="w-1/2 flex justify-between items-center">
@@ -59,7 +77,9 @@ export default function SignUpPage() {
               className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 border-[#b8b6b6]"
             />
           </form>
-          <button className="w-full rounded-sm bg-blue text-white py-3 flex items-center justify-center">
+          <button className="w-full rounded-sm bg-blue text-white py-3 flex items-center justify-center"
+            onClick={() => handleSignUp()}
+          >
             <div className="text-white text-base font-semibold font-inter leading-normal mr-2">
               Create account
             </div>

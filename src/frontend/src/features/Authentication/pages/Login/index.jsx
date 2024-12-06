@@ -3,10 +3,18 @@ import userApi from "../../../../api/userApi";
 
 export default function LoginPage() {
 
-  const handleLogin = () => {
-    const data = {"email": "lecongquochan@gmail.com", "password": "123"};
-    const value = userApi.loginUser(data);
-    console.log(value);
+  const handleLogin = async () => {
+      const email = document.querySelector('input[type="email"]').value;;
+      const password = document.querySelector('input[type="password"]').value;
+      const rawData = {
+        "email": email,
+        "password": password
+      }
+      const value = await userApi.loginUser(rawData);
+      console.log(value);
+      console.log(value.accessToken);
+      localStorage.setItem('accessToken', value.accessToken);
+      localStorage.setItem('refreshToken', value.refreshToken);
   }
 
   return (

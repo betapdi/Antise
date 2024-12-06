@@ -6,6 +6,7 @@ import {
 import AddCompany from './pages/AddCompany';
 import NavCompany from '../../components/Nav/Company';
 import Dashboard from './pages/Dashboard';
+import SucessCompanyUpload from './pages/SucessPage/uploadsuccess';
 
 
 const Company = (props) => {
@@ -17,6 +18,7 @@ const Company = (props) => {
         <Route exact path='/' element={<Navigate to="/company/AddCompany" replace />} />
         <Route path="/AddCompany" element={<AddCompany/>} />
         <Route path="/Dashboard" element={<Dashboard/>} />
+        <Route path="/SucessCompanyUpload" element={<SucessCompanyUpload/>} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>
