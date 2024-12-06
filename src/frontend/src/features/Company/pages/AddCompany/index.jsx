@@ -11,9 +11,10 @@ function AddCompany() {
         const description = document.querySelector('textarea[name="aboutus"]').value;
     
         const rawData = {
-            "name": name,
-            "description": description
+            name, description
         }
+        console.log(rawData);
+
         const value = await jobApi.createCompany(rawData);
         console.log(value);
         navigate("/company/SucessCompanyUpload");
