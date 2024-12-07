@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 function NavCompany() {
     const navigate = useNavigate();
     const handleNavigateToPostJob = () => {
-      navigate("/post-job");
+      navigate("/company/PostJob");
     };
 
   return (
