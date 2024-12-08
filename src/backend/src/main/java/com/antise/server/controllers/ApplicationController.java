@@ -13,6 +13,7 @@ import com.antise.server.dto.ApplicationDto;
 import com.antise.server.services.ApplicationService;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

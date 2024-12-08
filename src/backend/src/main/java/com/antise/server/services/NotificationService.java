@@ -18,12 +18,6 @@ public class NotificationService {
     private final NotificationRepository notificationRepository;
     private final FileService fileService;
 
-    @Value("${project.static}")
-    private String path;
-
-    @Value("${base.url}")
-    private String baseUrl;
-
     public NotificationService(NotificationRepository notificationRepository, FileService fileService) {
         this.notificationRepository = notificationRepository;
         this.fileService = fileService;

@@ -17,9 +17,6 @@ public class ApplicationService {
     private final ApplicationRepository applicationRepository;
     private final FileService fileService;
 
-    @Value("${project.static}")
-    private String path;
-
     @Value("${base.url}")
     private String baseUrl;
 

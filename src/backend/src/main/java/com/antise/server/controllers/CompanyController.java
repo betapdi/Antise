@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -52,8 +54,21 @@ public class CompanyController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CompanyDto> createCompany(@RequestPart("company") CompanyDto company, @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
-        CompanyDto response = companyService.createCompany(company, userDetails.getUsername());
+    public ResponseEntity<CompanyDto> createCompany(@RequestPart("company") CompanyDto company, 
+                                                    @RequestPart("banner") MultipartFile bannerFile,
+                                                    @RequestPart("logo") MultipartFile logoFile,
+                                                    @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
+        CompanyDto response = companyService.createCompany(company, bannerFile, logoFile, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity<CompanyDto> updateCompany(@RequestPart("company") CompanyDto company, 
+                                                    @RequestPart("banner") MultipartFile bannerFile,
+                                                    @RequestPart("logo") MultipartFile logoFile,
+                                                    @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
+        CompanyDto response = companyService.updateCompany(company, bannerFile, logoFile, userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

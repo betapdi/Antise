@@ -3,7 +3,6 @@ package com.antise.server.services;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,14 +16,13 @@ import com.antise.server.dto.CompanyDto;
 import com.antise.server.entities.Company;
 import com.antise.server.exceptions.CompanyNotFoundException;
 import com.antise.server.exceptions.UserNotFoundException;
-import com.antise.server.exceptions.UserRoleNotQualifiedException;
 
 @Service
 public class CompanyService {
     private final UserRepository userRepository;
     private final FileService fileService;
 
-    @Value("${project.static}")
+    @Value("${project.image}")
     private String path;
 
     @Value("${base.url}")
@@ -60,14 +58,48 @@ public class CompanyService {
         return response;
     }
 
-    public CompanyDto createCompany(CompanyDto dto, String email) {
+    public CompanyDto createCompany(CompanyDto dto, MultipartFile bannerFile, MultipartFile logoFile, String email) throws IOException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
 
         Company company = Company.fromUser(user, dto);
         company.update(dto);
         company.setRole(UserRole.COMPANY);
+
+        if (bannerFile != null) {
+            String bannerName = fileService.uploadFile(path, bannerFile);
+            company.setBannerName(bannerName);
+        }
+
+        if (logoFile != null) {
+            String logoName = fileService.uploadFile(path, logoFile);
+            company.setLogoName(logoName);
+        }
+        
         Company savedCompany = userRepository.save(company);
 
+        CompanyDto response = new CompanyDto();
+        response.update(savedCompany);
+
+        return response;
+    }
+
+    public CompanyDto updateCompany(CompanyDto dto, MultipartFile bannerFile, MultipartFile logoFile, String email) throws IOException {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
+        
+        Company company = (Company)user;
+        company.update(dto);
+
+        if (bannerFile != null) {
+            String bannerName = fileService.uploadFile(path, bannerFile);
+            company.setBannerName(bannerName);
+        }
+
+        if (logoFile != null) {
+            String logoName = fileService.uploadFile(path, logoFile);
+            company.setLogoName(logoName);
+        }
+        
+        Company savedCompany = userRepository.save(company);
         CompanyDto response = new CompanyDto();
         response.update(savedCompany);
 

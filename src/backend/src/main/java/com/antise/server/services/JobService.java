@@ -23,12 +23,6 @@ public class JobService {
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
 
-    @Value("${project.static}")
-    private String path;
-    
-    @Value("${base.url}")
-    private String baseUrl;
-
     public JobService(JobRepository jobRepository, UserRepository userRepository) {
         this.jobRepository = jobRepository;
         this.userRepository = userRepository;

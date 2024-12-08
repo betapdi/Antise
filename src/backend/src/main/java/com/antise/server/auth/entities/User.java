@@ -34,10 +34,6 @@ public class User implements UserDetails {
     
     private String phoneNumber;
 
-    private String imageName;
-
-    private String username;
-    
     @NotBlank(message = "The email field can't be blank")
     @Indexed(unique = true)
     @Email(message = "Please enter email in proper format!")

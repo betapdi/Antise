@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/file")
-public class FileController {
+@RequestMapping("/image")
+public class ImageController {
     private final FileService fileService;
 
-    @Value("${project.static}")
+    @Value("${project.image}")
     private String path;
 
-    public FileController(FileService fileService) {
+    public ImageController(FileService fileService) {
         this.fileService = fileService;
     }
 

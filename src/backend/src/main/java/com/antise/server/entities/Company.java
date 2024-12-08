@@ -58,14 +58,14 @@ public class Company extends User {
     }
 
     public static Company fromUser(User user, CompanyDto dto) { 
-        System.out.println(user.getRefreshToken());
+        // System.out.println(user.getRefreshToken());
         Company company = Company.builder() 
-                .id(user.getId()).password(user.getPassword()).username(user.getUsername())
-                .email(user.getEmail()).phoneNumber(user.getPhoneNumber()).imageName(user.getImageName())
-                .role(user.getRole()).refreshToken(user.getRefreshToken()).build(); 
+                .id(user.getId()).password(user.getPassword()).email(user.getEmail())
+                .phoneNumber(user.getPhoneNumber()).role(user.getRole())
+                .refreshToken(user.getRefreshToken()).build(); 
         
         company.update(dto);
-        System.out.println(company);
+        // System.out.println(company);
         return company;
     }
 }
