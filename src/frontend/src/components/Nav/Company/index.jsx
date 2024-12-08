@@ -8,7 +8,7 @@ function NavCompany() {
     };
 
   return (
-    <div className="w-full py-5 gap-20 items-center bg-white flex justify-center">
+    <div className="w-full py-5 gap-20 items-center bg-white flex justify-center ">
         <div className="flex flex-row justify-between max-w-screen-xl w-[90%]">
             <div className=" items-center gap-2 flex">
                 <img src={require("../../../image/logo_job.png")} alt="logo" />
