@@ -127,7 +127,7 @@ const ApplyForm = ({isCloseChange}) => {
                 <div className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex">
                     <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply Now</div>
                     <img 
-                        src={require("../../image/arrow_right_hover.png")} 
+                        src={"/image/arrow_right_hover.png"} 
                         alt="arrow_right" 
                         className="h-4"
                     />

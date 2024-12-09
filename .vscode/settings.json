@@ -1,4 +1,7 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "editor.fontLigatures": false,
+    "typescript.suggest.paths": false ,
+    "javascript.suggest.paths": false 
 }

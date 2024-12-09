@@ -14,7 +14,7 @@ const Sidebar = () => {
                         <li>
                             <div className="flex items-center text-[#767F8C] hover:text-blue">
                                 <img
-                                    src={require("../../../../../image/Stack.png")}
+                                    src={`/image/Stack.png`}
                                     alt="logo"
                                     className="h-auto mr-2"
                                 /> 
@@ -24,7 +24,7 @@ const Sidebar = () => {
                         <li>
                             <div className="flex items-center text-[#767F8C] hover:text-blue">
                                 <img
-                                    src={require("../../../../../image/PlusCircle.svg").default}
+                                    src={`/image/PlusCircle.svg`}
                                     alt="logo"
                                     className="h-auto mr-2"
                                 /> 
@@ -34,7 +34,7 @@ const Sidebar = () => {
                         <li>
                             <div className="flex items-center text-[#767F8C] hover:text-blue">
                                 <img
-                                    src={require("../../../../../image/Briefcase.png")}
+                                    src={`/image/Briefcase.png`}
                                     alt="logo"
                                     className="h-auto mr-2"
                                 /> 
@@ -44,7 +44,7 @@ const Sidebar = () => {
                         <li>
                             <div className="flex items-center text-[#767F8C] hover:text-blue relative">
                             <img
-                            src={require("../../../../../image/BookmarkSimple.png")}
+                            src={`/image/BookmarkSimple.png`}
                             alt="logo"
                             className="w-auto h-auto mr-2"
                             /> Save Candidates
@@ -53,7 +53,7 @@ const Sidebar = () => {
                         <li>
                             <div className="flex items-center text-[#767F8C] hover:text-blue relative">
                             <img
-                            src={require("../../../../../image/setting_btn.svg").default}
+                            src={`/image/setting_btn.svg`}
                             alt="logo"
                             className="w-auto h-auto mr-2"
                             /> Settings
@@ -62,7 +62,7 @@ const Sidebar = () => {
                         <li>
                             <div className="flex items-center text-[#767F8C] hover:text-blue relative mt-64">
                             <img
-                            src={require("../../../../../image/SignOut.svg").default}
+                            src={`/image/SignOut.svg")`}
                             alt="logo"
                             className="w-auto h-auto mr-2"
                             /> Log-out

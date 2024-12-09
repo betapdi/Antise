@@ -50,7 +50,7 @@ function MyJob() {
                     {/* Job Status */}
                     <div className='inline-flex gap-1 items-center w-2/12'>
                         <img 
-                            src={require("../../../../../image/CheckCircle.svg").default} 
+                            src={`/image/CheckCircle.svg`} 
                             className='h-6 w-6' 
                             alt="status"
                         />
@@ -62,7 +62,7 @@ function MyJob() {
                     {/* Applications Count */}
                     <div className='inline-flex gap-1 items-center w-3/12'>
                         <img 
-                            src={require("../../../../../image/Users.svg").default} 
+                            src={`/image/Users.svg`}
                             className='h-6 w-6' 
                             alt="applications"
                         />
@@ -79,7 +79,7 @@ function MyJob() {
                     {/* Arrow Icon */}
                     <div className="h-12 p-3 rounded-[5px] justify-start items-start gap-2.5 inline-flex">
                         <img 
-                            src={require("../../../../../image/arrow_right.png")} 
+                            src={`/image/arrow_right.png`}
                             className='h-6 w-6' 
                             alt="arrow"
                         />

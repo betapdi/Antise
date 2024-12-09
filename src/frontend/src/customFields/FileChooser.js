@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const FileChooser = (props) => {
-  const { field, form, label, type, accept, placeholder, width } = props;
+  const { field, form, label, accept, placeholder, width } = props;
   const { name, onChange, onBlur } = field;
 
   const { errors, touched } = form;
@@ -24,7 +24,7 @@ const FileChooser = (props) => {
         <input
           id = {name}
 
-          type={type}
+          type="file"
           accept={accept}
 
           onChange={(event) => form.setFieldValue(field.name, event.target.files[0])}
@@ -33,7 +33,7 @@ const FileChooser = (props) => {
         <div className="text-center">
           <img
             className="mx-auto h-12 w-12"
-            src={require("../image/icon_upload_gray.svg").default}
+            src="/image/icon_upload_gray.svg"
             alt=""
           />
 

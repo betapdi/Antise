@@ -25,7 +25,7 @@ export default function SignUpPage() {
         <div className="flex flex-col">
           <div className="flex flex-row items-center mb-10">
             <img
-              src={require("../../../../image/logo_job.png")}
+              src={`/image/logo_job.png`}
               alt="logo"
               className="h-auto"
             />
@@ -89,7 +89,7 @@ export default function SignUpPage() {
           <div className="flex justify-center items-center mb-3 w-full">
             <button className="bg-white py-2 px-8 rounded-md text-sm border border-gray/100 flex items-center justify-center">
               <img
-                src={require("../../../../image/logo_gg.png")}
+                src={`/image/logo_gg.png`}
                 alt="Google"
                 className="mr-2"
               />
@@ -100,7 +100,7 @@ export default function SignUpPage() {
       </div>
       <div className="w-1/3 flex flex-col justify-center items-center text-center me-6">
         <img
-          src={require("../../../../image/bg.png")}
+          src={`/image/bg.png`}
           alt="Logo"
           className="h-auto w-72"
         />

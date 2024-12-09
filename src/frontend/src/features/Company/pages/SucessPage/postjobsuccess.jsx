@@ -8,12 +8,12 @@ function postjobsuccess() {
         <button className="h-12 px-6 py-3 rounded-[3px] border-2 border-[#0a65cc] justify-center items-center gap-3 inline-flex text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal hover:bg-blue hover:text-white">
             View Jobs
             <img
-                src={require("../../../../image/arrow_right.png")}
+                src={`/image/arrow_right.png`}
                 alt="arrow-right"
                 className="group-hover:hidden"
             />
             <img
-                src={require("../../../../image/arrow_right_hover.png")}
+                src={`/image/arrow_right_hover.png`}
                 alt="arrow-right-hover"
                 className="hidden group-hover:inline"
             />

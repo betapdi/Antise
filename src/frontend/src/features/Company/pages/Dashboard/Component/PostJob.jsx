@@ -248,7 +248,7 @@ const PostJob = () => {
                     <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex text-white text-base font-semibold font-['Inter'] capitalize leading-normal" onClick={handleClick}>
                         Post Job
                         <img
-                            src={require(`../../../../../image/arrow_right_hover.png`)}
+                            src={`/image/arrow_right_hover.png`}
                             alt="icon"
                         />
                     </button>

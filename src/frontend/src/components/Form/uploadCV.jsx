@@ -58,7 +58,7 @@ function UploadCV() {
                 <div className="w-full h-48 relative border-2 border-gray/100 border-dashed rounded-lg p-6" id="dropzone">
                     <Field name="cv" type="file" className="absolute inset-0 w-full h-full opacity-0 z-50" />
                     <div className="text-center">
-                                            <img className="mx-auto h-12 w-12" src={require('../../image/icon_upload_gray.svg').default} alt=""/>
+                                            <img className="mx-auto h-12 w-12" src={"/image/icon_upload_gray.svg"} alt=""/>
 
                                             <h3 class="mt-2 text-sm font-medium text-gray-900">
                                                 <label for="file-upload" class="relative cursor-pointer">

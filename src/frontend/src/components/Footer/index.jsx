@@ -6,7 +6,7 @@ function Footer() {
         <div className="w-[1300px] h-96 flex flex-row justify-center py-16">
             <div className="h-36 flex-col justify-start items-start gap-6 inline-flex">
                 <div className="justify-start items-center gap-2 inline-flex">
-                    <img src={require('../../image/logo_white.png')} alt="logo" className="w-16 h-16" />
+                    <img src={`/image/logo_white`} alt="logo" className="w-16 h-16" />
                     <div className="text-white text-2xl font-semibold font-['Inter'] leading-10">MyJob</div>
                 </div>
                 <div className="flex-col justify-start items-start gap-3 flex">
