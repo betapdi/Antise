@@ -131,7 +131,7 @@ function DetailCompany() {
                         <div className="px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex">
                             <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">View Open Position</div>
                             <div className="w-6 h-6 relative">
-                                <img src={require(`../../../../image/arrow_right_hover.png`)} alt="icon" />
+                                <img src={`/image/arrow_right_hover.png`} alt="icon" />
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@ function DetailCompany() {
                                 {/* Founded in */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8 flex justify-center items-center">
-                                        <img src={require(`../../../../image/icon_calendar.png`)} alt="icon" />
+                                        <img src={`/image/icon_calendar.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -185,7 +185,7 @@ function DetailCompany() {
                                 {/* Organization type */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8 flex justify-center items-center">
-                                        <img src={require(`../../../../image/icon_timer.png`)} alt="icon" />
+                                        <img src={`/image/icon_timer.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -200,7 +200,7 @@ function DetailCompany() {
                                 {/* Team size */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_wallet.png`)} alt="icon" />
+                                        <img src={`/image/icon_wallet.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -215,7 +215,7 @@ function DetailCompany() {
                                 {/* Industry types */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_briefcase.png`)} alt="icon" />
+                                        <img src={`/image/icon_briefcase.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -235,7 +235,7 @@ function DetailCompany() {
                             <div className="justify-start items-start gap-4 inline-flex">
                                 <div className="w-8 h-8 justify-center items-center flex">
                                     <div className="w-8 h-8 relative">
-                                        <img src={require(`../../../../image/icon_globe.svg`).default} alt="icon" />
+                                        <img src={`/image/icon_globe.svg`} alt="icon" />
                                     </div>
                                 </div>
                                 <div className="flex-col justify-start items-start gap-1 inline-flex">
@@ -246,7 +246,7 @@ function DetailCompany() {
                             <div className="w-full h-[0px] border border-[#e4e5e8]"></div>
                             <div className="justify-start items-start gap-4 inline-flex">
                                 <div className="w-8 h-8 relative">
-                                    <img src={require(`../../../../image/icon_phone_blue.svg`).default} alt="icon" />
+                                    <img src={`/image/icon_phone_blue.svg`} alt="icon" />
                                 </div>
                                 <div className="flex-col justify-start items-start gap-1 inline-flex">
                                     <div className="text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">Phone</div>
@@ -256,7 +256,7 @@ function DetailCompany() {
                             <div className="w-full h-[0px] border border-[#e4e5e8]"></div>
                             <div className="justify-start items-start gap-4 inline-flex">
                                 <div className="w-8 h-8 relative">
-                                    <img src={require(`../../../../image/icon_envelope_blue.svg`).default} alt="icon" />
+                                    <img src={`/image/icon_envelope_blue.svg`} alt="icon" />
                                 </div>
                                 <div className="flex-col justify-start items-start gap-1 inline-flex">
                                     <div className="text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">Email address</div>
@@ -282,13 +282,13 @@ function DetailCompany() {
                             disabled={currentPage === 0}
                         >
                             <img
-                                src={require("../../../../image/arrow_left.png")}
+                                src={"/image/arrow_left.png"}
                                 alt="arrow_right"
                                 className="w-6 h-6 group-hover:hidden"
 
                             />
                             <img
-                                src={require("../../../../image/arrow_left_hover.png")}
+                                src={"/image/arrow_left_hover.png"}
                                 alt="arrow_right_hover"
                                 className="w-6 h-6 hidden group-hover:block"
                             />
@@ -298,12 +298,12 @@ function DetailCompany() {
                             disabled={currentPage * itemsPerPage + itemsPerPage >= jobs.length}
                         >
                             <img
-                                src={require("../../../../image/arrow_right.png")}
+                                src={"/image/arrow_right.png"}
                                 alt="arrow_right"
                                 className="w-6 h-6 group-hover:hidden"
                             />
                             <img
-                                src={require("../../../../image/arrow_right_hover.png")}
+                                src={"/image/arrow_right_hover.png"}
                                 alt="arrow_right_hover"
                                 className="w-6 h-6 hidden group-hover:block"
                             />
@@ -326,7 +326,7 @@ function DetailCompany() {
                                         </div>
                                         <div className="justify-start items-center gap-1.5 inline-flex">
                                             <div className="w-[18px] h-[18px] relative">
-                                                <img src={require(`../../../../image/icon_map.png`)} alt="icon" />
+                                                <img src={`/image/icon_map.png`} alt="icon" />
                                             </div>
                                             <div className="text-[#9199a3] text-sm font-normal font-['Inter'] leading-tight">
                                                 {job.location}

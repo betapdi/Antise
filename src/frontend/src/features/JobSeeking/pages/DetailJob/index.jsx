@@ -7,7 +7,7 @@ const jobs = [
     {
         title: "Senior UX Designer",
         companyName: "Instagram",
-        companyLogo: require("../../../../image/logoCompany/company_1.png"),
+        companyLogo: "/image/logoCompany/company_1.png",
         contractType: "Contract Base",
         location: "Australia",
         salary: "$30K-$35K",
@@ -17,7 +17,7 @@ const jobs = [
     {
         title: "Software Engineer",
         companyName: "Facebook",
-        companyLogo: require("../../../../image/logoCompany/company_2.png"),
+        companyLogo: "/image/logoCompany/company_2.png",
         contractType: "Full Time",
         location: "USA",
         salary: "$50K-$70K",
@@ -27,7 +27,7 @@ const jobs = [
     {
         title: "Product Manager",
         companyName: "Facebook",
-        companyLogo: require("../../../../image/logoCompany/company_3.png"),
+        companyLogo: "/image/logoCompany/company_3.png",
         contractType: "Part Time",
         location: "UK",
         salary: "$40K-$50K",
@@ -38,7 +38,7 @@ const jobs = [
     {
         title: "Senior UX Designer",
         companyName: "Instagram",
-        companyLogo: require("../../../../image/logoCompany/company_1.png"),
+        companyLogo: "/image/logoCompany/company_1.png",
         contractType: "Contract Base",
         location: "Australia",
         salary: "$30K-$35K",
@@ -48,7 +48,7 @@ const jobs = [
     {
         title: "Software Engineer",
         companyName: "Facebook",
-        companyLogo: require("../../../../image/logoCompany/company_2.png"),
+        companyLogo: "/image/logoCompany/company_2.png",
         contractType: "Full Time",
         location: "USA",
         salary: "$50K-$70K",
@@ -58,7 +58,7 @@ const jobs = [
     {
         title: "Product Manager",
         companyName: "Facebook",
-        companyLogo: require("../../../../image/logoCompany/company_4.png"),
+        companyLogo: "/image/logoCompany/company_4.png",
         contractType: "Part Time",
         location: "UK",
         salary: "$40K-$50K",
@@ -69,7 +69,7 @@ const jobs = [
     {
         title: "Senior UX Designer",
         companyName: "Instagram",
-        companyLogo: require("../../../../image/logoCompany/company_2.png"),
+        companyLogo: "/image/logoCompany/company_2.png",
         contractType: "Contract Base",
         location: "Australia",
         salary: "$30K-$35K",
@@ -79,7 +79,7 @@ const jobs = [
     {
         title: "Software Engineer",
         companyName: "Facebook",
-        companyLogo: require("../../../../image/logoCompany/company_2.png"),
+        companyLogo: "/image/logoCompany/company_2.png",
         contractType: "Full Time",
         location: "USA",
         salary: "$50K-$70K",
@@ -89,7 +89,7 @@ const jobs = [
     {
         title: "Product Manager",
         companyName: "Facebook",
-        companyLogo: require("../../../../image/logoCompany/company_4.png"),
+        companyLogo: "/image/logoCompany/company_4.png",
         contractType: "Part Time",
         location: "UK",
         salary: "$40K-$50K",
@@ -143,7 +143,7 @@ function DetailJob() {
                                 <div className="justify-start items-center gap-2 flex">
                                     <div className="w-5 h-5 relative">
                                         <img
-                                            src={require(`../../../../image/icon_link.svg`).default}
+                                            src={`/image/icon_link.svg`}
                                             alt="icon"
                                             className="transition-opacity duration-300 group-hover:opacity-0">
                                         </img>
@@ -153,7 +153,7 @@ function DetailJob() {
                                 <div className="justify-start items-center gap-1.5 flex">
                                     <div className="w-6 h-6 relative">
                                         <img
-                                            src={require(`../../../../image/icon_phone.svg`).default}
+                                            src={`/image/icon_phone.svg`}
                                             alt="icon"
                                             className="transition-opacity duration-300 group-hover:opacity-0">
                                         </img>
@@ -164,7 +164,7 @@ function DetailJob() {
                                     <div className="w-6 h-6 justify-center items-center flex">
                                         <div className="w-6 h-6 relative">
                                             <img
-                                                src={require(`../../../../image/icon_envelop.svg`).default}
+                                                src={`/image/icon_envelop.svg`}
                                                 alt="icon"
                                                 className="transition-opacity duration-300 group-hover:opacity-0">
                                             </img>
@@ -181,7 +181,7 @@ function DetailJob() {
                                 <div className="w-6 h-6 justify-center items-center flex">
                                     <div className="w-6 h-6 relative">
                                         <img
-                                            src={require(`../../../../image/bookmark.png`)}
+                                            src={`/image/bookmark.png`}
                                             alt="icon"
                                         />
                                     </div>
@@ -195,7 +195,7 @@ function DetailJob() {
                                 <div className="w-6 h-6 justify-center items-center flex">
                                     <div className="w-6 h-6 relative">
                                         <img
-                                            src={require(`../../../../image/${isClicked ? 'bookmark_click.png' : 'bookmark.png'}`)}
+                                            src={`/image/${isClicked ? 'bookmark_click.png' : 'bookmark.png'}`}
                                             alt="icon"
                                         />
                                     </div>
@@ -207,7 +207,7 @@ function DetailJob() {
                             >
                                 <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
                                 <img
-                                    src={require(`../../../../image/arrow_right_hover.png`)}
+                                    src={`/image/arrow_right_hover.png`}
                                     alt="icon"
                                 />
                             </button>
@@ -254,7 +254,7 @@ function DetailJob() {
                                 {/* Job Posted */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8 flex justify-center items-center">
-                                        <img src={require(`../../../../image/icon_calendar.png`)} alt="icon" />
+                                        <img src={`/image/icon_calendar.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -269,7 +269,7 @@ function DetailJob() {
                                 {/* Job Expire */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8 flex justify-center items-center">
-                                        <img src={require(`../../../../image/icon_timer.png`)} alt="icon" />
+                                        <img src={`/image/icon_timer.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -284,7 +284,7 @@ function DetailJob() {
                                 {/* Education */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_briefcase.png`)} alt="icon" />
+                                        <img src={`/image/icon_briefcase.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -299,7 +299,7 @@ function DetailJob() {
                                 {/* Salary */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_wallet.png`)} alt="icon" />
+                                        <img src={`/image/icon_wallet.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -314,7 +314,7 @@ function DetailJob() {
                                 {/* Location */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_location.png`)} alt="icon" />
+                                        <img src={`/image/icon_location.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -329,7 +329,7 @@ function DetailJob() {
                                 {/* Job Type */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_briefcase.png`)} alt="icon" />
+                                        <img src={`/image/icon_briefcase.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -344,7 +344,7 @@ function DetailJob() {
                                 {/* Experience */}
                                 <div className="flex flex-col items-start gap-4">
                                     <div className="w-8 h-8">
-                                        <img src={require(`../../../../image/icon_briefcase.png`)} alt="icon" />
+                                        <img src={`/image/icon_briefcase.png`} alt="icon" />
                                     </div>
                                     <div className="flex flex-col items-start gap-1">
                                         <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
@@ -411,13 +411,13 @@ function DetailJob() {
                             disabled={currentPage === 0}
                         >
                             <img
-                                src={require("../../../../image/arrow_left.png")}
+                                src={"/image/arrow_left.png"}
                                 alt="arrow_right"
                                 className="w-6 h-6 group-hover:hidden"
 
                             />
                             <img
-                                src={require("../../../../image/arrow_left_hover.png")}
+                                src={"/image/arrow_left_hover.png"}
                                 alt="arrow_right_hover"
                                 className="w-6 h-6 hidden group-hover:block"
                             />
@@ -427,12 +427,12 @@ function DetailJob() {
                             disabled={currentPage * itemsPerPage + itemsPerPage >= jobs.length}
                         >
                             <img
-                                src={require("../../../../image/arrow_right.png")}
+                                src={"/image/arrow_right.png"}
                                 alt="arrow_right"
                                 className="w-6 h-6 group-hover:hidden"
                             />
                             <img
-                                src={require("../../../../image/arrow_right_hover.png")}
+                                src={"/image/arrow_right_hover.png"}
                                 alt="arrow_right_hover"
                                 className="w-6 h-6 hidden group-hover:block"
                             />
@@ -455,7 +455,7 @@ function DetailJob() {
                                         </div>
                                         <div className="justify-start items-center gap-1.5 inline-flex">
                                             <div className="w-[18px] h-[18px] relative">
-                                                <img src={require(`../../../../image/icon_map.png`)} alt="icon" />
+                                                <img src={`/image/icon_map.png`} alt="icon" />
                                             </div>
                                             <div className="text-[#9199a3] text-sm font-normal font-['Inter'] leading-tight">
                                                 {job.location}
