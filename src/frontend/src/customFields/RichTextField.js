@@ -19,12 +19,15 @@ const RichTextField = (props) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <label
-        htmlFor={name}
-        className="text-sm font-medium text-[#18191c]"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={name}
+          className="text-sm font-medium text-[#18191c]"
+        >
+          {label}
+        </label>
+      )}
+      
       <textarea
         id={name}
         name={name}

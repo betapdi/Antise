@@ -14,7 +14,7 @@ const Manga = (props) => {
     <div>
       <HeaderUnloggin />
       <Routes>
-        <Route exact path='/' element={<Navigate to="/temp" replace />} />
+        <Route exact path='/' element={<Navigate to="/job/homePage" replace />} />
         <Route path="/temp" element={<MainPage />} />
         <Route path="/homePage" element={<HomePage />} />
         <Route path="/detailjob" element={<DetailJob />} />

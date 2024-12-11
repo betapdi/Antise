@@ -20,12 +20,14 @@ const SelectField = (props) => {
 
   return (
     <div className="flex flex-col gap-2">
-        <label
+        {label && (
+          <label
             htmlFor="organizationType"
             className="text-sm font-medium text-[#18191c]"
         >
             {label}
-        </label>
+          </label>
+        )}
 
         <select
             id={name}

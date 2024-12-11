@@ -22,12 +22,14 @@ const IconTextField = (props) => {
 
   return (
     <div className="flex flex-col gap-2">
+      {label && (  
         <label
         htmlFor="companyWebsite"
         className="text-sm font-medium text-[#18191c]"
         >
         	{label}
         </label>
+      )}
 
         <div className="relative">
 					<input

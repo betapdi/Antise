@@ -5,18 +5,28 @@ import { useNavigate } from "react-router-dom";
 export default function SignUpPage() {
   const navigate = useNavigate();
   const handleSignUp = async () => {
-    const email = document.querySelector('input[type="email"]').value;;
+    const fullName = document.querySelector('input[type="text"]').value;
+    const email = document.querySelector('input[type="email"]').value;
     const password = document.querySelector('input[type="password"]').value;
+    const role = document.querySelector('select').value;
     const rawData = {
+      "fullName": fullName,
       "email": email,
       "password": password
     }
-    const value = await userApi.registerUser(rawData);
-    console.log(value);
-    console.log(value.accessToken);
-    localStorage.setItem('accessToken', value.accessToken);
-    localStorage.setItem('refreshToken', value.refreshToken);
-    navigate("/company/AddCompany");
+    // const value = await userApi.registerUser(rawData);
+    console.log({rawData, role});
+    // console.log(value.accessToken);
+    // localStorage.setItem('accessToken', value.accessToken);
+    // localStorage.setItem('refreshToken', value.refreshToken);
+
+    if (role == "Employee") {
+      navigate("/job")
+    }
+
+    else {
+      navigate("/company/AddCompany");
+    }
 
 }
   return (
@@ -49,18 +59,11 @@ export default function SignUpPage() {
             </select>
           </div>
           <form className="space-y-2 mb-8">
-            <div className="flex flex-row gap-2">
-              <input
-                type="text"
-                placeholder="Full Name"
-                className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 border-[#b8b6b6]"
-              />
-              <input
-                type="text"
-                placeholder="Username"
-                className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 border-[#b8b6b6]"
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full px-2 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 border-[#b8b6b6]"
+            />
             <input
               type="email"
               placeholder="Email address"
