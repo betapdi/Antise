@@ -31,6 +31,8 @@ import jakarta.validation.constraints.Size;
 public class User implements UserDetails {
     @Id
     private String id;
+
+    private String fullName;
     
     private String phoneNumber;
 

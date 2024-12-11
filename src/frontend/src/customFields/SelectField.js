@@ -10,7 +10,8 @@ const SelectField = (props) => {
     label,
     placeholder,
     disabled, //our props
-    options
+    options,
+    heightInput
   } = props;
 
   const { name, value, onChange, onBlur } = field; //defaults
@@ -32,7 +33,7 @@ const SelectField = (props) => {
         <select
             id={name}
             name={name}
-            className="block w-full border border-gray/100 rounded p-1"
+            className={`block w-full border border-gray/100 rounded-md p-1 px-4 ${heightInput}`}
             defaultValue=""
         >
             {options.map((option, index) => (

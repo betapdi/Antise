@@ -23,7 +23,7 @@ public class UserDto {
 
     private String phoneNumber;
 
-    private String imageUrl;
+    private String fullName;
 
     private String username;
     
@@ -35,6 +35,7 @@ public class UserDto {
 
     void update(User user) {
         if (user.getId() != null) id = user.getId();
+        if (user.getFullName() != null) fullName = user.getFullName();
         if (user.getPhoneNumber() != null) phoneNumber = user.getPhoneNumber();
         if (user.getEmail() != null) email = user.getEmail();
         if (user.getRefreshToken() != null) refreshToken = user.getRefreshToken();

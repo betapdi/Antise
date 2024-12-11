@@ -3,12 +3,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import jobApi from "../../../../api/jobApi";
-import FileChooser from "../../../../customFields/FileChooser";
 import TextField from "../../../../customFields/TextField";
 import RichTextField from "../../../../customFields/RichTextField";
 import SelectField from "../../../../customFields/SelectField";
 import DateField from "../../../../customFields/DateField";
 import IconTextField from "../../../../customFields/IconTextField";
+import ImageField from "../../../../customFields/ImageField";
 
 function AddCompany() {
   const navigate = useNavigate();
@@ -86,7 +86,7 @@ function AddCompany() {
                         <div className="w-full flex flex-row justify-between items-center gap-2">
                             <Field
                                 name = "logoImage"
-                                component = {FileChooser}
+                                component = {ImageField}
                                 label = "Logo"
                                 width = "w-1/3"
                                 placeholder = "A photo larger than 400 pixels work best. Max photo size 5 MB"
@@ -94,7 +94,7 @@ function AddCompany() {
 
                             <Field
                                 name = "bannerImage"
-                                component = {FileChooser}
+                                component = {ImageField}
                                 label = "Banner Image"
                                 width = "w-2/3"
                                 placeholder = "Banner images optical dimension 1520x400. Supported format JPEG, PNG. Max photo size 5 MB."

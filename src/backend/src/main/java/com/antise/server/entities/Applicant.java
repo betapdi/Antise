@@ -22,8 +22,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 public class Applicant extends User {
-    private String fullName;
-
     private Boolean gender;
     
     private String profileImageName;
@@ -44,7 +42,6 @@ public class Applicant extends User {
     private String biography;
 
     public void update(ApplicantDto dto) {
-        if (dto.getFullName() != null) fullName = dto.getFullName();
         if (dto.getGender() != null) gender = dto.getGender();
         if (dto.getDateOfBirth() != null) dateOfBirth = dto.getDateOfBirth();
         if (dto.getExperience() != null) experience = dto.getExperience();
@@ -56,8 +53,8 @@ public class Applicant extends User {
     public static Applicant fromUser(User user, ApplicantDto dto) {
         Applicant applicant = Applicant.builder() 
                 .id(user.getId()).password(user.getPassword()).email(user.getEmail())
-                .phoneNumber(user.getPhoneNumber()).role(user.getRole())
-                .refreshToken(user.getRefreshToken()).build(); 
+                .phoneNumber(user.getPhoneNumber()).refreshToken(user.getRefreshToken())
+                .fullName(user.getFullName()).role(user.getRole()).build(); 
         
         applicant.update(dto);
         return applicant;

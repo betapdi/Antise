@@ -1,13 +1,28 @@
 import { ErrorMessage } from "formik";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 
-const FileChooser = (props) => {
+const ImageField = (props) => {
   const { field, form, label, accept, placeholder, width } = props;
   const { name, onChange, onBlur } = field;
 
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
+
+  const [preview, setPreview] = useState(''); 
+  const handleFileChange = (event) => { 
+    const file = event.target.files[0]; 
+    if (file && file.type.startsWith('image/')) { 
+      const reader = new FileReader(); 
+      reader.onloadend = () => { 
+        setPreview(reader.result); 
+      }; 
+      
+      reader.readAsDataURL(file); 
+    } 
+
+    form.setFieldValue(field.name, file); 
+  };
 
   return (
     <div className={`flex flex-col gap-2 ${width} h-full`}>
@@ -27,9 +42,12 @@ const FileChooser = (props) => {
           type="file"
           accept={accept}
 
-          onChange={(event) => form.setFieldValue(field.name, event.target.files[0])}
+          onChange={handleFileChange}
           className="absolute inset-0 w-full h-full opacity-0 z-50"
         />
+        {preview ? ( 
+          <img src={preview} className="absolute top-4 left-0 max-h-40 max-w-full" id="preview" alt="Preview" /> 
+        ) :
         <div className="text-center">
           <img
             className="mx-auto h-12 w-12"
@@ -48,22 +66,21 @@ const FileChooser = (props) => {
             {placeholder}
           </p>
         </div>
-
-        <img src="" class="mt-4 mx-auto max-h-40 hidden" id="preview" />
+        }
       </div>
     </div>
   );
 };
 
-FileChooser.propTypes = {
+ImageField.propTypes = {
   field: PropTypes.object.isRequired,
   form: PropTypes.object.isRequired,
 
   accept: PropTypes.string,
 };
 
-FileChooser.defaultProps = {
-  accept: "*",
+ImageField.defaultProps = {
+  accept: "image/*",
 };
 
-export default FileChooser;
+export default ImageField;

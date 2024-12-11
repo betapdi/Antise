@@ -10,7 +10,8 @@ const IconTextField = (props) => {
     label,
     placeholder,
     disabled, //our props
-		imageName
+		imageName,
+    heightInput
   } = props;
 
   const { name, value, onChange, onBlur } = field; //defaults
@@ -37,7 +38,7 @@ const IconTextField = (props) => {
 							name={name}
 							type={type}
 							placeholder={placeholder}
-							className="block w-full border border-gray/100 rounded pl-10 p-1"
+							className={`block w-full border border-gray/100 rounded-md pl-10 p-1 ${heightInput}`}
 					/>
 					<div className="absolute inset-y-0 left-0 flex items-center pl-3 pr-1">
 							<img

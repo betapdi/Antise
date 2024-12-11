@@ -20,8 +20,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApplicantDto extends UserDto {
-    private String fullName;
-
     private Boolean gender;
 
     private String profileImageUrl;
@@ -42,7 +40,6 @@ public class ApplicantDto extends UserDto {
 
     public void update(Applicant applicant) {
         this.update((User)applicant);
-        if (applicant.getFullName() != null) fullName = applicant.getFullName();
         if (applicant.getGender() != null) gender = applicant.getGender();
         if (applicant.getProfileImageName() != null) profileImageUrl = "/image/" + applicant.getProfileImageName();
         if (applicant.getResume() != null) resumeUrl = "/pdf/" + applicant.getResume();

@@ -10,6 +10,7 @@ const TextField = (props) => {
     label,
     placeholder,
     disabled, //our props
+    heightInput
   } = props;
 
   const { name, value, onChange, onBlur } = field; //defaults
@@ -33,7 +34,7 @@ const TextField = (props) => {
         name={name}
         type={type}
         placeholder={placeholder}
-        className="block w-full border border-gray/100 rounded p-1"
+        className={`block w-full border border-gray/100 rounded-md p-1 px-4 ${heightInput}`}
       />
       <ErrorMessage
         name={name}

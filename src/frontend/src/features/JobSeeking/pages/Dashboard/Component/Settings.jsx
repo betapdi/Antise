@@ -1,9 +1,13 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import FileChooser from "../../../../../customFields/FileChooser";
 import TextField from "../../../../../customFields/TextField";
 import SelectField from "../../../../../customFields/SelectField";
+import DateField from "../../../../../customFields/DateField";
+import IconTextField from "../../../../../customFields/IconTextField";
+import RichTextField from "../../../../../customFields/RichTextField";
+import ResumeField from "../../../../../customFields/ResumeField";
+import ImageField from "../../../../../customFields/ImageField";
 
 const Settings = () => {
   return (
@@ -15,6 +19,7 @@ const Settings = () => {
         <Formik
           initialValues={{
             profilePicture: null,
+            resume: null,
             fullName: "",
             majorField: "",
             experience: "",
@@ -70,314 +75,153 @@ const Settings = () => {
                   Basic Information
                 </h2>
                 <div className="w-full flex-row justify-start items-start flex gap-10 mb-6">
-                    <Field
-                      name="profilePicture"
-                      component={FileChooser}
-                      label="Profile Picture"
-                      width = "w-1/3"
-                      placeholder="A photo larger than 400 pixels work best. Max photo size 5 MB."
-                    />
-                  {/* <div className='w-1/3 flex flex-col gap-2 h-full'>
-                    <label className="ps-1 text-[#18191c] text-sm font-normal font-['Inter'] leading-7">Profile Picture</label>
-                    <div className="w-full h-48 relative border-2 border-gray/100 border-dashed rounded-lg p-6" id="dropzone">
-                      <input type="file" className="absolute inset-0 w-full h-full opacity-0 z-50" name="profilePicture" 
-                      onChange={(event) => {console.log("Set file value"); setFieldValue('profilePicture', event.currentTarget.files[0]);}} />
-                      
-                      <div className="text-center">
-      
-                        <img className="mx-auto h-12 w-12" src={`/image/icon_upload_gray.svg`} alt="" />
-                        <h3 class="mt-2 text-sm font-medium text-gray-900">
-                          <label for="file-upload" class="relative cursor-pointer">
-                            <span>Drag and drop</span>
-                            <span class="text-indigo-600"> or browse</span>
-                            <span> to upload</span>
-                          </label>
-                        </h3>
-                        <p class="mt-1 text-xs text-[#767f8c] font-inter">
-                          A photo larger than 400 pixels work best. Max photo size 5 MB.
-                        </p>
-                      </div>
+                  <Field
+                    name="profilePicture"
+                    component={ImageField}
+                    label="Profile Picture"
+                    width = "w-1/4"
+                    placeholder="A photo larger than 400 pixels work best. Max photo size 5 MB."
+                  />
+                  
+                  <div className="w-3/4 space-y-3">
+                    <div className="grid grid-cols-2 gap-3">
+                      {/* Full Name */}
+                        <Field
+                          name="fullName"
+                          component={TextField}
+                          label="Full Name"
+                          heightInput="h-12"
+                          placeholder="Enter full name"
+                        />
+                      {/* Major Field */}
+                        <Field
+                          name="majorField"
+                          component={TextField}
+                          label="Major/Field"
+                          heightInput="h-12"
+                          placeholder="Enter major/field"
+                        />
+                      {/* Experience */}
+                        <Field
+                          name="experience"
+                          component={SelectField}
+                          label="Experience"
+                          heightInput="h-12"
+                          options = {[{key: "Select...", value: ""},
+                                    {key: "0-1 years", value: "0-1 years"},
+                                    {key: "1-3 years", value: "1-3 years"},
+                                    {key: "3-5 years", value: "3-5 years"},
+                                    {key: "5+ years", value: "5+ years"}]}
+                        />
+
+                      {/* Education */}
+                        <Field
+                          name="education"
+                          component={TextField}
+                          label="Education"
+                          heightInput="h-12"
+                          placeholder="Enter education details"
+                        />
                     </div>
-                  </div> */}
-                  <div className="grid grid-cols-2 gap-3">
-                    {/* Full Name */}
-                    <div>
-                    <Field
-                      name="fullName"
-                      component={TextField}
-                      label="Full Name"
-                      heightInput="h-12"
-                      placeholder="Enter full name"
-                    />
-                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Full Name
-                      </label>
-                      <Field
-                        name="fullName"
-                        type="text"
-                        className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                        placeholder="Enter full name"
-                      />
-                      <ErrorMessage
-                        name="fullName"
-                        component="div"
-                        className="text-red text-sm"
-                      /> */}
-                    </div>
-                    {/* Major Field */}
-                    <div>
-                      <Field
-                        name="majorField"
-                        component={TextField}
-                        label="Major Field"
-                        heightInput="h-12"
-                        placeholder="Enter major field"
-                      />
-                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Major Field
-                      </label>
-                      <Field
-                        name="majorField"
-                        type="text"
-                        className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                        placeholder="Enter major field"
-                      />
-                      <ErrorMessage
-                        name="majorField"
-                        component="div"
-                        className="text-red text-sm"
-                      /> */}
-                    </div>
-                    {/* Experience */}
-                    <div>
-                      <Field
-                        name="experience"
-                        component={SelectField}
-                        label="Experience"
-                        heightInput="h-12"
-                        options = {[{key: "Select...", value: ""},
-                                  {key: "0-1 years", value: "0-1 years"},
-                                  {key: "1-3 years", value: "1-3 years"},
-                                  {key: "3-5 years", value: "3-5 years"},
-                                  {key: "5+ years", value: "5+ years"}]}
-                      />
-                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Experience
-                      </label>
-                      <Field
-                        as="select"
-                        name="experience"
-                        className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                      >
-                        <option value="">Select experience</option>
-                        <option value="0-1 years">0-1 years</option>
-                        <option value="1-3 years">1-3 years</option>
-                        <option value="3-5 years">3-5 years</option>
-                        <option value="5+ years">5+ years</option>
-                      </Field>
-                      <ErrorMessage
-                        name="experience"
-                        component="div"
-                        className="text-red text-sm"
-                      /> */}
-                    </div>
-                    {/* Education */}
-                    <div>
-                      <Field
-                        name="education"
-                        component={TextField}
-                        label="Education"
-                        heightInput="h-12"
-                        placeholder="Enter education details"
-                      />
-                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Education
-                      </label>
-                      <Field
-                        name="education"
-                        type="text"
-                        className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                        placeholder="Enter education details"
-                      />
-                      <ErrorMessage
-                        name="education"
-                        component="div"
-                        className="text-red text-sm"
-                      /> */}
-                    </div>
-                    {/* Nationality */}
-                    <div>
-                      <Field
-                        name="nationality"
-                        component={SelectField}
-                        label="Nationality"
-                        heightInput="h-12"
-                        options = {[{key: "Select...", value: ""},
-                                  {key: "Vietnam", value: "Vietnam"},
-                                  {key: "USA", value: "USA"}]}
-                      />
-                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Nationality
-                      </label>
-                      <Field as="select" name="nationality" className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md">
-                        <option value="">Select...</option>
-                        <option value="vn">Vietnam</option>
-                        <option value="us">USA</option>
-                      </Field>
-                      <ErrorMessage
-                        name="nationality"
-                        component="div"
-                        className="text-red text-sm"
-                      /> */}
-                    </div>
-                    {/* Major/Field */}
-                    <div>
-                      <Field
-                        name="majorField"
-                        component={TextField}
-                        label="Major/Field"
-                        heightInput="h-12"
-                        placeholder="Enter study field"
-                      />
-                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Major/Field
-                      </label>
-                      <Field
-                        name="majorField"
-                        type="text"
-                        className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                        placeholder="Enter your field of study"
-                      />
-                      <ErrorMessage
-                        name="majorField"
-                        component="div"
-                        className="text-red text-sm"
-                      /> */}
-                    </div>
-                    {/* Experience */}
-                    <div>
-                      <Field
-                        name="experience"
-                        component={SelectField}
-                        label="Experience"
-                        heightInput="h-12"
-                        options = {[{key: "Select...", value: ""},
-                                  {key: "1-2 years", value: "1-2 years"},
-                                  {key: "3-5 years", value: "3-5 years"},
-                                  {key: "5+ years", value: "5+ years"}]}
-                      />
-                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Experience
-                      </label>
-                      <Field as="select" name="experience" className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md">
-                        <option value="">Select...</option>
-                        <option value="1">1-2 years</option>
-                        <option value="2">3-5 years</option>
-                        <option value="3">5+ years</option>
-                      </Field>
-                      <ErrorMessage
-                        name="experience"
-                        component="div"
-                        className="text-red text-sm"
-                      /> */}
-                    </div>
-                    {/* Gender */}
-                    <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
-                        Gender
-                      </label>
-                      <Field as="select" name="gender" className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md">
-                        <option value="">Select...</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </Field>
-                      <ErrorMessage
-                        name="gender"
-                        component="div"
-                        className="text-red text-sm"
-                      />
+
+                    <div className="grid grid-cols-3 gap-3">
+                      {/* Nationality */}
+                        <Field
+                          name="nationality"
+                          component={SelectField}
+                          label="Nationality"
+                          heightInput="h-12"
+                          options = {[{key: "Select...", value: ""},
+                                    {key: "Vietnam", value: "VietNam"},
+                                    {key: "USA", value: "USA"}]}
+                        />
+
+                      {/* Date Of Birth */}
+                        <Field
+                          name = "dateOfBirth"
+                          component = {DateField}
+                          label = "Date of Birth"
+                          placeholder="mm/dd/yyyy"
+                          heightInput = "h-12"
+                        />
+
+                      {/* Gender */}
+                        <Field
+                          name="gender"
+                          component={SelectField}
+                          label="Gender"
+                          heightInput="h-12"
+                          options = {[{key: "Select...", value: ""},
+                                    {key: "Male", value: "male"},
+                                    {key: "Female", value: "female"}]}
+                        />
                     </div>
                   </div>
                 </div>
 
                 {/* Contact Information */}
-                <h2 className="text-[#18191c] text-lg font-medium leading-7">
-                  Contact Information
-                </h2>
-                {/* Map Location */}
-                <div>
-                  <label className="text-[#18191c] text-sm font-normal leading-tight">
-                    Map Location
-                  </label>
-                  <Field
-                    name="mapLocation"
-                    type="text"
-                    className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                    placeholder="Enter location"
-                  />
-                  <ErrorMessage
-                    name="mapLocation"
-                    component="div"
-                    className="text-red text-sm"
-                  />
-                </div>
-                {/* Phone */}
-                <div>
-                  <label className="text-[#18191c] text-sm font-normal leading-tight">
-                    Phone
-                  </label>
-                  <Field
-                    name="phone"
-                    type="text"
-                    className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                    placeholder="Enter phone number"
-                  />
-                  <ErrorMessage
-                    name="phone"
-                    component="div"
-                    className="text-red text-sm"
-                  />
-                </div>
-                {/* Email */}
-                <div>
-                  <label className="text-[#18191c] text-sm font-normal leading-tight">
-                    Email
-                  </label>
-                  <Field
-                    name="email"
-                    type="email"
-                    className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                    placeholder="Enter email address"
-                  />
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-red text-sm"
-                  />
-                </div>
-                {/* Biography */}
-                <div className="col-span-2">
-                  <label className="text-[#18191c] text-sm font-normal leading-tight">
-                    Biography
-                  </label>
-                  <Field
-                    as="textarea"
-                    name="biography"
-                    className="w-full h-32 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                    placeholder="Tell us something about yourself"
-                  />
-                  <ErrorMessage
-                    name="biography"
-                    component="div"
-                    className="text-red text-sm"
-                  />
+                <div className="pt-8">
+                  <h2 className="text-[#18191c] text-lg font-medium leading-7">
+                    Contact Information
+                  </h2>
+
+                  <div className="space-y-2 pt-4 w-full">
+                    {/* Map Location */}
+                    <div>
+                      <Field
+                        name = "mapLocation"
+                        component = {TextField}
+                        placeholder = "Enter location"
+                        heightInput = "h-12"
+                        label = "Map Location"
+                      />
+                    </div>
+
+                    {/* Phone */}
+                    <Field
+                      name = "phone"
+                      component = {IconTextField}
+                      label = "Phone"
+                      placeholder="Phone number..."
+                      imageName = "phone.svg"
+                      type = "number"
+                      heightInput = "h-12"
+                    />
+                    
+                    {/* Email */}
+                    <Field
+                      name = "email"
+                      component = {IconTextField}
+                      label = "Email"
+                      placeholder="Email Address"
+                      imageName = "Email.svg"
+                      type = "email"
+                    />
+
+                    {/* Biography */}
+                    <Field
+                      name = "biography"
+                      component = {RichTextField}
+                      label = "Biography"
+                      placeholder="Tell us something about yourself"
+                      rows = "6"
+                    />
+                  </div>
+
+                  <div>
+                    <div className="text-lg font-medium mb-3">Your Cv/Resume</div>
+                    {/* Resume */}
+                    <Field
+                      name = "resume"
+                      component = {ResumeField}
+                      placeholder = "Browse file or drop here. only pdf"
+                    />
+                  </div>
                 </div>
 
-                {/* Change Password */}
-                <h2 className="text-[#18191c] text-lg font-medium leading-7">
+                {/* <h2 className="text-[#18191c] text-lg font-medium leading-7">
                   Change Password
                 </h2>
-                {/* Current Password */}
                 <div>
                   <label className="text-[#18191c] text-sm font-normal leading-tight">
                     Current Password
@@ -394,7 +238,6 @@ const Settings = () => {
                     className="text-red text-sm"
                   />
                 </div>
-                {/* New Password */}
                 <div>
                   <label className="text-[#18191c] text-sm font-normal leading-tight">
                     New Password
@@ -427,7 +270,7 @@ const Settings = () => {
                     component="div"
                     className="text-red text-sm"
                   />
-                </div>
+                </div> */}
 
                 {/* Submit Button */}
                 <button
@@ -439,7 +282,8 @@ const Settings = () => {
                     Save Changes
                   </div>
                 </button>
-                {/* Delete Your Account */}
+                <div className="w-full h-4"/>
+                {/* Delete Your Account
                 <div className="space-y-3 mt-6">
                   <h2 className="text-[#18191c] text-lg font-medium leading-7">
                     Delete Your Account
@@ -453,7 +297,7 @@ const Settings = () => {
                     />
                     <div className="text-[#e05050] text-sm font-medium font-['Inter'] leading-tight">Close Account</div>
                   </div>
-                </div>
+                </div> */}
               </Form>
             )
           }}
