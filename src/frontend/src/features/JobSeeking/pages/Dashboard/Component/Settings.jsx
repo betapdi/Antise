@@ -1,6 +1,9 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import FileChooser from "../../../../../customFields/FileChooser";
+import TextField from "../../../../../customFields/TextField";
+import SelectField from "../../../../../customFields/SelectField";
 
 const Settings = () => {
   return (
@@ -67,13 +70,21 @@ const Settings = () => {
                   Basic Information
                 </h2>
                 <div className="w-full flex-row justify-start items-start flex gap-10 mb-6">
-                  <div className='w-1/3 flex flex-col gap-2 h-full'>
+                    <Field
+                      name="profilePicture"
+                      component={FileChooser}
+                      label="Profile Picture"
+                      width = "w-1/3"
+                      placeholder="A photo larger than 400 pixels work best. Max photo size 5 MB."
+                    />
+                  {/* <div className='w-1/3 flex flex-col gap-2 h-full'>
                     <label className="ps-1 text-[#18191c] text-sm font-normal font-['Inter'] leading-7">Profile Picture</label>
                     <div className="w-full h-48 relative border-2 border-gray/100 border-dashed rounded-lg p-6" id="dropzone">
                       <input type="file" className="absolute inset-0 w-full h-full opacity-0 z-50" name="profilePicture" 
                       onChange={(event) => {console.log("Set file value"); setFieldValue('profilePicture', event.currentTarget.files[0]);}} />
                       
                       <div className="text-center">
+      
                         <img className="mx-auto h-12 w-12" src={`/image/icon_upload_gray.svg`} alt="" />
                         <h3 class="mt-2 text-sm font-medium text-gray-900">
                           <label for="file-upload" class="relative cursor-pointer">
@@ -87,11 +98,18 @@ const Settings = () => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="grid grid-cols-2 gap-3">
                     {/* Full Name */}
                     <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
+                    <Field
+                      name="fullName"
+                      component={TextField}
+                      label="Full Name"
+                      heightInput="h-12"
+                      placeholder="Enter full name"
+                    />
+                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
                         Full Name
                       </label>
                       <Field
@@ -104,11 +122,18 @@ const Settings = () => {
                         name="fullName"
                         component="div"
                         className="text-red text-sm"
-                      />
+                      /> */}
                     </div>
                     {/* Major Field */}
                     <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
+                      <Field
+                        name="majorField"
+                        component={TextField}
+                        label="Major Field"
+                        heightInput="h-12"
+                        placeholder="Enter major field"
+                      />
+                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
                         Major Field
                       </label>
                       <Field
@@ -121,11 +146,22 @@ const Settings = () => {
                         name="majorField"
                         component="div"
                         className="text-red text-sm"
-                      />
+                      /> */}
                     </div>
                     {/* Experience */}
                     <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
+                      <Field
+                        name="experience"
+                        component={SelectField}
+                        label="Experience"
+                        heightInput="h-12"
+                        options = {[{key: "Select...", value: ""},
+                                  {key: "0-1 years", value: "0-1 years"},
+                                  {key: "1-3 years", value: "1-3 years"},
+                                  {key: "3-5 years", value: "3-5 years"},
+                                  {key: "5+ years", value: "5+ years"}]}
+                      />
+                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
                         Experience
                       </label>
                       <Field
@@ -143,11 +179,18 @@ const Settings = () => {
                         name="experience"
                         component="div"
                         className="text-red text-sm"
-                      />
+                      /> */}
                     </div>
                     {/* Education */}
                     <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
+                      <Field
+                        name="education"
+                        component={TextField}
+                        label="Education"
+                        heightInput="h-12"
+                        placeholder="Enter education details"
+                      />
+                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
                         Education
                       </label>
                       <Field
@@ -160,11 +203,20 @@ const Settings = () => {
                         name="education"
                         component="div"
                         className="text-red text-sm"
-                      />
+                      /> */}
                     </div>
                     {/* Nationality */}
                     <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
+                      <Field
+                        name="nationality"
+                        component={SelectField}
+                        label="Nationality"
+                        heightInput="h-12"
+                        options = {[{key: "Select...", value: ""},
+                                  {key: "Vietnam", value: "Vietnam"},
+                                  {key: "USA", value: "USA"}]}
+                      />
+                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
                         Nationality
                       </label>
                       <Field as="select" name="nationality" className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md">
@@ -176,11 +228,18 @@ const Settings = () => {
                         name="nationality"
                         component="div"
                         className="text-red text-sm"
-                      />
+                      /> */}
                     </div>
                     {/* Major/Field */}
                     <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
+                      <Field
+                        name="majorField"
+                        component={TextField}
+                        label="Major/Field"
+                        heightInput="h-12"
+                        placeholder="Enter study field"
+                      />
+                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
                         Major/Field
                       </label>
                       <Field
@@ -193,11 +252,21 @@ const Settings = () => {
                         name="majorField"
                         component="div"
                         className="text-red text-sm"
-                      />
+                      /> */}
                     </div>
                     {/* Experience */}
                     <div>
-                      <label className="text-[#18191c] text-sm font-normal leading-tight">
+                      <Field
+                        name="experience"
+                        component={SelectField}
+                        label="Experience"
+                        heightInput="h-12"
+                        options = {[{key: "Select...", value: ""},
+                                  {key: "1-2 years", value: "1-2 years"},
+                                  {key: "3-5 years", value: "3-5 years"},
+                                  {key: "5+ years", value: "5+ years"}]}
+                      />
+                      {/* <label className="text-[#18191c] text-sm font-normal leading-tight">
                         Experience
                       </label>
                       <Field as="select" name="experience" className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md">
@@ -210,7 +279,7 @@ const Settings = () => {
                         name="experience"
                         component="div"
                         className="text-red text-sm"
-                      />
+                      /> */}
                     </div>
                     {/* Gender */}
                     <div>
