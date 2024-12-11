@@ -20,7 +20,7 @@ const Sidebar = ({ numberOfJobs }) => {
                 className={`flex items-center ${isActive("/job/dashboard/overview") ? 'text-blue' : 'text-[#767F8C]'} hover:text-blue relative`}
               >
                 <img
-                  src={require("../../../../../image/Stack.png")}
+                  src={`/image/Stack.png`}
                   alt="logo"
                   className={`h-auto mr-2 ${isActive("/job/dashboard/overview") ? 'filter-blue' : ''}`}
                 />
@@ -33,7 +33,7 @@ const Sidebar = ({ numberOfJobs }) => {
                 className={`flex items-center ${isActive("/job/dashboard/applied-jobs") ? 'text-blue' : 'text-[#767F8C]'} hover:text-blue relative`}
               >
                 <img
-                  src={require("../../../../../image/Briefcase.png")}
+                  src={`/image/Briefcase.png`}
                   alt="logo"
                   className={`h-auto mr-2 ${isActive("/job/dashboard/applied-jobs") ? 'filter-blue' : ''}`}
                 />
@@ -46,7 +46,7 @@ const Sidebar = ({ numberOfJobs }) => {
                 className={`flex items-center ${isActive("/job/dashboard/favorite-jobs") ? 'text-blue' : 'text-[#767F8C]'} hover:text-blue relative`}
               >
                 <img
-                  src={require("../../../../../image/BookmarkSimple.png")}
+                  src={`/image/BookmarkSimple.png`}
                   alt="logo"
                   className={`h-auto mr-2 ${isActive("/job/dashboard/favorite-jobs") ? 'filter-blue' : ''}`}
                 />
@@ -59,7 +59,7 @@ const Sidebar = ({ numberOfJobs }) => {
                 className={`flex items-center ${isActive("/job/dashboard/job-alerts") ? 'text-blue' : 'text-[#767F8C]'} hover:text-blue relative`}
               >
                 <img
-                  src={require("../../../../../image/BellRinging.png")}
+                  src={`/image/BellRinging.png`}
                   alt="logo"
                   className={`h-auto mr-2 ${isActive("/job/dashboard/job-alerts") ? 'filter-blue' : ''}`}
                 />
@@ -75,7 +75,7 @@ const Sidebar = ({ numberOfJobs }) => {
                 className={`flex items-center ${isActive("/job/dashboard/settings") ? 'text-blue' : 'text-[#767F8C]'} hover:text-blue`}
               >
                 <img
-                  src={require("../../../../../image/setting_btn.svg").default}
+                  src={`/image/setting_btn.svg`}
                   alt="logo"
                   className={`w-auto h-auto mr-2 ${isActive("/job/dashboard/settings") ? 'filter-blue' : ''}`}
                 />

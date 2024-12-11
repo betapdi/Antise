@@ -53,7 +53,7 @@ function ListJob({isSearch}) {
         {isSearch === 1 ? (
                 <div className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex">
                     <div className="w-6 h-6 justify-center items-center flex">
-                        <img src={require("../../../../image/icon_filter.png")} alt="icon_filter" className="w-6 h-6" />
+                        <img src={`/image/icon_filter.png`} alt="icon_filter" className="w-6 h-6" />
                     </div>
                     <button className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
                                     onClick={() =>{ setIsFilterOpen(!isFilterOpen); console.log(isFilterOpen);}}
@@ -77,7 +77,7 @@ function ListJob({isSearch}) {
                     className="w-[1100px] h-[132px] p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-4 transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
                     >
                         <div className="justify-start items-start gap-5 flex">
-                            <img src={require(`../../../../image/logoCompany/${job.companyLogo}`)} alt="job_icon" className="w-16 h-16" />
+                            <img src={`/image/logoCompany/${job.companyLogo}`} alt="job_icon" className="w-16 h-16" />
                             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
@@ -87,15 +87,15 @@ function ListJob({isSearch}) {
                                 </div>
                                 <div className="justify-start items-center gap-4 inline-flex">
                                     <div className="justify-start items-center gap-1.5 flex">
-                                        <img src={require("../../../../image/icon_map.png")} alt="location_icon" className="h-4" />
+                                        <img src={`/image/icon_map.png`} alt="location_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.location}</div>
                                     </div>
                                     <div className="justify-start items-center gap-1 flex">
-                                        <img src={require("../../../../image/icon_salary.png")} alt="salary_icon" className="h-4" />
+                                        <img src={`/image/icon_salary.png`} alt="salary_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.salary}</div>
                                     </div>
                                     <div className="justify-start items-center gap-1.5 flex">
-                                        <img src={require("../../../../image/icon_calander.png")} alt="calendar_icon" className="h-4" />
+                                        <img src={`/image/icon_calander.png`} alt="calendar_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.daysRemaining} Days Remaining</div>
                                     </div>
                                 </div>
@@ -103,7 +103,7 @@ function ListJob({isSearch}) {
                         </div>
                         <div className="justify-start items-start gap-3 flex">
                             <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-                                <img src={require("../../../../image/bookmark.png")} alt="icon_star" className="w-4 h-4" />
+                                <img src={`/image/bookmark.png`} alt="icon_star" className="w-4 h-4" />
                             </div>
                             <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                             hover:bg-[#0a65cc] hover:text-white group">
@@ -111,12 +111,12 @@ function ListJob({isSearch}) {
                                 Apply Now
                                 </div>
                                 <img 
-                                    src={require("../../../../image/arrow_right.png")} 
+                                    src={`/image/arrow_right.png`} 
                                     alt="arrow_right" 
                                     className="h-4 group-hover:hidden"
                                 />
                                 <img 
-                                    src={require("../../../../image/arrow_right_hover.png")} 
+                                    src={`/image/arrow_right_hover.png`} 
                                     alt="arrow_right_hover" 
                                     className="h-4 hidden group-hover:block"
                                 />
@@ -127,7 +127,7 @@ function ListJob({isSearch}) {
         </div>
         <div className="h-12 justify-center items-center gap-2 inline-flex">
                 <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex">
-                    <img src={require("../../../../image/arrow_left.png")} alt="icon_arrow" className="w-6 h-6" />
+                    <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
                 </div>
                 <div className="justify-start items-start flex">
                     <div className="w-12 h-12 px-2 py-3.5 bg-[#0a65cc] rounded-[50px] justify-center items-center flex ml-2">
@@ -147,7 +147,7 @@ function ListJob({isSearch}) {
                     </div>
                 </div>
                 <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex">
-                    <img src={require("../../../../image/arrow_right.png")} alt="icon_arrow" className="w-6 h-6" />
+                    <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
                 </div>
         </div>
         {/* Filter Modal */}

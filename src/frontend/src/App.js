@@ -7,7 +7,7 @@ import './App.css';
 import Authentication from './features/Authentication';
 import NavCompany from './components/Nav/Company';
 
-// const Job = React.lazy(() => import('./features/JobSeeking'));
+const Job = React.lazy(() => import('./features/JobSeeking'));
 const Company = React.lazy(() => import('./features/Company'));
 
 
@@ -17,7 +17,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path = "/" element = {<Navigate to = "auth/" replace />} />
-            {/* <Route path = "job/*" element = {<Job />} /> */}
+            <Route path = "job/*" element = {<Job />} />
             <Route path = "auth/*" element = {<Authentication />} />
             <Route path = "company/*" element = {<Company />} />
           </Routes>

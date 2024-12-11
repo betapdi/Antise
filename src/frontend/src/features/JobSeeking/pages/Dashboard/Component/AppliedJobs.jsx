@@ -121,7 +121,7 @@ function ListJob({ jobs, numberOfJobs }) {
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="justify-start items-start gap-5 flex w-1/2">
-                            <img src={require(`../../../../../image/logoCompany/${job.companyLogo}`)} alt="job_icon" className="w-16 h-16" />
+                            <img src={`/image/logoCompany/${job.companyLogo}`} alt="job_icon" className="w-16 h-16" />
                             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
@@ -131,11 +131,11 @@ function ListJob({ jobs, numberOfJobs }) {
                                 </div>
                                 <div className="justify-start items-center gap-4 inline-flex">
                                     <div className="justify-start items-center gap-1.5 flex">
-                                        <img src={require("../../../../../image/icon_map.png")} alt="location_icon" className="h-4" />
+                                        <img src={`/image/icon_map.png`} alt="location_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.location}</div>
                                     </div>
                                     <div className="justify-start items-center gap-1 flex">
-                                        <img src={require("../../../../../image/icon_salary.png")} alt="salary_icon" className="h-4" />
+                                        <img src={`/image/icon_salary.png`} alt="salary_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.salary}</div>
                                     </div>
                                 </div>
@@ -145,7 +145,7 @@ function ListJob({ jobs, numberOfJobs }) {
                         <div className=" text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight mr-10">{job.dateApplied}</div>
                         <div className=" mr-5 justify-start items-start gap-3 flex">
                             <div className="justify-start items-center gap-1.5 flex">
-                                <img src={require("../../../../../image/Check.png")} alt="icon_star" className="w-4 h-4" />
+                                <img src={`/image/Check.png`} alt="icon_star" className="w-4 h-4" />
                                 <div className="text-[#0ba02c] text-sm font-medium font-['Inter'] leading-tight">Active</div>
                             </div>
 
@@ -195,7 +195,7 @@ const AppliedJobs = () => {
             <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 {/* Previous Page Button */}
                 <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex" onClick={handlePrevPage}>
-                    <img src={require("../../../../../image/arrow_left.png")} alt="icon_arrow" className="w-6 h-6" />
+                    <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
                 </div>
 
                 {/* Page Number */}
@@ -207,7 +207,7 @@ const AppliedJobs = () => {
 
                 {/* Next Page Button */}
                 <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex" onClick={handleNextPage}>
-                    <img src={require("../../../../../image/arrow_right.png")} alt="icon_arrow" className="w-6 h-6" />
+                    <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
                 </div>
             </div>
         </div>

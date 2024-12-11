@@ -112,7 +112,7 @@ function ListJob({ jobs, numberOfJobs }) {
                         <div className=" opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Applied jobs</div>
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
-                        <img src={require("../../../../../image/briefcase-duotone (1) 1.png")} alt="icon_star" className="w-8 h-8" />
+                        <img src={`/image/briefcase-duotone (1) 1.png`} alt="icon_star" className="w-8 h-8" />
                     </div>
                 </div>
                 <div className="w-1/3 pl-6 pr-5 py-5 bg-[#fff6e6] rounded-lg justify-center items-center gap-20 inline-flex">
@@ -122,7 +122,7 @@ function ListJob({ jobs, numberOfJobs }) {
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
                         <div className="justify-center items-center flex">
-                            <img src={require("../../../../../image/BookmarkSimpleColored.png")} alt="icon_star" className="w-8 h-8" />
+                            <img src={`/image/BookmarkSimpleColored.png`} alt="icon_star" className="w-8 h-8" />
                         </div>
                     </div>
                 </div>
@@ -133,14 +133,14 @@ function ListJob({ jobs, numberOfJobs }) {
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
                         <div className="w-8 h-8 justify-center items-center flex">
-                            <img src={require("../../../../../image/BellRingingColored.png")} alt="icon_star" className="w-8 h-8" />
+                            <img src={`/image/BellRingingColored.png`} alt="icon_star" className="w-8 h-8" />
                         </div>
                     </div>
                 </div>
             </div>
             <div className="w-full h-32 p-8 bg-[#e05050] rounded-lg justify-between items-center inline-flex mb-5">
                 <div className="justify-center items-center gap-6 flex">
-                    <img className="w-16 h-16 rounded-full" alt="icon_star" src={require("../../../../../image/Ellipse 19.png")} />
+                    <img className="w-16 h-16 rounded-full" alt="icon_star" src={`/image/Ellipse 19.png`} />
                     <div className="flex-col justify-start items-start gap-2 inline-flex">
                         <div className="text-white text-lg font-medium font-['Inter'] leading-7">Your profile editing is not completed.</div>
                         <div className="text-white text-sm font-normal font-['Inter'] leading-tight">Complete your profile editing & build your custom Resume</div>
@@ -148,14 +148,14 @@ function ListJob({ jobs, numberOfJobs }) {
                 </div>
                 <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 flex">
                     <div className="text-[#e05050] text-base font-semibold font-['Inter'] capitalize leading-normal">Edit Profile</div>
-                    <img src={require("../../../../../image/fi_arrow-right.png")} alt="icon_star" className="w-8 h-8" />
+                    <img src={`/image/fi_arrow-right.png`} alt="icon_star" className="w-8 h-8" />
                 </div>
             </div>
             <div className="w-full h-6 justify-between items-center inline-flex">
                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Recently Applied</div>
                 <div className="justify-center items-center gap-2 flex">
                     <div className="text-[#767f8c] text-base font-medium font-['Inter'] leading-normal">View all</div>
-                    <img src={require("../../../../../image/fi_arrow-right-grey.png")} alt="icon_star" className="w-6 h-6" />
+                    <img src={`/image/fi_arrow-right-grey.png`} alt="icon_star" className="w-6 h-6" />
                 </div>
             </div>
             {/* Job List */}
@@ -172,7 +172,7 @@ function ListJob({ jobs, numberOfJobs }) {
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="justify-start items-start gap-5 flex w-1/2">
-                            <img src={require(`../../../../../image/logoCompany/${job.companyLogo}`)} alt="job_icon" className="w-16 h-16" />
+                            <img src={`/image/logoCompany/${job.companyLogo}`} alt="job_icon" className="w-16 h-16" />
                             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
@@ -182,11 +182,11 @@ function ListJob({ jobs, numberOfJobs }) {
                                 </div>
                                 <div className="justify-start items-center gap-4 inline-flex">
                                     <div className="justify-start items-center gap-1.5 flex">
-                                        <img src={require("../../../../../image/icon_map.png")} alt="location_icon" className="h-4" />
+                                        <img src={`/image/icon_map.png`} alt="location_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.location}</div>
                                     </div>
                                     <div className="justify-start items-center gap-1 flex">
-                                        <img src={require("../../../../../image/icon_salary.png")} alt="salary_icon" className="h-4" />
+                                        <img src={`/image/icon_salary.png`} alt="salary_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.salary}</div>
                                     </div>
                                 </div>
@@ -196,7 +196,7 @@ function ListJob({ jobs, numberOfJobs }) {
                         <div className=" text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight mr-10">{job.dateApplied}</div>
                         <div className=" mr-5 justify-start items-start gap-3 flex">
                             <div className="justify-start items-center gap-1.5 flex">
-                                <img src={require("../../../../../image/Check.png")} alt="icon_star" className="w-4 h-4" />
+                                <img src={`/image/Check.png`} alt="icon_star" className="w-4 h-4" />
                                 <div className="text-[#0ba02c] text-sm font-medium font-['Inter'] leading-tight">Active</div>
                             </div>
 

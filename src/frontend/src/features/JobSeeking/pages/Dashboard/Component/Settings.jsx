@@ -74,7 +74,7 @@ const Settings = () => {
                       onChange={(event) => {console.log("Set file value"); setFieldValue('profilePicture', event.currentTarget.files[0]);}} />
                       
                       <div className="text-center">
-                        <img className="mx-auto h-12 w-12" src={require('../../../../../image/icon_upload_gray.svg').default} alt="" />
+                        <img className="mx-auto h-12 w-12" src={`/image/icon_upload_gray.svg`} alt="" />
                         <h3 class="mt-2 text-sm font-medium text-gray-900">
                           <label for="file-upload" class="relative cursor-pointer">
                             <span>Drag and drop</span>
@@ -378,7 +378,7 @@ const Settings = () => {
                   <div className="w-1/2 text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">If you delete your Antise account, you will no longer be able to get information about the matched jobs, following employers, and job alert, shortlisted jobs and more. You will be abandoned from all the services of Antise.com.</div>
                   <div className="h-6 rounded-[3px] justify-center items-center gap-2 inline-flex">
                     <img
-                      src={require("../../../../../image/XCircle.png")}
+                      src={`/image/XCircle.png`}
                       alt="logo"
                       className="h-auto"
                     />

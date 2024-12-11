@@ -115,7 +115,7 @@ function ListJob({jobs, numberOfJobs}) {
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="justify-start items-start gap-5 flex">
-                            <img src={require(`../../../../../image/logoCompany/${job.companyLogo}`)} alt="job_icon" className="w-16 h-16" />
+                            <img src={`/image/logoCompany/${job.companyLogo}`} alt="job_icon" className="w-16 h-16" />
                             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
@@ -125,15 +125,15 @@ function ListJob({jobs, numberOfJobs}) {
                                 </div>
                                 <div className="justify-start items-center gap-4 inline-flex">
                                     <div className="justify-start items-center gap-1.5 flex">
-                                        <img src={require("../../../../../image/icon_map.png")} alt="location_icon" className="h-4" />
+                                        <img src={`/image/icon_map.png`} alt="location_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.location}</div>
                                     </div>
                                     <div className="justify-start items-center gap-1 flex">
-                                        <img src={require("../../../../../image/icon_salary.png")} alt="salary_icon" className="h-4" />
+                                        <img src={`/image/icon_salary.png`} alt="salary_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.salary}</div>
                                     </div>
                                     <div className="justify-start items-center gap-1.5 flex">
-                                        <img src={require("../../../../../image/icon_calander.png")} alt="calendar_icon" className="h-4" />
+                                        <img src={`/image/icon_calander.png`} alt="calendar_icon" className="h-4" />
                                         <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.daysRemaining} Days Remaining</div>
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@ function ListJob({jobs, numberOfJobs}) {
                         </div>
                         <div className="justify-start items-start gap-3 flex">
                             <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-                                <img src={require("../../../../../image/bookmark.png")} alt="icon_star" className="w-4 h-4" />
+                                <img src={`/image/bookmark.png`} alt="icon_star" className="w-4 h-4" />
                             </div>
                             <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                                 hover:bg-[#0a65cc] hover:text-white group">
@@ -149,12 +149,12 @@ function ListJob({jobs, numberOfJobs}) {
                                     Apply Now
                                 </div>
                                 <img
-                                    src={require("../../../../../image/arrow_right.png")}
+                                    src={`/image/arrow_right.png`}
                                     alt="arrow_right"
                                     className="h-4 group-hover:hidden"
                                 />
                                 <img
-                                    src={require("../../../../../image/arrow_right_hover.png")}
+                                    src={`/image/arrow_right_hover.png`}
                                     alt="arrow_right_hover"
                                     className="h-4 hidden group-hover:block"
                                 />
@@ -199,7 +199,7 @@ const FavoriteJobs = () => {
             <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 {/* Previous Page Button */}
                 <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex" onClick={handlePrevPage}>
-                    <img src={require("../../../../../image/arrow_left.png")} alt="icon_arrow" className="w-6 h-6" />
+                    <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
                 </div>
                 
                 {/* Page Number */}
@@ -211,7 +211,7 @@ const FavoriteJobs = () => {
                 
                 {/* Next Page Button */}
                 <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex" onClick={handleNextPage}>
-                    <img src={require("../../../../../image/arrow_right.png")} alt="icon_arrow" className="w-6 h-6" />
+                    <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
                 </div>
             </div>
         </div>
