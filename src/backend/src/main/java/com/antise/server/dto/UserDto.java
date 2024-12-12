@@ -33,7 +33,7 @@ public class UserDto {
 
     private UserRole role;
 
-    void update(User user) {
+    public void update(User user) {
         if (user.getId() != null) id = user.getId();
         if (user.getFullName() != null) fullName = user.getFullName();
         if (user.getPhoneNumber() != null) phoneNumber = user.getPhoneNumber();
