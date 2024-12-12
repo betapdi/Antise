@@ -1,6 +1,6 @@
 import { ErrorMessage } from "formik";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const ImageField = (props) => {
   const { field, form, label, accept, placeholder, width } = props;
@@ -9,7 +9,20 @@ const ImageField = (props) => {
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
 
-  const [preview, setPreview] = useState(''); 
+  const [preview, setPreview] = useState('');
+  
+  useEffect(() => {
+    const initialFile = form.values[field.name];
+    if (initialFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      }
+
+      reader.readAsDataURL(initialFile);
+    }
+  }, [])
+
   const handleFileChange = (event) => { 
     const file = event.target.files[0]; 
     if (file && file.type.startsWith('image/')) { 
