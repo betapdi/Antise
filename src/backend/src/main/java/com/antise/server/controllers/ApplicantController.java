@@ -51,8 +51,8 @@ public class ApplicantController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<ApplicantDto> createApplicant(@RequestPart("applicant") ApplicantDto applicant, @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
-        ApplicantDto response = applicantService.createApplicant(applicant, userDetails.getUsername());
+    public ResponseEntity<ApplicantDto> createApplicant(@AuthenticationPrincipal UserDetails userDetails) throws IOException {        
+        ApplicantDto response = applicantService.createApplicant(userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

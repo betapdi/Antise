@@ -28,14 +28,18 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest registerRequest) {
         var user = User.builder()
+                .fullName(registerRequest.getFullName())
                 .email(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(UserRole.USER)
                 .build();
         
-        // System.out.println(user);
+        System.out.println(registerRequest);
+        System.out.println(user.getFullName());
         
         User savedUser = userRepository.save(user);
+        System.out.println("AAAAAAAAAA");
+        System.out.println(savedUser);
 
         var accessToken = jwtService.generateToken(savedUser);
         var refreshToken = refreshTokenService.createRefreshToken(savedUser.getEmail());

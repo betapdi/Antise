@@ -63,14 +63,13 @@ public class ApplicantService {
         return response;
     }
 
-    public ApplicantDto createApplicant(ApplicantDto dto, String email) {
+    public ApplicantDto createApplicant(String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
 
-        Applicant applicant = Applicant.fromUser(user, dto);
-        applicant.update(dto);
+        Applicant applicant = Applicant.fromUser(user);
         applicant.setRole(UserRole.APPLICANT);
-        Applicant savedApplicant = userRepository.save(applicant);
 
+        Applicant savedApplicant = userRepository.save(applicant);
         ApplicantDto response = new ApplicantDto();
         response.update(savedApplicant);
 

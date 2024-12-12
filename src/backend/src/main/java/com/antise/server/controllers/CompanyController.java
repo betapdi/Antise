@@ -54,11 +54,8 @@ public class CompanyController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CompanyDto> createCompany(@RequestPart("company") CompanyDto company, 
-                                                    @RequestPart("banner") MultipartFile bannerFile,
-                                                    @RequestPart("logo") MultipartFile logoFile,
-                                                    @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
-        CompanyDto response = companyService.createCompany(company, bannerFile, logoFile, userDetails.getUsername());
+    public ResponseEntity<CompanyDto> createCompany(@AuthenticationPrincipal UserDetails userDetails) throws IOException {        
+        CompanyDto response = companyService.createCompany(userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

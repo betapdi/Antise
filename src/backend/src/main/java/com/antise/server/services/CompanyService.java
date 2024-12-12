@@ -58,25 +58,13 @@ public class CompanyService {
         return response;
     }
 
-    public CompanyDto createCompany(CompanyDto dto, MultipartFile bannerFile, MultipartFile logoFile, String email) throws IOException {
+    public CompanyDto createCompany(String email) throws IOException {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
 
-        Company company = Company.fromUser(user, dto);
-        company.update(dto);
+        Company company = Company.fromUser(user);
         company.setRole(UserRole.COMPANY);
-
-        if (bannerFile != null) {
-            String bannerName = fileService.uploadFile(path, bannerFile);
-            company.setBannerName(bannerName);
-        }
-
-        if (logoFile != null) {
-            String logoName = fileService.uploadFile(path, logoFile);
-            company.setLogoName(logoName);
-        }
         
         Company savedCompany = userRepository.save(company);
-
         CompanyDto response = new CompanyDto();
         response.update(savedCompany);
 

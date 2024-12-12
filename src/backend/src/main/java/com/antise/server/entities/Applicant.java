@@ -50,13 +50,12 @@ public class Applicant extends User {
         if (dto.getBiography() != null) biography = dto.getBiography();
     }
 
-    public static Applicant fromUser(User user, ApplicantDto dto) {
+    public static Applicant fromUser(User user) {
         Applicant applicant = Applicant.builder() 
                 .id(user.getId()).password(user.getPassword()).email(user.getEmail())
                 .phoneNumber(user.getPhoneNumber()).refreshToken(user.getRefreshToken())
                 .fullName(user.getFullName()).role(user.getRole()).build(); 
         
-        applicant.update(dto);
         return applicant;
     }
 }
