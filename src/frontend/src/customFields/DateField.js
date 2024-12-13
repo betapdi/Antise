@@ -33,6 +33,7 @@ const DateField = (props) => {
               name={name}
               type={type}
               placeholder={placeholder}
+              onChange={onChange}
               className={`block w-full border border-gray/100 rounded-md p-1 px-4 ${heightInput}`}
           />
           <ErrorMessage

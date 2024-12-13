@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import TextField from "../../../../../customFields/TextField";
 import SelectField from "../../../../../customFields/SelectField";
@@ -219,59 +219,6 @@ const Settings = () => {
                   </div>
                 </div>
 
-                {/* <h2 className="text-[#18191c] text-lg font-medium leading-7">
-                  Change Password
-                </h2>
-                <div>
-                  <label className="text-[#18191c] text-sm font-normal leading-tight">
-                    Current Password
-                  </label>
-                  <Field
-                    name="currentPassword"
-                    type="password"
-                    className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                    placeholder="Enter current password"
-                  />
-                  <ErrorMessage
-                    name="currentPassword"
-                    component="div"
-                    className="text-red text-sm"
-                  />
-                </div>
-                <div>
-                  <label className="text-[#18191c] text-sm font-normal leading-tight">
-                    New Password
-                  </label>
-                  <Field
-                    name="newPassword"
-                    type="password"
-                    className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                    placeholder="Enter new password"
-                  />
-                  <ErrorMessage
-                    name="newPassword"
-                    component="div"
-                    className="text-red text-sm"
-                  />
-                </div>
-
-                <div>
-                  <label className="text-[#18191c] text-sm font-normal leading-tight">
-                    Confirm New Password
-                  </label>
-                  <Field
-                    name="confirmNewPassword"
-                    type="password"
-                    className="w-full h-12 px-4 bg-white border border-[#e4e5e8] rounded-md"
-                    placeholder="Confirm new password"
-                  />
-                  <ErrorMessage
-                    name="confirmNewPassword"
-                    component="div"
-                    className="text-red text-sm"
-                  />
-                </div> */}
-
                 {/* Submit Button */}
                 <button
                   type="submit"
@@ -282,22 +229,8 @@ const Settings = () => {
                     Save Changes
                   </div>
                 </button>
+                
                 <div className="w-full h-4"/>
-                {/* Delete Your Account
-                <div className="space-y-3 mt-6">
-                  <h2 className="text-[#18191c] text-lg font-medium leading-7">
-                    Delete Your Account
-                  </h2>
-                  <div className="w-1/2 text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">If you delete your Antise account, you will no longer be able to get information about the matched jobs, following employers, and job alert, shortlisted jobs and more. You will be abandoned from all the services of Antise.com.</div>
-                  <div className="h-6 rounded-[3px] justify-center items-center gap-2 inline-flex">
-                    <img
-                      src={`/image/XCircle.png`}
-                      alt="logo"
-                      className="h-auto"
-                    />
-                    <div className="text-[#e05050] text-sm font-medium font-['Inter'] leading-tight">Close Account</div>
-                  </div>
-                </div> */}
               </Form>
             )
           }}

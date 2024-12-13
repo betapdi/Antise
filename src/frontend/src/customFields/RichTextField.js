@@ -34,6 +34,7 @@ const RichTextField = (props) => {
         name={name}
         rows={rows}
         placeholder={placeholder}
+        onChange={onChange}
         className={`block w-full border border-gray/100 rounded-md p-1 px-4 ${heightInput}`}
       />
       <ErrorMessage

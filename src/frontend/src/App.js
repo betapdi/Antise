@@ -16,7 +16,7 @@ function App() {
     <Suspense fallback = {<div>Loading...</div>}>
         <BrowserRouter>
           <Routes>
-            <Route path = "/" element = {<Navigate to = "auth/" replace />} />
+            <Route path = "/" element = {<Navigate to = "/job/homePage" replace />} />
             <Route path = "job/*" element = {<Job />} />
             <Route path = "auth/*" element = {<Authentication />} />
             <Route path = "company/*" element = {<Company />} />

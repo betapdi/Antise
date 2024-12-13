@@ -23,11 +23,7 @@ axiosPrivate.interceptors.request.use(async (config) => {
 })
 
 axiosPrivate.interceptors.response.use((response) => {
-  if (response && response.data) {
-    return response.data;
-  }
-
-  return response;
+  return {status: response.status, data: response.data}
 }, (error) => {
   throw error;
 });

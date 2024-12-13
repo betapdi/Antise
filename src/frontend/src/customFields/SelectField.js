@@ -35,6 +35,7 @@ const SelectField = (props) => {
             name={name}
             className={`block w-full border border-gray/100 rounded-md p-1 px-4 ${heightInput}`}
             defaultValue=""
+            onChange={onChange}
         >
             {options.map((option, index) => (
                 <option value={option.value} disabled={index === 0} >{option.key}</option>
