@@ -5,15 +5,13 @@ import applicantApi from "../../../../api/applicantApi";
 import companyApi from "../../../../api/companyApi";
 
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import SelectField from "../../../../customFields/SelectField";
 import TextField from "../../../../customFields/TextField";
 import RegisterDialog from "../../components/RegisterDialog";
 import { useState } from "react";
 
 export default function SignUpPage() {
-  const navigate = useNavigate();
-
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({title: null, content: null, buttonLabel: null, link: null});
 
@@ -104,7 +102,6 @@ export default function SignUpPage() {
             }}
           >
             {({ values, errors, touched, handleSubmit, setFieldValue, isSubmitting }) => {
-              {/* console.log({ values, errors, touched, handleSubmit, isSubmitting }); */}
               return (
                 <Form onSubmit={handleSubmit}>
                   <div className="flex flex-row items-center justify-between mb-8">
