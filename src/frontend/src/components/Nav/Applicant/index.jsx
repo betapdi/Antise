@@ -20,7 +20,7 @@ function Nav({isAuthen}) {
     
     return (
         <div className="w-full py-5 gap-20 items-center bg-white flex justify-center">
-            <div className="flex gap-4">
+            <div className="flex ms-24 gap-4">
                 <div className="justify-start items-center gap-2 flex">
                     <img src="/image/logo_job.png" alt="logo" />
                     <div className="text-[#18191c] text-2xl font-semibold font-inter leading-10">Antise</div>
@@ -124,13 +124,13 @@ function Nav({isAuthen}) {
 
                 <div className="justify-end gap-2 flex">
                     <button
-                        className="px-6 py-3 bg-white border border-[#0a65cc] rounded-[3px] justify-center items-center gap-3 flex"
+                        className="px-4 py-3 bg-white border border-[#0a65cc] rounded-[3px] justify-center items-center gap-3 flex"
                         onClick={handleSignInClick}
                     >
                         <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Sign in</div>
                     </button>
                     <button
-                        className="px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 flex"
+                        className="px-4 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 flex"
                         onClick={handleSignUpClick}
                     >
                         <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Sign up</div>

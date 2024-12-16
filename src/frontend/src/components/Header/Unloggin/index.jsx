@@ -14,7 +14,7 @@ const HeaderUnloggin = () => {
               <Link
                 to="/job/homepage"
                 className={`py-3.5 ${
-                  location.pathname === '/job/homepage' ? 'text-blue' : 'text-[#5e6670]'
+                  location.pathname.toLowerCase() === '/job/homepage' ? 'text-blue' : 'text-[#5e6670]'
                 } font-normal font-['Inter'] leading-tight`}
               >
                 Home
@@ -22,7 +22,7 @@ const HeaderUnloggin = () => {
               <Link
                 to="/job/listjob/search"
                 className={`py-3.5 ${
-                  location.pathname === '/job/ListJob/search' ? 'text-blue' : 'text-[#5e6670]'
+                  location.pathname.toLowerCase() === '/job/listjob/search' ? 'text-blue' : 'text-[#5e6670]'
                 } font-normal font-['Inter'] leading-tight`}
               >
                 Find Job
@@ -30,10 +30,10 @@ const HeaderUnloggin = () => {
               <Link
                 to="/"
                 className={`py-3.5 ${
-                  location.pathname === '/' ? 'text-blue' : 'text-[#5e6670]'
+                  location.pathname.toLowerCase() === '/' ? 'text-blue' : 'text-[#5e6670]'
                 } font-normal font-['Inter'] leading-tight`}
               >
-                Find Employees
+                Find Company
               </Link>
             </div>
           </div>

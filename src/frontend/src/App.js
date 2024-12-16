@@ -46,6 +46,7 @@ function App() {
         const response = await userApi.getUserData();
         const userData = response.data;
         console.log(userData);
+        console.log("debug");
   
         setUserId(userData.id);
         setFullName(userData.fullName);
@@ -85,14 +86,30 @@ function App() {
     }
 
     fetchUserData();
-  }, [])
-  
-
+  },[])
+  useEffect(()=>{
+    if (userData == null){
+      console.log("null");
+      return;
+    }
+    console.log("User data updated");
+    console.log(userData.id);
+    console.log(userData.role);
+  });
   return (
     <Suspense fallback = {<div>Loading...</div>}>
         <BrowserRouter>
           <Routes>
-            <Route path = "/" element = {<Navigate to = "/job/homePage" replace />} />
+            <Route path = "/" element={
+                              role === "APPLICANT" ? (
+                                <Job />
+                              ) : role === "COMPANY" ? (
+                                <Company />
+                              ) : (
+                                <Navigate to="/auth/register" replace />
+                              )
+                            }
+            />
             <Route path = "job/*" element = {<Job />} />
             <Route path = "auth/*" element = {<Authentication />} />
             <Route path = "company/*" element = {<Company />} />

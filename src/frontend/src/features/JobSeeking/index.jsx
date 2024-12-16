@@ -19,7 +19,6 @@ const JobSeeking = (props) => {
       {isAuthenticated ? <HeaderLoggin/> : <HeaderUnloggin/>}
       <Routes>
         <Route exact path='/' element={<Navigate to="/job/homePage" replace />} />
-        <Route path="/temp" element={<MainPage />} />
         <Route path="/homePage" element={<HomePage />} />
         <Route path="/detailjob" element={<DetailJob />} />
         <Route path="/listjob" element={<ListJob isSearch ={0} />} />

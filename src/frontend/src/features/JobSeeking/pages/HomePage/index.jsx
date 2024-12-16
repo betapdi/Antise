@@ -121,13 +121,10 @@ function HomePage() {
     
     
     return (
-        <div>
+        <div> 
             <div className="flex flex-col w-full items-center justify-center bg-[#f7f7f8]">
                 <div className="flex-row justify-center items-center gap-10 flex mb-20">
-                    <div className="flex-col justify-start items-start gap-8 flex">
-                            <div className="w-[32rem] text-[#18191c] text-[56px] font-medium font-['Inter'] leading-[64px]">Find a job that suits your interest & skills.</div>
-                            <div className="w-[25rem] text-[#bccce0] text-lg font-normal font-['Inter'] leading-7">Aliquam vitae turpis in diam convallis finibus in at risus. Nullam in scelerisque leo, eget sollicitudin velit bestibulum.</div>
-                    </div>
+                    <div className="w-[32rem] text-[#18191c] text-[56px] font-medium font-['Inter'] leading-[64px]">Find a job that suits your interest & skills.</div>
                     <img src={"/image/homepage_img.png"} alt="hero_image"/>
                 </div>
                 <div className="flex flex-row gap-4 mb-20">
@@ -171,32 +168,32 @@ function HomePage() {
                     {[
                         {
                             title: "Create account",
-                            description: "Aliquam facilisis egestas sapien, nec tempor leo tristique at.",
+                            description: "Sign up to start your job search journey easily.",
                             defaultImage: "/image/icon_add_user.png",
                             hoverImage: "/image/icon_add_user_hover.png",
                         },
                         {
                             title: "Upload CV/Resume",
-                            description: "Curabitur sit amet maximus ligula. Nam a nulla ante. Nam sodales.",
+                            description: "Upload your updated CV or resume to showcase your skills and experience.",
                             defaultImage: "/image/icon_upload.png",
                             hoverImage: "/image/icon_upload_hover.png",
                         },
                         {
                             title: "Find suitable job",
-                            description: "Phasellus quis eleifend ex. Morbi nec fringilla nibh.",
+                            description: "Search and discover jobs that match your skills and career goals.",
                             defaultImage: "/image/icon_find.png",
                             hoverImage: "/image/icon_find_hover.png",
                         },
                         {
                             title: "Apply job",
-                            description: "Curabitur sit amet maximus ligula. Nam a nulla ante, Nam sodales purus.",
+                            description: "Submit applications for your preferred job openings with ease.",
                             defaultImage: "/image/icon_tick.png",
                             hoverImage: "/image/icon_tick_hover.png",
                         },
                     ].map((item, index) => (
                         <div
                             key={index}
-                            className="h-56 p-6 rounded-xl flex-col justify-start items-center gap-6 inline-flex group transform transition-transform duration-300 hover:scale-105"
+                            className="h-56 p-4 rounded-xl flex-col justify-start items-center gap-6 inline-flex group transform transition-transform duration-300 hover:scale-105"
                         >
                             <div className="p-5 bg-white rounded-[80px] justify-start items-start gap-2.5 inline-flex group-hover:bg-[#0A65CC]">
                                 <img
@@ -211,10 +208,10 @@ function HomePage() {
                                 />
                             </div>
                             <div className="flex-col justify-start items-start gap-3 flex">
-                                <div className="w-[264px] text-center text-[#18191c] text-lg font-medium font-['Inter'] leading-7">
+                                <div className="w-[18rem] text-center text-[#18191c] text-lg font-medium font-['Inter'] leading-7">
                                     {item.title}
                                 </div>
-                                <div className="w-[264px] text-center text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">
+                                <div className="w-[18rem] text-center text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">
                                     {item.description}
                                 </div>
                             </div>
@@ -364,15 +361,14 @@ function HomePage() {
                 </div>
             </div>
             <div className='flex flex-row justify-center gap-16 py-16'>
-                <div className="h-[290px] p-[30px] bg-[#e4e5e8] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
+                <div className="h-[20rem] p-7 bg-[#e4e5e8] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
                     <div className="flex-col justify-start items-start gap-4 flex">
                         <div className="w-[500px] text-[#181f33] text-[32px] font-medium font-['Inter'] leading-10">Become a Candidate</div>
-                        <div className="w-[312px] opacity-80 text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus a dolor convallis efficitur.</div>
+                        <div className="w-[312px] opacity-80 text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">Take the first step towards your dream job. Create your profile, upload your resume, and discover opportunities tailored to your skills and ambitions.</div>
                     </div>
-                    <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group">
-                        <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
-                                         onClick={()=>handleSignUpClick()}
-                        >
+                    <button className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group"
+                            onClick={()=>handleSignUpClick()}>
+                        <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                             Register now
                         </div>
                         <img 
@@ -385,17 +381,16 @@ function HomePage() {
                                 alt="arrow_right_hover" 
                                 className="h-4 hidden group-hover:block"
                         />
-                    </div>
+                    </button>
                 </div>
-                <div className="h-[290px] p-[30px] bg-[#0851a3] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
+                <div className="h-[20rem] p-7 bg-[#0851a3] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
                     <div className="flex-col justify-start items-start gap-4 flex">
                         <div className="w-[500px] text-white text-[32px] font-medium font-['Inter'] leading-10">Become a Employers</div>
-                        <div className="w-[312px] opacity-80 text-white text-sm font-normal font-['Inter'] leading-tight">Cras in massa pellentesque, mollis ligula non, luctus dui. Morbi sed efficitur dolor. Pelque augue risus, aliqu.</div>    
+                        <div className="w-[312px] opacity-80 text-white text-sm font-normal font-['Inter'] leading-tight">Join our platform to find the best talent for your business. Post job listings, manage applications, and build a successful team effortlessly.</div>    
                     </div>
-                    <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group">
-                        <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
-                                        onClick={()=>handleSignUpClick()}
-                        >
+                    <button className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group"
+                            onClick={()=>handleSignUpClick()}>
+                        <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                             Register now
                         </div>
                         <img 
@@ -408,7 +403,7 @@ function HomePage() {
                                 alt="arrow_right_hover" 
                                 className="h-4 hidden group-hover:block"
                         />
-                    </div>
+                    </button>
                 </div>
 
             </div>
