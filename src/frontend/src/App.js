@@ -80,6 +80,7 @@ function App() {
         }
       } catch(error) {
         console.log(error);
+        setRole("ANONYMOUS");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
       }
@@ -87,36 +88,32 @@ function App() {
 
     fetchUserData();
   },[])
-  useEffect(()=>{
-    if (userData == null){
-      console.log("null");
-      return;
-    }
-    console.log("User data updated");
-    console.log(userData.id);
-    console.log(userData.role);
-  });
+
   return (
-    <Suspense fallback = {<div>Loading...</div>}>
-        <BrowserRouter>
-          <Routes>
-            <Route path = "/" element={
-                              role === "APPLICANT" ? (
-                                <Job />
-                              ) : role === "COMPANY" ? (
-                                <Company />
-                              ) : (
-                                <Navigate to="/auth/register" replace />
-                              )
-                            }
-            />
-            <Route path = "job/*" element = {<Job />} />
-            <Route path = "auth/*" element = {<Authentication />} />
-            <Route path = "company/*" element = {<Company />} />
-          </Routes>
-        </BrowserRouter>
-    </Suspense>
-  );
+    <>
+      {(role != null) ? (
+        <Suspense fallback = {<div>Loading...</div>}>
+            <BrowserRouter>
+              <Routes>
+                <Route path = "/" element={
+                                  role === "APPLICANT" ? (
+                                    <Job />
+                                  ) : role === "COMPANY" ? (
+                                    <Company />
+                                  ) : (
+                                    <Navigate to="/auth/register" replace />
+                                  )
+                                }
+                />
+                <Route path = "job/*" element = {<Job />} />
+                <Route path = "auth/*" element = {<Authentication />} />
+                <Route path = "company/*" element = {<Company />} />
+              </Routes>
+            </BrowserRouter>
+        </Suspense>)
+      : <div>Loading...</div>}
+    </>
+  )
 }
 
 export default App;
