@@ -4,10 +4,20 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { UserProvider } from './context/UserContext';
+import { CompanyProvider } from './context/CompanyContext';
+import { ApplicantProvider } from './context/ApplicantContext';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
-    <App />
+  <UserProvider>
+    <CompanyProvider>
+      <ApplicantProvider>
+        <App />
+      </ApplicantProvider>
+    </CompanyProvider>
+  </UserProvider>
   // </React.StrictMode>
 );
 

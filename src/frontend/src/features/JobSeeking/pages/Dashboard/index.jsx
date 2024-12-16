@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useState } from "react";
 import Sidebar from "./Component/SideBar";
 import Overview from "./Component/Overview";
@@ -23,6 +23,7 @@ const Dashboard = () => {
           </div>
           <div className="w-3/4">
             <Routes>
+              <Route exact path='/' element={<Navigate to="/job/dashboard/overview" replace />} />
               <Route path="/overview" element={<Overview />} />
               <Route path="/applied-jobs" element={<AppliedJobs />} />
               <Route path="/favorite-jobs" element={<FavoriteJobs />} />

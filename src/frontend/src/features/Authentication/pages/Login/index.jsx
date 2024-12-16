@@ -2,12 +2,13 @@ import * as React from "react";
 import { useState } from "react";
 import userApi from "../../../../api/userApi";
 import { Field, Form, Formik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import TextField from "../../../../customFields/TextField";
 import RegisterDialog from "../../components/RegisterDialog";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({title: null, content: null, buttonLabel: null, link: null});
 
@@ -23,8 +24,7 @@ export default function LoginPage() {
         localStorage.setItem('accessToken', value.accessToken);
         localStorage.setItem('refreshToken', value.refreshToken);
 
-        const userData = await userApi.getUserData();
-        console.log(userData);
+        navigate("/");
       } catch(error) {
         setDialogContent({
           title: `Error - Status Code: ${error.status}!`, 

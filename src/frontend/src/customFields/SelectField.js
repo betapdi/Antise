@@ -38,7 +38,7 @@ const SelectField = (props) => {
             onChange={onChange}
         >
             {options.map((option, index) => (
-                <option value={option.value} disabled={index === 0} >{option.key}</option>
+                <option value={option.value} disabled={index === 0} key= {index} >{option.key}</option>
             ))}
         </select>
 

@@ -36,7 +36,7 @@ const HeaderLoggin = () => {
                 Find Employees
               </Link>
               <Link
-                to="/"
+                to="/job/dashboard"
                 className={`py-3.5 ${
                   location.pathname === '/' ? 'text-blue' : 'text-[#5e6670]'
                 } font-normal font-['Inter'] leading-tight`}

@@ -19,7 +19,7 @@ const IconTextField = (props) => {
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
 
-	console.log(imageName)
+	// console.log(imageName)
 
   return (
     <div className="flex flex-col gap-2">

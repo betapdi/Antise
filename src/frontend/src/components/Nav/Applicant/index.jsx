@@ -118,7 +118,7 @@ function Nav({isAuthen}) {
                         </svg>
                         <span className="animate-ping absolute top-1 right-0.5 block h-1 w-1 rounded-full ring-2 ring-[#E05151] bg-[#E05151]"></span>
                     </button>
-                    <img className="w-12 h-12 rounded-full" src="https://via.placeholder.com/48x48" />
+                    <img className="w-12 h-12 rounded-full" src="https://via.placeholder.com/48x48" alt = "" />
                 </div>
             ) : (
 

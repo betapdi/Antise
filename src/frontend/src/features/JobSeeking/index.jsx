@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Route, Routes, Navigate
 } from "react-router-dom";
@@ -9,10 +9,14 @@ import DetailJob from './pages/DetailJob';
 import ListJob from './pages/ListJob';
 import Dashboard from './pages/Dashboard';
 import UploadCV from '../../components/Form/uploadCV';
-const Manga = (props) => {
+import HeaderLoggin from '../../components/Header/Loggin';
+
+const JobSeeking = (props) => {
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
+
   return (
     <div>
-      <HeaderUnloggin />
+      {isAuthenticated ? <HeaderLoggin/> : <HeaderUnloggin/>}
       <Routes>
         <Route exact path='/' element={<Navigate to="/job/homePage" replace />} />
         <Route path="/temp" element={<MainPage />} />
@@ -28,4 +32,4 @@ const Manga = (props) => {
   );
 };
 
-export default Manga;
+export default JobSeeking;

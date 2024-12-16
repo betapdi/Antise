@@ -14,9 +14,9 @@ const ResumeField = (props) => {
     return initialFile ? { name: initialFile.name, size: (initialFile.size / (1024 * 1024)).toFixed(2) + " MB" } : null;
   });
 
-  useEffect(() => {
-    console.log(fileDetail)
-  }, [fileDetail])
+  // useEffect(() => {
+  //   console.log(fileDetail)
+  // }, [fileDetail])
   
 
   const handleOnChange = (event) => {

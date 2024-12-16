@@ -32,9 +32,8 @@ const ImageField = (props) => {
       }; 
       
       reader.readAsDataURL(file); 
+      form.setFieldValue(field.name, file); 
     } 
-
-    form.setFieldValue(field.name, file); 
   };
 
   return (
@@ -68,19 +67,25 @@ const ImageField = (props) => {
             alt=""
           />
 
-          <h3 class="mt-2 text-sm font-medium text-gray-900">
-            <label for="file-upload" class="relative cursor-pointer">
+          <h3 className="mt-2 text-sm font-medium text-gray-900">
+            <label for="file-upload" className="relative cursor-pointer">
               <span>Drag and drop</span>
-              <span class="text-indigo-600"> or browse</span>
+              <span className="text-indigo-600"> or browse</span>
               <span> to upload</span>
             </label>
           </h3>
-          <p class="mt-1 text-xs text-[#767f8c] font-inter">
+          <p className="mt-1 text-xs text-[#767f8c] font-inter">
             {placeholder}
           </p>
         </div>
         }
       </div>
+
+      <ErrorMessage
+        name={name}
+        component="div"
+        className="text-red text-sm mt-1"
+      />
     </div>
   );
 };

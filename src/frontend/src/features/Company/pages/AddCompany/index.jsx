@@ -12,21 +12,9 @@ import ImageField from "../../../../customFields/ImageField";
 
 function AddCompany() {
   const navigate = useNavigate();
-  const handleClick = async () => {
-    const name = document.querySelector('input[name="companyName"]').value;
-    const description = document.querySelector(
-      'textarea[name="aboutUs"]'
-    ).value;
-
-    const rawData = {
-      name,
-      description,
-    };
-    console.log(rawData);
-
-    const value = await jobApi.createCompany(rawData);
-    console.log(value);
-    navigate("/company/SucessCompanyUpload");
+  const handleClickSubmit = async (values) => {
+    console.log(values)
+    // navigate("/company/SucessCompanyUpload");
   };
 
   return (
@@ -49,6 +37,14 @@ function AddCompany() {
             email: "",
           }}
           validationSchema={Yup.object({
+            logoImage: Yup.mixed()
+              .required("Please import your company's logo image")
+              .test("is-valid-size", "Max allowed size is 5 MB", value => value && value.size <= 1024),
+
+            bannerImage: Yup.mixed()
+              .required("Please import your company's banner image")
+              .test("is-valid-size", "Max allowed size is 5 MB", value => value && value.size <= 5 * 1024 * 1024),
+            
             companyName: Yup.string().required(
               "Please fill your company's name"
             ),
@@ -71,8 +67,11 @@ function AddCompany() {
               .required("Please provide an email"),
           })}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
-            setSubmitting(false);
+            setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
+                handleClickSubmit(values);
+            }, 400);
           }}
         >
           {({ values, errors, touched, setFieldValue, isSubmitting }) => {
