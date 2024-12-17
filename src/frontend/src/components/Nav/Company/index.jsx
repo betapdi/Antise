@@ -6,7 +6,7 @@ import { CompanyContext } from '../../../context/CompanyContext';
 function NavCompany() {
     const navigate = useNavigate();
     const handleNavigateToPostJob = () => {
-      navigate("/company/PostJob");
+      navigate("dashboard/post-job");
     };
     const { logoUrl } = useContext(CompanyContext);
 

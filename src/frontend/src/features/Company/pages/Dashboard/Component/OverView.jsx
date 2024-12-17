@@ -1,110 +1,20 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 import ListJob from "./ListJob";
 import { CompanyContext } from "../../../../../context/CompanyContext";
-const jobs = [
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 3, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 4, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 5, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 6, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 7, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 8, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 9, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 10, 2019 19:28",
-    },
-];
+
 
 function OverView() {
-    const {companyName} = useContext(CompanyContext);
-    console.log(companyName)
+    const {companyName, jobList} = useContext(CompanyContext);
+    const totalApplicants = useMemo(() => {
+        return jobList.reduce(
+          (sum, job) => sum + (job.applications?.length || 0),
+          0
+        );
+    }, [jobList]);
+
+    console.log(jobList);
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
             {/*Display how many job are there, for example, display Favorite Job (13) */}
@@ -113,7 +23,7 @@ function OverView() {
             <div className="flex w-full gap-5 mb-5">
                 <div className="w-1/3 pl-6 pr-5 bg-[#e7f0fa] rounded-lg justify-center items-center gap-20 inline-flex">
                     <div className="flex-col justify-start items-start inline-flex mb-2">
-                        <div className=" text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">589</div>
+                        <div className=" text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">{jobList.length}</div>
                         <div className=" opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Open Jobs</div>
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
@@ -122,7 +32,7 @@ function OverView() {
                 </div>
                 <div className="w-1/3 pl-6 pr-5 py-5 bg-[#fff6e6] rounded-lg justify-center items-center gap-20 inline-flex">
                     <div className="flex-col justify-start items-start inline-flex mb-2">
-                        <div className="text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">238</div>
+                        <div className="text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">{totalApplicants}</div>
                         <div className="opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Candidates</div>
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
@@ -148,7 +58,7 @@ function OverView() {
                     <div className="w-1/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">STATUS</div>
                     <div className="w-1/6 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">ACTION</div>
                 </div>
-                <ListJob jobList={jobs} />
+                <ListJob jobList={jobList} />
             </div>
         </div>
     )

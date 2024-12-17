@@ -28,7 +28,6 @@ const Company = (props) => {
         <Route path="/Dashboard/*" element={<Dashboard/>} />
         <Route path="/SuccessCompanyUpload" element={<SuccessCompanyUpload/>} />
         <Route path="/CompanySetupSuccess" element={<CompanySetupSuccess/>} />
-        <Route path="/PostJob" element={<PostJob/>} />
         <Route path="/postjobsuccess" element={<PostJobSuccess/>} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
