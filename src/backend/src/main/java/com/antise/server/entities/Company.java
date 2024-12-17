@@ -70,8 +70,7 @@ public class Company extends User {
     public static Company fromUser(User user) { 
         Company company = Company.builder() 
                         .id(user.getId()).password(user.getPassword()).email(user.getEmail())
-                        .phoneNumber(user.getPhoneNumber()).refreshToken(user.getRefreshToken())
-                        .fullName(user.getFullName()).role(user.getRole()).build(); 
+                        .refreshToken(user.getRefreshToken()).role(user.getRole()).build(); 
                         
         return company;
     }

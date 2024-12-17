@@ -26,20 +26,30 @@ public class Applicant extends User {
     
     private String profileImageName;
 
-    private String resume;
+    private String resumeName;
+
+    private String fullName;
     
     @DBRef
     private List<Application> applications;
 
     private Date dateOfBirth;
 
-    private Integer experience;
+    private String experience;
+
+    private String education;
 
     private String nationality;
 
     private String major;
 
     private String biography;
+
+    private String location;
+
+    private String workEmail;
+
+    private String phoneNumber;
 
     public void update(ApplicantDto dto) {
         if (dto.getGender() != null) gender = dto.getGender();
@@ -48,13 +58,16 @@ public class Applicant extends User {
         if (dto.getNationality() != null) nationality = dto.getNationality();
         if (dto.getMajor() != null) major = dto.getMajor();
         if (dto.getBiography() != null) biography = dto.getBiography();
+        if (dto.getLocation() != null) location = dto.getLocation();
+        if (dto.getEducation() != null) education = dto.getEducation();
+        if (dto.getWorkEmail() != null) workEmail = dto.getWorkEmail();
+        if (dto.getPhoneNumber() != null) phoneNumber = dto.getPhoneNumber();
     }
 
     public static Applicant fromUser(User user) {
         Applicant applicant = Applicant.builder() 
                 .id(user.getId()).password(user.getPassword()).email(user.getEmail())
-                .phoneNumber(user.getPhoneNumber()).refreshToken(user.getRefreshToken())
-                .fullName(user.getFullName()).role(user.getRole()).build(); 
+                .refreshToken(user.getRefreshToken()).role(user.getRole()).build(); 
         
         return applicant;
     }

@@ -21,10 +21,6 @@ import lombok.Setter;
 public class UserDto {
     private String id;
 
-    private String phoneNumber;
-
-    private String fullName;
-
     private String username;
     
     private String email;
@@ -35,8 +31,6 @@ public class UserDto {
 
     public void update(User user) {
         if (user.getId() != null) id = user.getId();
-        if (user.getFullName() != null) fullName = user.getFullName();
-        if (user.getPhoneNumber() != null) phoneNumber = user.getPhoneNumber();
         if (user.getEmail() != null) email = user.getEmail();
         if (user.getRefreshToken() != null) refreshToken = user.getRefreshToken();
         if (user.getRole() != null) role = user.getRole();

@@ -80,7 +80,7 @@ public class ApplicantService {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
         
         Applicant applicant = (Applicant)user;
-        applicant.update(dto);
+        applicant.update(dto);  
 
         if (profileImage != null) {
             String fileName = fileService.uploadFile(pathImage, profileImage);
@@ -89,7 +89,7 @@ public class ApplicantService {
 
         if (resume != null) {
             String fileName = fileService.uploadFile(pathResume, resume);
-            applicant.setResume(fileName);
+            applicant.setResumeName(fileName);
         }
         
         Applicant savedApplicant = userRepository.save(applicant);

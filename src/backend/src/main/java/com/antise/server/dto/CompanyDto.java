@@ -48,8 +48,8 @@ public class CompanyDto extends UserDto {
         // System.out.println(company.getRefreshToken());
         this.update((User)company);
         if (company.getName() != null) name = company.getName();
-        if (company.getLogoName() != null) logoUrl = "/file/" + company.getLogoName();
-        if (company.getBannerName() != null) bannerUrl = "/file/" + company.getBannerName();
+        if (company.getLogoName() != null) logoUrl = "/image/" + company.getLogoName();
+        if (company.getBannerName() != null) bannerUrl = "/image/" + company.getBannerName();
         if (company.getDescription() != null) description = company.getDescription();
         if (company.getBenefit() != null) benefit = company.getBenefit();
         if (company.getLocation() != null) location = company.getLocation();

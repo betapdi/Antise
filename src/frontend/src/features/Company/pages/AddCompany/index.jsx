@@ -13,9 +13,17 @@ import companyApi from "../../../../api/companyApi.js"
 function AddCompany() {
   const navigate = useNavigate();
   const handleClickSubmit = async (values) => {
-    console.log(values)
-    const response = companyApi.editCompany(values);
-    navigate("/company/SucessCompanyUpload");
+    console.log(values);
+
+    try {
+      const response = await companyApi.editCompany(values);
+      const company = response.data;
+      //update context
+      
+      navigate("/company/SucessCompanyUpload");
+    } catch(error) {
+      console.log(error);
+    }
   };
 
   Yup.addMethod(Yup.mixed, 'fileSize', function (maxSize, message) { 

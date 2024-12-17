@@ -22,13 +22,17 @@ import lombok.Setter;
 public class ApplicantDto extends UserDto {
     private Boolean gender;
 
+    private String fullName;
+
     private String profileImageUrl;
 
     private String resumeUrl;
     
     private Date dateOfBirth;
     
-    private Integer experience;
+    private String experience;
+
+    private String education;
     
     private String nationality;
     
@@ -36,18 +40,28 @@ public class ApplicantDto extends UserDto {
     
     private String biography;
 
+    private String location;
+
+    private String workEmail;
+
+    private String phoneNumber;
+
     private List<ApplicationDto> applications;
 
     public void update(Applicant applicant) {
         this.update((User)applicant);
         if (applicant.getGender() != null) gender = applicant.getGender();
         if (applicant.getProfileImageName() != null) profileImageUrl = "/image/" + applicant.getProfileImageName();
-        if (applicant.getResume() != null) resumeUrl = "/pdf/" + applicant.getResume();
+        if (applicant.getResumeName() != null) resumeUrl = "/pdf/" + applicant.getResumeName();
         if (applicant.getDateOfBirth() != null) dateOfBirth = applicant.getDateOfBirth();
         if (applicant.getExperience() != null) experience = applicant.getExperience();
         if (applicant.getNationality() != null) nationality = applicant.getNationality();
         if (applicant.getMajor() != null) major = applicant.getMajor();
         if (applicant.getBiography() != null) biography = applicant.getBiography();
+        if (applicant.getLocation() != null) location = applicant.getLocation();
+        if (applicant.getEducation() != null) education = applicant.getEducation();
+        if (applicant.getWorkEmail() != null) workEmail = applicant.getWorkEmail();
+        if (applicant.getPhoneNumber() != null) phoneNumber = applicant.getPhoneNumber();
         if (applicant.getApplications() != null) {
             applications = new ArrayList<>();
             

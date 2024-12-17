@@ -10,13 +10,26 @@ const applicantApi = {
 
     editApplicant: (rawData) => {
         const url = '/applicant/edit';
-      
-        // Convert rawData to FormData
+
         const formData = new FormData();
-        formData.append('applicant', new Blob([JSON.stringify(rawData)], {type: 'application/json'}));
+        const applicant = {};
+
+        for (let key in rawData) {
+          if (key === "resume") {
+            formData.append('resume', rawData[key]);
+          }
+
+          else if (key === "profilePicture") {
+            formData.append('profileImage', rawData[key]);
+          }
+
+          else applicant[key] = rawData[key];
+        }
+      
+        formData.append('applicant', new Blob([JSON.stringify(applicant)], {type: 'application/json'}));
       
         // Send as multipart/form-data
-        return axiosPrivate.post(url, formData, {
+        return axiosPrivate.put(url, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

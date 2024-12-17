@@ -8,8 +8,23 @@ import IconTextField from "../../../../../customFields/IconTextField";
 import RichTextField from "../../../../../customFields/RichTextField";
 import ResumeField from "../../../../../customFields/ResumeField";
 import ImageField from "../../../../../customFields/ImageField";
+import applicantApi from "../../../../../api/applicantApi";
 
 const Settings = () => {
+  const handleSaveChange = async (values) => {
+    console.log(values);
+
+    try {
+      const response = await applicantApi.editApplicant(values);
+      const applicant = response.data;
+
+      //Update context and show popup
+
+    } catch(error) {
+      console.log(error);
+    }
+  } 
+
   return (
     <div className="w-full overflow-y-auto ml-8">
       <div className="w-full flex-col justify-start items-start gap-4 flex">
@@ -21,46 +36,37 @@ const Settings = () => {
             profilePicture: null,
             resume: null,
             fullName: "",
-            majorField: "",
+            major: "",
             experience: "",
             education: "",
             nationality: "",
             dateOfBirth: "",
             gender: "",
-            mapLocation: "",
-            phone: "",
-            email: "",
+            location: "",
+            phoneNumber: "",
+            workEmail: "",
             biography: "",
-            currentPassword: "",
-            newPassword: "",
-            confirmNewPassword: "",
           }}
           validationSchema={Yup.object({
             fullName: Yup.string().required("Please fill your full name"),
-            majorField: Yup.string().required("Please fill your field of study"),
+            major: Yup.string().required("Please fill your field of study"),
             experience: Yup.string().required("Please select your experience"),
             education: Yup.string().required("Please fill your education details"),
             nationality: Yup.string().required("Please select your nationality"),
             dateOfBirth: Yup.date().required("Please select your date of birth"),
             gender: Yup.string().required("Please select your gender"),
             mapLocation: Yup.string().required("Please provide your location"),
-            phone: Yup.string()
+            phoneNumber: Yup.string()
               .required("Please enter your phone number")
               .matches(/^\d{10,15}$/, "Phone number must be between 10 and 15 digits"),
-            email: Yup.string()
+            workEmail: Yup.string()
               .required("Please provide your email")
               .email("Invalid email address"),
             biography: Yup.string().required("Please write a short biography"),
-            currentPassword: Yup.string().required("Please enter your current password"),
-            newPassword: Yup.string()
-              .required("Please provide a new password")
-              .min(8, "Password must be at least 8 characters"),
-            confirmNewPassword: Yup.string()
-              .required("Please confirm your new password")
-              .oneOf([Yup.ref("newPassword"), null], "Passwords must match"),
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
+                            handleSaveChange(values);
                             alert(JSON.stringify(values, null, 2));
                             setSubmitting(false);
                         }, 400);
@@ -95,7 +101,7 @@ const Settings = () => {
                         />
                       {/* Major Field */}
                         <Field
-                          name="majorField"
+                          name="major"
                           component={TextField}
                           label="Major/Field"
                           heightInput="h-12"
@@ -179,7 +185,7 @@ const Settings = () => {
 
                     {/* Phone */}
                     <Field
-                      name = "phone"
+                      name = "phoneNumber"
                       component = {IconTextField}
                       label = "Phone"
                       placeholder="Phone number..."
@@ -190,7 +196,7 @@ const Settings = () => {
                     
                     {/* Email */}
                     <Field
-                      name = "email"
+                      name = "workEmail"
                       component = {IconTextField}
                       label = "Email"
                       placeholder="Email Address"
