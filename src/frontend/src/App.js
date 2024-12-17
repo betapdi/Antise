@@ -56,7 +56,7 @@ function App() {
           setAddress(userData.address);
           setProfileImageUrl(userData.profileImageUrl);
           setResumeUrl(userData.resumeUrl);
-          setDateOfBirth(userData.dateOfBirth);
+          setDateOfBirth((userData.dateOfBirth).substring(0, 10));
           setExperience(userData.experience);
           setNationality(userData.nationality);
           setMajor(userData.major);
@@ -80,9 +80,10 @@ function App() {
           setVerified(userData.verified);
           setCompanyEmail(userData.companyEmail);
           setCompanyPhoneNumber(userData.companyPhoneNumber);
-          setYearOfEstablishment(userData.yearOfEstablishment);
+          setYearOfEstablishment((userData.yearOfEstablishment).substring(0, 10));
           setSavedApplicants(userData.savedApplicants);
         }
+
       } catch(error) {
         console.log(error);
         setRole("ANONYMOUS");

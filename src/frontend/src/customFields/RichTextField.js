@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { ErrorMessage } from "formik";
 
@@ -10,13 +10,19 @@ const RichTextField = (props) => {
     label,
     placeholder,
     disabled, //our props
-    heightInput
+    heightInput,
+    oldValue
   } = props;
 
   const { name, value, onChange, onBlur } = field; //defaults
 
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
+
+  useEffect(() => {
+    if (oldValue != null) 
+      form.setFieldValue(field.name, oldValue);
+  }, [])
 
   return (
     <div className="flex flex-col gap-2">
@@ -35,6 +41,7 @@ const RichTextField = (props) => {
         rows={rows}
         placeholder={placeholder}
         onChange={onChange}
+        defaultValue={oldValue}
         className={`block w-full border border-gray/100 rounded-md p-1 px-4 ${heightInput}`}
       />
       <ErrorMessage

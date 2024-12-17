@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 
 const ImageField = (props) => {
-  const { field, form, label, accept, placeholder, width } = props;
+  const { field, form, label, accept, placeholder, width, oldImageUrl } = props;
   const { name, onChange, onBlur } = field;
 
   const { errors, touched } = form;
@@ -12,15 +12,7 @@ const ImageField = (props) => {
   const [preview, setPreview] = useState('');
   
   useEffect(() => {
-    const initialFile = form.values[field.name];
-    if (initialFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreview(reader.result);
-      }
-
-      reader.readAsDataURL(initialFile);
-    }
+    if (oldImageUrl) setPreview(oldImageUrl);
   }, [])
 
   const handleFileChange = (event) => { 

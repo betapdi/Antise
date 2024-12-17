@@ -3,21 +3,20 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 
 const ResumeField = (props) => {
-  const { field, form, label, accept, placeholder, width } = props;
+  const { field, form, label, accept, placeholder, width, oldFile } = props;
   const { name, onChange, onBlur } = field;
 
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
 
   const [fileDetail, setFileDetail] = useState(() => {
-    const initialFile = form.values[field.name]; 
+    const initialFile = oldFile; 
     return initialFile ? { name: initialFile.name, size: (initialFile.size / (1024 * 1024)).toFixed(2) + " MB" } : null;
   });
 
   // useEffect(() => {
   //   console.log(fileDetail)
   // }, [fileDetail])
-  
 
   const handleOnChange = (event) => {
     const file = event.target.files[0]; 

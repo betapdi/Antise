@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import TextField from "../../../../../customFields/TextField";
@@ -9,8 +9,18 @@ import RichTextField from "../../../../../customFields/RichTextField";
 import ResumeField from "../../../../../customFields/ResumeField";
 import ImageField from "../../../../../customFields/ImageField";
 import applicantApi from "../../../../../api/applicantApi";
+import { ApplicantContext } from "../../../../../context/ApplicantContext";
 
 const Settings = () => {
+  const {
+      gender, setGender, fullName, setFullName, profileImageUrl, setProfileImageUrl,
+      resumeUrl, setResumeUrl, dateOfBirth, setDateOfBirth,
+      experience, setExperience, nationality, setNationality,
+      major, setMajor, biography, setBiography, address, setAddress, 
+      applications, setApplications, education, setEducation,
+      workEmail, setWorkEmail, phoneNumber, setPhoneNumber
+    } = useContext(ApplicantContext);
+
   const handleSaveChange = async (values) => {
     console.log(values);
 
@@ -27,6 +37,7 @@ const Settings = () => {
 
   return (
     <div className="w-full overflow-y-auto ml-8">
+      {console.log(dateOfBirth)}
       <div className="w-full flex-col justify-start items-start gap-4 flex">
         <h1 className="text-[#18191c] text-2xl font-medium leading-loose font-inter">
           Settings
@@ -41,8 +52,8 @@ const Settings = () => {
             education: "",
             nationality: "",
             dateOfBirth: "",
-            gender: "",
-            location: "",
+            gender: null,
+            address: "",
             phoneNumber: "",
             workEmail: "",
             biography: "",
@@ -54,10 +65,11 @@ const Settings = () => {
             education: Yup.string().required("Please fill your education details"),
             nationality: Yup.string().required("Please select your nationality"),
             dateOfBirth: Yup.date().required("Please select your date of birth"),
-            gender: Yup.string().required("Please select your gender"),
-            mapLocation: Yup.string().required("Please provide your location"),
+            gender: Yup.boolean().required("Please select your gender"),
+            address: Yup.string().required("Please provide your location"),
             phoneNumber: Yup.string()
               .required("Please enter your phone number")
+              .matches(/^\d+$/, "Please enter a valid number.")
               .matches(/^\d{10,15}$/, "Phone number must be between 10 and 15 digits"),
             workEmail: Yup.string()
               .required("Please provide your email")
@@ -86,6 +98,7 @@ const Settings = () => {
                     component={ImageField}
                     label="Profile Picture"
                     width = "w-1/4"
+                    oldImageUrl = {profileImageUrl}
                     placeholder="A photo larger than 400 pixels work best. Max photo size 5 MB."
                   />
                   
@@ -95,6 +108,7 @@ const Settings = () => {
                         <Field
                           name="fullName"
                           component={TextField}
+                          oldValue = {fullName}
                           label="Full Name"
                           heightInput="h-12"
                           placeholder="Enter full name"
@@ -103,6 +117,7 @@ const Settings = () => {
                         <Field
                           name="major"
                           component={TextField}
+                          oldValue = {fullName}
                           label="Major/Field"
                           heightInput="h-12"
                           placeholder="Enter major/field"
@@ -112,6 +127,7 @@ const Settings = () => {
                           name="experience"
                           component={SelectField}
                           label="Experience"
+                          oldValue = {experience}
                           heightInput="h-12"
                           options = {[{key: "Select...", value: ""},
                                     {key: "0-1 years", value: "0-1 years"},
@@ -124,6 +140,7 @@ const Settings = () => {
                         <Field
                           name="education"
                           component={TextField}
+                          oldValue = {education}
                           label="Education"
                           heightInput="h-12"
                           placeholder="Enter education details"
@@ -135,6 +152,7 @@ const Settings = () => {
                         <Field
                           name="nationality"
                           component={SelectField}
+                          oldValue = {nationality}
                           label="Nationality"
                           heightInput="h-12"
                           options = {[{key: "Select...", value: ""},
@@ -146,6 +164,7 @@ const Settings = () => {
                         <Field
                           name = "dateOfBirth"
                           component = {DateField}
+                          oldValue = {dateOfBirth}
                           label = "Date of Birth"
                           placeholder="mm/dd/yyyy"
                           heightInput = "h-12"
@@ -155,11 +174,12 @@ const Settings = () => {
                         <Field
                           name="gender"
                           component={SelectField}
+                          oldValue = {gender}
                           label="Gender"
                           heightInput="h-12"
                           options = {[{key: "Select...", value: ""},
-                                    {key: "Male", value: "male"},
-                                    {key: "Female", value: "female"}]}
+                                    {key: "Male", value: 0},
+                                    {key: "Female", value: 1}]}
                         />
                     </div>
                   </div>
@@ -175,8 +195,9 @@ const Settings = () => {
                     {/* Map Location */}
                     <div>
                       <Field
-                        name = "mapLocation"
+                        name = "address"
                         component = {TextField}
+                        oldValue = {address}
                         placeholder = "Enter location"
                         heightInput = "h-12"
                         label = "Map Location"
@@ -187,10 +208,11 @@ const Settings = () => {
                     <Field
                       name = "phoneNumber"
                       component = {IconTextField}
+                      oldValue = {phoneNumber}
                       label = "Phone"
                       placeholder="Phone number..."
                       imageName = "phone.svg"
-                      type = "number"
+                      type = "text"
                       heightInput = "h-12"
                     />
                     
@@ -198,16 +220,19 @@ const Settings = () => {
                     <Field
                       name = "workEmail"
                       component = {IconTextField}
+                      oldValue = {workEmail}
                       label = "Email"
                       placeholder="Email Address"
                       imageName = "Email.svg"
                       type = "email"
+                      heightInput = "h-12"
                     />
 
                     {/* Biography */}
                     <Field
                       name = "biography"
                       component = {RichTextField}
+                      oldValue = {biography}
                       label = "Biography"
                       placeholder="Tell us something about yourself"
                       rows = "6"
