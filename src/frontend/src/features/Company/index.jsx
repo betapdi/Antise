@@ -8,9 +8,9 @@ import { useState } from "react";
 import AddCompany from './pages/AddCompany';
 import NavCompany from '../../components/Nav/Company';
 import Dashboard from './pages/Dashboard';
-import SucessCompanyUpload from './pages/SucessPage/uploadsuccess';
+import SuccessCompanyUpload from './pages/SuccessPage/uploadsuccess';
 import PostJob from './pages/Dashboard/Component/PostJob';
-import PostJobSuccess from './pages/SucessPage/postjobsuccess';
+import PostJobSuccess from './pages/SuccessPage/postjobsuccess';
 import HeaderLogginComany from '../../components/Header/Company';
 import HeaderUnloggin from '../../components/Header/Unloggin';
 
@@ -25,7 +25,7 @@ const Company = (props) => {
         <Route exact path='/' element={<Navigate to="/company/dashboard" replace />} />
         <Route path="/AddCompany" element={<AddCompany/>} />
         <Route path="/Dashboard/*" element={<Dashboard/>} />
-        <Route path="/SucessCompanyUpload" element={<SucessCompanyUpload/>} />
+        <Route path="/SuccessCompanyUpload" element={<SuccessCompanyUpload/>} />
         <Route path="/PostJob" element={<PostJob/>} />
         <Route path="/postjobsuccess" element={<PostJobSuccess/>} />
         <Route path="*" element={<p>NONE</p>} />
