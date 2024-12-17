@@ -9,6 +9,7 @@ function NavCompany() {
       navigate("/company/PostJob");
     };
     const { logoUrl } = useContext(CompanyContext);
+
    
    
 

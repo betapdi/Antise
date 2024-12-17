@@ -1,6 +1,8 @@
 import React from "react";
+import { useContext } from "react";
 
 import ListJob from "./ListJob";
+import { CompanyContext } from "../../../../../context/CompanyContext";
 const jobs = [
     {
         title: "Senior UX Designer",
@@ -101,10 +103,12 @@ const jobs = [
 ];
 
 function OverView() {
+    const {companyName} = useContext(CompanyContext);
+    console.log(companyName)
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
             {/*Display how many job are there, for example, display Favorite Job (13) */}
-            <div className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7 mb-2">Hello, Esther Howard</div>
+            <div className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7 mb-2">Hello, {companyName}</div>
             <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight mb-5">Here is your daily activities and applications</div>
             <div className="flex w-full gap-5 mb-5">
                 <div className="w-1/3 pl-6 pr-5 bg-[#e7f0fa] rounded-lg justify-center items-center gap-20 inline-flex">

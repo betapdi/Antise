@@ -46,7 +46,6 @@ function App() {
         const response = await userApi.getUserData();
         const userData = response.data;
         console.log(userData);
-        console.log("debug");
   
         setUserId(userData.id);
         setFullName(userData.fullName);
@@ -91,7 +90,7 @@ function App() {
 
   return (
     <>
-      {(role != null || role ==null) ? (
+      {(role != null) ? (
         <Suspense fallback = {<div>Loading...</div>}>
             <BrowserRouter>
               <Routes>
