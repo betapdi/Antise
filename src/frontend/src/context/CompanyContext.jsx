@@ -18,6 +18,7 @@ export const CompanyProvider = ({children}) => {
     const [organizationType, setOrganizationType] = useState(null);
     const [verified, setVerified] = useState(null);
     const [yearOfEstablishment, setYearOfEstablishment] = useState(null);
+    const [savedApplicants, setSavedApplicants] = useState(null);
 
     return (
         <CompanyContext.Provider value = {{
@@ -26,7 +27,7 @@ export const CompanyProvider = ({children}) => {
             location, setLocation, organizationType, setOrganizationType,
             companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
             companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
-            yearOfEstablishment, setYearOfEstablishment
+            yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants
         }}>
             {children}
         </CompanyContext.Provider>

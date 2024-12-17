@@ -36,7 +36,7 @@ function App() {
     location, setLocation, organizationType, setOrganizationType,
     companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
     companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
-    yearOfEstablishment, setYearOfEstablishment
+    yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants
   } = useContext(CompanyContext);
 
   useEffect(() => {
@@ -81,6 +81,7 @@ function App() {
           setCompanyEmail(userData.companyEmail);
           setCompanyPhoneNumber(userData.companyPhoneNumber);
           setYearOfEstablishment(userData.yearOfEstablishment);
+          setSavedApplicants(userData.savedApplicants);
         }
       } catch(error) {
         console.log(error);
