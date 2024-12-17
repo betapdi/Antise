@@ -1,6 +1,6 @@
 import React from 'react'
 
-function postjobsuccess() {
+function PostJobSuccess() {
   return (
     <div className="w-full flex flex-col mx-auto p-8 bg-white shadow-md rounded">
         <div className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7">🎉 Congratulation, Your Job is successfully posted!</div>
@@ -22,4 +22,4 @@ function postjobsuccess() {
   )
 }
 
-export default postjobsuccess
+export default PostJobSuccess

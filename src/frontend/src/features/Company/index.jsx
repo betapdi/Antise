@@ -10,7 +10,7 @@ import NavCompany from '../../components/Nav/Company';
 import Dashboard from './pages/Dashboard';
 import SucessCompanyUpload from './pages/SucessPage/uploadsuccess';
 import PostJob from './pages/Dashboard/Component/PostJob';
-import postjobsuccess from './pages/SucessPage/postjobsuccess';
+import PostJobSuccess from './pages/SucessPage/postjobsuccess';
 import HeaderLogginComany from '../../components/Header/Company';
 import HeaderUnloggin from '../../components/Header/Unloggin';
 
@@ -27,7 +27,7 @@ const Company = (props) => {
         <Route path="/Dashboard/*" element={<Dashboard/>} />
         <Route path="/SucessCompanyUpload" element={<SucessCompanyUpload/>} />
         <Route path="/PostJob" element={<PostJob/>} />
-        <Route path="/postjobsuccess" element={<postjobsuccess/>} />
+        <Route path="/postjobsuccess" element={<PostJobSuccess/>} />
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>

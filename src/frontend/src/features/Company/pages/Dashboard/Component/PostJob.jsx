@@ -21,7 +21,6 @@ const PostJob = () => {
   }
   return (
     <div className="w-full flex justify-center items-center  max-w-screen-xl">
-
         <Formik
             initialValues={{
                 jobTitle: "",
