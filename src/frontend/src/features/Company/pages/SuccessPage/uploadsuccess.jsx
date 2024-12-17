@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SucessCompanyUpload() {
+function SuccessCompanyUpload() {
   return ( 
     <div className='w-screen h-screen flex justify-center items-center flex-col'>
         <div className='w-2/3 flex justify-center items-center flex-col gap-3'>
@@ -14,4 +14,4 @@ function SucessCompanyUpload() {
   )
 }
 
-export default SucessCompanyUpload
+export default SuccessCompanyUpload
