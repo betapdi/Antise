@@ -1,6 +1,7 @@
 package com.antise.server.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -41,6 +42,12 @@ public class Company extends User {
 
     private String companyUrl;
 
+    private Date yearOfEstablishment;
+
+    private String companyEmail;
+
+    private String companyPhoneNumber;
+
     @Builder.Default
     private Boolean verified = false;
 
@@ -55,6 +62,9 @@ public class Company extends User {
         if (dto.getLocation() != null) location = dto.getLocation();
         if (dto.getOrganizationType() != null) organizationType = dto.getOrganizationType();
         if (dto.getCompanyUrl() != null) companyUrl = dto.getCompanyUrl();
+        if (dto.getYearOfEstablishment() != null) yearOfEstablishment = dto.getYearOfEstablishment();
+        if (dto.getCompanyEmail() != null) companyEmail = dto.getCompanyEmail();
+        if (dto.getCompanyPhoneNumber() != null) companyPhoneNumber = dto.getCompanyPhoneNumber();
     }
 
     public static Company fromUser(User user) { 

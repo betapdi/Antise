@@ -5,6 +5,7 @@ import com.antise.server.entities.Company;
 import com.antise.server.entities.Job;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +34,12 @@ public class CompanyDto extends UserDto {
 
     private String companyUrl;
 
+    private Date yearOfEstablishment;
+
+    private String companyEmail;
+
+    private String companyPhoneNumber;
+
     private List<JobDto> jobList;
 
     private Boolean verified;
@@ -49,6 +56,10 @@ public class CompanyDto extends UserDto {
         if (company.getOrganizationType() != null) organizationType = company.getOrganizationType();
         if (company.getCompanyUrl() != null) companyUrl = company.getCompanyUrl();
         if (company.getVerified() != null) verified = company.getVerified();
+        if (company.getYearOfEstablishment() != null) yearOfEstablishment = company.getYearOfEstablishment();
+        if (company.getCompanyEmail() != null) companyEmail = company.getCompanyEmail();
+        if (company.getCompanyPhoneNumber() != null) companyPhoneNumber = company.getCompanyPhoneNumber();
+        
         if (company.getJobList() != null) {
             jobList = new ArrayList<>();
 

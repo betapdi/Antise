@@ -2,20 +2,32 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import jobApi from "../../../../api/jobApi";
 import TextField from "../../../../customFields/TextField";
 import RichTextField from "../../../../customFields/RichTextField";
 import SelectField from "../../../../customFields/SelectField";
 import DateField from "../../../../customFields/DateField";
 import IconTextField from "../../../../customFields/IconTextField";
 import ImageField from "../../../../customFields/ImageField";
+import companyApi from "../../../../api/companyApi.js"
 
 function AddCompany() {
   const navigate = useNavigate();
   const handleClickSubmit = async (values) => {
     console.log(values)
-    // navigate("/company/SucessCompanyUpload");
+    const response = companyApi.editCompany(values);
+    navigate("/company/SucessCompanyUpload");
   };
+
+  Yup.addMethod(Yup.mixed, 'fileSize', function (maxSize, message) { 
+    return this.test('fileSize', message, function (value) { 
+      const { path, createError } = this; 
+      if (value && value.size > maxSize) { 
+        return createError({ path, message }); 
+      } 
+      
+      return true; 
+    }); 
+  });
 
   return (
     <div className="w-full flex justify-center">
@@ -27,28 +39,28 @@ function AddCompany() {
           initialValues={{
             bannerImage: null,
             logoImage: null,
-            companyName: "",
-            aboutUs: "",
+            name: "",
+            description: "",
             organizationType: "",
             yearOfEstablishment: "",
-            companyWebsite: "",
-            mapLocation: "",
-            phone: "",
-            email: "",
+            companyUrl: "",
+            location: "",
+            companyPhoneNumber: "",
+            companyEmail: "",
           }}
           validationSchema={Yup.object({
             logoImage: Yup.mixed()
               .required("Please import your company's logo image")
-              .test("is-valid-size", "Max allowed size is 5 MB", value => value && value.size <= 1024),
+              .fileSize(5 * 1024 * 1024, 'File size must be less than or equal to 5MB'),
 
             bannerImage: Yup.mixed()
               .required("Please import your company's banner image")
-              .test("is-valid-size", "Max allowed size is 5 MB", value => value && value.size <= 5 * 1024 * 1024),
+              .fileSize(5 * 1024 * 1024, 'File size must be less than or equal to 5MB'),
             
-            companyName: Yup.string().required(
+            name: Yup.string().required(
               "Please fill your company's name"
             ),
-            aboutUs: Yup.string().required(
+            description: Yup.string().required(
               "Please fill in this field. If not, fill N/A"
             ),
             organizationType: Yup.string().required(
@@ -57,12 +69,12 @@ function AddCompany() {
             yearOfEstablishment: Yup.string().required(
               "Please enter a valid year"
             ),
-            companyWebsite: Yup.string()
+            companyUrl: Yup.string()
               .url("Invalid website URL")
               .required("Please provide the company website"),
-            mapLocation: Yup.string().required("Please provide a map location"),
-            phone: Yup.string().required("Please provide a phone number"),
-            email: Yup.string()
+            location: Yup.string().required("Please provide a map location"),
+            companyPhoneNumber: Yup.string().required("Please provide a phone number"),
+            companyEmail: Yup.string()
               .email("Invalid email format")
               .required("Please provide an email"),
           })}
@@ -101,14 +113,14 @@ function AddCompany() {
                         </div>
                     </div>
                     <Field
-                      name = "companyName"
+                      name = "name"
                       component = {TextField}
                       label = "Company Name"
                       placeholder = "Company Name..."
                     />
 
                     <Field
-                      name = "aboutUs"
+                      name = "description"
                       component = {RichTextField}
                       label = "About Us"
                       placeholder="Write down about your company here. Let the candidate know who we are..."
@@ -134,7 +146,7 @@ function AddCompany() {
                     </div>
 
                     <Field
-                        name = "companyWebsite"
+                        name = "companyUrl"
                         component = {IconTextField}
                         label = "Company Website"
                         placeholder="Website url..."
@@ -142,7 +154,7 @@ function AddCompany() {
                     />
 
                     <Field
-                      name = "mapLocation"
+                      name = "location"
                       component = {TextField}
                       label = "Map Location"
                       placeholder = "Location..."
@@ -150,7 +162,7 @@ function AddCompany() {
 
                     <div className="grid grid-cols-2 gap-4">
                         <Field
-                            name = "phone"
+                            name = "companyPhoneNumber"
                             component = {IconTextField}
                             label = "Phone"
                             placeholder="Phone number..."
@@ -159,7 +171,7 @@ function AddCompany() {
                         />
 
                         <Field
-                            name = "email"
+                            name = "companyEmail"
                             component = {IconTextField}
                             label = "Email"
                             placeholder="Email Address"

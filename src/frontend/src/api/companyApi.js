@@ -10,13 +10,26 @@ const companyApi = {
 
     editCompany: (rawData) => {
         const url = '/company/edit';
-      
-        // Convert rawData to FormData
+        
         const formData = new FormData();
-        formData.append('company', new Blob([JSON.stringify(rawData)], {type: 'application/json'}));
+        const company = {};
+
+        for (let key in rawData) {
+          if (key === "bannerImage") {
+            formData.append('banner', rawData[key]);
+          }
+
+          else if (key === "logoImage") {
+            formData.append('logo', rawData[key]);
+          }
+
+          else company[key] = rawData[key];
+        }
       
+        formData.append('company', new Blob([JSON.stringify(company)], {type: 'application/json'}));
+
         // Send as multipart/form-data
-        return axiosPrivate.post(url, formData, {
+        return axiosPrivate.put(url, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
