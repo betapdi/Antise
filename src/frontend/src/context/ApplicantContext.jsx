@@ -6,22 +6,28 @@ export const ApplicantContext = createContext({});
 export const ApplicantProvider = ({children}) => {
     //Applicant Data
     const [gender, setGender] = useState(null);
+    const [fullName, setFullName] = useState(null);
     const [profileImageUrl, setProfileImageUrl] = useState(null);
     const [resumeUrl, setResumeUrl] = useState(null);
     const [dateOfBirth, setDateOfBirth] = useState(null);
     const [experience, setExperience] = useState(null);
+    const [education, setEducation] = useState(null);
     const [nationality, setNationality] = useState(null);
     const [major, setMajor] = useState(null);
     const [biography, setBiography] = useState(null);
+    const [address, setAddress] = useState(null);
+    const [workEmail, setWorkEmail] = useState(null);
+    const [phoneNumber, setPhoneNumber] = useState(null);
     const [applications, setApplications] = useState(null);
 
     return (
         <ApplicantContext.Provider value = {{
-            gender, setGender, profileImageUrl, setProfileImageUrl,
+            gender, setGender, fullName, setFullName, profileImageUrl, setProfileImageUrl,
             resumeUrl, setResumeUrl, dateOfBirth, setDateOfBirth,
             experience, setExperience, nationality, setNationality,
-            major, setMajor, biography, setBiography, 
-            applications, setApplications
+            major, setMajor, biography, setBiography, address, setAddress,
+            applications, setApplications, education, setEducation,
+            workEmail, setWorkEmail, phoneNumber, setPhoneNumber
         }}>
             {children}
         </ApplicantContext.Provider>

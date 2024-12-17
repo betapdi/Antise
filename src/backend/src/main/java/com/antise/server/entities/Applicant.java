@@ -45,7 +45,7 @@ public class Applicant extends User {
 
     private String biography;
 
-    private String location;
+    private String address;
 
     private String workEmail;
 
@@ -58,7 +58,7 @@ public class Applicant extends User {
         if (dto.getNationality() != null) nationality = dto.getNationality();
         if (dto.getMajor() != null) major = dto.getMajor();
         if (dto.getBiography() != null) biography = dto.getBiography();
-        if (dto.getLocation() != null) location = dto.getLocation();
+        if (dto.getAddress() != null) address = dto.getAddress();
         if (dto.getEducation() != null) education = dto.getEducation();
         if (dto.getWorkEmail() != null) workEmail = dto.getWorkEmail();
         if (dto.getPhoneNumber() != null) phoneNumber = dto.getPhoneNumber();

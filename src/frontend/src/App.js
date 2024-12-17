@@ -18,27 +18,26 @@ const Company = React.lazy(() => import('./features/Company'));
 
 function App() {
   const {
-    userId, setUserId, fullName, setFullName,
-    email, setEmail, role, setRole,
-    phoneNumber, setPhoneNumber
+    userId, setUserId, email, setEmail, role, setRole,
   } = useContext(UserContext);
 
   const {
-    gender, setGender, profileImageUrl, setProfileImageUrl,
+    gender, setGender, fullName, setFullName, profileImageUrl, setProfileImageUrl,
     resumeUrl, setResumeUrl, dateOfBirth, setDateOfBirth,
     experience, setExperience, nationality, setNationality,
-    major, setMajor, biography, setBiography, 
-    applications, setApplications
+    major, setMajor, biography, setBiography, address, setAddress, 
+    applications, setApplications, education, setEducation,
+    workEmail, setWorkEmail, phoneNumber, setPhoneNumber
   } = useContext(ApplicantContext);
 
   const {
     companyName, setCompanyName, logoUrl, setLogoUrl, bannerUrl, setBannerUrl,
     description, setDescription, benefit, setBenefit,
     location, setLocation, organizationType, setOrganizationType,
-    companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified
+    companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
+    companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
+    yearOfEstablishment, setYearOfEstablishment
   } = useContext(CompanyContext);
-
-  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -48,13 +47,13 @@ function App() {
         console.log(userData);
   
         setUserId(userData.id);
-        setFullName(userData.fullName);
         setEmail(userData.email);
         setRole(userData.role);
-        setPhoneNumber(userData.phoneNumber);
   
         if (userData.role === 'APPLICANT') {
           setGender(userData.gender);
+          setFullName(userData.fullName);
+          setAddress(userData.address);
           setProfileImageUrl(userData.profileImageUrl);
           setResumeUrl(userData.resumeUrl);
           setDateOfBirth(userData.dateOfBirth);
@@ -63,10 +62,13 @@ function App() {
           setMajor(userData.major);
           setBiography(userData.biography);
           setApplications(userData.applications);
+          setEducation(userData.education);
+          setWorkEmail(userData.workEmail);
+          setPhoneNumber(userData.phoneNumber);
         }
   
         else {
-          setCompanyName(userData.companyName);
+          setCompanyName(userData.name);
           setLogoUrl(userData.logoUrl);
           setBannerUrl(userData.bannerUrl);
           setDescription(userData.description);
@@ -76,6 +78,9 @@ function App() {
           setCompanyUrl(userData.companyUrl);
           setJobList(userData.jobList);
           setVerified(userData.verified);
+          setCompanyEmail(userData.companyEmail);
+          setCompanyPhoneNumber(userData.companyPhoneNumber);
+          setYearOfEstablishment(userData.yearOfEstablishment);
         }
       } catch(error) {
         console.log(error);
