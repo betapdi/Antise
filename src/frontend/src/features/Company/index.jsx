@@ -13,6 +13,7 @@ import PostJob from './pages/Dashboard/Component/PostJob';
 import PostJobSuccess from './pages/SuccessPage/postjobsuccess';
 import HeaderLogginComany from '../../components/Header/Company';
 import HeaderUnloggin from '../../components/Header/Unloggin';
+import CompanySetupSuccess from './pages/SuccessPage/companysetupsuccess';
 
 
 const Company = (props) => {
@@ -26,6 +27,7 @@ const Company = (props) => {
         <Route path="/AddCompany" element={<AddCompany/>} />
         <Route path="/Dashboard/*" element={<Dashboard/>} />
         <Route path="/SuccessCompanyUpload" element={<SuccessCompanyUpload/>} />
+        <Route path="/CompanySetupSuccess" element={<CompanySetupSuccess/>} />
         <Route path="/PostJob" element={<PostJob/>} />
         <Route path="/postjobsuccess" element={<PostJobSuccess/>} />
         <Route path="*" element={<p>NONE</p>} />
