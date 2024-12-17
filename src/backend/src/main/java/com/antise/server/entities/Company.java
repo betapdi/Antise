@@ -55,6 +55,10 @@ public class Company extends User {
     @Builder.Default
     private List<Job> jobList = new ArrayList<>();
 
+    @DBRef
+    @Builder.Default
+    private List<Applicant> savedApplicants = new ArrayList<>();
+
     public void update(CompanyDto dto) {
         if (dto.getName() != null) name = dto.getName();
         if (dto.getDescription() != null) description = dto.getDescription();

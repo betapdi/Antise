@@ -1,6 +1,7 @@
 package com.antise.server.dto;
 
 import com.antise.server.auth.entities.User;
+import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Company;
 import com.antise.server.entities.Job;
 
@@ -42,6 +43,8 @@ public class CompanyDto extends UserDto {
 
     private List<JobDto> jobList;
 
+    private List<ApplicantDto> savedApplicants;
+
     private Boolean verified;
 
     public void update(Company company) {
@@ -59,6 +62,17 @@ public class CompanyDto extends UserDto {
         if (company.getYearOfEstablishment() != null) yearOfEstablishment = company.getYearOfEstablishment();
         if (company.getCompanyEmail() != null) companyEmail = company.getCompanyEmail();
         if (company.getCompanyPhoneNumber() != null) companyPhoneNumber = company.getCompanyPhoneNumber();
+
+        if (company.getSavedApplicants() != null) {
+            savedApplicants = new ArrayList<>();
+
+            for (Applicant applicant : company.getSavedApplicants()) {
+                ApplicantDto dto = new ApplicantDto();
+                dto.update(applicant);
+
+                savedApplicants.add(dto);
+            }
+        }
         
         if (company.getJobList() != null) {
             jobList = new ArrayList<>();
