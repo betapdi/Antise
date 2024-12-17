@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const Sidebar = ({ numberOfJobs }) => {
   const location = useLocation(); // Get the current location/path
   
-  const isActive = (path) => location.pathname === path; // Check if the link is active
+  const isActive = (path) => location.pathname.toLowerCase() === path; // Check if the link is active
 
   return (
     <div className="w-full bg-white">

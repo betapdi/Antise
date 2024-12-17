@@ -24,7 +24,7 @@ const Company = (props) => {
       <Routes>
         <Route exact path='/' element={<Navigate to="/company/dashboard" replace />} />
         <Route path="/AddCompany" element={<AddCompany/>} />
-        <Route path="/Dashboard" element={<Dashboard/>} />
+        <Route path="/Dashboard/*" element={<Dashboard/>} />
         <Route path="/SucessCompanyUpload" element={<SucessCompanyUpload/>} />
         <Route path="/PostJob" element={<PostJob/>} />
         <Route path="/postjobsuccess" element={<postjobsuccess/>} />

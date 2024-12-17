@@ -91,7 +91,7 @@ function App() {
 
   return (
     <>
-      {(role != null) ? (
+      {(role != null || role ==null) ? (
         <Suspense fallback = {<div>Loading...</div>}>
             <BrowserRouter>
               <Routes>
@@ -101,7 +101,7 @@ function App() {
                                   ) : role === "COMPANY" ? (
                                     <Company />
                                   ) : (
-                                    <Navigate to="/auth/register" replace />
+                                    <Navigate to="/auth/login" replace />
                                   )
                                 }
                 />

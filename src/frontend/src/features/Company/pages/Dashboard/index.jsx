@@ -1,7 +1,10 @@
 import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./Component/Sidebar";
 import PostJob from "./Component/PostJob";
 import MyJob from "./Component/MyJob";
+import OverView from "./Component/OverView";
+import CandidateList from "./Component/CandidateList";
 
 
 const Dashboard = () => {
@@ -12,7 +15,13 @@ const Dashboard = () => {
           <Sidebar />
         </div>
         <div className="w-3/4">
-            <MyJob/>
+            <Routes>
+              <Route exact path='/' element={<Navigate to="/company/dashboard/overview" replace />} />
+              <Route path="/overview" element={<OverView />} />
+              <Route path="/post-job" element={<PostJob />} />
+              <Route path="/my-job" element={<MyJob />} />
+              <Route path="/my-job/candidate/{$id}" element={<CandidateList/>} />
+            </Routes> 
         </div>
       </div>
     </div>

@@ -34,6 +34,10 @@ const companyApi = {
             'Content-Type': 'multipart/form-data',
           },
         });
+    },
+    getCompany: (id) => {
+      const url = `/company/get/${id}`;
+      return axiosClient.get(url);
     }
 }
 
