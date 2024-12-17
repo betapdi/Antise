@@ -23,7 +23,7 @@ const Dashboard = () => {
             <Route path="/post-job" element={<PostJob />} />
             <Route path="/saved-candidate" element={<SavedCandidate />} />
             <Route path="/my-job" element={<MyJob />} />
-            <Route path="/my-job/ViewCandidate" element={<ViewCandidate />} />
+            <Route path="/ViewCandidate" element={<ViewCandidate />} />
             <Route path="/my-job/candidate/{$id}" element={<CandidateList />} />
           </Routes>
         </div>
