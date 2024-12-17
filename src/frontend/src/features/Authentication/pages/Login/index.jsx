@@ -37,7 +37,7 @@ export default function LoginPage() {
 
   return (
     <div className="w-screen h-screen justify-center items-center flex flex-row gap-20">
-      <div className="w-1/4 flex justify-between items-center">
+      <div className="w-2/5 flex justify-between items-center">
         <div className="flex flex-col w-full justify-between">
           <div className="flex flex-row items-center mb-10">
             <img src="/image/logo_job.png" alt="logo" className="h-auto" />
@@ -109,16 +109,10 @@ export default function LoginPage() {
                     <span className="text-white text-1xl">→</span>
                   </button>
                   <div className="my-4 text-center text-gray">or</div>
-                  <div className="flex justify-between mb-3">
-                    <button className="w-full mr-2 bg-white py-2 rounded-md text-sm border border-[#b8b6b6] pl-1 inline-flex items-center">
-                      <img src="/image/logo_fb.png" alt="Facebook" className="mr-2" />
-                      Sign in with Facebook
-                    </button>
-                    <button className="w-full ml-2 bg-white py-2 rounded-md text-sm border border-[#b8b6b6] pl-1 inline-flex items-center">
-                      <img src="/image/logo_gg.png" alt="Google" className="mr-2"/>
-                      Sign in with Google
-                    </button>
-                  </div>
+                  <button className="w-full ml-2 bg-white py-2 rounded-md text-sm border border-[#b8b6b6] pl-1 flex items-center justify-center">
+                    <img src="/image/logo_gg.png" alt="Google" className="mr-2"/>
+                    <span>Sign in with Google</span>
+                  </button>
                 </Form>
               )
             }}

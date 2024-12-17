@@ -20,8 +20,8 @@ const PostJob = () => {
       navigate("/company/postjobsuccess");
   }
   return (
-    <div className="w-full flex justify-center items-center">
-    <div className="w-3/4 flex justify-center items-center max-w-screen-xl">
+    <div className="w-full flex justify-center items-center  max-w-screen-xl">
+
         <Formik
             initialValues={{
                 jobTitle: "",
@@ -260,7 +260,7 @@ const PostJob = () => {
             )}
         </Formik>
     </div>
-</div>
+
   )
 };
 
