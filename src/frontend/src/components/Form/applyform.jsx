@@ -1,8 +1,23 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import TextField from "../../customFields/TextField";
+import SelectField from "../../customFields/SelectField";
+import RichTextField from "../../customFields/RichTextField";
 
-const ApplyForm = ({isCloseChange}) => {
+const ApplyForm = ({ isCloseChange }) => {
+  const navigate = useNavigate();
+  const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
+  const handleClickSubmit = async (values) => {
+    console.log(values);
+    try {
+      navigate("/job/detailjob");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-full mx-auto p-8 bg-white shadow-md rounded">
       <h1 className="text-[#18191c] mb-3 text-lg font-medium font-['Inter'] leading-7">Apply Job: Senior UX Designer</h1>
@@ -16,125 +31,77 @@ const ApplyForm = ({isCloseChange}) => {
         }}
         validationSchema={Yup.object({
           fullName: Yup.string().required("Please fill your full name"),
-          phoneNumber: Yup.string().required("Please fill your telephone number"),
+          phoneNumber: Yup.string().matches(phoneRegExp, "Please enter a valid phone number").required("Please fill your telephone number"),
           email: Yup.string().email("Invalid email").required("Please fill your email"),
           resume: Yup.string().required("Please upload your CV"),
           coverLetter: Yup.string().required("Please fill the cover letter. If not, fill N/A"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-          setSubmitting(false);
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+            handleClickSubmit(values);
+          }, 400);
         }}
       >
-        {() => (
-          <Form className="space-y-4">
-            <div>
-              <label htmlFor="fullName" className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Full Name
-              </label>
+        {({ values, errors, touched, setFieldValue, isSubmitting }) => {
+          return (
+            <Form className="space-y-4">
               <Field
-                id="fullName"
+                label="Full Name"
                 name="fullName"
-                type="text"
-                className="block w-full border border-gray/100 rounded px-3 py-2"
+                component={TextField}
+                placeholder="Company Name"
               />
-              <ErrorMessage
-                name="fullName"
-                component="div"
-                className="text-red text-sm mt-1"
-              />
-            </div>
 
-            <div>
-              <label htmlFor="phoneNumber" className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Telephone Number
-              </label>
               <Field
-                id="phoneNumber"
+                label="Telephone Number"
                 name="phoneNumber"
-                type="number"
-                className="block w-full border border-gray/100 rounded px-3 py-2"
+                component={TextField}
+                placeholder="Telephone number"
               />
-              <ErrorMessage
-                name="phoneNumber"
-                component="div"
-                className="text-red text-sm mt-1"
-              />
-            </div>
 
-            <div>
-              <label htmlFor="email" className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Email
-              </label>
               <Field
-                id="email"
+                label="Email"
                 name="email"
-                type="email"
-                className="block w-full border border-gray/100 rounded px-3 py-2"
+                component={TextField}
+                placeholder="Email"
               />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="text-red text-sm mt-1"
-              />
-            </div>
 
-            <div>
-              <label htmlFor="resume" className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Choose Resume
-              </label>
               <Field
-                as="select"
-                id="resume"
                 name="resume"
-                className="block w-full border border-gray/100 rounded px-3 py-2"
-              >
-                <option value="">Select...</option>
-                <option value="resume1">Resume 1</option>
-              </Field>
-              <ErrorMessage
-                name="resume"
-                component="div"
-                className="text-red text-sm mt-1"
+                component={SelectField}
+                label="Resume"
+                options={[{ key: "Select...", value: "" },
+                { key: "Resume 1", value: "Resume 1" },
+                { key: "Resume 2", value: "Resume 2" }]}
               />
-            </div>
 
-            <div>
-              <label htmlFor="coverLetter" className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
-                Cover Letter
-              </label>
               <Field
-                as="textarea"
-                id="coverLetter"
+                label="Cover Letter"
                 name="coverLetter"
-                placeholder="Write down your biography here..."
-                className="block w-full border border-gray/100 rounded px-3 py-2"
-                rows="4"
+                component={RichTextField}
+                placeholder="Cover Letter"
               />
-              <ErrorMessage
-                name="coverLetter"
-                component="div"
-                className="text-red text-sm mt-1"
-              />
-            </div>
 
-            <div className="flex flex-row justify-between">
+              <div className="flex flex-row justify-between">
                 <button className="h-12 px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex"
-                     onClick={() => isCloseChange(true)}
+                  onClick={() => isCloseChange(true)}
                 >
-                    <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Cancel</div>
+                  <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Cancel</div>
                 </button>
-                <div className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex">
-                    <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply Now</div>
-                    <img 
-                        src={"/image/arrow_right_hover.png"} 
-                        alt="arrow_right" 
-                        className="h-4"
-                    />
-                </div>
-            </div>
-          </Form>
-        )}
+                <button className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex cursor-pointer">
+                  <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply Now</div>
+                  <img
+                    src={"/image/arrow_right_hover.png"}
+                    alt="arrow_right"
+                    className="h-4"
+                  />
+                </button>
+              </div>
+            </Form>
+          )
+        }}
       </Formik>
     </div>
   );
