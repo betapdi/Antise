@@ -78,8 +78,8 @@ function Settings() {
         </h1>
         <Formik
           initialValues={{
-            logoUrl: null,
-            bannerUrl: null,
+            logoImage: null,
+            bannerImage: null,
             companyName: "",
             description: "",
             organizationType: "",
@@ -90,11 +90,11 @@ function Settings() {
             companyEmail: "",
           }}
           validationSchema={Yup.object({
-            logoUrl: Yup.mixed().required(
+            logoImage: Yup.mixed().required(
               "Please import your company's logo image"
             ),
 
-            bannerUrl: Yup.mixed().required(
+            bannerImage: Yup.mixed().required(
               "Please import your company's banner image"
             ),
 
@@ -157,18 +157,18 @@ function Settings() {
                 </h2>
                 <div className="w-full flex flex-row justify-between items-center gap-2">
                   <Field
-                    name="logoUrl"
+                    name="logoImage"
                     component={ImageField}
-                    oldValue = {logoUrl}
+                    oldImageUrl = {logoUrl}
                     label="Logo"
                     width="w-1/3"
                     placeholder="A photo larger than 400 pixels work best. Max photo size 5 MB"
                   />
 
                   <Field
-                    name="bannerUrl"
+                    name="bannerImage"
                     component={ImageField}
-                    oldValue = {bannerUrl}
+                    oldImageUrl = {bannerUrl}
                     label="Banner Image"
                     width="w-2/3"
                     placeholder="Banner images optical dimension 1520x400. Supported format JPEG, PNG. Max photo size 5 MB."

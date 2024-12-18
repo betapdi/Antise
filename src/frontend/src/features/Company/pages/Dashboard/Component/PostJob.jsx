@@ -20,7 +20,7 @@ const PostJob = () => {
       const job = response.data;
 
       //Update context and show popup
-      console.log(job);
+      console.log("job",job);
       navigate("/company/postjobsuccess");
     } catch (error) {
       console.log(error);
@@ -32,7 +32,7 @@ const PostJob = () => {
       <div className="w-full  max-w-screen-xl">
         <Formik
           initialValues={{
-            jobTitle: "",
+            title: "",
             minSalary: "",
             maxSalary: "",
             education: "",
@@ -41,10 +41,10 @@ const PostJob = () => {
             location: "",
             expirationDate: "",
             description: "",
-            responsibilities: "",
+            responsibility: "",
           }}
           validationSchema={Yup.object({
-            jobTitle: Yup.string().required("Job Title is required"),
+            title: Yup.string().required("Job Title is required"),
             minSalary: Yup.number().required("Minimum salary is required"),
             maxSalary: Yup.number()
               .required("Maximum salary is required")
@@ -58,7 +58,7 @@ const PostJob = () => {
             location: Yup.string().required("Location is required"),
             expirationDate: Yup.date().required("Expiration date is required"),
             description: Yup.string().required("Description is required"),
-            responsibilities: Yup.string().required(
+            responsibility: Yup.string().required(
               "Responsibilities are required"
             ),
           })}
@@ -92,7 +92,7 @@ const PostJob = () => {
                 </h1>
                 <div className="flex flex-col gap-2 w-full">
                   <Field
-                    name="jobTitle"
+                    name="title"
                     label="Title"
                     component={TextField}
                     placeholder="Enter your job title"
@@ -191,12 +191,12 @@ const PostJob = () => {
 
                   <Field
                     label="Responsibilities"
-                    name="responsibilities"
+                    name="responsibility"
                     placeholder="Add your job responsibilities..."
                     component={RichTextField}
                   />
 
-                  <div className="flex justify-end">
+                  <div className="flex justify-end mt-12">
                     <button
                       type="submit"
                       className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
