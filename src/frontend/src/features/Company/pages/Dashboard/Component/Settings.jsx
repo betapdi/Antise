@@ -159,6 +159,7 @@ function Settings() {
                   <Field
                     name="logoUrl"
                     component={ImageField}
+                    oldValue = {logoUrl}
                     label="Logo"
                     width="w-1/3"
                     placeholder="A photo larger than 400 pixels work best. Max photo size 5 MB"
@@ -167,6 +168,7 @@ function Settings() {
                   <Field
                     name="bannerUrl"
                     component={ImageField}
+                    oldValue = {bannerUrl}
                     label="Banner Image"
                     width="w-2/3"
                     placeholder="Banner images optical dimension 1520x400. Supported format JPEG, PNG. Max photo size 5 MB."
@@ -175,6 +177,7 @@ function Settings() {
                 <Field
                   name="companyName"
                   component={TextField}
+                  oldValue = {companyName}
                   label="Company name"
                   width="w-1/3"
                 />
@@ -182,6 +185,7 @@ function Settings() {
                   name="description"
                   component={RichTextField}
                   label="About Us"
+                  oldValue={description}
                   width="w-1/3"
                   placeholder="Write down about your company here. Let the candidate know who we are..."
                 />
@@ -190,6 +194,7 @@ function Settings() {
                     name="organizationType"
                     component={SelectField}
                     label="Organization Type"
+                    oldValue = {organizationType}
                     options={[
                       { key: "Select...", value: "" },
                       { key: "LLC", value: "LLC" },
@@ -201,12 +206,14 @@ function Settings() {
                   <Field
                     name="yearOfEstablishment"
                     component={DateField}
+                    oldValue = {yearOfEstablishment}
                     label="Year of Establishment"
                     width="w-1/3"
                   />
                   <Field
                     name="companyUrl"
                     component={IconTextField}
+                    oldValue = {companyUrl}
                     label="Company Website"
                     width="w-1/3"
                     placeholder="Website url..."
@@ -219,6 +226,7 @@ function Settings() {
                 <Field
                   name="location"
                   component={TextField}
+                  oldValue = {location}
                   label="Location"
                   width="w-1/3"
                 />
@@ -226,6 +234,7 @@ function Settings() {
                   name="companyPhoneNumber"
                   component={IconTextField}
                   label="Phone"
+                  oldValue = {companyPhoneNumber}
                   placeholder="Phone number..."
                   imageName="phone.svg"
                   type="number"
@@ -234,6 +243,7 @@ function Settings() {
                   name="companyEmail"
                   component={IconTextField}
                   label="Email"
+                  oldValue = {companyEmail}
                   placeholder="Email Address"
                   imageName="Email.svg"
                   type="email"
