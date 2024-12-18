@@ -22,6 +22,7 @@ const TextField = (props) => {
   const showError = errors[name] && touched[name];
 
   useEffect(() => {
+    console.log("TextField: ", oldValue)
     if (oldValue != null) 
       form.setFieldValue(field.name, oldValue);
   }, [])

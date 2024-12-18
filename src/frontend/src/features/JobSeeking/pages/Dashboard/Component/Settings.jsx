@@ -46,6 +46,7 @@ const Settings = () => {
     try {
       const response = await applicantApi.editApplicant(values);
       const applicant = response.data;
+      
       setGender(applicant.gender);
       setFullName(applicant.fullName);
       setAddress(applicant.address);

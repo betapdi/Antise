@@ -53,6 +53,8 @@ public class Applicant extends User {
 
     public void update(ApplicantDto dto) {
         if (dto.getGender() != null) gender = dto.getGender();
+        if (dto.getFullName() != null) fullName = dto.getFullName();
+        if (dto.getMajor() != null) major = dto.getMajor();
         if (dto.getDateOfBirth() != null) dateOfBirth = dto.getDateOfBirth();
         if (dto.getExperience() != null) experience = dto.getExperience();
         if (dto.getNationality() != null) nationality = dto.getNationality();
