@@ -3,29 +3,38 @@ package com.antise.server.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
+import com.antise.server.dto.ApplicantDto;
+import com.antise.server.dto.ApplicationDto;
 import com.antise.server.dto.JobDto;
+import com.antise.server.entities.Applicant;
+import com.antise.server.entities.Application;
 import com.antise.server.entities.Company;
 import com.antise.server.entities.Job;
 import com.antise.server.exceptions.JobNotFoundException;
 import com.antise.server.exceptions.ObjectOwnershipException;
 import com.antise.server.exceptions.UserNotFoundException;
 import com.antise.server.exceptions.UserRoleNotQualifiedException;
+import com.antise.server.repositories.ApplicationRepository;
 import com.antise.server.repositories.JobRepository;
 
 @Service
 public class JobService {
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
+    private final ApplicationRepository applicationRepository;
+    private final ApplicationService applicationService;
 
-    public JobService(JobRepository jobRepository, UserRepository userRepository) {
+    public JobService(JobRepository jobRepository, UserRepository userRepository, 
+                        ApplicationRepository applicationRepository, ApplicationService applicationService) {
         this.jobRepository = jobRepository;
         this.userRepository = userRepository;
+        this.applicationRepository = applicationRepository;
+        this.applicationService = applicationService;
     }
     
     public List<JobDto> getAllJobs() {
@@ -93,5 +102,28 @@ public class JobService {
         jobRepository.delete(job);
 
         return "Job with id " + jobId + " is deleted successfully";
+    }
+
+    public ApplicationDto applyJob(ApplicationDto applicationDto, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
+        if (user.getRole() != UserRole.APPLICANT) throw new UserRoleNotQualifiedException();
+
+        Application application = new Application();
+        application.update(applicationDto);
+        
+        Application savedApplication = applicationRepository.save(application);
+
+        Job job = jobRepository.findById(savedApplication.getJobId()).orElseThrow(() -> new JobNotFoundException());
+        job.getApplications().add(savedApplication);
+        jobRepository.save(job);
+
+        Applicant applicant = (Applicant)user;
+        applicant.getApplications().add(savedApplication);
+        userRepository.save(applicant);
+
+        ApplicationDto response = new ApplicationDto();
+        response.update(savedApplication);
+
+        return response;
     }
 }

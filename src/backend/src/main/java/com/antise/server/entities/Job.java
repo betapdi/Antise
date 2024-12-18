@@ -1,12 +1,12 @@
 package com.antise.server.entities;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.antise.server.dto.ApplicationDto;
 import com.antise.server.dto.JobDto;
 
 import lombok.AllArgsConstructor;
@@ -33,13 +33,15 @@ public class Job {
 
     private String responsibility;
 
-    private Long postedDate;
+    private Date postedDate;
 
-    private Long expiredDate;
+    private Date expirationDate;
 
     private String companyId;
 
-    private String salaryRange;
+    private Integer minSalary;
+    
+    private Integer maxSalary;
 
     private String location;
 
@@ -57,9 +59,10 @@ public class Job {
         if (dto.getDescription() != null) description = dto.getDescription();
         if (dto.getResponsibility() != null) responsibility = dto.getResponsibility();
         if (dto.getPostedDate() != null) postedDate = dto.getPostedDate();
-        if (dto.getExpiredDate() != null) expiredDate = dto.getExpiredDate();
+        if (dto.getExpirationDate() != null) expirationDate = dto.getExpirationDate();
         if (dto.getCompanyId() != null) companyId = dto.getCompanyId();
-        if (dto.getSalaryRange() != null) salaryRange = dto.getSalaryRange();
+        if (dto.getMinSalary() != null) minSalary = dto.getMinSalary();
+        if (dto.getMaxSalary() != null) maxSalary = dto.getMaxSalary();
         if (dto.getLocation() != null) location = dto.getLocation();
         if (dto.getEducation() != null) education = dto.getEducation();
         if (dto.getJobType() != null) jobType = dto.getJobType();

@@ -1,6 +1,7 @@
 package com.antise.server.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.antise.server.entities.Application;
@@ -24,13 +25,15 @@ public class JobDto {
 
     private String responsibility;
 
-    private Long postedDate;
+    private Date postedDate;
 
-    private Long expiredDate;
+    private Date expirationDate;
 
     private String companyId;
 
-    private String salaryRange;
+    private Integer minSalary;
+    
+    private Integer maxSalary;
 
     private String location;
 
@@ -48,9 +51,10 @@ public class JobDto {
         if (job.getDescription() != null) description = job.getDescription();
         if (job.getResponsibility() != null) responsibility = job.getResponsibility();
         if (job.getPostedDate() != null) postedDate = job.getPostedDate();
-        if (job.getExpiredDate() != null) expiredDate = job.getExpiredDate();
+        if (job.getExpirationDate() != null) expirationDate = job.getExpirationDate();
         if (job.getCompanyId() != null) companyId = job.getCompanyId();
-        if (job.getSalaryRange() != null) salaryRange = job.getSalaryRange();
+        if (job.getMinSalary() != null) minSalary = job.getMinSalary();
+        if (job.getMaxSalary() != null) maxSalary = job.getMaxSalary();
         if (job.getLocation() != null) location = job.getLocation();
         if (job.getEducation() != null) education = job.getEducation();
         if (job.getJobType() != null) jobType = job.getJobType();

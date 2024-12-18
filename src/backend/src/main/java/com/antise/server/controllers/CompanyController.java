@@ -62,8 +62,8 @@ public class CompanyController {
 
     @PutMapping("/edit")
     public ResponseEntity<CompanyDto> updateCompany(@RequestPart("company") CompanyDto company, 
-                                                    @RequestPart("banner") MultipartFile bannerFile,
-                                                    @RequestPart("logo") MultipartFile logoFile,
+                                                    @RequestPart(value = "banner", required = false) MultipartFile bannerFile,
+                                                    @RequestPart(value = "logo", required = false) MultipartFile logoFile,
                                                     @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
         CompanyDto response = companyService.updateCompany(company, bannerFile, logoFile, userDetails.getUsername());
         

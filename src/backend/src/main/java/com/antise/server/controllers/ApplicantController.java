@@ -1,6 +1,5 @@
 package com.antise.server.controllers;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,14 +8,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.antise.server.auth.services.AuthService;
-import com.antise.server.auth.services.JwtService;
-import com.antise.server.auth.services.RefreshTokenService;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.services.ApplicantService;
-
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.AllArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

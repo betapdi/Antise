@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.antise.server.dto.ApplicationDto;
 import com.antise.server.dto.JobDto;
+import com.antise.server.entities.Application;
 import com.antise.server.services.JobService;
 
 import lombok.AllArgsConstructor;
@@ -21,6 +23,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.IOException;
 import java.util.List;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("api/v1/job")
@@ -60,4 +64,14 @@ public class JobController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PostMapping("/apply")
+    public ResponseEntity<ApplicationDto> postMethodName(@RequestPart("application") ApplicationDto applicationDto,
+                                 @AuthenticationPrincipal UserDetails userDetails) {
+        
+        ApplicationDto respone = jobService.applyJob(applicationDto, userDetails.getUsername());
+
+        return new ResponseEntity<>(respone, HttpStatus.OK);
+    }
+    
 }
