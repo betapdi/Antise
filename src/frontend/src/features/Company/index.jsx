@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Route, Routes, Navigate,useLocation 
+  Route, Routes, Navigate, useLocation
 } from "react-router-dom";
 
 import { useState } from "react";
@@ -14,6 +14,7 @@ import PostJobSuccess from './pages/SuccessPage/postjobsuccess';
 import HeaderLogginComany from '../../components/Header/Company';
 import HeaderUnloggin from '../../components/Header/Unloggin';
 import CompanySetupSuccess from './pages/SuccessPage/companysetupsuccess';
+import ApplyForm from '../../components/Form/applyform';
 
 
 const Company = (props) => {
@@ -21,15 +22,16 @@ const Company = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
   return (
     <div>
-      {isAuthenticated ? <HeaderLogginComany/> : <HeaderUnloggin/>}
+      {isAuthenticated ? <HeaderLogginComany /> : <HeaderUnloggin />}
       <Routes>
         <Route exact path='/' element={<Navigate to="/company/dashboard" replace />} />
-        <Route path="/AddCompany" element={<AddCompany/>} />
-        <Route path="/Dashboard/*" element={<Dashboard/>} />
-        <Route path="/SuccessCompanyUpload" element={<SuccessCompanyUpload/>} />
-        <Route path="/CompanySetupSuccess" element={<CompanySetupSuccess/>} />
-        <Route path="/postjobsuccess" element={<PostJobSuccess/>} />
+        <Route path="/AddCompany" element={<AddCompany />} />
+        <Route path="/Dashboard/*" element={<Dashboard />} />
+        <Route path="/SuccessCompanyUpload" element={<SuccessCompanyUpload />} />
+        <Route path="/CompanySetupSuccess" element={<CompanySetupSuccess />} />
+        <Route path="/postjobsuccess" element={<PostJobSuccess />} />
         <Route path="*" element={<p>NONE</p>} />
+        <Route path="/applyForm" element={<ApplyForm />} />\
       </Routes>
     </div>
   )

@@ -11,22 +11,20 @@ const Sidebar = () => {
           EMPLOYERS DASHBOARD
         </div>
         <nav>
-          <ul className="space-y-4">
+          <ul className="">
             <li>
               <Link
                 to="/company/dashboard/overview"
-                className={`flex items-center ${
-                  isActive("/company/dashboard/overview")
-                    ? "text-blue"
-                    : "text-[#767F8C]"
-                } hover:text-blue relative`}
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/overview")
+                  ? "bg-[#e7f0fa] text-[#0a65cc]"
+                  : "text-[#767F8C]"
+                  } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`/image/Stack.png`}
+                  src={`${isActive("/company/dashboard/overview") ? "/image/BlueStack.png" : "/image/Stack.png"}`}
                   alt="logo"
-                  className={`h-auto mr-2 ${
-                    isActive("/company/dashboard/overview") ? "filter-blue" : ""
-                  }`}
+                  className={`h-auto ml-4 mr-2 ${isActive("/company/dashboard/overview") ? "filter-blue" : ""
+                    }`}
                 />
                 Overview
               </Link>
@@ -34,16 +32,15 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/company/dashboard/post-job"
-                className={`flex items-center ${
-                  isActive("/company/dashboard/post-job")
-                    ? "text-blue"
-                    : "text-[#767F8C]"
-                } hover:text-blue relative`}
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/post-job")
+                  ? "bg-[#e7f0fa] text-[#0a65cc]"
+                  : "text-[#767F8C]"
+                  } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`/image/PlusCircle.svg`}
+                  src={`${isActive("/company/dashboard/post-job") ? "/image/BluePlusCircle.png" : "/image/PlusCircle.png"}`}
                   alt="logo"
-                  className="h-auto mr-2"
+                  className="h-auto ml-4 mr-2"
                 />
                 Post a Job
               </Link>
@@ -51,16 +48,15 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/company/dashboard/my-job"
-                className={`flex items-center ${
-                  isActive("/company/dashboard/my-job")
-                    ? "text-blue"
-                    : "text-[#767F8C]"
-                } hover:text-blue relative`}
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/my-job")
+                  ? "bg-[#e7f0fa] text-[#0a65cc]"
+                  : "text-[#767F8C]"
+                  } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`/image/Briefcase.png`}
+                  src={`${isActive("/company/dashboard/my-job") ? "/image/BlueBriefcase.png" : "/image/Briefcase.png"}`}
                   alt="logo"
-                  className="h-auto mr-2"
+                  className="h-auto ml-4 mr-2"
                 />
                 My Jobs
               </Link>
@@ -68,16 +64,15 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/company/dashboard/candidate"
-                className={`flex items-center ${
-                  isActive("/company/dashboard/candidate")
-                    ? "text-blue"
-                    : "text-[#767F8C]"
-                } hover:text-blue relative`}
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/candidate")
+                  ? "bg-[#e7f0fa] text-[#0a65cc]"
+                  : "text-[#767F8C]"
+                  } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`/image/BookmarkSimple.png`}
+                  src={`${isActive("/company/dashboard/candidate") ? "/image/BlueBookmarkSimple.png" : "/image/BookmarkSimple.png"}`}
                   alt="logo"
-                  className="h-auto mr-2"
+                  className="h-auto ml-4 mr-2"
                 />
                 Candidates
               </Link>
@@ -85,28 +80,26 @@ const Sidebar = () => {
             <li>
               <Link
                 to="/company/dashboard/settings"
-                className={`flex items-center ${
-                  isActive("/company/dashboard/settings")
-                    ? "text-blue"
-                    : "text-[#767F8C]"
-                } hover:text-blue`}
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/settings")
+                  ? "bg-[#e7f0fa] text-[#0a65cc]"
+                  : "text-[#767F8C]"
+                  } hover:bg-[#e7f0fa]`}
               >
                 <img
-                  src={`/image/setting_btn.svg`}
+                  src={`${isActive("/company/dashboard/settings") ? "/image/BlueGear.png" : "/image/setting_btn.svg"}`}
                   alt="logo"
-                  className={`w-auto h-auto mr-2 ${
-                    isActive("/company/dashboard/settings") ? "filter-blue" : ""
-                  }`}
+                  className={`w-auto h-auto ml-4 mr-2 ${isActive("/company/dashboard/settings") ? "filter-blue" : ""
+                    }`}
                 />
                 Settings
               </Link>
             </li>
             <li>
-              <div className="flex items-center text-[#767F8C] hover:text-blue relative mt-64">
+              <div className="flex items-center py-2.5 text-[#767F8C] hover:bg-[#e7f0fa] relative mt-64">
                 <img
                   src={`/image/SignOut.png`}
                   alt="logo"
-                  className="w-auto h-auto mr-2"
+                  className="w-auto h-auto ml-4 mr-2"
                 />
                 Log-out
               </div>
