@@ -7,6 +7,7 @@ import OverView from "./Component/OverView";
 import CandidateList from "./Component/CandidateList";
 import SavedCandidate from "./Component/SavedCandidate";
 import ViewCandidate from "./Component/ViewCandidate";
+import Settings from "./Component/Settings";
 
 
 const Dashboard = () => {
@@ -25,6 +26,7 @@ const Dashboard = () => {
             <Route path="/my-job" element={<MyJob />} />
             <Route path="/ViewCandidate" element={<ViewCandidate />} />
             <Route path="/my-job/candidate/{$id}" element={<CandidateList />} />
+            <Route path="Settings" element={<Settings />} />
           </Routes>
         </div>
       </div>
