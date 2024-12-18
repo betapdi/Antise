@@ -11,9 +11,9 @@ import ViewCandidate from "./Component/ViewCandidate";
 
 const Dashboard = () => {
   return (
-    <div className="w-screen flex justify-center">
+    <div className="w-screen flex justify-center h-screen">
       <div className="w-[90%] max-w-screen-xl flex flex-row mt-5">
-        <div className="w-1/4 border-r border-[#adb5bd] mr-8">
+        <div className="w-1/4 border-r border-[#adb5bd] mr-8 h-full">
           <Sidebar />
         </div>
         <div className="w-3/4">
