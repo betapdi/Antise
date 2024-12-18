@@ -1,8 +1,9 @@
 import axios from 'axios';
 import queryString from 'query-string';
+import { apiUrl } from '../constances/dev/apiUrl';
 
 const axiosClient = axios.create({
-  baseURL: "http://172.28.102.169:8080/api/v1",
+  baseURL: apiUrl,
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,6 +1,7 @@
 import { ErrorMessage } from "formik";
 import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
+import { apiUrl } from "../constances/dev/apiUrl";
 
 const ImageField = (props) => {
   const { field, form, label, accept, placeholder, width, oldImageUrl } = props;
@@ -12,7 +13,7 @@ const ImageField = (props) => {
   const [preview, setPreview] = useState('');
   
   useEffect(() => {
-    if (oldImageUrl) setPreview(oldImageUrl);
+    if (oldImageUrl) setPreview(apiUrl + oldImageUrl);
   }, [])
 
   const handleFileChange = (event) => { 

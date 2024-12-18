@@ -34,6 +34,11 @@ const applicantApi = {
             'Content-Type': 'multipart/form-data',
           },
         });
+    },
+
+    getResume: (fileName) => {
+      const url = fileName + "/details"
+      return axiosPrivate.get(url);
     }
 }
 
