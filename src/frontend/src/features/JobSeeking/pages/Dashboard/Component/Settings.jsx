@@ -46,6 +46,21 @@ const Settings = () => {
     try {
       const response = await applicantApi.editApplicant(values);
       const applicant = response.data;
+      
+      setGender(applicant.gender);
+      setFullName(applicant.fullName);
+      setAddress(applicant.address);
+      setProfileImageUrl(applicant.profileImageUrl);
+      setResumeUrl(applicant.resumeUrl);
+      setDateOfBirth((applicant.dateOfBirth != null) ? (applicant.dateOfBirth).substring(0, 10) : null);
+      setExperience(applicant.experience);
+      setNationality(applicant.nationality);
+      setMajor(applicant.major);
+      setBiography(applicant.biography);
+      setApplications(applicant.applications);
+      setEducation(applicant.education);
+      setWorkEmail(applicant.workEmail);
+      setPhoneNumber(applicant.phoneNumber);
 
       //Update context and show popup
       console.log(applicant);
@@ -137,7 +152,7 @@ const Settings = () => {
                           <Field
                             name="major"
                             component={TextField}
-                            oldValue = {fullName}
+                            oldValue = {major}
                             label="Major/Field"
                             heightInput="h-12"
                             placeholder="Enter major/field"
@@ -281,8 +296,6 @@ const Settings = () => {
                       Save Changes
                     </div>
                   </button>
-                  
-                  <div className="w-full h-4"/>
                 </Form>
               )
             }}

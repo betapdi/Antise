@@ -51,6 +51,8 @@ public class ApplicantDto extends UserDto {
     public void update(Applicant applicant) {
         this.update((User)applicant);
         if (applicant.getGender() != null) gender = applicant.getGender();
+        if (applicant.getFullName() != null) fullName = applicant.getFullName();
+        if (applicant.getMajor() != null) major = applicant.getMajor();
         if (applicant.getProfileImageName() != null) profileImageUrl = "/image/" + applicant.getProfileImageName();
         if (applicant.getResumeName() != null) resumeUrl = "/pdf/" + applicant.getResumeName();
         if (applicant.getDateOfBirth() != null) dateOfBirth = applicant.getDateOfBirth();

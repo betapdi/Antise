@@ -10,9 +10,6 @@ function NavCompany() {
     };
     const { logoUrl } = useContext(CompanyContext);
 
-   
-   
-
     return (
         <div className="w-full py-5 gap-20 items-center bg-white flex justify-center ">
             <div className="flex flex-row justify-between max-w-screen-xl w-[90%]">
@@ -39,7 +36,7 @@ function NavCompany() {
                             Post a Job
                         </button>
                         <img className="w-12 h-12 rounded-full"  
-                            src={"http://172.28.102.169:8080" + logoUrl}
+                            src={"http://172.28.102.169:8080/api/v1" + logoUrl}
                             alt="Company Logo"
                         />
                 </div>
