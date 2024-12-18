@@ -23,6 +23,11 @@ const applicantApi = {
             formData.append('profileImage', rawData[key]);
           }
 
+          else if (key === "gender") {
+            const value = parseInt(rawData[key]);
+            applicant[key] = value;
+          }
+
           else applicant[key] = rawData[key];
         }
       

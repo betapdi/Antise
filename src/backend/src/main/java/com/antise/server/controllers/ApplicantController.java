@@ -59,8 +59,8 @@ public class ApplicantController {
 
     @PutMapping("/edit")
     public ResponseEntity<ApplicantDto> updateApplicant(@RequestPart("applicant") ApplicantDto applicant,
-                                                        @RequestPart("profileImage") MultipartFile profileImage,
-                                                        @RequestPart("resume") MultipartFile resume,
+                                                        @RequestPart(value = "profileImage", required = false) MultipartFile profileImage,
+                                                        @RequestPart(value = "resume", required = false) MultipartFile resume,
                                                         @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
         ApplicantDto response = applicantService.updateApplicant(applicant, profileImage, resume, userDetails.getUsername());
         
