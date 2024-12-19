@@ -3,7 +3,6 @@ import React from "react";
 const WelcomeEmployer = () => {
     <div className='w-screen h-screen flex justify-center items-center flex-col'>
         <div className='w-2/3 flex justify-center items-center flex-col gap-3'>
-            <img src={`/image/Timer.png`} alt="success" className='w-16 h-16' />
             <div className="flex-col justify-center items-center gap-4 flex">
                 <div className="text-center">
                     <div className=" text-center text-[#18191c] text-5xl font-medium font-['Inter'] leading-loose">🎉 Welcome to Antise</div>
