@@ -38,7 +38,11 @@ const companyApi = {
     getCompany: (id) => {
       const url = `/company/get/${id}`;
       return axiosClient.get(url);
-    }
+    },
+    getAllCompanies: () => {
+      const url = 'public/company/getAll';
+      return axiosClient.get(url);
+    },
 }
 
 export default companyApi;
