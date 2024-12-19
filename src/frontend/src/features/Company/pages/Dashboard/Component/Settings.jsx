@@ -1,5 +1,5 @@
 import React from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { CompanyContext } from "../../../../../context/CompanyContext";
@@ -11,6 +11,7 @@ import RichTextField from "../../../../../customFields/RichTextField";
 import ResumeField from "../../../../../customFields/ResumeField";
 import ImageField from "../../../../../customFields/ImageField";
 import companyApi from "../../../../../api/companyApi.js";
+import PopupDialog from "../../../components/PopupDialog.js";
 
 function Settings() {
   const {
@@ -43,31 +44,55 @@ function Settings() {
     savedApplicants,
     setSavedApplicants,
   } = useContext(CompanyContext);
-  const handleSaveChange = async (values) => {
-        console.log(values);
-    try {
-        const response = await companyApi.editCompany(values);
-        const company = response.data;
-        setCompanyName(company.name);
-        setLogoUrl(company.logoUrl);
-        setBannerUrl(company.bannerUrl);
-        setDescription(company.description);
-        setBenefit(company.benefit);
-        setLocation(company.location);
-        setOrganizationType(company.organizationType);
-        setCompanyUrl(company.companyUrl);
-        setJobList(company.jobList);
-        setVerified(company.verified);
-        setCompanyEmail(company.companyEmail);
-        setCompanyPhoneNumber(company.companyPhoneNumber);
-        setYearOfEstablishment((company.yearOfEstablishment != null) ? (company.yearOfEstablishment).substring(0, 10) : null);
-        setSavedApplicants(company.savedApplicants);
 
-        //Update context and show popup
-        console.log(company);
-    } catch(error) {
-      console.log(error);
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+
+  // Handle dialog close
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false);
+  };
+
+  const handleSaveChange = async (values) => {
+    console.log(values);
+    try {
+      const response = await companyApi.editCompany(values);
+      const company = response.data;
+      setCompanyName(company.name);
+      setLogoUrl(company.logoUrl);
+      setBannerUrl(company.bannerUrl);
+      setDescription(company.description);
+      setBenefit(company.benefit);
+      setLocation(company.location);
+      setOrganizationType(company.organizationType);
+      setCompanyUrl(company.companyUrl);
+      setJobList(company.jobList);
+      setVerified(company.verified);
+      setCompanyEmail(company.companyEmail);
+      setCompanyPhoneNumber(company.companyPhoneNumber);
+      setYearOfEstablishment((company.yearOfEstablishment != null) ? (company.yearOfEstablishment).substring(0, 10) : null);
+      setSavedApplicants(company.savedApplicants);
+
+      // Set success dialog
+      setDialogContent({
+        title: "Changes Saved Successfully!",
+        content: "Your profile has been updated.",
+        buttonLabel: "Close",
+        link: null
+      });
+    } catch (error) {
+      console.error(error);
+
+      // Set error dialog
+      setDialogContent({
+        title: "Error!",
+        content: "An error occurred while saving changes. Please try again later.",
+        buttonLabel: "Close",
+        link: null
+      });
     }
+    // Open dialog
+    setIsOpenDialog(true);
   };
 
   return (
@@ -159,7 +184,7 @@ function Settings() {
                   <Field
                     name="logoImage"
                     component={ImageField}
-                    oldImageUrl = {logoUrl}
+                    oldImageUrl={logoUrl}
                     label="Logo"
                     width="w-1/3"
                     placeholder="A photo larger than 400 pixels work best. Max photo size 5 MB"
@@ -168,7 +193,7 @@ function Settings() {
                   <Field
                     name="bannerImage"
                     component={ImageField}
-                    oldImageUrl = {bannerUrl}
+                    oldImageUrl={bannerUrl}
                     label="Banner Image"
                     width="w-2/3"
                     placeholder="Banner images optical dimension 1520x400. Supported format JPEG, PNG. Max photo size 5 MB."
@@ -177,7 +202,7 @@ function Settings() {
                 <Field
                   name="companyName"
                   component={TextField}
-                  oldValue = {companyName}
+                  oldValue={companyName}
                   label="Company name"
                   width="w-1/3"
                 />
@@ -194,7 +219,7 @@ function Settings() {
                     name="organizationType"
                     component={SelectField}
                     label="Organization Type"
-                    oldValue = {organizationType}
+                    oldValue={organizationType}
                     options={[
                       { key: "Select...", value: "" },
                       { key: "LLC", value: "LLC" },
@@ -206,14 +231,14 @@ function Settings() {
                   <Field
                     name="yearOfEstablishment"
                     component={DateField}
-                    oldValue = {yearOfEstablishment}
+                    oldValue={yearOfEstablishment}
                     label="Year of Establishment"
                     width="w-1/3"
                   />
                   <Field
                     name="companyUrl"
                     component={IconTextField}
-                    oldValue = {companyUrl}
+                    oldValue={companyUrl}
                     label="Company Website"
                     width="w-1/3"
                     placeholder="Website url..."
@@ -226,7 +251,7 @@ function Settings() {
                 <Field
                   name="location"
                   component={TextField}
-                  oldValue = {location}
+                  oldValue={location}
                   label="Location"
                   width="w-1/3"
                 />
@@ -234,16 +259,16 @@ function Settings() {
                   name="companyPhoneNumber"
                   component={IconTextField}
                   label="Phone"
-                  oldValue = {companyPhoneNumber}
+                  oldValue={companyPhoneNumber}
                   placeholder="Phone number..."
                   imageName="phone.svg"
-                  type="number"
+                  type="tel"
                 />
                 <Field
                   name="companyEmail"
                   component={IconTextField}
                   label="Email"
-                  oldValue = {companyEmail}
+                  oldValue={companyEmail}
                   placeholder="Email Address"
                   imageName="Email.svg"
                   type="email"
@@ -255,7 +280,7 @@ function Settings() {
                     disabled={isSubmitting}
                   >
                     <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
-                    Save Change
+                      Save Change
                     </div>
                   </button>
                 </div>
@@ -264,6 +289,13 @@ function Settings() {
           }}
         </Formik>
       </div>
+      {isOpenDialog && (
+        <PopupDialog
+          isOpen={isOpenDialog}
+          handleClose={handleCloseDialog}
+          content={dialogContent}
+        />
+      )}
     </div>
   );
 }

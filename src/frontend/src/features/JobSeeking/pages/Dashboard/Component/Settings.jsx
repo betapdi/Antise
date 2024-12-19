@@ -267,7 +267,7 @@ const Settings = () => {
                         label="Phone"
                         placeholder="Phone number..."
                         imageName="phone.svg"
-                        type="text"
+                        type="tel"
                         heightInput="h-12"
                       />
 

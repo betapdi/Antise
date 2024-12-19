@@ -17,23 +17,34 @@ export default function LoginPage() {
   }
 
   const handleLogin = async (values) => {
-      try {
-        const response = await userApi.loginUser(values);
-        const value = response.data;
-
-        localStorage.setItem('accessToken', value.accessToken);
-        localStorage.setItem('refreshToken', value.refreshToken);
-
-        window.location.href = "/";
-      } catch(error) {
+    try {
+      const response = await userApi.loginUser(values);
+      const value = response.data;
+  
+      localStorage.setItem('accessToken', value.accessToken);
+      localStorage.setItem('refreshToken', value.refreshToken);
+  
+      window.location.href = "/";
+    } catch (error) {
+      if (error.response && error.response.status === 403) { // Assuming 401 is returned for incorrect credentials
         setDialogContent({
-          title: `Error - Status Code: ${error.status}!`, 
-          content: "There is a error while login your account, please try again later!", 
-          buttonLabel: "Click here to back to Homepage!",
-          link: "/" 
-        })
+          title: "Invalid Login Credentials",
+          content: "The username or password you entered is incorrect. Please try again.",
+          buttonLabel: "Retry",
+          link: null, // No redirection needed, just close the dialog
+        });
+      } else {
+        setDialogContent({
+          title: `Error - Status Code: ${error.response?.status || "Unknown"}`,
+          content: "An error occurred while logging in. Please try again later.",
+          buttonLabel: "Back to Homepage",
+          link: "/",
+        });
       }
-  }
+      setIsOpenDialog(true);
+    }
+  };
+  
 
   return (
     <div className="w-screen h-screen justify-center items-center flex flex-row gap-20">
