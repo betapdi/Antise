@@ -262,7 +262,7 @@ function Settings() {
                   oldValue={companyPhoneNumber}
                   placeholder="Phone number..."
                   imageName="phone.svg"
-                  type="number"
+                  type="tel"
                 />
                 <Field
                   name="companyEmail"
