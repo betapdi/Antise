@@ -45,7 +45,6 @@ function Settings() {
     setSavedApplicants,
   } = useContext(CompanyContext);
 
-  const [oldResume, setOldResume] = useState(null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
 
