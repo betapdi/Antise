@@ -2,7 +2,7 @@ import React from 'react';
 import NavCompany from '../../Nav/Company';
 import { Link, useLocation } from 'react-router-dom';
 
-const HeaderLogginComany  = () => {
+const HeaderLogginComany = () => {
   const location = useLocation();
   return (
     <div className="w-full flex flex-col justify-center bg-[#f1f2f4]">
@@ -10,27 +10,25 @@ const HeaderLogginComany  = () => {
         <div className="w-[65rem] flex items-center justify-start">
           <div className="h-12 justify-start items-center inline-flex">
             <div className="justify-start gap-6 flex">
-              <Link
-                to="/"
-                className={`py-3.5 ${
-                  location.pathname.toLowerCase() ==='/' ? 'text-blue' : 'text-[#5e6670]'
-                } font-normal font-['Inter'] leading-tight`}
+              <a
+                href="/"
+                className={`py-3.5 ${location.pathname.toLowerCase() === '/' ? 'text-blue' : 'text-[#5e6670]'
+                  } font-normal font-['Inter'] leading-tight`}
               >
                 Find Employees
-              </Link>
-              <Link
-                to="/company/dashboard"
-                className={`py-3.5 ${
-                  location.pathname.toLowerCase().startsWith('/company/dashboard')? 'text-blue' : 'text-[#5e6670]'
-                } font-normal font-['Inter'] leading-tight`}
+              </a>
+              <a
+                href="/company/dashboard"
+                className={`py-3.5 ${location.pathname.toLowerCase().startsWith('/company/dashboard') ? 'text-blue' : 'text-[#5e6670]'
+                  } font-normal font-['Inter'] leading-tight`}
               >
                 Dashboard
-              </Link>
+              </a>
             </div>
           </div>
         </div>
       </div>
-      {location.pathname.toLowerCase()  !== "/company/addcompany" && <NavCompany />}
+      {location.pathname.toLowerCase() !== "/company/addcompany" && <NavCompany />}
     </div>
   );
 };

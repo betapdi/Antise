@@ -6,15 +6,14 @@ import { CompanyContext } from "../../../../../context/CompanyContext";
 
 
 function OverView() {
-    const {companyName, jobList} = useContext(CompanyContext);
+    const { companyName, jobList } = useContext(CompanyContext);
     const totalApplicants = useMemo(() => {
         return jobList.reduce(
-          (sum, job) => sum + (job.applications?.length || 0),
-          0
+            (sum, job) => sum + (job.applications?.length || 0),
+            0
         );
     }, [jobList]);
 
-    console.log(jobList);
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
             {/*Display how many job are there, for example, display Favorite Job (13) */}
