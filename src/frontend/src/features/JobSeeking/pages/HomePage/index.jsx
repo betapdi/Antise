@@ -1,18 +1,21 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../../../components/Footer';
 import jobApi from '../../../../api/jobApi';
 import companyApi from '../../../../api/companyApi';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../../../../context/UserContext';
 
 function HomePage() {
     const [listJob, setListJobs] = useState([]);
+    const [isClicked, setIsClicked] = useState({});
     const [remainingDays, setRemainingDays] = useState([]);
     const [companies, setcompanies] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [currentCompanies, setCurrentCompanies] = useState([]);
     const [logo, setLogo] = useState({});
+    const { role } = useContext(UserContext);
 
     const calculateRemainingDays = () => {
         const updatedListJobs = [];
@@ -27,7 +30,7 @@ function HomePage() {
             if (daysLeft > 0) {
                 updatedListJobs.push(listJob[i]);
                 remainingDaysList.push(daysLeft);
-            }else{
+            } else {
                 check = true;
             }
         }
@@ -73,15 +76,15 @@ function HomePage() {
     }, []);
 
     useEffect(() => {
-            calculateRemainingDays();
-            if (listJob.length > 0) {
-                const interval = setInterval(() => {
-                    calculateRemainingDays();
-                }, 5000);
-    
-                // Cleanup interval on component unmount
-                return () => clearInterval(interval);
-            }
+        calculateRemainingDays();
+        if (listJob.length > 0) {
+            const interval = setInterval(() => {
+                calculateRemainingDays();
+            }, 5000);
+
+            // Cleanup interval on component unmount
+            return () => clearInterval(interval);
+        }
     }, [listJob]);
 
     useEffect(() => {
@@ -112,6 +115,15 @@ function HomePage() {
             setLogo(idToLogoMap);
         }
     }, [companies]);
+
+    const handleJobClick = (jobId) => {
+        console.log("Job Clicked: ", jobId);
+        setIsClicked((prevState) => ({
+            ...prevState,
+            [jobId]: !prevState[jobId], // Toggle the clicked state for the specific job
+        }));
+    };
+
 
     return (
         <div>
@@ -253,9 +265,21 @@ function HomePage() {
                             </div>
                         </div>
                         <div className="justify-start items-start gap-3 flex">
-                            <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-                                <img src={"/image/bookmark.png"} alt="icon_star" className="w-4 h-4" />
-                            </div>
+                            {role === "APPLICANT" &&
+                                <div
+                                    className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex"
+                                    onClick={() => handleJobClick(job.id)}
+                                >
+                                    <div className="w-6 h-6 justify-center items-center flex">
+                                        <div className="w-6 h-6 relative">
+                                            <img
+                                                src={`/image/${isClicked[job.id] ? 'bookmark_click.png' : 'bookmark.png'}`}
+                                                alt="icon"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                             <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                             hover:bg-[#0a65cc] hover:text-white group"
                                 onClick={() => handleViewDetailJob(job)}

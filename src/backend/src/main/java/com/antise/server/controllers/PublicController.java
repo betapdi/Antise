@@ -54,10 +54,23 @@ public class PublicController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
+
     @GetMapping("/company/getAll")
     public ResponseEntity<List<CompanyDto>> getAllCompanies() throws IOException {
         return ResponseEntity.ok(companyService.getAllCompanies());
     }
+
+    @GetMapping("/company/get/{companyId}")
+    public ResponseEntity<CompanyDto> getCompany(@PathVariable("companyId") String companyId) {
+        CompanyDto response = companyService.getCompany(companyId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
     
+    @PostMapping("/company/search/{searchPattern}")
+    public ResponseEntity<List<CompanyDto>> searchCompany(@PathVariable("searchPattern") String searchPattern) {
+        List<CompanyDto> response = companyService.searchCompany(searchPattern);
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

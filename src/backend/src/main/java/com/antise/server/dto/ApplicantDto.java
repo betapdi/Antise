@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import com.antise.server.auth.entities.User;
 import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Application;
+import com.antise.server.entities.Job;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -46,6 +47,8 @@ public class ApplicantDto extends UserDto {
 
     private String phoneNumber;
 
+    private List<JobDto> favoriteJobs;
+
     private List<ApplicationDto> applications;
 
     public void update(Applicant applicant) {
@@ -64,6 +67,16 @@ public class ApplicantDto extends UserDto {
         if (applicant.getEducation() != null) education = applicant.getEducation();
         if (applicant.getWorkEmail() != null) workEmail = applicant.getWorkEmail();
         if (applicant.getPhoneNumber() != null) phoneNumber = applicant.getPhoneNumber();
+        if (applicant.getFavoriteJobs() != null) {
+            favoriteJobs = new ArrayList<>();
+
+            for (Job job : applicant.getFavoriteJobs()) {
+                JobDto dto = new JobDto();
+                dto.update(job);
+
+                favoriteJobs.add(dto);
+            }
+        }
         if (applicant.getApplications() != null) {
             applications = new ArrayList<>();
             

@@ -45,6 +45,8 @@ public class JobDto {
 
     private List<ApplicationDto> applications;
 
+    private String questions;
+
     public void update(Job job) {
         if (job.getId() != null) id = job.getId();
         if (job.getTitle() != null) title = job.getTitle();
@@ -59,6 +61,7 @@ public class JobDto {
         if (job.getEducation() != null) education = job.getEducation();
         if (job.getJobType() != null) jobType = job.getJobType();
         if (job.getExperience() != null) experience = job.getExperience();
+        if (job.getQuestions() != null) questions = job.getQuestions();
         if (job.getApplications() != null) {
             applications = new ArrayList<>();
 

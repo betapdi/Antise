@@ -1,107 +1,10 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ApplyForm from '../../../../components/Form/applyform';
-import { useEffect } from 'react';
 import companyApi from '../../../../api/companyApi';
 import { useParams } from 'react-router-dom';
 import jobApi from '../../../../api/jobApi';
-import { use } from 'react';
-
-
-const jobs = [
-    {
-        title: "Senior UX Designer",
-        companyName: "Instagram",
-        companyLogo: "/image/logoCompany/company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        daysRemaining: 4,
-        jobType: "Full Time",
-    },
-    {
-        title: "Software Engineer",
-        companyName: "Facebook",
-        companyLogo: "/image/logoCompany/company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        daysRemaining: 7,
-        jobType: "Part Time",
-    },
-    {
-        title: "Product Manager",
-        companyName: "Facebook",
-        companyLogo: "/image/logoCompany/company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        daysRemaining: 10,
-        jobType: "Full Time",
-    },
-
-    {
-        title: "Senior UX Designer",
-        companyName: "Instagram",
-        companyLogo: "/image/logoCompany/company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        daysRemaining: 4,
-        jobType: "Full Time",
-    },
-    {
-        title: "Software Engineer",
-        companyName: "Facebook",
-        companyLogo: "/image/logoCompany/company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        daysRemaining: 7,
-        jobType: "Part Time",
-    },
-    {
-        title: "Product Manager",
-        companyName: "Facebook",
-        companyLogo: "/image/logoCompany/company_4.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        daysRemaining: 10,
-        jobType: "Full Time",
-    },
-
-    {
-        title: "Senior UX Designer",
-        companyName: "Instagram",
-        companyLogo: "/image/logoCompany/company_2.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        daysRemaining: 4,
-        jobType: "Full Time",
-    },
-    {
-        title: "Software Engineer",
-        companyName: "Facebook",
-        companyLogo: "/image/logoCompany/company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        daysRemaining: 7,
-        jobType: "Part Time",
-    },
-    {
-        title: "Product Manager",
-        companyName: "Facebook",
-        companyLogo: "/image/logoCompany/company_4.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        daysRemaining: 10,
-        jobType: "Full Time",
-    },
-];
+import { UserContext } from '../../../../context/UserContext';
 
 function DetailJob() {
     const [isClicked, setIsClicked] = useState(false);
@@ -110,13 +13,14 @@ function DetailJob() {
     const [company, setCompany] = useState(null);
     const [job, setJob] = useState(null);
     const [jobID, setJobID] = useState(null);
-    const [companyID, setCompanyID] = useState(null);
     const params = useParams();
+    const { role } = useContext(UserContext);
+    const itemsPerPage = 6;
+
 
     useEffect(() => {
         setJobID(params.id);
     }, []);
-
 
     useEffect(() => {
         const fetchJobById = async (jobID) => {
@@ -133,28 +37,16 @@ function DetailJob() {
         if (jobID != null) fetchJobById(jobID);
     }, [jobID]);
 
-    // useEffect(() => {
-    //     if (job != null) {
-    //         console.log('companyid', job.companyId);
-    //         setCompanyID(job.companyId);
-    //     }
-    // }, [jobID]);
-
     const handleClose = () => {
         setIsFormOpen(false);
     };
-    const itemsPerPage = 6;
-    // Calculate the index range for the current page
-    const startIndex = currentPage * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
 
-    // Slice the jobs array based on current page
-    const currentJobs = jobs.slice(startIndex, endIndex);
-
-    // Handle page change (next and previous page)
     const handlePageChange = (newPage) => {
-        // Ensure the new page is within valid bounds
-        if (newPage >= 0 && newPage < Math.ceil(jobs.length / itemsPerPage)) {
+        if (
+            company &&
+            newPage >= 0 &&
+            newPage < Math.ceil(company.jobList.length / itemsPerPage)
+        ) {
             setCurrentPage(newPage);
         }
     };
@@ -183,7 +75,7 @@ function DetailJob() {
                         {/* Job Title */}
                         <div className='flex flex-row justify-between items-start w-full max-w-7xl gap-10'>
                             <div className="flex-row justify-start items-center gap-10 flex">
-                                <img className="w-24 h-24 rounded-[100px]" src="https://via.placeholder.com/96x96" />
+                                <img className="w-24 h-24 rounded-[100px]" src={"http://172.28.102.169:8080/api/v1" + [company.logoUrl]} alt={company.name} />
                                 <div className="flex-col justify-start items-start gap-[13px] inline-flex">
                                     <div className="justify-start items-center gap-2 inline-flex">
                                         <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">{job.title}</div>
@@ -227,48 +119,73 @@ function DetailJob() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex-col justify-center items-end gap-3 inline-flex">
-                                <div className="justify-center items-center gap-3 inline-flex">
-                                    {/* <div className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex">
-                                        <div className="w-6 h-6 justify-center items-center flex">
-                                            <div className="w-6 h-6 relative">
-                                                <img
-                                                    src={`/image/bookmark.png`}
-                                                    alt="icon"
-                                                />
+                            {role === "APPLICANT" &&
+                                <div className="flex-col justify-center items-end gap-3 inline-flex">
+                                    <div className="justify-center items-center gap-3 inline-flex">
+                                        <div
+                                            className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex"
+                                            onClick={() => setIsClicked(!isClicked)}
+                                        >
+                                            <div className="w-6 h-6 justify-center items-center flex">
+                                                <div className="w-6 h-6 relative">
+                                                    <img
+                                                        src={`/image/${isClicked ? 'bookmark_click.png' : 'bookmark.png'}`}
+                                                        alt="icon"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                    </div> */}
 
-                                    <div
-                                        className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex"
-                                        onClick={() => setIsClicked(!isClicked)}
-                                    >
-                                        <div className="w-6 h-6 justify-center items-center flex">
-                                            <div className="w-6 h-6 relative">
-                                                <img
-                                                    src={`/image/${isClicked ? 'bookmark_click.png' : 'bookmark.png'}`}
-                                                    alt="icon"
-                                                />
-                                            </div>
-                                        </div>
+                                        <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
+                                            onClick={() => setIsFormOpen(true)}
+                                        >
+                                            <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
+                                            <img
+                                                src={`/image/arrow_right_hover.png`}
+                                                alt="icon"
+                                            />
+                                        </button>
                                     </div>
 
-                                    <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
-                                        onClick={() => setIsFormOpen(true)}
-                                    >
-                                        <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
-                                        <img
-                                            src={`/image/arrow_right_hover.png`}
-                                            alt="icon"
-                                        />
-                                    </button>
+                                    <div className="justify-start items-start inline-flex">
+                                        <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Job expire in: </div>
+                                        <div className="text-[#e05050] text-sm font-medium font-['Inter'] leading-tight px-1">
+                                            {new Date(job.expirationDate).toLocaleDateString('en-GB', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                year: 'numeric',
+                                            })}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="justify-start items-start inline-flex">
-                                    <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Job expire in:</div>
-                                    <div className="text-[#e05050] text-sm font-medium font-['Inter'] leading-tight"> June 30, 2021</div>
+                            }
+                            {role != "APPLICANT" && role != "COMPANY" &&
+                                <div className="flex-col justify-center items-end gap-3 inline-flex">
+                                    <div className="justify-center items-center gap-3 inline-flex">
+                                        <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
+                                            onClick={() => setIsFormOpen(false)}
+                                        >
+                                            <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
+                                            <img
+                                                src={`/image/arrow_right_hover.png`}
+                                                alt="icon"
+                                            />
+                                        </button>
+                                    </div>
+
+                                    <div className="justify-start items-start inline-flex">
+                                        <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Job expire in: </div>
+                                        <div className="text-[#e05050] text-sm font-medium font-['Inter'] leading-tight px-1">
+                                            {new Date(job.expirationDate).toLocaleDateString('en-GB', {
+                                                day: '2-digit',
+                                                month: '2-digit',
+                                                year: 'numeric',
+                                            })}
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+
+                            }
                         </div>
 
                         {/* Job Details */}
@@ -277,21 +194,19 @@ function DetailJob() {
                             <div className="w-3/5 flex-col justify-start items-start gap-8 inline-flex">
                                 <div className="flex-col justify-start items-start gap-4 flex">
                                     <div className="text-black text-lg font-medium font-['Inter'] leading-7">Job Description</div>
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Integer aliquet pretium consequat. Donec et sapien id leo accumsan pellentesque eget maximus tellus. Duis et est ac leo rhoncus tincidunt vitae vehicula augue. Donec in suscipit diam. Pellentesque quis justo sit amet arcu commodo sollicitudin. Integer finibus blandit condimentum. Vivamus sit amet ligula ullamcorper, pulvinar ante id, tristique erat. Quisque sit amet aliquam urna. Maecenas blandit felis id massa sodales finibus. Integer bibendum eu nulla eu sollicitudin. Sed lobortis diam tincidunt accumsan faucibus. Quisque blandit augue quis turpis auctor, dapibus euismod ante ultricies. Ut non felis lacinia turpis feugiat euismod at id magna. Sed ut orci arcu. Suspendisse sollicitudin faucibus aliquet.</div>
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Nam dapibus consectetur erat in euismod. Cras urna augue, mollis venenatis augue sed, porttitor aliquet nibh. Sed tristique dictum elementum. Nulla imperdiet sit amet quam eget lobortis. Etiam in neque sit amet orci interdum tincidunt.</div>
+                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal text-justify">{job.description}</div>
                                 </div>
                                 <div className="flex-col justify-start items-start gap-4 flex">
                                     <div className="text-black text-lg font-medium font-['Inter'] leading-7">Responsibilities</div>
                                     <div className="flex-col justify-start items-start gap-3 flex">
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Quisque semper gravida est et consectetur.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Curabitur blandit lorem velit, vitae pretium leo placerat eget.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Morbi mattis in ipsum ac tempus.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Curabitur eu vehicula libero. Vestibulum sed purus ullamcorper, lobortis lectus nec.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">vulputate turpis. Quisque ante odio, iaculis a porttitor sit amet.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">lobortis vel lectus. Nulla at risus ut diam.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">commodo feugiat. Nullam laoreet, diam placerat dapibus tincidunt.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">odio metus posuere lorem, id condimentum erat velit nec neque.</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">dui sodales ut. Curabitur tempus augue.</div>
+                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal space-y-2">
+                                            {job.responsibility.split('\n').map((line, index) => (
+                                                <div key={index} className="flex items-start">
+                                                    <span className="mr-2 text-black">•</span>
+                                                    <span>{line}</span>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -313,7 +228,11 @@ function DetailJob() {
                                                     Job Posted:
                                                 </div>
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    14 June, 2021
+                                                    {new Date(job.postedDate).toLocaleDateString('en-GB', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: 'numeric',
+                                                    })}
                                                 </div>
                                             </div>
                                         </div>
@@ -327,8 +246,13 @@ function DetailJob() {
                                                 <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
                                                     Job Expire In:
                                                 </div>
+
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    14 July, 2021
+                                                    {new Date(job.expirationDate).toLocaleDateString('en-GB', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: 'numeric',
+                                                    })}
                                                 </div>
                                             </div>
                                         </div>
@@ -343,7 +267,7 @@ function DetailJob() {
                                                     Education:
                                                 </div>
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    Graduation
+                                                    {job.education}
                                                 </div>
                                             </div>
                                         </div>
@@ -355,10 +279,10 @@ function DetailJob() {
                                             </div>
                                             <div className="flex flex-col items-start gap-1">
                                                 <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
-                                                    Salary:
+                                                    Salary (month):
                                                 </div>
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    $50k-80k/month
+                                                    {job.minSalary}$ - {job.maxSalary}$
                                                 </div>
                                             </div>
                                         </div>
@@ -373,7 +297,7 @@ function DetailJob() {
                                                     Location:
                                                 </div>
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    New York, USA
+                                                    {job.location}
                                                 </div>
                                             </div>
                                         </div>
@@ -388,7 +312,7 @@ function DetailJob() {
                                                     Job Type:
                                                 </div>
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    Full Time
+                                                    {job.jobType}
                                                 </div>
                                             </div>
                                         </div>
@@ -403,7 +327,7 @@ function DetailJob() {
                                                     Experience:
                                                 </div>
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    10-15 Years
+                                                    {job.experience}
                                                 </div>
                                             </div>
                                         </div>
@@ -412,36 +336,37 @@ function DetailJob() {
 
                                 <div className="w-full p-8 rounded-xl border-2 border-[#e7f0fa] flex-col justify-start items-start gap-8 flex">
                                     <div className="justify-start items-center gap-4 inline-flex">
-                                        <img className="rounded-md" src="https://via.placeholder.com/64x64" />
+                                        <img className="rounded-md w-16 h-16" src={"http://172.28.102.169:8080/api/v1" + [company.logoUrl]} alt="job_icon" />
                                         <div className="flex-col justify-start items-start gap-2 inline-flex">
-                                            <div className="text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">Instagram</div>
-                                            <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Social networking service</div>
+                                            <div className="text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">{company.name}</div>
                                         </div>
                                     </div>
                                     <div className="w-full flex-col justify-start items-start gap-y-5 flex">
                                         <div className="w-full justify-between items-center inline-flex">
                                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Founded in:</div>
-                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">March 21, 2006</div>
+                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">
+                                                {new Date(company.yearOfEstablishment).toLocaleDateString('en-GB', {
+                                                    day: '2-digit',
+                                                    month: '2-digit',
+                                                    year: 'numeric',
+                                                })}
+                                            </div>
                                         </div>
                                         <div className="w-full justify-between items-center inline-flex">
                                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Organization type:</div>
-                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">Private Company</div>
-                                        </div>
-                                        <div className="w-full justify-between items-center inline-flex">
-                                            <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Company size:</div>
-                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">120-300 Employers</div>
+                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.organizationType}</div>
                                         </div>
                                         <div className="w-full justify-between items-center inline-flex">
                                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Phone:</div>
-                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">(406) 555-0120</div>
+                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.companyPhoneNumber}</div>
                                         </div>
                                         <div className="w-full justify-between items-center inline-flex">
                                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Email:</div>
-                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">twitter@gmail.com</div>
+                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.companyEmail}</div>
                                         </div>
                                         <div className="w-full justify-between items-center inline-flex">
                                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Website:</div>
-                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">https://twitter.com</div>
+                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.companyUrl}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -476,7 +401,7 @@ function DetailJob() {
                                 </div>
                                 <div className="p-3 bg-[#e7f0fa] rounded-[5px] justify-start items-start gap-2.5 flex hover:bg-[#0a65cc] group"
                                     onClick={() => handlePageChange(currentPage + 1)}
-                                    disabled={currentPage * itemsPerPage + itemsPerPage >= jobs.length}
+                                    disabled={currentPage * itemsPerPage + itemsPerPage >= company.jobList.length}
                                 >
                                     <img
                                         src={"/image/arrow_right.png"}
@@ -494,13 +419,13 @@ function DetailJob() {
 
                         <div className="mb-20">
                             <div className="grid grid-cols-3 grid-rows-2 gap-10">
-                                {jobs.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).map((job, index) => (
+                                {company.jobList.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).map((job, index) => (
                                     <div
                                         key={index}
                                         className="p-4 bg-[#FBFBFF] rounded-lg border border-[#e4e5e8] flex-col justify-start items-start gap-6 flex"
                                     >
                                         <div className="justify-center items-center gap-4 inline-flex">
-                                            <img src={job.companyLogo} alt={`${job.companyName} logo`} className="w-16 h-16" />
+                                            <img className="rounded-md w-16 h-16" src={"http://172.28.102.169:8080/api/v1" + [company.logoUrl]} alt={`${company.name} logo`} />
                                             <div className="flex-col justify-start items-start gap-1.5 inline-flex">
                                                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">
                                                     {job.companyName}
@@ -536,12 +461,14 @@ function DetailJob() {
                     {isFormOpen && (
                         <div className="w-screen fixed inset-0 z-30 flex justify-center items-center bg-black bg-opacity-50">
                             <div className="max-h-screen w-full max-w-lg overflow-y-auto bg-white rounded-lg shadow-lg">
-                                <ApplyForm isCloseChange={handleClose} />
+                                <ApplyForm isCloseChange={handleClose} job={job} />
                             </div>
                         </div>
 
                     )}
+
                 </div>
+
             }
         </>
     )

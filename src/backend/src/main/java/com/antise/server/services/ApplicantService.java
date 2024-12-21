@@ -14,15 +14,20 @@ import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
 import com.antise.server.dto.ApplicantDto;
+import com.antise.server.dto.JobDto;
 import com.antise.server.entities.Applicant;
+import com.antise.server.entities.Job;
 import com.antise.server.exceptions.CompanyNotFoundException;
+import com.antise.server.exceptions.JobNotFoundException;
 import com.antise.server.exceptions.UserNotFoundException;
 import com.antise.server.exceptions.UserRoleNotQualifiedException;
+import com.antise.server.repositories.JobRepository;
 
 @Service
 public class ApplicantService {
     private final UserRepository userRepository;
     private final FileService fileService;
+    private final JobRepository jobRepository;
 
     @Value("${project.pdf}")
     private String pathResume;
@@ -33,9 +38,10 @@ public class ApplicantService {
     @Value("${base.url}")
     private String baseUrl;
 
-    public ApplicantService(FileService fileService, UserRepository userRepository) {
+    public ApplicantService(FileService fileService, UserRepository userRepository, JobRepository jobRepository) {
         this.fileService = fileService;
         this.userRepository = userRepository;
+        this.jobRepository = jobRepository;
     }
 
     public List<ApplicantDto> getAllApplicants() {
@@ -95,6 +101,21 @@ public class ApplicantService {
         Applicant savedApplicant = userRepository.save(applicant);
         ApplicantDto response = new ApplicantDto();
         response.update(savedApplicant);
+
+        return response;
+    }
+
+    public JobDto addFavoriteJob(String jobId, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
+        Job job = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
+        
+        Applicant applicant = (Applicant)user;
+        applicant.getFavoriteJobs().add(job);
+
+        userRepository.save(applicant);
+
+        JobDto response = new JobDto();
+        response.update(job);
 
         return response;
     }

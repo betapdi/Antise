@@ -108,4 +108,25 @@ public class CompanyService {
         response.update(savedCompany);
         return response;
     }
+
+    public List<CompanyDto> searchCompany(String searchPattern) {
+        List<User> users = userRepository.findAll();
+        List<Company> companies = users.stream().filter(user -> user instanceof Company).
+                                    map(user -> (Company)user).collect(Collectors.toList());
+        
+        List<CompanyDto> response = new ArrayList<>();
+
+        for (Company company : companies) {
+            String companyName = (company.getName()).toLowerCase();
+            String searchPatternLowercase = searchPattern.toLowerCase();
+
+            if (companyName.contains(searchPatternLowercase)) {
+                CompanyDto dto = new CompanyDto();
+                dto.update(company);
+                response.add(dto);
+            }
+        }
+
+        return response;
+    }
 }
