@@ -5,7 +5,6 @@ import companyApi from '../../../../api/companyApi';
 import { useParams } from 'react-router-dom';
 import jobApi from '../../../../api/jobApi';
 import { UserContext } from '../../../../context/UserContext';
-import RegisterDialog from '../../../Authentication/components/RegisterDialog.js';
 
 function DetailJob() {
     const [isClicked, setIsClicked] = useState(false);
@@ -462,7 +461,7 @@ function DetailJob() {
                     {isFormOpen && (
                         <div className="w-screen fixed inset-0 z-30 flex justify-center items-center bg-black bg-opacity-50">
                             <div className="max-h-screen w-full max-w-lg overflow-y-auto bg-white rounded-lg shadow-lg">
-                                <ApplyForm isCloseChange={handleClose} />
+                                <ApplyForm isCloseChange={handleClose} job={job} />
                             </div>
                         </div>
 

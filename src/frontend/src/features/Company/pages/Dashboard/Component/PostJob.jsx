@@ -62,6 +62,7 @@ const PostJob = () => {
             responsibility: Yup.string().required(
               "Responsibilities are required"
             ),
+            question: Yup.string(),
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
