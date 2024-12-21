@@ -1,6 +1,10 @@
 import React from 'react'
 import { useState } from 'react';
 import ApplyForm from '../../../../components/Form/applyform';
+import { useEffect } from 'react';
+import companyApi from '../../../../api/companyApi';
+import { useParams } from 'react-router-dom';
+import jobApi from '../../../../api/jobApi';
 
 
 const jobs = [
@@ -102,6 +106,34 @@ function DetailJob() {
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [isFormOpen, setIsFormOpen] = useState(false);
+    const [companyData, setCompanyData] = useState(null);
+    const [job, setJob] = useState(null);
+    const [jobID, setJobID] = useState(null);
+    const params = useParams();
+
+
+    useEffect(() => {
+        setJobID(params.id);
+        console.log('hh', params.id);
+    }, []);
+
+    useEffect(() => {
+        console.log('haa', jobID);
+        const fetchJobById = async (jobID) => {
+            try {
+                const response = await jobApi.getJob(jobID);
+                const data = await response.json();
+                if (response.ok) {
+                    setJob(data);
+                }
+            } catch (error) {
+                console.error('Error fetching job data:', error);
+            }
+        };
+        fetchJobById(jobID);
+    }, [jobID]);
+
+
 
 
     const handleClose = () => {
@@ -122,6 +154,22 @@ function DetailJob() {
             setCurrentPage(newPage);
         }
     };
+
+    // useEffect(() => {
+    //     const fetchCompany = async () => {
+    //         try {
+    //             const response = await companyApi.getCompany(job.companyID);
+    //             const companyData = response.data;
+    //             console.log(companyData);
+    //             setCompanyData(companyData);
+    //         } catch (error) {
+    //             console.log(error);
+    //         }
+    //     }
+    //     fetchCompany();
+    // }, [])
+
+
     return (
         <div className="w-full flex flex-col justify-center items-center">
             <div className="w-3/4 mx-auto flex flex-col justify-center items-center mt-20 mb-20">
@@ -131,12 +179,9 @@ function DetailJob() {
                         <img className="w-24 h-24 rounded-[100px]" src="https://via.placeholder.com/96x96" />
                         <div className="flex-col justify-start items-start gap-[13px] inline-flex">
                             <div className="justify-start items-center gap-2 inline-flex">
-                                <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">Senior UX Designer</div>
-                                <div className="px-3 py-[3px] bg-[#ffeded] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                    <div className="text-[#ff4e4e] text-sm font-normal font-['Inter'] leading-tight">Featured</div>
-                                </div>
+                                <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">{job.title}</div>
                                 <div className="px-3 py-[3px] bg-[#e8f1ff] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                    <div className="text-[#0065ff] text-sm font-normal font-['Inter'] leading-tight">Full Time</div>
+                                    <div className="text-[#0065ff] text-sm font-normal font-['Inter'] leading-tight">{job.jobType}</div>
                                 </div>
                             </div>
                             <div className="justify-start items-center gap-5 inline-flex">
@@ -148,7 +193,7 @@ function DetailJob() {
                                             className="transition-opacity duration-300 group-hover:opacity-0">
                                         </img>
                                     </div>
-                                    <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">https://instagram.com</div>
+                                    <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">wwww.insstagram</div>
                                 </div>
                                 <div className="justify-start items-center gap-1.5 flex">
                                     <div className="w-6 h-6 relative">
@@ -487,7 +532,7 @@ function DetailJob() {
                         <ApplyForm isCloseChange={handleClose} />
                     </div>
                 </div>
-            
+
             )}
         </div>
     )

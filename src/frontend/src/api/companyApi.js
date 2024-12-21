@@ -43,6 +43,7 @@ const companyApi = {
       const url = 'public/company/getAll';
       return axiosClient.get(url);
     },
+
 }
 
 export default companyApi;

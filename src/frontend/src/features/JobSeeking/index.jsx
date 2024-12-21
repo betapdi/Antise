@@ -18,15 +18,16 @@ const JobSeeking = (props) => {
 
   return (
     <div>
-      {isAuthenticated ? <HeaderLoggin/> : <HeaderUnloggin/>}
+      {isAuthenticated ? <HeaderLoggin /> : <HeaderUnloggin />}
       <Routes>
         <Route exact path='/' element={<Navigate to="/job/homePage" replace />} />
         <Route path="/homePage" element={<HomePage />} />
-        <Route path="/detailjob" element={<DetailJob />} />
+        {/* <Route path="/detailjob" element={<DetailJob />} /> */}
+        <Route path="/detailjob/:id" element={<DetailJob />} />
         <Route path="/welcomeEmployee" element={<WelcomeEmployee />} />
         <Route path="/welcomeEmployer" element={<WelcomeEmployer />} />
-        <Route path="/listjob" element={<ListJob isSearch ={0} />} />
-        <Route path="/listjob/search" element={<ListJob isSearch ={1} />} />
+        <Route path="/listjob" element={<ListJob isSearch={0} />} />
+        <Route path="/listjob/search" element={<ListJob isSearch={1} />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/uploadCV" element={<UploadCV />} />
         <Route path="*" element={<p>NONE</p>} />
