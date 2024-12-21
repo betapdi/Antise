@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.antise.server.controllers.requests.SearchJobRequest;
 import com.antise.server.dto.ApplicationDto;
 import com.antise.server.dto.JobDto;
 import com.antise.server.entities.Application;
@@ -72,6 +73,13 @@ public class JobController {
         ApplicationDto respone = jobService.applyJob(applicationDto, userDetails.getUsername());
 
         return new ResponseEntity<>(respone, HttpStatus.OK);
+    }
+    
+    @PostMapping("/search")
+    public ResponseEntity<List<JobDto>> searchJob(@RequestPart("searchData") SearchJobRequest searchData) {
+        List<JobDto> response = jobService.searchJob(searchData);
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
 }
