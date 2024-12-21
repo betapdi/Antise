@@ -23,7 +23,7 @@ const jobApi = {
   },
 
   getJob: (id) => {
-    const url = `/job/get/${id}`;
+    const url = `public/job/get/${id}`;
     return axiosClient.get(url);
   },
 }

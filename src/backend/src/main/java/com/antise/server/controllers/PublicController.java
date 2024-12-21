@@ -48,6 +48,13 @@ public class PublicController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/job/get/{jobId}")
+    public ResponseEntity<JobDto> getJob(@PathVariable("jobId") String jobId) throws IOException {
+        JobDto response = jobService.getJob(jobId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
     @GetMapping("/company/getAll")
     public ResponseEntity<List<CompanyDto>> getAllCompanies() throws IOException {
         return ResponseEntity.ok(companyService.getAllCompanies());
