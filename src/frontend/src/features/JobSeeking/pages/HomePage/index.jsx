@@ -1,111 +1,38 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../../../components/Footer';
-
-const jobs = [
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        daysRemaining: 4,
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        daysRemaining: 7,
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        daysRemaining: 10,
-    },
-];
-
-const companies = [
-    {
-      id: 1,
-      logo: "/image/logoCompany/company_1.png",
-      name: "Dribbble",
-      location: "United States",
-    },
-    {
-      id: 2,
-      logo: "/image/logoCompany/company_2.png",
-      name: "Figma",
-      location: "Canada",
-    },
-    {
-      id: 3,
-      logo: "/image/logoCompany/company_3.png",
-      name: "Spotify",
-      location: "Sweden",
-    },
-    {
-      id: 4,
-      logo: "/image/logoCompany/company_4.png",
-      name: "Google",
-      location: "United States",
-    },
-    {
-        id: 4,
-        logo: "/image/logoCompany/company_4.png",
-        name: "Google",
-        location: "United States",
-    },
-    {
-        id: 4,
-        logo: "/image/logoCompany/company_4.png",
-        name: "Google",
-        location: "United States",
-    },
-    {
-        id: 4,
-        logo: "/image/logoCompany/company_4.png",
-        name: "Google",
-        location: "United States",
-    },
-    {
-        id: 4,
-        logo: "/image/logoCompany/company_4.png",
-        name: "Google",
-        location: "United States",
-    },
-    {
-        id: 4,
-        logo: "/image/logoCompany/company_4.png",
-        name: "Google",
-        location: "United States",
-    },
-    {
-        id: 4,
-        logo: "/image/logoCompany/company_4.png",
-        name: "Google",
-        location: "United States",
-    },
-
-];
-  
+import jobApi from '../../../../api/jobApi';
+import companyApi from '../../../../api/companyApi'; 
 
 
 function HomePage() {
+    const [listJob, setListJobs] = useState([]);
+    const [remainingDays, setRemainingDays] = useState([]);
+    const [companies, setcompanies] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
+    const [currentCompanies, setCurrentCompanies] = useState([]);
+    const [logo, setLogo] = useState({});
+
+    const calculateRemainingDays = () => {
+        const updatedListJobs = [];
+        const remainingDaysList = [];
+        for (let i = 0; i < listJob.length; i++) {
+            const targetDateString = listJob[i].expirationDate;
+            const targetDate = new Date(targetDateString);
+            const now = new Date();
+            const diff = targetDate - now;
+            const daysLeft = Math.ceil(diff / (1000 * 60 * 60 * 24));
+            if (daysLeft > 0) {
+                updatedListJobs.push(listJob[i]);
+                remainingDaysList.push(daysLeft);
+            }
+        }
+        setListJobs(updatedListJobs);
+        setRemainingDays(remainingDaysList);
+    };
     const itemsPerPage = 8; 
     const navigate = useNavigate();
-    // Calculate the index range for the current page
-    const startIndex = currentPage * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
- 
-    // Slice the companies array based on current page
-    const currentCompanies = companies.slice(startIndex, endIndex);
  
     // Handle page change (next and previous page)
     const handlePageChange = (newPage) => {
@@ -113,13 +40,61 @@ function HomePage() {
         if (newPage >= 0 && newPage < Math.ceil(companies.length / itemsPerPage)) {
             setCurrentPage(newPage);
         }
+        const startIndex = currentPage * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage; 
+        setCurrentCompanies(companies, startIndex, endIndex);
     };
 
     const handleSignUpClick = () => {
         navigate('/auth/register'); // Route for Sign Up
     };
-    
-    
+    useEffect(() => {
+        const fetchJobs = async () => {
+            try {
+                const response = await jobApi.getAllJobs();
+                console.log("Fetch Jobs: ", response.data);
+                setListJobs(response.data);
+            } catch (error) {
+                console.log("Failed to fetch jobs: ", error);
+            }
+        }
+        fetchJobs();
+    },[]);
+
+    useEffect(() => {
+        if (listJob.length > 0)
+            calculateRemainingDays();
+    }, [listJob]);
+
+    useEffect(() => {
+        const fetchCompanies = async () => {
+            try {
+                const response = await companyApi.getAllCompanies();
+                console.log("Fetch Companies: ", response.data);
+                setcompanies(response.data);
+            } catch (error) {
+                console.log("Failed to fetch companies: ", error);
+            }
+        }
+        fetchCompanies();
+    },[]);
+    useEffect(() => {
+        if (companies.length > 0) {
+            const startIndex = currentPage * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            setCurrentCompanies(companies, startIndex, endIndex);    
+               
+            const idToLogoMap = {}
+            for (const company of companies) {
+                console.log("Company: ", company.id, " id: ", company.logoUrl);
+                if (company.id && company.logoUrl) {
+                    idToLogoMap[company.id] = company.logoUrl;
+                }
+            }
+            setLogo(idToLogoMap); // Save it in state if needed
+        }
+    },[companies]);
+   
     return (
         <div> 
             <div className="flex flex-col w-full items-center justify-center bg-[#f7f7f8]">
@@ -229,18 +204,18 @@ function HomePage() {
                 </div>
             </div>
             <div className='flex flex-col items-center justify-center'>
-            {jobs.map((job, index) => (
+            {listJob.map((job, index) => (
                 <div
                 key={index}
                 className="w-[1200px] h-[132px] p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-4 transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
                 >
                     <div className="justify-start items-start gap-5 flex">
-                        <img src={`/image/logoCompany/${job.companyLogo}`} alt="job_icon" className="w-16 h-16" />
+                        <img src={"http://172.28.102.169:8080/api/v1"+ logo[job.companyId]} alt="job_icon" className="w-16 h-16" />
                         <div className="flex-col justify-start items-start gap-3.5 inline-flex">
-                            <div className="justify-start items-center gap-2 inline-flex">
+                            <div className="justify-start items-center gap-5 inline-flex">
                                 <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
                                 <div className="px-3 py-[3px] bg-[#e8f1ff] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                    <div className="text-[#0a65cc] text-sm font-normal font-['Inter'] leading-tight">{job.contractType}</div>
+                                    <div className="text-[#0a65cc] text-sm font-normal font-['Inter'] leading-tight">{job.jobType}</div>
                                 </div>
                             </div>
                             <div className="justify-start items-center gap-4 inline-flex">
@@ -250,11 +225,11 @@ function HomePage() {
                                 </div>
                                 <div className="justify-start items-center gap-1 flex">
                                     <img src={"/image/icon_salary.png"} alt="salary_icon" className="h-4" />
-                                    <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.salary}</div>
+                                    <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.minSalary} - {job.maxSalary}</div>
                                 </div>
                                 <div className="justify-start items-center gap-1.5 flex">
                                     <img src={"/image/icon_calander.png"} alt="calendar_icon" className="h-4" />
-                                    <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.daysRemaining} Days Remaining</div>
+                                    <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{remainingDays[index]} Days Remaining</div>
                                 </div>
                             </div>
                         </div>
@@ -329,7 +304,7 @@ function HomePage() {
                             className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
                         >
                             <div className="justify-start items-start gap-4 inline-flex">
-                                <img src={company.logo} alt={`${company.name} logo`} className="w-16 h-16" />
+                                <img src={"http://172.28.102.169:8080/api/v1" + company.logoUrl} alt={`${company.name} logo`} className="w-16 h-16" />
                                 <div className="flex-col justify-start items-start gap-1.5 inline-flex">
                                     <div className="justify-start items-center gap-2 inline-flex">
                                         <div className="text-[#181f33] text-lg font-medium font-['Inter'] leading-7">
@@ -409,7 +384,6 @@ function HomePage() {
             </div>
             <Footer/>
         </div>
-        
     )
 }
 

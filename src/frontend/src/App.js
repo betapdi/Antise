@@ -38,7 +38,7 @@ function App() {
     companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
     yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants
   } = useContext(CompanyContext);
-
+  
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -107,7 +107,7 @@ function App() {
                                   ) : role === "COMPANY" ? (
                                     <Company />
                                   ) : (
-                                    <Navigate to="/auth/login" replace />
+                                    <Navigate to="/job/homepage" replace />
                                   )
                                 }
                 />

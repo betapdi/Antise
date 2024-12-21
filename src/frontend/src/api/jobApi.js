@@ -17,6 +17,10 @@ const jobApi = {
           },
         });
     },
+    getAllJobs: () => {
+        const url = 'public/job/getAll';
+        return axiosClient.get(url);
+    },
 
 }
 
