@@ -12,8 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
+import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.CompanyDto;
+import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Company;
+import com.antise.server.exceptions.ApplicantNotFoundException;
 import com.antise.server.exceptions.CompanyNotFoundException;
 import com.antise.server.exceptions.UserNotFoundException;
 
@@ -91,6 +94,18 @@ public class CompanyService {
         CompanyDto response = new CompanyDto();
         response.update(savedCompany);
 
+        return response;
+    }
+
+    public CompanyDto saveApplicant(String applicantId, String email) {
+        Applicant applicant = (Applicant)(userRepository.findById(applicantId).orElseThrow(() -> new ApplicantNotFoundException()));
+        Company company = (Company)(userRepository.findByEmail(email).orElseThrow(() -> new CompanyNotFoundException()));
+
+        company.getSavedApplicants().add(applicant);
+        Company savedCompany = userRepository.save(company);
+
+        CompanyDto response = new CompanyDto();
+        response.update(savedCompany);
         return response;
     }
 }

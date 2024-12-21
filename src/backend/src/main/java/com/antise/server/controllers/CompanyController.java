@@ -69,4 +69,12 @@ public class CompanyController {
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @PostMapping("/saveApplicant")
+    public ResponseEntity<CompanyDto> saveApplicant(@RequestPart("applicantId") String applicantId, @AuthenticationPrincipal UserDetails userDetails) {
+        CompanyDto response = companyService.saveApplicant(applicantId, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
 }

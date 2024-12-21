@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
+import com.antise.server.controllers.requests.SearchJobRequest;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.ApplicationDto;
 import com.antise.server.dto.JobDto;
@@ -61,10 +62,16 @@ public class JobService {
 
     public JobDto createJob(JobDto jobDto, String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("User not found!"));
-        if (user.getRole() != UserRole.ADMIN && user.getRole() != UserRole.COMPANY) throw new UserRoleNotQualifiedException("UserRole is not qualified!");
+        if (user.getRole() != UserRole.COMPANY) throw new UserRoleNotQualifiedException("UserRole is not qualified!");
 
         Job job = new Job(); job.update(jobDto); job.setCompanyId(user.getId());
         jobRepository.save(job);
+
+        Company company = (Company)user;
+        company.getJobList().add(job);
+        userRepository.save(company);
+
+        //Create job alert
 
         JobDto response = new JobDto();
         response.update(job);
@@ -123,6 +130,43 @@ public class JobService {
 
         ApplicationDto response = new ApplicationDto();
         response.update(savedApplication);
+
+        //Notification
+
+        return response;
+    }
+
+    public List<JobDto> searchJob(SearchJobRequest searchData) {
+        List<Job> jobs = jobRepository.findAll();
+        List<Job> filteredJobs = new ArrayList<>();
+
+        for(Job job : jobs) {
+            if (searchData.getJobType() != null && job.getJobType() != searchData.getJobType()) continue;
+            if (searchData.getEducation() != null && job.getEducation() != searchData.getEducation()) continue;
+            if (searchData.getExperience() != null && job.getExperience() != searchData.getExperience()) continue;
+            if (searchData.getSearchPattern() != null) {
+                if (!(job.getTitle()).contains(searchData.getSearchPattern())) continue;
+            }
+
+            if (searchData.getMaxSalary() != null && searchData.getMinSalary() != null) {
+                if (job.getMaxSalary() >= searchData.getMaxSalary()) {
+                    if (job.getMinSalary() <= searchData.getMaxSalary()) {
+                        filteredJobs.add(job);
+                    }
+                }
+
+                else if (searchData.getMinSalary() <= job.getMaxSalary()) {
+                    filteredJobs.add(job);
+                }
+            }
+        }
+
+        List<JobDto> response = new ArrayList<>();
+        for (Job job : filteredJobs) {
+            JobDto dto = new JobDto();
+            dto.update(job);
+            response.add(dto);
+        }
 
         return response;
     }
