@@ -91,7 +91,7 @@ function HomePage() {
                     idToLogoMap[company.id] = company.logoUrl;
                 }
             }
-            setLogo(idToLogoMap); // Save it in state if needed
+            setLogo(idToLogoMap); 
         }
     },[companies]);
    
