@@ -51,6 +51,8 @@ public class Job {
 
     private String experience;
 
+    private String questions;
+
     @Builder.Default
     private List<Application> applications = new ArrayList<>();
 
@@ -67,5 +69,6 @@ public class Job {
         if (dto.getEducation() != null) education = dto.getEducation();
         if (dto.getJobType() != null) jobType = dto.getJobType();
         if (dto.getExperience() != null) experience = dto.getExperience();
+        if (dto.getQuestions() != null) questions = dto.getQuestions();
     }
 }

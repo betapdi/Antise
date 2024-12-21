@@ -77,4 +77,11 @@ public class CompanyController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
+    @PostMapping("/search/{searchPattern}")
+    public ResponseEntity<List<CompanyDto>> searchCompany(@PathVariable("searchPattern") String searchPattern) {
+        List<CompanyDto> response = companyService.searchCompany(searchPattern);
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
 }

@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.antise.server.dto.ApplicantDto;
+import com.antise.server.dto.JobDto;
 import com.antise.server.services.ApplicantService;
+import com.antise.server.services.JobService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class ApplicantController {
     
     private final ApplicantService applicantService;
+
     public ApplicantController(ApplicantService applicantService) {
         this.applicantService = applicantService;
     }
@@ -56,6 +59,13 @@ public class ApplicantController {
                                                         @RequestPart(value = "resume", required = false) MultipartFile resume,
                                                         @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
         ApplicantDto response = applicantService.updateApplicant(applicant, profileImage, resume, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/addFavoriteJob/{jobId}")
+    public ResponseEntity<JobDto> addFavoriteJob(@PathVariable("jobId") String jobId, @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
+        JobDto response = applicantService.addFavoriteJob(jobId, userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

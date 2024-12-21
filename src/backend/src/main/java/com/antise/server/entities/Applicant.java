@@ -51,6 +51,9 @@ public class Applicant extends User {
 
     private String phoneNumber;
 
+    @DBRef
+    private List<Job> favoriteJobs;
+
     public void update(ApplicantDto dto) {
         if (dto.getGender() != null) gender = dto.getGender();
         if (dto.getFullName() != null) fullName = dto.getFullName();
