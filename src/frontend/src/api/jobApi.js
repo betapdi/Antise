@@ -21,6 +21,11 @@ const jobApi = {
         const url = 'public/job/getAll';
         return axiosClient.get(url);
     },
+
+    getJob: (id) => {
+      const url = `public/job/get/${id}`;
+      return axiosClient.get(url);
+    },
     searchJob: (searchData) => {
       const url = '/job/search';
       const formData = new FormData();  
@@ -31,8 +36,6 @@ const jobApi = {
         },
       });
     },
-
-    
 }
 
 export default jobApi;
