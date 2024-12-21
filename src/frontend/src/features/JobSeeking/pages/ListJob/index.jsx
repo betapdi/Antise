@@ -10,7 +10,6 @@ import { useSearchParams } from "react-router-dom";
 
 function ListJob({isSearch}) {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [filters, setFilters] = useState({}); 
     const [jobs, setJobs] = useState([]);
     const [remainingDays, setRemainingDays] = useState([]);
     const [companies, setcompanies] = useState([]);
@@ -19,6 +18,12 @@ function ListJob({isSearch}) {
     const [searchParams] = useSearchParams();
     const dropdownItems = searchParams.get("dropdownItems");
     const searchQuery = searchParams.get("searchQuery");
+    const [filters, setFilters] = useState({
+        Experience: null,
+        Salary: null,
+        JobType: null,
+        Education: null,
+    });
    
  
     useEffect(()  => {
@@ -41,6 +46,7 @@ function ListJob({isSearch}) {
                     minSalary: minSalary,
                     maxSalary: maxSalary,
                     jobType: filters.JobType,
+                    education: filters.Education,
                     searchPattern: searchQuery,                  
                 };
                 try {
@@ -53,7 +59,7 @@ function ListJob({isSearch}) {
                 }
         }
         search();
-    }, [filters]);
+    }, [searchQuery,filters]);
     const calculateRemainingDays = () => {
         const updatedListJobs = [];
         const remainingDaysList = [];
@@ -135,23 +141,22 @@ function ListJob({isSearch}) {
     };
 
     return (
-    <div className={`flex flex-col gap-12 justify-center items-center w-full py-16 h-screen`}>    
+    <div className={`flex flex-col gap-12 justify-center items-center w-full py-16`}>    
         <div
             className={`flex flex-row h-12 mb-8 ${
             isSearch === 1 ? "gap-[55rem]" : "gap-[44rem]"
         }`}
         >
         {isSearch === 1 ? (
-                <div className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex">
+                <button className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex"
+                onClick={() =>{ setIsFilterOpen(!isFilterOpen);}}>
                     <div className="w-6 h-6 justify-center items-center flex">
                         <img src={`/image/icon_filter.png`} alt="icon_filter" className="w-6 h-6" />
                     </div>
-                    <button className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
-                                    onClick={() =>{ setIsFilterOpen(!isFilterOpen); console.log(isFilterOpen);}}
-                    >
+                    <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                         Filter
-                    </button>
-                </div>
+                    </div>
+                </button>
             ) : (
                 <div className="text-center text-[#181f33] text-[40px] font-medium font-['Inter'] leading-[48px]">Featured job</div>
         )}
@@ -245,7 +250,7 @@ function ListJob({isSearch}) {
         {isFilterOpen && (
             <div className="w-full fixed inset-0 z-30 flex justify-center items-center bg-black bg-opacity-50">
                 <div className="max-h-screen w-2/3 flex justify-center overflow-y-auto bg-white rounded-lg shadow-lg">
-                    <FilterTable onFilterChange={handleFilterChange} isCloseChange={handleClose}/>
+                    <FilterTable onFilterChange={handleFilterChange} isCloseChange={handleClose} filters={filters}/>
                 </div>
             </div>
                           

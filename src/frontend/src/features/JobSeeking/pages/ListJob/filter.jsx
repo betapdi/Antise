@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 const experienceLevels = [
     { id: "freshers", value: "freshers", label: "Freshers" },
@@ -46,23 +46,31 @@ const education = [
     { id: "Bachelor Degree", value: "Bachelor Degree", label: "Bachelor Degree" },
 ];
 
-function FilterTable({ onFilterChange , isCloseChange}) {
-    const [filters, setFilters] = useState({
-        Experience: '',
-        Salary: '',
-        JobType: '',
-        Education: '',
-      });
-    const applyFilters = () => {
-        onFilterChange(filters); // Pass filters back to the parent component
-    };
+function FilterTable({ onFilterChange , isCloseChange,filters}) {
+    const [localFilters, setLocalFilters] = useState({ ...filters });
     
+    useEffect(() => {
+        // Initialize local state with the passed filters when the component mounts
+        setLocalFilters({ ...filters });
+    }, [filters]);
+
     const handleRadioChange = (e, category) => {
-        setFilters({
-          ...filters,
-          [category]: e.target.value
+        setLocalFilters((prev) => ({
+            ...prev,
+            [category]: e.target.value,
+        }));
+    };
+    const applyFilters = () => {
+        onFilterChange(localFilters); // Send the updated filters back to the parent
+    };
+    const clearFilters = () => {
+        setLocalFilters({
+            Experience: null,
+            Salary: null,
+            JobType: null,
+            Education: null
         });
-      };
+    };
     
     return (
     <div className="w-full bg-white flex flex-col justify-center items-center rounded-lg shadow-xl">
@@ -71,6 +79,12 @@ function FilterTable({ onFilterChange , isCloseChange}) {
             onClick={applyFilters}>
                 <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                     Apply Filter
+                </div>
+            </button>
+            <button className="h-10 w-full max-w-[150px] px-4 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex border-b-2 border-gray/100 my-2 me-4"
+            onClick={clearFilters}>
+                <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
+                    Clear Filters
                 </div>
             </button>
             <button className="h-10 w-full max-w-[150px] px-4 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex border-b-2 border-gray/100 my-2 me-4"
@@ -88,7 +102,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     {experienceLevels.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
                             <input type="radio" id={item.id} class="accent-blue" name="experience" value={item.value} 
-                            onChange={(e) => handleRadioChange(e, 'Experience')}/>
+                            onChange={(e) => handleRadioChange(e, 'Experience')}
+                            checked={localFilters.Experience === item.value}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter'] checked:bg-blue cursor-pointer form-radio">{item.label}</label>
                         </div>
                         ))}
@@ -100,7 +115,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     {salary.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
                             <input type="radio" id={item.id} class="accent-blue" name="salary" value={item.value} 
-                            onChange={(e) => handleRadioChange(e, 'Salary')}/>
+                            onChange={(e) => handleRadioChange(e, 'Salary')}
+                            checked={localFilters.Salary === item.value}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
                         </div>
                         ))}
@@ -112,7 +128,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     {type.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
                             <input type="radio" id={item.id} class="accent-blue" name="type" value={item.value} 
-                             onChange={(e) => handleRadioChange(e, 'JobType')}/>
+                             onChange={(e) => handleRadioChange(e, 'JobType')}
+                             checked={localFilters.JobType === item.value}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter'] peer-checked:text-blue cursor-pointer">{item.label}</label>
                         </div>
                         ))}
@@ -124,7 +141,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     {education.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
                             <input type="radio" id={item.id} class="accent-blue" name="type" value={item.value} 
-                             onChange={(e) => handleRadioChange(e, 'Education')}/>
+                             onChange={(e) => handleRadioChange(e, 'Education')}
+                             checked={localFilters.Education === item.value}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
                         </div>
                         ))}
