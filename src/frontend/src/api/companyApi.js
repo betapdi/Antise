@@ -44,6 +44,10 @@ const companyApi = {
     return axiosClient.get(url);
   },
 
+  searchCompany: (searchPattern) => {
+    const url = `public/company/search/${searchPattern}`;
+    return axiosClient.post(url); 
+  },
 }
 
 export default companyApi;

@@ -16,7 +16,6 @@ function ListJob({isSearch}) {
     const [logo, setLogo] = useState({});
     const [title, setTitle] = useState(null);
     const [searchParams] = useSearchParams();
-    const dropdownItems = searchParams.get("dropdownItems");
     const searchQuery = searchParams.get("searchQuery");
     const [filters, setFilters] = useState({
         Experience: null,
@@ -24,6 +23,21 @@ function ListJob({isSearch}) {
         JobType: null,
         Education: null,
     });
+    const [sortOption, setSortOption] = useState("latest"); 
+    // Handle sorting
+    const handleSortChange = (e) => {
+        const selectedOption = e.target.value;
+        setSortOption(selectedOption);
+
+        const sortedJobs = [...jobs];
+        if (selectedOption === "latest") {
+            sortedJobs.sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
+        } else if (selectedOption === "popular") {
+            sortedJobs.sort((a, b) => b.applicant.length - a.applicant.length); // Assuming popularity is a job attribute
+        }
+        setJobs(sortedJobs);
+    };
+
    
  
     useEffect(()  => {
@@ -160,7 +174,10 @@ function ListJob({isSearch}) {
             ) : (
                 <div className="text-center text-[#181f33] text-[40px] font-medium font-['Inter'] leading-[48px]">Featured job</div>
         )}
-            <select id="sort" class="bg-white border border-gray/100 text-black rounded-lg p-2">
+            <select id="sort" class="bg-white border border-gray/100 text-black rounded-lg p-2"
+                    value={sortOption}
+                    onChange={handleSortChange}
+            >
                 <option value="latest">Latest</option>
                 <option value="Popular">Popular</option>
             </select>

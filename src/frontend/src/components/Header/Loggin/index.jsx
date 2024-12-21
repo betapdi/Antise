@@ -28,9 +28,9 @@ const HeaderLoggin = () => {
                 Find Job
               </Link>
               <Link
-                to="/"
+                to="/job/findcompany"
                 className={`py-3.5 ${
-                  location.pathname.toLowerCase() ==='/' ? 'text-blue' : 'text-[#5e6670]'
+                  location.pathname.toLowerCase() ==='/job/findcompany' ? 'text-blue' : 'text-[#5e6670]'
                 } font-normal font-['Inter'] leading-tight`}
               >
                 Find Company
