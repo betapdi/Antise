@@ -20,7 +20,7 @@ const PostJob = () => {
       const job = response.data;
 
       //Update context and show popup
-      console.log("job",job);
+      console.log("job", job);
       navigate("/company/postjobsuccess");
     } catch (error) {
       console.log(error);
@@ -42,6 +42,7 @@ const PostJob = () => {
             expirationDate: "",
             description: "",
             responsibility: "",
+            question: "",
           }}
           validationSchema={Yup.object({
             title: Yup.string().required("Job Title is required"),
@@ -193,6 +194,13 @@ const PostJob = () => {
                     label="Responsibilities"
                     name="responsibility"
                     placeholder="Add your job responsibilities..."
+                    component={RichTextField}
+                  />
+
+                  <Field
+                    label="Questions (Optional)"
+                    name="questions"
+                    placeholder="Add your entrance question..."
                     component={RichTextField}
                   />
 
