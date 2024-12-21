@@ -21,7 +21,18 @@ const jobApi = {
         const url = 'public/job/getAll';
         return axiosClient.get(url);
     },
+    searchJob: (searchData) => {
+      const url = '/job/search';
+      const formData = new FormData();  
+      formData.append('searchData', new Blob([JSON.stringify(searchData)], {type: 'application/json'}));
+      return axiosClient.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+    },
 
+    
 }
 
 export default jobApi;
