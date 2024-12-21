@@ -27,7 +27,7 @@ const jobApi = {
       return axiosClient.get(url);
     },
     searchJob: (searchData) => {
-      const url = '/job/search';
+      const url = 'public/job/search';
       const formData = new FormData();  
       formData.append('searchData', new Blob([JSON.stringify(searchData)], {type: 'application/json'}));
       return axiosClient.post(url, formData, {
