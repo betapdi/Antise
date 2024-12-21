@@ -1,5 +1,6 @@
 package com.antise.server.controllers;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,6 +67,13 @@ public class ApplicantController {
     @PostMapping("/addFavoriteJob/{jobId}")
     public ResponseEntity<JobDto> addFavoriteJob(@PathVariable("jobId") String jobId, @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
         JobDto response = applicantService.addFavoriteJob(jobId, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/removeFavoriteJob/{jobId}")
+    public ResponseEntity<String> removeFavoriteJob(@PathVariable("jobId") String jobId, @AuthenticationPrincipal UserDetails userDetails) throws IOException {        
+        String response = applicantService.removeFavoriteJob(jobId, userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

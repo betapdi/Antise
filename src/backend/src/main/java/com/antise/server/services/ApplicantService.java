@@ -110,6 +110,8 @@ public class ApplicantService {
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
         
         Applicant applicant = (Applicant)user;
+        
+        if (applicant.getFavoriteJobs() == null) applicant.setFavoriteJobs(new ArrayList<>());
         applicant.getFavoriteJobs().add(job);
 
         userRepository.save(applicant);
@@ -117,6 +119,25 @@ public class ApplicantService {
         JobDto response = new JobDto();
         response.update(job);
 
+        return response;
+    }
+
+    public String removeFavoriteJob(String jobId, String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
+        Applicant applicant = (Applicant)user;
+        
+        Job chosenJob = new Job();
+        for (Job job : applicant.getFavoriteJobs()) {
+            if (job.getId() == jobId) {
+                chosenJob = job; 
+                break;
+            }
+        }
+
+        applicant.getFavoriteJobs().remove(chosenJob);
+        userRepository.save(applicant);
+
+        String response = "Job with id: " + jobId + " was removed from favorite list!";
         return response;
     }
 }
