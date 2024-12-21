@@ -3,46 +3,46 @@ import axiosClient from "./axiosClient"
 import axiosPrivate from "./axiosPrivate"
 
 const companyApi = {
-    createCompanyAccount: (rawData) => {
-        const url = '/company/create';
-        return axiosPrivate.post(url);
-    },
+  createCompanyAccount: (rawData) => {
+    const url = '/company/create';
+    return axiosPrivate.post(url);
+  },
 
-    editCompany: (rawData) => {
-        const url = '/company/edit';
-        
-        const formData = new FormData();
-        const company = {};
+  editCompany: (rawData) => {
+    const url = '/company/edit';
 
-        for (let key in rawData) {
-          if (key === "bannerImage") {
-            formData.append('banner', rawData[key]);
-          }
+    const formData = new FormData();
+    const company = {};
 
-          else if (key === "logoImage") {
-            formData.append('logo', rawData[key]);
-          }
+    for (let key in rawData) {
+      if (key === "bannerImage") {
+        formData.append('banner', rawData[key]);
+      }
 
-          else company[key] = rawData[key];
-        }
-      
-        formData.append('company', new Blob([JSON.stringify(company)], {type: 'application/json'}));
+      else if (key === "logoImage") {
+        formData.append('logo', rawData[key]);
+      }
 
-        // Send as multipart/form-data
-        return axiosPrivate.put(url, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-    },
-    getCompany: (id) => {
-      const url = `/company/get/${id}`;
-      return axiosClient.get(url);
-    },
-    getAllCompanies: () => {
-      const url = 'public/company/getAll';
-      return axiosClient.get(url);
-    },
+      else company[key] = rawData[key];
+    }
+
+    formData.append('company', new Blob([JSON.stringify(company)], { type: 'application/json' }));
+
+    // Send as multipart/form-data
+    return axiosPrivate.put(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+  getCompany: (id) => {
+    const url = `public/company/get/${id}`;
+    return axiosClient.get(url);
+  },
+  getAllCompanies: () => {
+    const url = 'public/company/getAll';
+    return axiosClient.get(url);
+  },
 
 }
 

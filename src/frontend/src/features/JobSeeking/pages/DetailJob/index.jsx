@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import companyApi from '../../../../api/companyApi';
 import { useParams } from 'react-router-dom';
 import jobApi from '../../../../api/jobApi';
+import { use } from 'react';
 
 
 const jobs = [
@@ -106,15 +107,16 @@ function DetailJob() {
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [isFormOpen, setIsFormOpen] = useState(false);
-    const [companyData, setCompanyData] = useState(null);
+    const [company, setCompany] = useState(null);
     const [job, setJob] = useState(null);
     const [jobID, setJobID] = useState(null);
+    const [companyID, setCompanyID] = useState(null);
     const params = useParams();
 
     useEffect(() => {
         setJobID(params.id);
-        // console.log('hh', params.id);
     }, []);
+
 
     useEffect(() => {
         const fetchJobById = async (jobID) => {
@@ -131,8 +133,12 @@ function DetailJob() {
         if (jobID != null) fetchJobById(jobID);
     }, [jobID]);
 
-
-
+    // useEffect(() => {
+    //     if (job != null) {
+    //         console.log('companyid', job.companyId);
+    //         setCompanyID(job.companyId);
+    //     }
+    // }, [jobID]);
 
     const handleClose = () => {
         setIsFormOpen(false);
@@ -153,24 +159,25 @@ function DetailJob() {
         }
     };
 
-    // useEffect(() => {
-    //     const fetchCompany = async () => {
-    //         try {
-    //             const response = await companyApi.getCompany(job.companyID);
-    //             const companyData = response.data;
-    //             console.log(companyData);
-    //             setCompanyData(companyData);
-    //         } catch (error) {
-    //             console.log(error);
-    //         }
-    //     }
-    //     fetchCompany();
-    // }, [])
-
+    useEffect(() => {
+        const fetchCompany = async (companyID) => {
+            try {
+                const response = await companyApi.getCompany(companyID);
+                const company = response.data;
+                setCompany(company);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        if (job != null) {
+            fetchCompany(job.companyId);
+            console.log('companyID', job.companyId);
+        }
+    }, [job])
 
     return (
         <>
-            {job != null &&
+            {job != null && company != null &&
                 <div className="w-full flex flex-col justify-center items-center">
                     <div className="w-3/4 mx-auto flex flex-col justify-center items-center mt-20 mb-20">
                         {/* Job Title */}
@@ -193,7 +200,7 @@ function DetailJob() {
                                                     className="transition-opacity duration-300 group-hover:opacity-0">
                                                 </img>
                                             </div>
-                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">wwww.insstagram</div>
+                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">{company.companyUrl}</div>
                                         </div>
                                         <div className="justify-start items-center gap-1.5 flex">
                                             <div className="w-6 h-6 relative">
@@ -203,7 +210,7 @@ function DetailJob() {
                                                     className="transition-opacity duration-300 group-hover:opacity-0">
                                                 </img>
                                             </div>
-                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">(406) 555-0120</div>
+                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">{company.companyPhoneNumber}</div>
                                         </div>
                                         <div className="justify-start items-center gap-1.5 flex">
                                             <div className="w-6 h-6 justify-center items-center flex">
@@ -215,7 +222,7 @@ function DetailJob() {
                                                     </img>
                                                 </div>
                                             </div>
-                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">career@instagram.com</div>
+                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">{company.companyEmail}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -535,7 +542,7 @@ function DetailJob() {
 
                     )}
                 </div>
-            }    
+            }
         </>
     )
 }
