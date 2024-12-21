@@ -23,21 +23,37 @@ function ListJob({isSearch}) {
  
     useEffect(()  => {
         const search = async () => {
-            if (searchQuery) {
+                let minSalary = null;
+                let maxSalary = null;
+
+                if (filters.Salary) {
+                    const salaryRange = filters.Salary.split("-"); 
+                    if (salaryRange.length === 2) {
+                        minSalary = parseInt(salaryRange[0]);
+                        maxSalary = parseInt(salaryRange[1]);
+                    }else{
+                        minSalary = parseInt(salaryRange[0]);
+                        maxSalary = parseInt("10000000000000");
+                    }
+                }
                 const searchData = {
+                    experience: filters.Experience,
+                    minSalary: minSalary,
+                    maxSalary: maxSalary,
+                    jobType: filters.JobType,
                     searchPattern: searchQuery,                  
                 };
                 try {
+                    console.log(searchData);
                     const response = await jobApi.searchJob(searchData);
                     console.log("Search Jobs: ", response.data);
                     setJobs(response.data);  
                 } catch (error) {
                     console.error("Error searching jobs:", error);
                 }
-            }
         }
         search();
-    }, [searchQuery]);
+    }, [filters]);
     const calculateRemainingDays = () => {
         const updatedListJobs = [];
         const remainingDaysList = [];
@@ -108,7 +124,6 @@ function ListJob({isSearch}) {
                 setLogo(idToLogoMap); 
         }
     },[companies]);
-
     // Callback function to handle filter data
     const handleFilterChange = (newFilters) => {
         setFilters(newFilters); 

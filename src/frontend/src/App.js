@@ -11,6 +11,7 @@ import userApi from './api/userApi';
 import { UserContext } from './context/UserContext';
 import { ApplicantContext } from './context/ApplicantContext';
 import { CompanyContext } from './context/CompanyContext';
+import Error from './components/Error';
 
 const Job = React.lazy(() => import('./features/JobSeeking'));
 const Company = React.lazy(() => import('./features/Company'));
@@ -114,6 +115,7 @@ function App() {
                 <Route path = "job/*" element = {<Job />} />
                 <Route path = "auth/*" element = {<Authentication />} />
                 <Route path = "company/*" element = {<Company />} />
+                <Route path = "error/" element={<Error/>} />
               </Routes>
             </BrowserRouter>
         </Suspense>)

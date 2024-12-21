@@ -47,15 +47,28 @@ const education = [
 ];
 
 function FilterTable({ onFilterChange , isCloseChange}) {
-    const [filters, setFilters] = useState({ Experience: '', Salary: '', JobType: '', Education: '', JobLevel: ''}); // State to hold filter criteria
+    const [filters, setFilters] = useState({
+        Experience: '',
+        Salary: '',
+        JobType: '',
+        Education: '',
+      });
     const applyFilters = () => {
         onFilterChange(filters); // Pass filters back to the parent component
     };
     
+    const handleRadioChange = (e, category) => {
+        setFilters({
+          ...filters,
+          [category]: e.target.value
+        });
+      };
+    
     return (
     <div className="w-full bg-white flex flex-col justify-center items-center rounded-lg shadow-xl">
         <div className="h-16 w-full flex flex-row items-center justify-end border border-[#EDEFF5]">
-            <button className="h-10 w-full max-w-[150px] px-4 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex border-b-2 border-gray/100 my-2 me-4">
+            <button className="h-10 w-full max-w-[150px] px-4 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 inline-flex border-b-2 border-gray/100 my-2 me-4"
+            onClick={applyFilters}>
                 <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                     Apply Filter
                 </div>
@@ -74,7 +87,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {experienceLevels.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="radio" id={item.id} class="accent-blue" name="experience" value={item.value} />
+                            <input type="radio" id={item.id} class="accent-blue" name="experience" value={item.value} 
+                            onChange={(e) => handleRadioChange(e, 'Experience')}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter'] checked:bg-blue cursor-pointer form-radio">{item.label}</label>
                         </div>
                         ))}
@@ -85,7 +99,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {salary.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="radio" id={item.id} class="accent-blue" name="salary" value={item.value} />
+                            <input type="radio" id={item.id} class="accent-blue" name="salary" value={item.value} 
+                            onChange={(e) => handleRadioChange(e, 'Salary')}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
                         </div>
                         ))}
@@ -96,7 +111,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {type.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="checkbox" id={item.id} class="accent-blue" name="type" value={item.value} />
+                            <input type="radio" id={item.id} class="accent-blue" name="type" value={item.value} 
+                             onChange={(e) => handleRadioChange(e, 'JobType')}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter'] peer-checked:text-blue cursor-pointer">{item.label}</label>
                         </div>
                         ))}
@@ -107,18 +123,8 @@ function FilterTable({ onFilterChange , isCloseChange}) {
                     <div className="flex flex-col gap-1">
                     {education.map((item) => (
                         <div key={item.id} className="flex flex-row gap-2">
-                            <input type="checkbox" id={item.id} class="accent-blue" name="type" value={item.value} />
-                            <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
-                        </div>
-                        ))}
-                    </div>
-                </div>
-                <div className='flex flex-col gap-2'>
-                    <h1 className=' text-[#181f33] text-lg font-medium font-inter leading-7'>Job Level</h1>
-                    <div className="flex flex-col gap-1">
-                    {level.map((item) => (
-                        <div key={item.id} className="flex flex-row gap-2">
-                            <input type="radio" id={item.id} class="accent-blue" name="level" value={item.value} />
+                            <input type="radio" id={item.id} class="accent-blue" name="type" value={item.value} 
+                             onChange={(e) => handleRadioChange(e, 'Education')}/>
                             <label htmlFor={item.id} className="text-[#181f33] text-sm font-normal font-['Inter']">{item.label}</label>
                         </div>
                         ))}
