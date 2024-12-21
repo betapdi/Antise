@@ -2,12 +2,20 @@ import React from "react";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ApplicantContext } from "../../../context/ApplicantContext";
+import { useSearchParams } from "react-router-dom";
+
 
 function Nav({ isAuthen }) {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownItems, setDropdownItems] = useState("Job");
   const navigate = useNavigate();
   const { profileImageUrl } = useContext(ApplicantContext);
+  const [searchQuery, setSearchQuery] = useState("");
+  const params = new URLSearchParams({
+    dropdownItems,
+    searchQuery,
+  });
+
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -18,6 +26,15 @@ function Nav({ isAuthen }) {
 
   const handleSignUpClick = () => {
     navigate("/auth/register"); // Route for Sign Up
+  };
+  const handleSearchChange = () => {
+    console.log(searchQuery);
+
+    if (dropdownItems === "Job") {
+      navigate(`/job/listjob/search?${params.toString()}`);
+    } else {
+      navigate(`/company/search?${params.toString()}`);
+    }
   };
 
   return (
@@ -98,11 +115,12 @@ function Nav({ isAuthen }) {
               <input
                 type="text"
                 placeholder="Search"
+                onChange={(e) => setSearchQuery(e.target.value)} // Update `tag` as user types
                 className="w-full px-4 py-4 pr-10 text-sm font-medium text-black rounded-e-lg border border-gray/100 focus:outline-none"
               />
-              <button
-                type="submit"
+              <div
                 className="absolute top-1/2 right-2 transform -translate-y-1/2 p-2 text-sm text-white bg-blue-600 rounded"
+                onClick={handleSearchChange}
               >
                 <svg
                   width="24"
@@ -126,7 +144,7 @@ function Nav({ isAuthen }) {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </button>
+              </div>
             </div>
           </div>
         </form>

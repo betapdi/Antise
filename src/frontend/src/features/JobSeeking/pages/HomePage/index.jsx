@@ -17,6 +17,7 @@ function HomePage() {
     const calculateRemainingDays = () => {
         const updatedListJobs = [];
         const remainingDaysList = [];
+        let check = false;
         for (let i = 0; i < listJob.length; i++) {
             const targetDateString = listJob[i].expirationDate;
             const targetDate = new Date(targetDateString);
@@ -26,11 +27,16 @@ function HomePage() {
             if (daysLeft > 0) {
                 updatedListJobs.push(listJob[i]);
                 remainingDaysList.push(daysLeft);
+            }else{
+                check = true;
             }
         }
-        setListJobs(updatedListJobs);
+        if (check) setListJobs(updatedListJobs);
         setRemainingDays(remainingDaysList);
     };
+
+
+
     const itemsPerPage = 8;
     const navigate = useNavigate();
 
@@ -67,8 +73,15 @@ function HomePage() {
     }, []);
 
     useEffect(() => {
-        if (listJob.length > 0)
             calculateRemainingDays();
+            if (listJob.length > 0) {
+                const interval = setInterval(() => {
+                    calculateRemainingDays();
+                }, 5000);
+    
+                // Cleanup interval on component unmount
+                return () => clearInterval(interval);
+            }
     }, [listJob]);
 
     useEffect(() => {

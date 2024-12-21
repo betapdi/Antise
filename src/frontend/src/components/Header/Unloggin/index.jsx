@@ -20,9 +20,9 @@ const HeaderUnloggin = () => {
                 Home
               </Link>
               <Link
-                to="/job/listjob/search"
+                to="/job/listjob"
                 className={`py-3.5 ${
-                  location.pathname.toLowerCase() === '/job/listjob/search' ? 'text-blue' : 'text-[#5e6670]'
+                  (location.pathname.toLowerCase() === '/job/listjob/search' || location.pathname.toLowerCase() === '/job/listjob') ? 'text-blue' : 'text-[#5e6670]'
                 } font-normal font-['Inter'] leading-tight`}
               >
                 Find Job
