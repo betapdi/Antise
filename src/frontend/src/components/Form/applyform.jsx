@@ -6,21 +6,22 @@ import TextField from "../../customFields/TextField";
 import SelectField from "../../customFields/SelectField";
 import RichTextField from "../../customFields/RichTextField";
 
-const ApplyForm = ({ isCloseChange }) => {
+const ApplyForm = ({ isCloseChange, job }) => {
   const navigate = useNavigate();
   const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
   const handleClickSubmit = async (values) => {
     console.log(values);
     try {
-      navigate("/job/detailjob");
+      navigate(`/job/detailjob/${job.id}`);
     } catch (error) {
       console.log(error);
     }
   };
+  console.log(job);
 
   return (
     <div className="w-full mx-auto p-8 bg-white shadow-md rounded">
-      <h1 className="text-[#18191c] mb-3 text-lg font-medium font-['Inter'] leading-7">Apply Job: Senior UX Designer</h1>
+      <h1 className="text-[#18191c] mb-3 text-lg font-medium font-['Inter'] leading-7">{job.title}</h1>
       <Formik
         initialValues={{
           fullName: "",
@@ -28,6 +29,7 @@ const ApplyForm = ({ isCloseChange }) => {
           email: "",
           resume: "",
           coverLetter: "",
+          questions: "",
         }}
         validationSchema={Yup.object({
           fullName: Yup.string().required("Please fill your full name"),
@@ -35,12 +37,14 @@ const ApplyForm = ({ isCloseChange }) => {
           email: Yup.string().email("Invalid email").required("Please fill your email"),
           resume: Yup.string().required("Please upload your CV"),
           coverLetter: Yup.string().required("Please fill the cover letter. If not, fill N/A"),
+          questions: Yup.string().required("Please answer the questions"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
             handleClickSubmit(values);
+            isCloseChange(true);
           }, 400);
         }}
       >
@@ -84,6 +88,24 @@ const ApplyForm = ({ isCloseChange }) => {
                 placeholder="Cover Letter"
               />
 
+              {job?.questions && (
+                <div className="mt-4 ">
+                  <h3 className="text-sm font-medium text-[#18191c]"> Questions</h3>
+                  <div className="mb-2">
+                    {job.responsibility.split('\n').map((line, index) => (
+                      <div key={index} className="flex items-start">
+                        <span className="text-sm font-small text-[#18191c] px-1">•</span>
+                        <span>{line}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <Field
+                    name="questions"
+                    component={RichTextField}
+                    placeholder="Questions"
+                  />
+                </div>
+              )}
               <div className="flex flex-row justify-between">
                 <button className="h-12 px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex"
                   onClick={() => isCloseChange(true)}

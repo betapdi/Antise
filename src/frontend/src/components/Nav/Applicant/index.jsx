@@ -1,11 +1,12 @@
 import React from "react";
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext ,useEffect} from "react";
+import { Route, useNavigate,useLocation } from "react-router-dom";
 import { ApplicantContext } from "../../../context/ApplicantContext";
 import { useSearchParams } from "react-router-dom";
 
 
 function Nav({ isAuthen }) {
+  const location = useLocation();
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownItems, setDropdownItems] = useState("Job");
   const navigate = useNavigate();
@@ -15,6 +16,17 @@ function Nav({ isAuthen }) {
     dropdownItems,
     searchQuery,
   });
+  
+  useEffect(() => {
+    if (location.pathname.startsWith("/job/findjob")) {
+      setDropdownItems("Job");
+    } else if (location.pathname.startsWith("/job/findcompany")) {
+      setDropdownItems("Company");
+    } else{
+      setDropdownItems("Job");
+    }
+  }, [location]);
+
 
 
   const toggleDropdown = () => {
@@ -33,7 +45,7 @@ function Nav({ isAuthen }) {
     if (dropdownItems === "Job") {
       navigate(`/job/listjob/search?${params.toString()}`);
     } else {
-      navigate(`/company/search?${params.toString()}`);
+      navigate(`/job/findcompany?${params.toString()}`);
     }
   };
 
