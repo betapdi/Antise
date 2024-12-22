@@ -16,6 +16,7 @@ import com.antise.server.auth.repositories.UserRepository;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.JobDto;
 import com.antise.server.entities.Applicant;
+import com.antise.server.entities.Application;
 import com.antise.server.entities.Job;
 import com.antise.server.exceptions.CompanyNotFoundException;
 import com.antise.server.exceptions.JobNotFoundException;
@@ -136,17 +137,37 @@ public class ApplicantService {
         Applicant applicant = (Applicant)user;
         
         Job chosenJob = new Job();
+        Boolean ok = false;
         for (Job job : applicant.getFavoriteJobs()) {
             if (job.getId().equals(jobId)) {
                 chosenJob = job;
+                ok = true;
                 break;
             }
         }
 
-        applicant.getFavoriteJobs().remove(chosenJob);
-        userRepository.save(applicant);
+        if (ok == true) {
+            applicant.getFavoriteJobs().remove(chosenJob);
+            userRepository.save(applicant);
+        }
 
         String response = "Job with id: " + jobId + " was removed from favorite list!";
+        return response;
+    }
+
+    public List<JobDto> getAppliedJobs(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
+        Applicant applicant = (Applicant)user;
+        
+        List<JobDto> response = new ArrayList<>();
+        for (Application application : applicant.getApplications()) {
+            Job job = jobRepository.findById(application.getJobId()).orElseThrow(() -> new JobNotFoundException());
+            JobDto dto = new JobDto();
+            dto.update(job);
+
+            response.add(dto);
+        }
+        
         return response;
     }
 }

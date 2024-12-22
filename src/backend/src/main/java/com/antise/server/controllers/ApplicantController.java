@@ -22,6 +22,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -77,4 +79,12 @@ public class ApplicantController {
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/getAppliedJobs")
+    public ResponseEntity<List<JobDto>> getAppliedJobs(@AuthenticationPrincipal UserDetails userDetails) {
+        List<JobDto> response = applicantService.getAppliedJobs(userDetails.getUsername());
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    
 }
