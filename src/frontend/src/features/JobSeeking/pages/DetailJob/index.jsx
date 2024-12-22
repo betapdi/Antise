@@ -2,12 +2,13 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react';
 import ApplyForm from '../../../../components/Form/applyform';
 import companyApi from '../../../../api/companyApi';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import jobApi from '../../../../api/jobApi';
 import applicantApi from '../../../../api/applicantApi';
 import { UserContext } from '../../../../context/UserContext';
 
 function DetailJob() {
+    const navigate = useNavigate();
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -22,6 +23,10 @@ function DetailJob() {
     useEffect(() => {
         setJobID(params.id);
     }, []);
+
+    const handleViewDetailJob = (job) => {
+        window.location.href = `../detailjob/${job.id}`;
+    };
 
     useEffect(() => {
         const fetchJobById = async (jobID) => {
@@ -452,6 +457,7 @@ function DetailJob() {
                                     <div
                                         key={index}
                                         className="p-4 bg-[#FBFBFF] rounded-lg border border-[#e4e5e8] flex-col justify-start items-start gap-6 flex"
+                                        onClick={() => handleViewDetailJob(job)}
                                     >
                                         <div className="justify-center items-center gap-4 inline-flex">
                                             <img className="rounded-md w-16 h-16" src={"http://172.28.102.169:8080/api/v1" + [company.logoUrl]} alt={`${company.name} logo`} />

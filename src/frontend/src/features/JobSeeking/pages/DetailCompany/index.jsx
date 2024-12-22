@@ -6,7 +6,6 @@ import companyApi from '../../../../api/companyApi';
 
 
 function DetailCompany() {
-    // const [isClicked, setIsClicked] = useState(false);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
     const [company, setCompany] = useState(null);
@@ -58,7 +57,7 @@ function DetailCompany() {
                                     <img className="w-20 h-20 rounded-md" src="https://via.placeholder.com/80x80" />
                                     <div className="flex-col justify-start items-start gap-2.5 inline-flex">
                                         <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">{company.name}</div>
-                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Information Technology (IT)</div>
+                                        <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">{company.industry}</div>
                                     </div>
                                 </div>
                                 <div className="px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex">
@@ -136,8 +135,8 @@ function DetailCompany() {
                                                 <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
                                                     TEAM SIZE:
                                                 </div>
-                                                <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    120-300 Candidates
+                                                <div className="w-60 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
+                                                    {company.size} Candidates
                                                 </div>
                                             </div>
                                         </div>
@@ -152,7 +151,7 @@ function DetailCompany() {
                                                     INDUSTRY TYPES:
                                                 </div>
                                                 <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                                    Technology
+                                                    {company.industry}
                                                 </div>
                                             </div>
                                         </div>

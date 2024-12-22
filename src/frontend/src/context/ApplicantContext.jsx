@@ -3,7 +3,7 @@ import { createContext, useState } from 'react'
 
 export const ApplicantContext = createContext({});
 
-export const ApplicantProvider = ({children}) => {
+export const ApplicantProvider = ({ children }) => {
     //Applicant Data
     const [gender, setGender] = useState(null);
     const [fullName, setFullName] = useState(null);
@@ -38,15 +38,30 @@ export const ApplicantProvider = ({children}) => {
         setFavoriteJobs(null);
     }
 
+    const addFavoriteJob = (job) => {
+        setFavoriteJobs((prevJobs) => {
+            if (!prevJobs.some((favJob) => favJob.id === job.id)) {
+                return [...prevJobs, job];
+            }
+            return prevJobs;
+        });
+    };
+
+    const removeFavoriteJob = (id) => {
+        setFavoriteJobs((prevJobs) => prevJobs.filter((favJob) => favJob.id !== id));
+    };
+
+
+
     return (
-        <ApplicantContext.Provider value = {{
+        <ApplicantContext.Provider value={{
             gender, setGender, fullName, setFullName, profileImageUrl, setProfileImageUrl,
             resumeUrl, setResumeUrl, dateOfBirth, setDateOfBirth,
             experience, setExperience, nationality, setNationality,
             major, setMajor, biography, setBiography, address, setAddress,
             applications, setApplications, education, setEducation,
             workEmail, setWorkEmail, phoneNumber, setPhoneNumber,
-            favoriteJobs, setFavoriteJobs, resetApplicant
+            favoriteJobs, setFavoriteJobs, resetApplicant, removeFavoriteJob, addFavoriteJob
         }}>
             {children}
         </ApplicantContext.Provider>

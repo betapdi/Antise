@@ -7,6 +7,7 @@ import companyApi from '../../../../api/companyApi';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../../../context/UserContext';
 import applicantApi from '../../../../api/applicantApi';
+import { ApplicantContext } from '../../../../context/ApplicantContext';
 
 function HomePage() {
     const [listJob, setListJobs] = useState([]);
@@ -17,6 +18,8 @@ function HomePage() {
     const [currentCompanies, setCurrentCompanies] = useState([]);
     const [logo, setLogo] = useState({});
     const { role } = useContext(UserContext);
+    const { favoriteJobs, setFavoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext)
+    console.log("Favorite Job: ", favoriteJobs);
 
     const calculateRemainingDays = () => {
         const updatedListJobs = [];
@@ -126,13 +129,16 @@ function HomePage() {
         }
     }, [companies]);
 
-    const handleJobClick = (jobId) => { //Favorite job
-        console.log("Job Clicked: ", jobId);
-        setIsClicked((prevState) => ({
-            ...prevState,
-            [jobId]: !prevState[jobId],
-        }));
+    const handleJobFavoriteClick = (jobId) => { //Favorite job
+        setIsClicked((prev) => ({ ...prev, [jobId]: !prev[jobId] }));
     };
+
+    useEffect(() => {
+        favoriteJobs.forEach((job) => {
+            setIsClicked((prev) => ({ ...prev, [job.id]: true }));
+        });
+    }, []);
+
 
     const handleAddFavoriteJob = async (id) => {
         console.log(id);
@@ -140,6 +146,18 @@ function HomePage() {
             const response = await applicantApi.addFavoriteJob(id);
             const job = response.data;
             console.log(job);
+            addFavoriteJob(job);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleRemoveFavoriteJob = async (id) => {
+        try {
+            const response = await applicantApi.removeFavoriteJob(id);
+            const job = response.data;
+            console.log('Remove', job);
+            removeFavoriteJob(job);
         } catch (error) {
             console.log(error);
         }
@@ -292,11 +310,11 @@ function HomePage() {
                                 <div
                                     className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex"
                                     onClick={() => {
-                                        handleJobClick(job.id)
-                                        if (isClicked[job.id]) {
-                                            // handleRemoveFavoriteJob(job.id); // Call remove when it's already bookmarked
+                                        handleJobFavoriteClick(job.id);
+                                        if (!favoriteJobs.some((favJob) => favJob.id === job.id)) {
+                                            handleAddFavoriteJob(job.id); 
                                         } else {
-                                            handleAddFavoriteJob(job.id); // Call add when it's not bookmarked
+                                            handleRemoveFavoriteJob(job.id); 
                                         }
                                     }}
                                 >

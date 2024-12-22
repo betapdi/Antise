@@ -34,7 +34,6 @@ function ListJob({ jobList }) {
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedJobs = jobList.slice(startIndex, startIndex + itemsPerPage);
-
     const totalPages = Math.ceil(jobList.length / itemsPerPage);
 
     useEffect(() => {
