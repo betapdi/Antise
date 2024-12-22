@@ -41,6 +41,10 @@ public class CompanyDto extends UserDto {
 
     private String companyPhoneNumber;
 
+    private String size;
+
+    private String industry;
+
     private List<JobDto> jobList;
 
     private List<ApplicantDto> savedApplicants;
@@ -62,6 +66,8 @@ public class CompanyDto extends UserDto {
         if (company.getYearOfEstablishment() != null) yearOfEstablishment = company.getYearOfEstablishment();
         if (company.getCompanyEmail() != null) companyEmail = company.getCompanyEmail();
         if (company.getCompanyPhoneNumber() != null) companyPhoneNumber = company.getCompanyPhoneNumber();
+        if (company.getSize() != null) size = company.getSize();
+        if (company.getIndustry() != null) industry = company.getIndustry();
 
         if (company.getSavedApplicants() != null) {
             savedApplicants = new ArrayList<>();

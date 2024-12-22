@@ -21,7 +21,7 @@ const WelcomeEmployer = React.lazy(() => import('./features/Welcome/WelcomeEmplo
 
 function App() {
   const {
-    userId, setUserId, email, setEmail, role, setRole,
+    userId, setUserId, email, setEmail, role, setRole, resetUser
   } = useContext(UserContext);
 
   const {
@@ -30,7 +30,8 @@ function App() {
     experience, setExperience, nationality, setNationality,
     major, setMajor, biography, setBiography, address, setAddress, 
     applications, setApplications, education, setEducation,
-    workEmail, setWorkEmail, phoneNumber, setPhoneNumber, resetApplicant
+    workEmail, setWorkEmail, phoneNumber, setPhoneNumber,
+    favoriteJobs, setFavoriteJobs, resetApplicant
   } = useContext(ApplicantContext);
 
   const {
@@ -39,7 +40,8 @@ function App() {
     location, setLocation, organizationType, setOrganizationType,
     companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
     companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
-    yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants, resetCompany
+    yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants, 
+    size, setSize, industry, setIndustry, resetCompany
   } = useContext(CompanyContext);
   
   useEffect(() => {
@@ -68,6 +70,7 @@ function App() {
           setEducation(userData.education);
           setWorkEmail(userData.workEmail);
           setPhoneNumber(userData.phoneNumber);
+          setFavoriteJobs(userData.favoriteJobs);
         }
   
         else {
@@ -85,11 +88,15 @@ function App() {
           setCompanyPhoneNumber(userData.companyPhoneNumber);
           setYearOfEstablishment((userData.yearOfEstablishment != null) ? (userData.yearOfEstablishment).substring(0, 10) : null);
           setSavedApplicants(userData.savedApplicants);
+          setIndustry(userData.industry);
+          setSize(userData.size);
         }
 
       } catch(error) {
         console.log(error);
         setRole("ANONYMOUS");
+
+        resetUser();
         resetApplicant();
         resetCompany();
         localStorage.removeItem("accessToken");

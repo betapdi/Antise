@@ -107,17 +107,26 @@ public class ApplicantService {
 
     public JobDto addFavoriteJob(String jobId, String email) {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException());
-        Job job = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
-        
+        Job favoJob = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
         Applicant applicant = (Applicant)user;
         
         if (applicant.getFavoriteJobs() == null) applicant.setFavoriteJobs(new ArrayList<>());
-        applicant.getFavoriteJobs().add(job);
+        Boolean ok = true;
 
-        userRepository.save(applicant);
+        for (Job job : applicant.getFavoriteJobs()) {
+            if (job.getId().equals(favoJob.getId())) {
+                ok = false;
+                break;
+            }
+        }
+
+        if (ok) {
+            applicant.getFavoriteJobs().add(favoJob);
+            userRepository.save(applicant);
+        }
 
         JobDto response = new JobDto();
-        response.update(job);
+        response.update(favoJob);
 
         return response;
     }
@@ -128,8 +137,8 @@ public class ApplicantService {
         
         Job chosenJob = new Job();
         for (Job job : applicant.getFavoriteJobs()) {
-            if (job.getId() == jobId) {
-                chosenJob = job; 
+            if (job.getId().equals(jobId)) {
+                chosenJob = job;
                 break;
             }
         }

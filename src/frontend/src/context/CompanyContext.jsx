@@ -19,6 +19,9 @@ export const CompanyProvider = ({children}) => {
     const [verified, setVerified] = useState(null);
     const [yearOfEstablishment, setYearOfEstablishment] = useState(null);
     const [savedApplicants, setSavedApplicants] = useState(null);
+    const [size, setSize] = useState(null);
+    const [industry, setIndustry] = useState(null);
+
     const resetCompany = () => {
         setBannerUrl(null);
         setBenefit(null);
@@ -34,6 +37,8 @@ export const CompanyProvider = ({children}) => {
         setVerified(null);
         setYearOfEstablishment(null);
         setSavedApplicants(null);
+        setSize(null);
+        setIndustry(null);
     }
 
     return (
@@ -43,7 +48,8 @@ export const CompanyProvider = ({children}) => {
             location, setLocation, organizationType, setOrganizationType,
             companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
             companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
-            yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants,resetCompany
+            yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants,
+            size, setSize, industry, setIndustry, resetCompany
         }}>
             {children}
         </CompanyContext.Provider>

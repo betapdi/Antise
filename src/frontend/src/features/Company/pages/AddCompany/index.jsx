@@ -55,6 +55,8 @@ function AddCompany() {
             location: "",
             companyPhoneNumber: "",
             companyEmail: "",
+            industry: "",
+            size: "",
           }}
           validationSchema={Yup.object({
             logoImage: Yup.mixed()
@@ -80,6 +82,13 @@ function AddCompany() {
             ),
             yearOfEstablishment: Yup.string().required(
               "Please enter a valid year"
+            ),
+            industry: Yup.string().required(
+              "Please provide your company's industry type"
+            ),
+
+            size: Yup.string().required(
+              "Please select your company size"
             ),
             companyUrl: Yup.string()
               .url("Invalid website URL")
@@ -157,6 +166,30 @@ function AddCompany() {
                     component={DateField}
                     label="Year of Establishment"
                     placeholder="mm/dd/yyyy"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <Field
+                    name="industry"
+                    component={TextField}
+                    label="Industry Type"
+                    placeholder="Industry..."
+                  />
+
+                  <Field
+                    name="size"
+                    component={SelectField}
+                    label="Company Size"
+                    options={[
+                      { key: "Select...", value: "" },
+                      { key: "<100 employees", value: "<100" },
+                      { key: "100-300 employees", value: "100-300" },
+                      { key: "300-500 employees", value: "300-500" },
+                      { key: "500-700 employees", value: "500-700" },
+                      { key: "700-1000 employees", value: "700-1000" },
+                      { key: ">1000 employees", value: ">1000" },
+                    ]}
                   />
                 </div>
 

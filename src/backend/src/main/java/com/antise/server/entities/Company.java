@@ -48,6 +48,10 @@ public class Company extends User {
 
     private String companyPhoneNumber;
 
+    private String size;
+
+    private String industry;
+
     @Builder.Default
     private Boolean verified = false;
 
@@ -69,6 +73,8 @@ public class Company extends User {
         if (dto.getYearOfEstablishment() != null) yearOfEstablishment = dto.getYearOfEstablishment();
         if (dto.getCompanyEmail() != null) companyEmail = dto.getCompanyEmail();
         if (dto.getCompanyPhoneNumber() != null) companyPhoneNumber = dto.getCompanyPhoneNumber();
+        if (dto.getSize() != null) size = dto.getSize();
+        if (dto.getIndustry() != null) industry = dto.getIndustry();
     }
 
     public static Company fromUser(User user) { 

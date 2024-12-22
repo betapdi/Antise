@@ -19,6 +19,7 @@ export const ApplicantProvider = ({children}) => {
     const [workEmail, setWorkEmail] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState(null);
     const [applications, setApplications] = useState(null);
+    const [favoriteJobs, setFavoriteJobs] = useState(null);
     const resetApplicant = () => {
         setGender(null);
         setFullName(null);
@@ -34,6 +35,7 @@ export const ApplicantProvider = ({children}) => {
         setWorkEmail(null);
         setPhoneNumber(null);
         setApplications(null);
+        setFavoriteJobs(null);
     }
 
     return (
@@ -43,7 +45,8 @@ export const ApplicantProvider = ({children}) => {
             experience, setExperience, nationality, setNationality,
             major, setMajor, biography, setBiography, address, setAddress,
             applications, setApplications, education, setEducation,
-            workEmail, setWorkEmail, phoneNumber, setPhoneNumber,resetApplicant
+            workEmail, setWorkEmail, phoneNumber, setPhoneNumber,
+            favoriteJobs, setFavoriteJobs, resetApplicant
         }}>
             {children}
         </ApplicantContext.Provider>

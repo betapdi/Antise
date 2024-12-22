@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext, useState } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, setIn } from "formik";
 import * as Yup from "yup";
 import { CompanyContext } from "../../../../../context/CompanyContext";
 import TextField from "../../../../../customFields/TextField";
@@ -43,6 +43,8 @@ function Settings() {
     setYearOfEstablishment,
     savedApplicants,
     setSavedApplicants,
+    size, setSize,
+    industry, setIndustry
   } = useContext(CompanyContext);
 
   const [isOpenDialog, setIsOpenDialog] = useState(false);
@@ -72,6 +74,8 @@ function Settings() {
       setCompanyPhoneNumber(company.companyPhoneNumber);
       setYearOfEstablishment((company.yearOfEstablishment != null) ? (company.yearOfEstablishment).substring(0, 10) : null);
       setSavedApplicants(company.savedApplicants);
+      setIndustry(company.industry);
+      setSize(company.size);
 
       // Set success dialog
       setDialogContent({
@@ -113,6 +117,8 @@ function Settings() {
             location: "",
             companyPhoneNumber: "",
             companyEmail: "",
+            industry: "",
+            size: "",
           }}
           validationSchema={Yup.object({
             logoImage: Yup.mixed().required(
@@ -135,9 +141,19 @@ function Settings() {
             yearOfEstablishment: Yup.string().required(
               "Please enter your company year of establishment"
             ),
+
             companyUrl: Yup.string().required(
               "Please enter your company website"
             ),
+
+            industry: Yup.string().required(
+              "Please provide your company's industry type"
+            ),
+
+            size: Yup.string().required(
+              "Please select your company size"
+            ),
+
             location: Yup.string().required(
               "Please enter your company location"
             ),
@@ -214,6 +230,7 @@ function Settings() {
                   width="w-1/3"
                   placeholder="Write down about your company here. Let the candidate know who we are..."
                 />
+                
                 <div className="w-full flex flex-row items-center justify-between">
                   <Field
                     name="organizationType"
@@ -245,6 +262,34 @@ function Settings() {
                     imageName="link.svg"
                   />
                 </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <Field
+                    name="industry"
+                    component={TextField}
+                    oldValue = {industry}
+                    label="Industry Type"
+                    placeholder="Industry..."
+                  />
+
+                  <Field
+                    name="size"
+                    component={SelectField}
+                    label="Company Size"
+                    oldValue = {size}
+                    options={[
+                      { key: "Select...", value: "" },
+                      { key: "<100 employees", value: "<100" },
+                      { key: "100-300 employees", value: "100-300" },
+                      { key: "300-500 employees", value: "300-500" },
+                      { key: "500-700 employees", value: "500-700" },
+                      { key: "700-1000 employees", value: "700-1000" },
+                      { key: ">1000 employees", value: ">1000" },
+                    ]}
+                  />
+                </div>
+                
+
                 <h2 className="text-[#18191c] text-lg font-medium leading-7">
                   Contact Information
                 </h2>
