@@ -17,6 +17,7 @@ import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.JobDto;
 import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Application;
+import com.antise.server.entities.Company;
 import com.antise.server.entities.Job;
 import com.antise.server.exceptions.CompanyNotFoundException;
 import com.antise.server.exceptions.JobNotFoundException;
@@ -124,6 +125,19 @@ public class ApplicantService {
         if (ok) {
             applicant.getFavoriteJobs().add(favoJob);
             userRepository.save(applicant);
+        }
+
+        //Add applicant to list of notified of Company
+        User companyUser = userRepository.findById(favoJob.getCompanyId()).orElseThrow(() -> new UserNotFoundException());
+        Company company = (Company)companyUser; Boolean applicantAdded = false;
+
+        for(String applicantId : company.getNotifiedApplicantIds()) {
+            if (applicantId.equals(applicant.getId())) {applicantAdded = true; break;}
+        }
+
+        if (!applicantAdded) {
+            company.getNotifiedApplicantIds().add(applicant.getId());
+            userRepository.save(company);
         }
 
         JobDto response = new JobDto();

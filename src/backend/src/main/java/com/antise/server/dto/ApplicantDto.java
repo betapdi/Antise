@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import com.antise.server.auth.entities.User;
+import com.antise.server.classes.ApplicantNotification;
 import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Application;
 import com.antise.server.entities.Job;
@@ -47,6 +48,8 @@ public class ApplicantDto extends UserDto {
 
     private String phoneNumber;
 
+    private List<ApplicantNotification> notifications;
+
     private List<JobDto> favoriteJobs;
 
     private List<ApplicationDto> applications;
@@ -67,6 +70,7 @@ public class ApplicantDto extends UserDto {
         if (applicant.getEducation() != null) education = applicant.getEducation();
         if (applicant.getWorkEmail() != null) workEmail = applicant.getWorkEmail();
         if (applicant.getPhoneNumber() != null) phoneNumber = applicant.getPhoneNumber();
+        if (applicant.getNotifications() != null) notifications = applicant.getNotifications();
         if (applicant.getFavoriteJobs() != null) {
             favoriteJobs = new ArrayList<>();
 

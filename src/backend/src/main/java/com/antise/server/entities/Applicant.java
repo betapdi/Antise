@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.antise.server.auth.entities.User;
+import com.antise.server.classes.ApplicantNotification;
 import com.antise.server.dto.ApplicantDto;
 
 import lombok.AllArgsConstructor;
@@ -53,6 +54,9 @@ public class Applicant extends User {
     private String workEmail;
 
     private String phoneNumber;
+
+    @Builder.Default
+    private List<ApplicantNotification> notifications = new ArrayList<>();
 
     @DBRef
     @Builder.Default

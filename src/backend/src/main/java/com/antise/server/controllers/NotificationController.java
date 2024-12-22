@@ -28,8 +28,8 @@ public class NotificationController {
         
         private final NotificationService notificationService;
     
-        @GetMapping("/getAll")
-        public ResponseEntity<List<NotificationDto>> getAllNotifications(@RequestParam String param) {
-            return ResponseEntity.ok(notificationService.getAllNotifications());
-        }
+        // @GetMapping("/getAll")
+        // public ResponseEntity<List<NotificationDto>> getAllNotifications(@RequestParam String param) {
+        //     return ResponseEntity.ok(notificationService.getAllNotifications());
+        // }
 }

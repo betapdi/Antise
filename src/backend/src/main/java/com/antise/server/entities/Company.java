@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.antise.server.auth.entities.User;
+import com.antise.server.classes.CompanyNotification;
 import com.antise.server.dto.CompanyDto;
 
 import lombok.AllArgsConstructor;
@@ -55,6 +56,9 @@ public class Company extends User {
     @Builder.Default
     private Boolean verified = false;
 
+    @Builder.Default
+    private List<CompanyNotification> notifications = new ArrayList<>();
+
     @DBRef
     @Builder.Default
     private List<Job> jobList = new ArrayList<>();
@@ -62,6 +66,9 @@ public class Company extends User {
     @DBRef
     @Builder.Default
     private List<Applicant> savedApplicants = new ArrayList<>();
+
+    @Builder.Default
+    private List<String> notifiedApplicantIds = new ArrayList<>();
 
     public void update(CompanyDto dto) {
         if (dto.getName() != null) name = dto.getName();

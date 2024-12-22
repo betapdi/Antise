@@ -21,7 +21,8 @@ const WelcomeEmployer = React.lazy(() => import('./features/Welcome/WelcomeEmplo
 
 function App() {
   const {
-    userId, setUserId, email, setEmail, role, setRole, resetUser
+    userId, setUserId, email, setEmail, role, setRole,
+    notifications, setNotifications, resetUser
   } = useContext(UserContext);
 
   const {
@@ -54,6 +55,7 @@ function App() {
         setUserId(userData.id);
         setEmail(userData.email);
         setRole(userData.role);
+        setNotifications(userData.notifications);
   
         if (userData.role === 'APPLICANT') {
           setGender(userData.gender);
