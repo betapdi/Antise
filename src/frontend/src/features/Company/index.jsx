@@ -22,7 +22,9 @@ const Company = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
   return (
     <div>
+      <div className='sticky top-0 z-50'>
       {isAuthenticated ? <HeaderLogginComany /> : <HeaderUnloggin />}
+      </div>
       <Routes>
         <Route exact path='/' element={<Navigate to="/company/dashboard" replace />} />
         <Route path="/AddCompany" element={<AddCompany />} />

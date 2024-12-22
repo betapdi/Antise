@@ -6,13 +6,14 @@ import MainPage from './pages/Main';
 import HomePage from './pages/HomePage';
 import HeaderUnloggin from '../../components/Header/Unloggin';
 import DetailJob from './pages/DetailJob';
+import DetailCompany from './pages/DetailCompany';
 import ListJob from './pages/ListJob';
 import Dashboard from './pages/Dashboard';
 import UploadCV from '../../components/Form/uploadCV';
 import HeaderLoggin from '../../components/Header/Loggin';
 import ListCompany from './pages/ListCompany';
 const JobSeeking = (props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false); 
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
 
   return (
     <div>
@@ -22,8 +23,10 @@ const JobSeeking = (props) => {
       <Routes>
         <Route exact path='/' element={<Navigate to="/job/homePage" replace />} />
         <Route path="/homePage" element={<HomePage />} />
-        {/* <Route path="/detailjob" element={<DetailJob />} /> */}
         <Route path="/detailjob/:id" element={<DetailJob />} />
+        <Route path="/detailcompany/:id" element={<DetailCompany />} />
+        <Route path="/welcomeEmployee" element={<WelcomeEmployee />} />
+        <Route path="/welcomeEmployer" element={<WelcomeEmployer />} />
         <Route path="/listjob" element={<ListJob isSearch={0} />} />
         <Route path="/listjob/search" element={<ListJob isSearch={1} />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
