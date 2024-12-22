@@ -13,9 +13,8 @@ import HeaderLoggin from '../../components/Header/Loggin';
 import WelcomeEmployee from './pages/Welcome/WelcomeEmployee';
 import WelcomeEmployer from './pages/Welcome/WelcomeEmployer';
 import ListCompany from './pages/ListCompany';
-
 const JobSeeking = (props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false); 
 
   return (
     <div>

@@ -19,6 +19,22 @@ export const ApplicantProvider = ({children}) => {
     const [workEmail, setWorkEmail] = useState(null);
     const [phoneNumber, setPhoneNumber] = useState(null);
     const [applications, setApplications] = useState(null);
+    const resetApplicant = () => {
+        setGender(null);
+        setFullName(null);
+        setProfileImageUrl(null);
+        setResumeUrl(null);
+        setDateOfBirth(null);
+        setExperience(null);
+        setEducation(null);
+        setNationality(null);
+        setMajor(null);
+        setBiography(null);
+        setAddress(null);
+        setWorkEmail(null);
+        setPhoneNumber(null);
+        setApplications(null);
+    }
 
     return (
         <ApplicantContext.Provider value = {{

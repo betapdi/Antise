@@ -8,7 +8,11 @@ export const UserProvider = ({children}) => {
     const [userId, setUserId] = useState(null);
     const [email, setEmail] = useState(null);
     const [role, setRole] = useState(null);
-
+    const resetUser = () => {
+        setUserId(null);
+        setEmail(null);
+        setRole(null);
+    };
     return (
         <UserContext.Provider value = {{
             userId, setUserId, email, setEmail, role, setRole,

@@ -19,6 +19,22 @@ export const CompanyProvider = ({children}) => {
     const [verified, setVerified] = useState(null);
     const [yearOfEstablishment, setYearOfEstablishment] = useState(null);
     const [savedApplicants, setSavedApplicants] = useState(null);
+    const resetCompany = () => {
+        setBannerUrl(null);
+        setBenefit(null);
+        setCompanyEmail(null);
+        setCompanyName(null);
+        setCompanyPhoneNumber(null);
+        setCompanyUrl(null);
+        setDescription(null);
+        setJobList(null);
+        setLocation(null);
+        setLogoUrl(null);
+        setOrganizationType(null);
+        setVerified(null);
+        setYearOfEstablishment(null);
+        setSavedApplicants(null);
+    }
 
     return (
         <CompanyContext.Provider value = {{
