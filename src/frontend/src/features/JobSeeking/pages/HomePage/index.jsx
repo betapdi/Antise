@@ -18,6 +18,10 @@ function HomePage() {
     const [currentCompanies, setCurrentCompanies] = useState([]);
     const [logo, setLogo] = useState({});
     const { role } = useContext(UserContext);
+    const [liveJobCount, setLiveJobCount] = useState(0);
+    const [newJobCount, setNewJobCount] = useState(0);
+    const [companyCount, setCompanyCount] = useState(0);
+    const [candidateCount, setCandidateCount] = useState(0);
     const { favoriteJobs, setFavoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext)
     console.log("Favorite Job: ", favoriteJobs);
 
@@ -129,6 +133,37 @@ function HomePage() {
         }
     }, [companies]);
 
+    useEffect(() => {
+        const fetchCounts = async () => {
+            try {
+                const jobResponse = await jobApi.getAllJobs();
+                const jobs = jobResponse.data;
+                const now = new Date();
+                const liveJobs = jobs.filter(
+                    (job) => new Date(job.expirationDate) > now
+                );
+                setLiveJobCount(liveJobs.length);
+
+                const oneWeekAgo = new Date();
+                oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+                const newJobs = jobs.filter(
+                    (job) => new Date(job.postedDate) >= oneWeekAgo
+                );
+                setNewJobCount(newJobs.length);
+    
+                const companyResponse = await companyApi.getAllCompanies();
+                setCompanyCount(companyResponse.data.length);
+    
+                setCandidateCount(500);
+            } catch (error) {
+                console.error("Error fetching counts:", error);
+            }
+        };
+    
+        fetchCounts();
+    }, []);
+    
+
     const handleJobFavoriteClick = (jobId) => { //Favorite job
         setIsClicked((prev) => ({ ...prev, [jobId]: !prev[jobId] }));
     };
@@ -172,10 +207,10 @@ function HomePage() {
                 </div>
                 <div className="flex flex-row gap-4 mb-20">
                     {[
-                        { number: "1,75,324", text: "Live Job", image: "icon_job.png", hoverImage: "icon_job_hover.png" },
-                        { number: "1,75,324", text: "Companies", image: "icon_company.png", hoverImage: "icon_company_hover.png" },
-                        { number: "1,75,324", text: "Candidates", image: "icon_user.png", hoverImage: "icon_user_hover.png" },
-                        { number: "1,75,324", text: "New Jobs", image: "icon_job.png", hoverImage: "icon_job_hover.png" },
+                        { number: liveJobCount, text: "Live Job", image: "icon_job.png", hoverImage: "icon_job_hover.png" },
+                        { number: companyCount, text: "Companies", image: "icon_company.png", hoverImage: "icon_company_hover.png" },
+                        { number: candidateCount, text: "Candidates", image: "icon_user.png", hoverImage: "icon_user_hover.png" },
+                        { number: newJobCount, text: "New Jobs", image: "icon_job.png", hoverImage: "icon_job_hover.png" },
                     ].map((item, index) => (
                         <div
                             key={index}
