@@ -30,7 +30,7 @@ function App() {
     experience, setExperience, nationality, setNationality,
     major, setMajor, biography, setBiography, address, setAddress, 
     applications, setApplications, education, setEducation,
-    workEmail, setWorkEmail, phoneNumber, setPhoneNumber
+    workEmail, setWorkEmail, phoneNumber, setPhoneNumber, resetApplicant
   } = useContext(ApplicantContext);
 
   const {
@@ -39,7 +39,7 @@ function App() {
     location, setLocation, organizationType, setOrganizationType,
     companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
     companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
-    yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants
+    yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants, resetCompany
   } = useContext(CompanyContext);
   
   useEffect(() => {
@@ -90,6 +90,8 @@ function App() {
       } catch(error) {
         console.log(error);
         setRole("ANONYMOUS");
+        resetApplicant();
+        resetCompany();
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
       }

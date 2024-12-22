@@ -11,9 +11,8 @@ import Dashboard from './pages/Dashboard';
 import UploadCV from '../../components/Form/uploadCV';
 import HeaderLoggin from '../../components/Header/Loggin';
 import ListCompany from './pages/ListCompany';
-
 const JobSeeking = (props) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false); 
 
   return (
     <div>
