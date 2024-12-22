@@ -2,13 +2,13 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react';
 import ApplyForm from '../../../../components/Form/applyform';
 import companyApi from '../../../../api/companyApi';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import jobApi from '../../../../api/jobApi';
 import applicantApi from '../../../../api/applicantApi';
 import { UserContext } from '../../../../context/UserContext';
+import { ApplicantContext } from '../../../../context/ApplicantContext';
 
 function DetailJob() {
-    const navigate = useNavigate();
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -17,6 +17,7 @@ function DetailJob() {
     const [jobID, setJobID] = useState(null);
     const params = useParams();
     const { role } = useContext(UserContext);
+    const { favoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext)
     const itemsPerPage = 6;
 
 
@@ -40,7 +41,16 @@ function DetailJob() {
             }
         };
 
-        if (jobID != null) fetchJobById(jobID);
+        if (jobID != null) {
+            fetchJobById(jobID);
+            if (role === "APPLICANT" && favoriteJobs != null) {
+                if (favoriteJobs.some((job) => job.id === jobID)) {
+                    setIsClicked(true);
+                } else {
+                    setIsClicked(false);
+                }
+            }
+        }
     }, [jobID]);
 
     const handleClose = () => {
@@ -73,12 +83,16 @@ function DetailJob() {
         }
     }, [job])
 
+
+
+
     const handleAddFavoriteJob = async (id) => {
         console.log(id);
         try {
             const response = await applicantApi.addFavoriteJob(id);
             const job = response.data;
             console.log(job);
+            addFavoriteJob(job);
         } catch (error) {
             console.log(error);
         }
@@ -88,11 +102,13 @@ function DetailJob() {
         try {
             const response = await applicantApi.removeFavoriteJob(id);
             const job = response.data;
-            console.log(job);
+            console.log('REMOVE', job);
+            removeFavoriteJob(id);
         } catch (error) {
             console.log(error);
         }
     };
+
 
     return (
         <>

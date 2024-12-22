@@ -22,7 +22,7 @@ function HomePage() {
     const [newJobCount, setNewJobCount] = useState(0);
     const [companyCount, setCompanyCount] = useState(0);
     const [candidateCount, setCandidateCount] = useState(0);
-    const { favoriteJobs, setFavoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext)
+    const { favoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext)
     console.log("Favorite Job: ", favoriteJobs);
 
     const calculateRemainingDays = () => {
@@ -150,19 +150,19 @@ function HomePage() {
                     (job) => new Date(job.postedDate) >= oneWeekAgo
                 );
                 setNewJobCount(newJobs.length);
-    
+
                 const companyResponse = await companyApi.getAllCompanies();
                 setCompanyCount(companyResponse.data.length);
-    
+
                 setCandidateCount(500);
             } catch (error) {
                 console.error("Error fetching counts:", error);
             }
         };
-    
+
         fetchCounts();
     }, []);
-    
+
 
     const handleJobFavoriteClick = (jobId) => { //Favorite job
         setIsClicked((prev) => ({ ...prev, [jobId]: !prev[jobId] }));
@@ -191,8 +191,8 @@ function HomePage() {
         try {
             const response = await applicantApi.removeFavoriteJob(id);
             const job = response.data;
-            console.log('Remove', job);
-            removeFavoriteJob(job);
+            console.log('REMOVE', job);
+            removeFavoriteJob(id);
         } catch (error) {
             console.log(error);
         }
@@ -347,9 +347,9 @@ function HomePage() {
                                     onClick={() => {
                                         handleJobFavoriteClick(job.id);
                                         if (!favoriteJobs.some((favJob) => favJob.id === job.id)) {
-                                            handleAddFavoriteJob(job.id); 
+                                            handleAddFavoriteJob(job.id);
                                         } else {
-                                            handleRemoveFavoriteJob(job.id); 
+                                            handleRemoveFavoriteJob(job.id);
                                         }
                                     }}
                                 >
