@@ -134,9 +134,9 @@ const ApplyForm = ({ isCloseChange, job }) => {
                   <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Cancel</div>
                 </button>
                 <button
-                  type="button" // Use type="button" for custom behavior
-                  onClick={handleClickSubmit} // Trigger Formik's handleSubmit
+                  type="submit" // Use type="button" for custom behavior
                   className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex cursor-pointer"
+                  disabled={isSubmitting}
                 >
                   <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply Now</div>
                   <img
