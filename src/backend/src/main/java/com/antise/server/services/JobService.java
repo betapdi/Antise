@@ -143,19 +143,20 @@ public class JobService {
     public List<JobDto> searchJob(SearchJobRequest searchData) {
         List<Job> jobs = jobRepository.findAll();
         List<Job> filteredJobs = new ArrayList<>();
-        // System.out.println("AAAAAAAAAAAAAAAAA");
-        // System.out.println(searchData.getEducation());
-        // System.out.println(searchData.getExperience());
-        // System.out.println(searchData.getJobType());
-        // System.out.println(searchData.getSearchPattern());
-        // System.out.println(searchData.getMinSalary());
-        // System.out.println(searchData.getMaxSalary());
-
 
         for(Job job : jobs) {
-            if (searchData.getJobType() != null && job.getJobType() != searchData.getJobType()) continue;
-            if (searchData.getEducation() != null && job.getEducation() != searchData.getEducation()) continue;
-            if (searchData.getExperience() != null && job.getExperience() != searchData.getExperience()) continue;
+            if (searchData.getJobType() != null) {
+                if (!searchData.getJobType().equals("All") && !job.getJobType().equals(searchData.getJobType())) continue;
+            } 
+
+            if (searchData.getEducation() != null) {
+                if (!searchData.getEducation().equals("All") && !job.getEducation().equals(searchData.getEducation())) continue;
+            }
+
+            if (searchData.getExperience() != null) {
+                if (!searchData.getExperience().equals("All") && !job.getExperience().equals(searchData.getExperience())) continue;
+            } 
+            
             if (searchData.getSearchPattern() != null) {
                 String jobTitle = (job.getTitle()).toLowerCase();
                 String searchPattern = (searchData.getSearchPattern()).toLowerCase();
@@ -164,8 +165,6 @@ public class JobService {
             }
 
             if (searchData.getMaxSalary() != null && searchData.getMinSalary() != null) {
-                System.out.println(searchData.getMaxSalary());
-                System.out.println(searchData.getMinSalary());
                 if (job.getMaxSalary() >= searchData.getMaxSalary()) {
                     if (job.getMinSalary() > searchData.getMaxSalary()) continue;
                 }

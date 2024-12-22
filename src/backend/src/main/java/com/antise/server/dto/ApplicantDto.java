@@ -71,6 +71,7 @@ public class ApplicantDto extends UserDto {
             favoriteJobs = new ArrayList<>();
 
             for (Job job : applicant.getFavoriteJobs()) {
+                System.out.println(job);
                 JobDto dto = new JobDto();
                 dto.update(job);
 
