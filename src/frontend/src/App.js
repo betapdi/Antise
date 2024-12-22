@@ -92,8 +92,7 @@ function App() {
           setSize(userData.size);
         }
 
-      } catch(error) {
-        console.log(error);
+      } catch(error) {     
         
         resetUser();
         resetApplicant();
