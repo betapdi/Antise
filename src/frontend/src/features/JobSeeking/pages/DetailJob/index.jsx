@@ -487,7 +487,7 @@ function DetailJob() {
                                             <img className="rounded-md w-16 h-16" src={"http://172.28.102.169:8080/api/v1" + [company.logoUrl]} alt={`${company.name} logo`} />
                                             <div className="flex-col justify-start items-start gap-1.5 inline-flex">
                                                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">
-                                                    {job.companyName}
+                                                    {company.name}
                                                 </div>
                                                 <div className="justify-start items-center gap-1.5 inline-flex">
                                                     <div className="w-[18px] h-[18px] relative">
