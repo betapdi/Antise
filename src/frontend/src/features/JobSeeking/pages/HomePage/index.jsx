@@ -169,9 +169,11 @@ function HomePage() {
     };
 
     useEffect(() => {
-        favoriteJobs.forEach((job) => {
-            setIsClicked((prev) => ({ ...prev, [job.id]: true }));
-        });
+        if (favoriteJobs != null) {
+            favoriteJobs.forEach((job) => {
+                setIsClicked((prev) => ({ ...prev, [job.id]: true }));
+            });
+        }
     }, []);
 
 
