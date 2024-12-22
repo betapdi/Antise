@@ -19,7 +19,9 @@ const JobSeeking = (props) => {
 
   return (
     <div>
-      {isAuthenticated ? <HeaderLoggin /> : <HeaderUnloggin />}
+      <div className="sticky top-0 z-50">
+        {isAuthenticated ? <HeaderLoggin /> : <HeaderUnloggin />}
+      </div>
       <Routes>
         <Route exact path='/' element={<Navigate to="/job/homePage" replace />} />
         <Route path="/homePage" element={<HomePage />} />
@@ -39,3 +41,4 @@ const JobSeeking = (props) => {
 };
 
 export default JobSeeking;
+

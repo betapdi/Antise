@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState, useEffect, useContext} from 'react';
-import FilterTable from './filter'; 
+import { useState, useEffect, useContext } from 'react';
+import FilterTable from './filter';
 import jobApi from '../../../../api/jobApi.js';
 import companyApi from '../../../../api/companyApi.js';
 import { useSearchParams } from "react-router-dom";
@@ -8,7 +8,25 @@ import { useSearchParams } from "react-router-dom";
 
 
 
-function ListJob({isSearch}) {
+function ListJob({ isSearch }) {
+    // Pagination
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5; // Number of jobs to display per page
+
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [jobs, setJobs] = useState([]);
     const [remainingDays, setRemainingDays] = useState([]);
@@ -23,7 +41,7 @@ function ListJob({isSearch}) {
         JobType: null,
         Education: null,
     });
-    const [sortOption, setSortOption] = useState("latest"); 
+    const [sortOption, setSortOption] = useState("latest");
     // Handle sorting
     const handleSortChange = (e) => {
         const selectedOption = e.target.value;
@@ -38,46 +56,50 @@ function ListJob({isSearch}) {
         setJobs(sortedJobs);
     };
 
-   
- 
-    useEffect(()  => {
-        const search = async () => {
-                let minSalary = null;
-                let maxSalary = null;
 
-                if (filters.Salary) {
-                    const salaryRange = filters.Salary.split("-"); 
-                    if (salaryRange.length === 2) {
-                        minSalary = parseInt(salaryRange[0]);
-                        maxSalary = parseInt(salaryRange[1]);
-                    }else{
-                        minSalary = parseInt(salaryRange[0]);
-                        maxSalary = parseInt("10000000000000");
-                    }
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedJobs = jobs.slice(startIndex, startIndex + itemsPerPage);
+
+    const totalPages = Math.ceil(jobs.length / itemsPerPage);
+
+    useEffect(() => {
+        const search = async () => {
+            let minSalary = null;
+            let maxSalary = null;
+
+            if (filters.Salary) {
+                const salaryRange = filters.Salary.split("-");
+                if (salaryRange.length === 2) {
+                    minSalary = parseInt(salaryRange[0]);
+                    maxSalary = parseInt(salaryRange[1]);
+                } else {
+                    minSalary = parseInt(salaryRange[0]);
+                    maxSalary = parseInt("10000000000000");
                 }
-                const searchData = {
-                    experience: filters.Experience,
-                    minSalary: minSalary,
-                    maxSalary: maxSalary,
-                    jobType: filters.JobType,
-                    education: filters.Education,
-                    searchPattern: searchQuery,                  
-                };
-                try {
-                    console.log(searchData);
-                    const response = await jobApi.searchJob(searchData);
-                    console.log("Search Jobs: ", response.data);
-                    setJobs(response.data);  
-                } catch (error) {
-                    console.error("Error searching jobs:", error);
-                }
+            }
+            const searchData = {
+                experience: filters.Experience,
+                minSalary: minSalary,
+                maxSalary: maxSalary,
+                jobType: filters.JobType,
+                education: filters.Education,
+                searchPattern: searchQuery,
+            };
+            try {
+                console.log(searchData);
+                const response = await jobApi.searchJob(searchData);
+                console.log("Search Jobs: ", response.data);
+                setJobs(response.data);
+            } catch (error) {
+                console.error("Error searching jobs:", error);
+            }
         }
         search();
-    }, [searchQuery,filters]);
+    }, [searchQuery, filters]);
     const calculateRemainingDays = () => {
         const updatedListJobs = [];
         const remainingDaysList = [];
-        let check  = false;
+        let check = false;
         for (let i = 0; i < jobs.length; i++) {
             const targetDateString = jobs[i].expirationDate;
             const targetDate = new Date(targetDateString);
@@ -87,7 +109,7 @@ function ListJob({isSearch}) {
             if (daysLeft > 0) {
                 updatedListJobs.push(jobs[i]);
                 remainingDaysList.push(daysLeft);
-            }else{
+            } else {
                 check = true;
             }
         }
@@ -131,23 +153,23 @@ function ListJob({isSearch}) {
             }
         }
         fetchCompanies();
-    },[]);
+    }, []);
     useEffect(() => {
-        if (companies.length > 0) {                   
-                const idToLogoMap = {}
-                for (const company of companies) {
-                    console.log("Company: ", company.id, " id: ", company.logoUrl);
-                    if (company.id && company.logoUrl) {
-                        idToLogoMap[company.id] = company.logoUrl;
-                    }
+        if (companies.length > 0) {
+            const idToLogoMap = {}
+            for (const company of companies) {
+                console.log("Company: ", company.id, " id: ", company.logoUrl);
+                if (company.id && company.logoUrl) {
+                    idToLogoMap[company.id] = company.logoUrl;
                 }
-                setLogo(idToLogoMap); 
+            }
+            setLogo(idToLogoMap);
         }
-    },[companies]);
+    }, [companies]);
     // Callback function to handle filter data
     const handleFilterChange = (newFilters) => {
-        setFilters(newFilters); 
-        setIsFilterOpen(false); 
+        setFilters(newFilters);
+        setIsFilterOpen(false);
     };
 
     const handleClose = () => {
@@ -155,42 +177,41 @@ function ListJob({isSearch}) {
     };
 
     return (
-    <div className={`flex flex-col gap-12 justify-center items-center w-full py-16`}>    
-        <div
-            className={`flex flex-row h-12 mb-8 ${
-            isSearch === 1 ? "gap-[55rem]" : "gap-[44rem]"
-        }`}
-        >
-        {isSearch === 1 ? (
-                <button className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex"
-                onClick={() =>{ setIsFilterOpen(!isFilterOpen);}}>
-                    <div className="w-6 h-6 justify-center items-center flex">
-                        <img src={`/image/icon_filter.png`} alt="icon_filter" className="w-6 h-6" />
-                    </div>
-                    <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
-                        Filter
-                    </div>
-                </button>
-            ) : (
-                <div className="text-center text-[#181f33] text-[40px] font-medium font-['Inter'] leading-[48px]">Featured job</div>
-        )}
-            <select id="sort" class="bg-white border border-gray/100 text-black rounded-lg p-2"
+        <div className={`flex flex-col gap-12 justify-center items-center w-full py-16`}>
+            <div
+                className={`flex flex-row h-12 mb-8 ${isSearch === 1 ? "gap-[55rem]" : "gap-[44rem]"
+                    }`}
+            >
+                {isSearch === 1 ? (
+                    <button className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex"
+                        onClick={() => { setIsFilterOpen(!isFilterOpen); }}>
+                        <div className="w-6 h-6 justify-center items-center flex">
+                            <img src={`/image/icon_filter.png`} alt="icon_filter" className="w-6 h-6" />
+                        </div>
+                        <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
+                            Filter
+                        </div>
+                    </button>
+                ) : (
+                    <div className="text-center text-[#181f33] text-[40px] font-medium font-['Inter'] leading-[48px]">Featured job</div>
+                )}
+                <select id="sort" class="bg-white border border-gray/100 text-black rounded-lg p-2"
                     value={sortOption}
                     onChange={handleSortChange}
-            >
-                <option value="latest">Latest</option>
-                <option value="Popular">Popular</option>
-            </select>
-        </div>
+                >
+                    <option value="latest">Latest</option>
+                    <option value="Popular">Popular</option>
+                </select>
+            </div>
             {/* Job List */}
-        <div className='flex flex-col gap-3 items-start justify-start flex-grow h-full'>
-                {jobs.map((job, index) => (
+            <div className='flex flex-col gap-3 items-start justify-start flex-grow h-full'>
+                {paginatedJobs.map((job, index) => (
                     <div
-                    key={index}
-                    className="w-[1100px] h-[132px] p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-4 transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
+                        key={index}
+                        className="w-[1100px] h-[132px] p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-4 transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
                     >
                         <div className="justify-start items-start gap-5 flex">
-                            <img src={"http://172.28.102.169:8080/api/v1"+ logo[job.companyId]} alt="job_icon" className="w-16 h-16" />
+                            <img src={"http://172.28.102.169:8080/api/v1" + logo[job.companyId]} alt="job_icon" className="w-16 h-16" />
                             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
@@ -221,59 +242,73 @@ function ListJob({isSearch}) {
                             <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                             hover:bg-[#0a65cc] hover:text-white group">
                                 <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
-                                Apply Now
+                                    Apply Now
                                 </div>
-                                <img 
-                                    src={`/image/arrow_right.png`} 
-                                    alt="arrow_right" 
+                                <img
+                                    src={`/image/arrow_right.png`}
+                                    alt="arrow_right"
                                     className="h-4 group-hover:hidden"
                                 />
-                                <img 
-                                    src={`/image/arrow_right_hover.png`} 
-                                    alt="arrow_right_hover" 
+                                <img
+                                    src={`/image/arrow_right_hover.png`}
+                                    alt="arrow_right_hover"
                                     className="h-4 hidden group-hover:block"
                                 />
                             </div>
                         </div>
                     </div>
                 ))}
-        </div>
-        <div className="h-12 justify-center items-center gap-2 inline-flex">
-                <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex">
-                    <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
-                </div>
-                <div className="justify-start items-start flex">
-                    <div className="w-12 h-12 px-2 py-3.5 bg-[#0a65cc] rounded-[50px] justify-center items-center flex ml-2">
-                        <div className="text-center text-white text-sm font-medium font-['Inter'] leading-tight">01</div>
-                    </div>
-                    <div className="w-12 h-12 px-2 py-3.5 rounded-[50px] justify-center items-center flex">
-                        <div className="text-center text-[#5e6670] text-sm font-medium font-['Inter'] leading-tight">02</div>
-                    </div>
-                    <div className="w-12 h-12 px-2 py-3.5 rounded-[50px] justify-center items-center flex">
-                        <div className="text-center text-[#5e6670] text-sm font-medium font-['Inter'] leading-tight">03</div>
-                    </div>
-                    <div className="w-12 h-12 px-2 py-3.5 rounded-[50px] justify-center items-center flex">
-                        <div className="text-center text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">04</div>
-                    </div>
-                    <div className="w-12 h-12 px-2 py-3.5 rounded-[50px] justify-center items-center flex mr-1">
-                        <div className="text-center text-[#5e6670] text-sm font-medium font-['Inter'] leading-tight">05</div>
-                    </div>
-                </div>
-                <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex">
-                    <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
-                </div>
-        </div>
-        {/* Filter Modal */}
-        {isFilterOpen && (
-            <div className="w-full fixed inset-0 z-30 flex justify-center items-center bg-black bg-opacity-50">
-                <div className="max-h-screen w-2/3 flex justify-center overflow-y-auto bg-white rounded-lg shadow-lg">
-                    <FilterTable onFilterChange={handleFilterChange} isCloseChange={handleClose} filters={filters}/>
-                </div>
             </div>
-                          
-        )}
-    </div>
-  )
+            <div className="h-12 justify-center items-center gap-2 inline-flex">
+                {/* Previous Button */}
+                <button
+                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                    onClick={handlePreviousPage}
+                    disabled={currentPage === 1}
+                >
+                    <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
+                </button>
+
+                {/* Page Numbers */}
+                {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
+                    const startPage = Math.max(1, currentPage - 2); // Ensure startPage is at least 1
+                    const endPage = Math.min(totalPages, currentPage + 2); // Ensure endPage does not exceed totalPages
+                    const displayPage = startPage + index; // Compute the actual page to display
+
+                    if (displayPage > totalPages) return null; // Prevent rendering out-of-bounds pages
+
+                    return (
+                        <button
+                            key={displayPage}
+                            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
+                                }`}
+                            onClick={() => setCurrentPage(displayPage)}
+                        >
+                            {displayPage}
+                        </button>
+                    );
+                })}
+
+                {/* Next Button */}
+                <button
+                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                >
+                    <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
+                </button>
+            </div>
+            {/* Filter Modal */}
+            {isFilterOpen && (
+                <div className="w-full fixed inset-0 z-30 flex justify-center items-center bg-black bg-opacity-50">
+                    <div className="max-h-screen w-2/3 flex justify-center overflow-y-auto bg-white rounded-lg shadow-lg">
+                        <FilterTable onFilterChange={handleFilterChange} isCloseChange={handleClose} filters={filters} />
+                    </div>
+                </div>
+
+            )}
+        </div>
+    )
 }
 
 export default ListJob
