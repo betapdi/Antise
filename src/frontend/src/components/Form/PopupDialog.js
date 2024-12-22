@@ -6,9 +6,9 @@ const PopupDialog = (props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    props.handleClose();
     navigate(props.content.link);
   }
-
   return (
     <Dialog open = {props.isOpen} onClose = {props.handleClose}>
       <DialogTitle className="text-center bg-blue/20">
