@@ -16,6 +16,7 @@ import ListCompany from './pages/ListCompany';
 import WelcomeEmployee from '../Welcome/WelcomeEmployee';
 import WelcomeEmployer from '../Welcome/WelcomeEmployer';
 import {UserContext} from '../../context/UserContext';
+import Error from '../../components/Error';
 const JobSeeking = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
   const {
@@ -61,7 +62,7 @@ const JobSeeking = (props) => {
           }
         />
 
-        <Route path="*" element={<p>NONE</p>} />
+        <Route path="*" element={<Error/>} />
       </Routes>
     </div>
   );
