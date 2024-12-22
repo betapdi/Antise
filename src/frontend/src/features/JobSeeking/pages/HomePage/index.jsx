@@ -22,8 +22,7 @@ function HomePage() {
   const [newJobCount, setNewJobCount] = useState(0);
   const [companyCount, setCompanyCount] = useState(0);
   const [candidateCount, setCandidateCount] = useState(0);
-  const { favoriteJobs, removeFavoriteJob, addFavoriteJob } =
-    useContext(ApplicantContext);
+  const { favoriteJobs, removeFavoriteJob, addFavoriteJob } =useContext(ApplicantContext);
   console.log("Favorite Job: ", favoriteJobs);
 
   const calculateRemainingDays = () => {
@@ -163,7 +162,6 @@ function HomePage() {
   }, []);
 
   const handleJobFavoriteClick = (jobId) => {
-    //Favorite job
     setIsClicked((prev) => ({ ...prev, [jobId]: !prev[jobId] }));
   };
 

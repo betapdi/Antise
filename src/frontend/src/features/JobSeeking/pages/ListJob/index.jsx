@@ -5,6 +5,8 @@ import jobApi from '../../../../api/jobApi.js';
 import companyApi from '../../../../api/companyApi.js';
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { UserContext } from '../../../../context/UserContext';
+import { ApplicantContext } from '../../../../context/ApplicantContext';
+import applicantApi from '../../../../api/applicantApi';
 
 
 
@@ -90,7 +92,7 @@ function ListJob({ isSearch }) {
                 maxSalary: maxSalary,
                 jobType: filters.JobType,
                 education: filters.Education,
-                searchPattern : searchQuery !== "" ? searchQuery : null
+                searchPattern: searchQuery !== "" ? searchQuery : null
             };
             console.log(searchData);
             try {
@@ -184,6 +186,43 @@ function ListJob({ isSearch }) {
         setIsFilterOpen(false);
     };
 
+    const { favoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext);
+    const [isClicked, setIsClicked] = useState({});
+    const handleJobFavoriteClick = (jobId) => {
+        setIsClicked((prev) => ({ ...prev, [jobId]: !prev[jobId] }));
+    };
+
+    useEffect(() => {
+        if (favoriteJobs != null) {
+            favoriteJobs.forEach((job) => {
+                setIsClicked((prev) => ({ ...prev, [job.id]: true }));
+            });
+        }
+    }, []);
+
+    const handleAddFavoriteJob = async (id) => {
+        console.log(id);
+        try {
+            const response = await applicantApi.addFavoriteJob(id);
+            const job = response.data;
+            console.log(job);
+            addFavoriteJob(job);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleRemoveFavoriteJob = async (id) => {
+        try {
+            const response = await applicantApi.removeFavoriteJob(id);
+            const job = response.data;
+            console.log("REMOVE", job);
+            removeFavoriteJob(id);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <div className={`flex flex-col gap-12 justify-center items-center w-full py-16`}>
             <div
@@ -245,9 +284,34 @@ function ListJob({ isSearch }) {
                         </div>
                         <div className="justify-start items-start gap-3 flex">
                             <>
-                                {role === "applicant" && (
+                                {/* {role === "APPLICANT" && (
                                     <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-                                        <img src={`/image/bookmark.png`} alt="icon_star" className="w-4 h-4" />
+                                        src={`/image/${isClicked ? 'bookmark_click.png' : 'bookmark.png'}`}
+                                    </div>
+                                )} */}
+                                {role === "APPLICANT" && (
+                                    <div
+                                        className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex"
+                                        onClick={() => {
+                                            handleJobFavoriteClick(job.id);
+                                            if (!favoriteJobs.some((favJob) => favJob.id === job.id)) {
+                                                handleAddFavoriteJob(job.id);
+                                            } else {
+                                                handleRemoveFavoriteJob(job.id);
+                                            }
+                                        }}
+                                    >
+                                        <div className="w-6 h-6 justify-center items-center flex">
+                                            <div className="w-6 h-6 relative">
+                                                <img
+                                                    src={`/image/${isClicked[job.id]
+                                                        ? "bookmark_click.png"
+                                                        : "bookmark.png"
+                                                        }`}
+                                                    alt="icon"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </>
