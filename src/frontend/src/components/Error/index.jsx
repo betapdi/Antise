@@ -1,50 +1,60 @@
 import React from "react";
 
 function Error() {
-    const handleLoginClick = () => {
+  const handleLoginClick = () => {
     window.location.href = "auth/login";
-    };
-    return (
-        <div className="w-full h-screen justify-center items-center flex flex-row m-7">
-        <div className="h-52 flex-col justify-center items-start gap-8 flex">
-            <div className="flex-col justify-start items-start gap-6 flex">
+  };
+  const handleHomeClick = () => {
+    window.location.href = "/job/homePage";
+  };
+  return (
+    <div className="w-full flex justify-center items-center">
+      <div className="w-[72rem] flex flex-row justify-center items-center">
+        <div className="w-full flex flex-col justify-center items-start gap-8 ml-24">
+          <div className="flex flex-col justify-start items-start gap-6">
             <div className="text-[#18191c] text-[40px] font-medium font-['Inter'] leading-[48px]">
-                Opps! Page not found
+              Opps! Page not found
             </div>
             <div className="w-full text-[#474c54] text-lg font-normal font-['Inter'] leading-7">
-                Something went wrong. You cannot access to this page.
+              Something went wrong. You cannot access this page.
             </div>
-            </div>
-            <div className="justify-start items-start gap-4 inline-flex">
-            <button className="px-6 py-3 bg-[#0a65cc] rounded-sm justify-center items-center gap-3 flex">
-                <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
+          </div>
+          <div className="flex justify-start items-start gap-4">
+            <button
+              className="px-6 py-3 bg-[#0a65cc] rounded-sm flex justify-center items-center gap-3"
+              onClick={() => {
+                handleHomeClick();
+              }}
+            >
+              <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                 Home
-                </div>
-                <img
+              </div>
+              <img
                 src={"/image/arrow_right_hover.png"}
                 alt="arrow_right"
                 className="h-4"
-                />
+              />
             </button>
-            <button className="px-6 py-3 rounded-sm border-2 border-[#e7f0fa] justify-center items-center gap-3 flex">
-                <div
+            <button className="px-6 py-3 rounded-sm border-2 border-[#e7f0fa] flex justify-center items-center gap-3">
+              <div
                 className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal"
                 onClick={() => {
-                    handleLoginClick();
+                  handleLoginClick();
                 }}
-                >
+              >
                 Login
-                </div>
+              </div>
             </button>
-            </div>
+          </div>
         </div>
         <img
-            src="image/illustration.png"
-            alt="illustration"
-            className="max-w-screen-lg"
+          src="/image/error.png"
+          alt="illustration"
+          className="w-[60%] h-[60%] object-cover"
         />
-        </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default Error;

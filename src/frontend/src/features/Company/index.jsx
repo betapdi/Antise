@@ -16,6 +16,7 @@ import HeaderUnloggin from '../../components/Header/Unloggin';
 import CompanySetupSuccess from './pages/SuccessPage/companysetupsuccess';
 import ApplyForm from '../../components/Form/applyform';
 import {UserContext} from '../../context/UserContext';
+import Error from '../../components/Error';
 
 
 const Company = (props) => {
@@ -42,7 +43,7 @@ const Company = (props) => {
         <Route path="/SuccessCompanyUpload" element={<SuccessCompanyUpload />} />
         <Route path="/CompanySetupSuccess" element={<CompanySetupSuccess />} />
         <Route path="/postjobsuccess" element={<PostJobSuccess />} />
-        <Route path="*" element={<p>NONE</p>} />
+        <Route path="*" element={<Error/>} />
       </Routes>
     </div>
   )
