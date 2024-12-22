@@ -3,13 +3,13 @@ import { useState,useEffect } from 'react';
 
 const experienceLevels = [
     { id: "freshers", value: "freshers", label: "Freshers" },
-    { id: "1-2", value: "1-2", label: "1 - 2 Years" },
-    { id: "2-4", value: "2-4", label: "2 - 4 Years" },
-    { id: "4-6", value: "4-6", label: "4 - 6 Years" },
-    { id: "6-8", value: "6-8", label: "6 - 8 Years" },
-    { id: "8-10", value: "8-10", label: "8 - 10 Years" },
-    { id: "10-15", value: "10-15", label: "10 - 15 Years" },
-    { id: "15+", value: "15+", label: "15+ Years" },
+    { id: "1-2", value: "1 - 2 Years", label: "1 - 2 Years" },
+    { id: "2-4", value: "2 - 4 Years", label: "2 - 4 Years" },
+    { id: "4-6", value: "4 - 6 Years", label: "4 - 6 Years" },
+    { id: "6-8", value: "6 - 8 Years", label: "6 - 8 Years" },
+    { id: "8-10", value: "8 - 10 Years", label: "8 - 10 Years" },
+    { id: "10-15", value: "10 - 15 Years", label: "10 - 15 Years" },
+    { id: "15+", value: "15+ Years", label: "15+ Years" },
 ];
 const salary = [
     { id: "freshers", value: "50 - 1000", label: "$50 - $1000" },

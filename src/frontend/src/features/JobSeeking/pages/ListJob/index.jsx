@@ -83,8 +83,9 @@ function ListJob({ isSearch }) {
                 maxSalary: maxSalary,
                 jobType: filters.JobType,
                 education: filters.Education,
-                searchPattern: searchQuery,
+                searchPattern : searchQuery !== "" ? searchQuery : null
             };
+            console.log(searchData);
             try {
                 console.log(searchData);
                 const response = await jobApi.searchJob(searchData);

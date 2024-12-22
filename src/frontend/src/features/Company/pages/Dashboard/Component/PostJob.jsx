@@ -131,9 +131,10 @@ const PostJob = () => {
                       options={[
                         { key: "Select...", value: "" },
                         { key: "High School", value: "HighSchool" },
-                        { key: "Bachelor", value: "Bachelor" },
-                        { key: "Master", value: "Master" },
-                        { key: "PhD", value: "PhD" },
+                        { key: "Intermediate", value: "Intermediate"},
+                        { key: "Graduation", value: "Graduation"},
+                        { key: "Bachelor Degree", value: "Bachelor Degree" },
+                        { key: "Master Degree", value: "Master Degree" },
                       ]}
                     />
                     <Field
