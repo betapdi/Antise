@@ -68,7 +68,7 @@ function HomePage() {
     };
 
     const handleViewDetailCompany = (company) => {
-        navigate(`/job/detailjob/${company.id}`);
+        navigate(`/job/detailcompany/${company.id}`);
     };
 
     useEffect(() => {
