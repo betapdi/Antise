@@ -94,11 +94,12 @@ function App() {
 
       } catch(error) {
         console.log(error);
-        setRole("ANONYMOUS");
-
+        
         resetUser();
         resetApplicant();
         resetCompany();
+        
+        setRole("ANONYMOUS");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
       }
