@@ -335,15 +335,15 @@ function HomePage() {
           >
             View All
             <img
-                  src={"/image/arrow_right.png"}
-                  alt="arrow_right"
-                  className="h-4 group-hover:hidden"
-                />
-                <img
-                  src={"/image/arrow_right_hover.png"}
-                  alt="arrow_right_hover"
-                  className="h-4 hidden group-hover:block"
-                />
+              src={"/image/arrow_right.png"}
+              alt="arrow_right"
+              className="h-4 group-hover:hidden"
+            />
+            <img
+              src={"/image/arrow_right_hover.png"}
+              alt="arrow_right_hover"
+              className="h-4 hidden group-hover:block"
+            />
           </button>
         </div>
       </div>
@@ -500,10 +500,7 @@ function HomePage() {
       <div className="flex justify-center items-center w-full py-16">
         <div className="grid grid-cols-4 grid-rows-2 gap-2">
           {currentCompanies.map((company, index) => (
-            <div
-              key={index}
-              className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
-            >
+            <div className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]">
               <div className="justify-start items-start gap-4 inline-flex">
                 <img
                   src={"http://172.28.102.169:8080/api/v1" + company.logoUrl}
@@ -515,13 +512,6 @@ function HomePage() {
                     <div className="text-[#181f33] text-lg font-medium font-['Inter'] leading-7">
                       {company.name}
                     </div>
-                    {index === 0 && (
-                      <div className="px-3 py-[3px] bg-[#fceeee] rounded-[52px] justify-start items-start gap-2.5 flex">
-                        <div className="text-[#e05050] text-sm font-normal font-['Inter'] leading-tight">
-                          Featured
-                        </div>
-                      </div>
-                    )}
                   </div>
                   <div className="justify-start items-center gap-1.5 inline-flex">
                     <img
@@ -535,19 +525,19 @@ function HomePage() {
                   </div>
                 </div>
               </div>
-              <div
+              <button
                 className="w-[248px] px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex  hover:bg-[#0a65cc] hover:text-white group"
                 onClick={() => handleViewDetailCompany(company)}
               >
                 <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal group-hover:text-white">
                   Open Position
                 </div>
-              </div>
+              </button>
             </div>
           ))}
         </div>
       </div>
-      {/* <div className="flex flex-row justify-center gap-16 py-16">
+      <div className="flex flex-row justify-center gap-16 py-16">
         <div className="h-[20rem] p-7 bg-[#e4e5e8] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
           <div className="flex-col justify-start items-start gap-4 flex">
             <div className="w-[500px] text-[#181f33] text-[32px] font-medium font-['Inter'] leading-10">
@@ -608,7 +598,7 @@ function HomePage() {
             />
           </button>
         </div>
-      </div> */}
+      </div>
       <Footer />
     </div>
   );

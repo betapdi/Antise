@@ -120,7 +120,7 @@ function DetailCompany() {
                                                 <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
                                                     ORGANIZATION TYPE:
                                                 </div>
-                                                <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
+                                                <div className="w-60 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
                                                     {company.organizationType}
                                                 </div>
                                             </div>
@@ -135,7 +135,7 @@ function DetailCompany() {
                                                 <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
                                                     TEAM SIZE:
                                                 </div>
-                                                <div className="w-60 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
+                                                <div className="w-80 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
                                                     {company.size} Candidates
                                                 </div>
                                             </div>
@@ -150,7 +150,7 @@ function DetailCompany() {
                                                 <div className="w-36 text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">
                                                     INDUSTRY TYPES:
                                                 </div>
-                                                <div className="w-36 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
+                                                <div className="w-100 text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
                                                     {company.industry}
                                                 </div>
                                             </div>
