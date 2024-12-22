@@ -1,106 +1,16 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { ApplicantContext } from "../../../../../context/ApplicantContext";
+import jobApi from "../../../../../api/jobApi";
+import applicantApi from "../../../../../api/applicantApi";
 
-const jobs = [
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 3, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 4, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 5, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 6, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 7, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 8, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 9, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 10, 2019 19:28",
-    },
-];
 
 function ListJob({ jobs, numberOfJobs }) {
+    const navigate = useNavigate();
+    const handleSettingCompany = (company) => {
+        navigate(`/job/dashboard/settings`);
+    };
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
             {/*Display how many job are there, for example, display Favorite Job (13) */}
@@ -147,10 +57,12 @@ function ListJob({ jobs, numberOfJobs }) {
                         <div className="text-white text-sm font-normal font-['Inter'] leading-tight">Complete your profile editing & build your custom Resume</div>
                     </div>
                 </div>
-                <div className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 flex">
-                    <div className="text-[#e05050] text-base font-semibold font-['Inter'] capitalize leading-normal">Edit Profile</div>
+                <button className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 flex">
+                    <div className="text-[#e05050] text-base font-semibold font-['Inter'] capitalize leading-normal"
+                        onClick={() => handleSettingCompany()}
+                    >Edit Profile</div>
                     <img src={`/image/fi_arrow-right.png`} alt="icon_star" className="w-8 h-8" />
-                </div>
+                </button>
             </div>
             <div className="w-full h-6 justify-between items-center inline-flex">
                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Recently Applied</div>
@@ -217,7 +129,6 @@ function ListJob({ jobs, numberOfJobs }) {
 
 
 const AppliedJobs = () => {
-
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // Number of jobs to display per page
@@ -235,15 +146,59 @@ const AppliedJobs = () => {
         }
     };
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedJobs = jobs.slice(startIndex, startIndex + itemsPerPage);
+    // const { applications, favoriteJobs } = useContext(ApplicantContext);
+    // const [jobIDs, setJobIDs] = useState([]);
+    // const [jobs, setJobs] = useState([]);
+    // const [isClicked, setIsClicked] = useState(false);
 
-    const totalPages = Math.ceil(jobs.length / itemsPerPage);
+    // useEffect(() => {
+    //     const fetchJobs = async () => {
+    //         try {
+    //             // Fetch job details for each jobId
+    //             const jobPromises = jobIDs.map((jobID) => jobApi.getJob(jobID));
+    //             const jobResponses = await Promise.all(jobPromises);
+    //             const jobData = jobResponses.map((response) => response.data);
+    //             setJobs(jobData);
+
+    //             // Check if any of the jobs are in favoriteJobs
+    //             const isAnyJobFavorite = jobIDs.some((jobID) =>
+    //                 favoriteJobs.some((job) => job.id === jobID)
+    //             );
+    //             setIsClicked(isAnyJobFavorite);
+    //         } catch (error) {
+    //             console.error('Error fetching job data:', error);
+    //         }
+    //     };
+
+    //     if (jobIDs && jobIDs.length > 0) {
+    //         fetchJobs();
+    //     }
+    // }, [jobIDs, favoriteJobs]);
+
+    const [appliedJobs, setAppliedJob] = useState([]);
+    useEffect(() => {
+        const fetchAppliedJob = async () => {
+            try {
+                const response = await applicantApi.getAppliedJob();
+                console.log("Fetch Applied Jobs: ", response.data);
+                setAppliedJob(response.data);
+            } catch (error) {
+                console.log("Failed to fetch companies: ", error);
+            }
+        };
+        fetchAppliedJob();
+    }, []);
+
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedJobs = appliedJobs.slice(startIndex, startIndex + itemsPerPage);
+
+    const totalPages = Math.ceil(appliedJobs.length / itemsPerPage);
 
     return (
         <div>
             <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
-                <ListJob jobs={paginatedJobs} numberOfJobs={jobs.length} />
+                <ListJob jobs={paginatedJobs} numberOfJobs={appliedJobs.length} />
             </div>
             <div className="h-12 justify-center items-center gap-2 inline-flex">
                 {/* Previous Button */}
