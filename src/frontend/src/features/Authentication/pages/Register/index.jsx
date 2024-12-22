@@ -9,15 +9,23 @@ import { Formik, Form, Field } from "formik";
 import SelectField from "../../../../customFields/SelectField";
 import TextField from "../../../../customFields/TextField";
 import RegisterDialog from "../../components/RegisterDialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SignUpPage() {
+  const navigate = useNavigate();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({title: null, content: null, buttonLabel: null, link: null});
 
   const handleCloseDialog = () => {
     setIsOpenDialog(false);
   }
+
+  useEffect(() => {
+    const isLoggedIn = !!localStorage.getItem("accessToken");
+    if (isLoggedIn) {
+      navigate("/"); // Redirect to homepage or dashboard
+    }
+  }, [navigate]);
 
   const handleSignUp = async (values) => {
     const rawData = values;
