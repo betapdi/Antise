@@ -16,6 +16,7 @@ const userApi = {
     const url = '/user/get';
     return axiosPrivate.get(url);
   }
+
 }
 
 export default userApi;

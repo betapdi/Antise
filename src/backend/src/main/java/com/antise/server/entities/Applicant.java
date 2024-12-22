@@ -1,5 +1,6 @@
 package com.antise.server.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import com.antise.server.auth.entities.User;
 import com.antise.server.dto.ApplicantDto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,7 +33,8 @@ public class Applicant extends User {
     private String fullName;
     
     @DBRef
-    private List<Application> applications;
+    @Builder.Default
+    private List<Application> applications = new ArrayList<>();
 
     private Date dateOfBirth;
 
@@ -52,7 +55,8 @@ public class Applicant extends User {
     private String phoneNumber;
 
     @DBRef
-    private List<Job> favoriteJobs;
+    @Builder.Default
+    private List<Job> favoriteJobs = new ArrayList<>();
 
     public void update(ApplicantDto dto) {
         if (dto.getGender() != null) gender = dto.getGender();

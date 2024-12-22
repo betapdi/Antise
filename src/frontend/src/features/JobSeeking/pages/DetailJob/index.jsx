@@ -4,6 +4,7 @@ import ApplyForm from '../../../../components/Form/applyform';
 import companyApi from '../../../../api/companyApi';
 import { useParams } from 'react-router-dom';
 import jobApi from '../../../../api/jobApi';
+import applicantApi from '../../../../api/applicantApi';
 import { UserContext } from '../../../../context/UserContext';
 
 function DetailJob() {
@@ -67,6 +68,27 @@ function DetailJob() {
         }
     }, [job])
 
+    const handleAddFavoriteJob = async (id) => {
+        console.log(id);
+        try {
+            const response = await applicantApi.addFavoriteJob(id);
+            const job = response.data;
+            console.log(job);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const handleRemoveFavoriteJob = async (id) => {
+        try {
+            const response = await applicantApi.removeFavoriteJob(id);
+            const job = response.data;
+            console.log(job);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             {job != null && company != null &&
@@ -124,7 +146,14 @@ function DetailJob() {
                                     <div className="justify-center items-center gap-3 inline-flex">
                                         <div
                                             className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex"
-                                            onClick={() => setIsClicked(!isClicked)}
+                                            onClick={() => {
+                                                setIsClicked(!isClicked);
+                                                if (isClicked) {
+                                                    handleRemoveFavoriteJob(job.id); // Call remove when it's already bookmarked
+                                                } else {
+                                                    handleAddFavoriteJob(job.id); // Call add when it's not bookmarked
+                                                }
+                                            }}
                                         >
                                             <div className="w-6 h-6 justify-center items-center flex">
                                                 <div className="w-6 h-6 relative">

@@ -67,7 +67,7 @@ public class JobController {
     }
 
     @PostMapping("/apply")
-    public ResponseEntity<ApplicationDto> postMethodName(@RequestPart("application") ApplicationDto applicationDto,
+    public ResponseEntity<ApplicationDto> applyJob(@RequestPart("application") ApplicationDto applicationDto,
                                  @AuthenticationPrincipal UserDetails userDetails) {
         
         ApplicationDto respone = jobService.applyJob(applicationDto, userDetails.getUsername());

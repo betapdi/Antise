@@ -6,6 +6,7 @@ import jobApi from '../../../../api/jobApi';
 import companyApi from '../../../../api/companyApi';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../../../context/UserContext';
+import applicantApi from '../../../../api/applicantApi';
 
 function HomePage() {
     const [listJob, setListJobs] = useState([]);
@@ -62,6 +63,14 @@ function HomePage() {
         navigate(`/job/detailjob/${job.id}`);
     };
 
+    const handleViewAlllJob = () => {
+        navigate(`/job/listjob`);
+    };
+
+    const handleViewDetailCompany = (company) => {
+        navigate(`/job/detailjob/${company.id}`);
+    };
+
     useEffect(() => {
         const fetchJobs = async () => {
             try {
@@ -99,6 +108,7 @@ function HomePage() {
         }
         fetchCompanies();
     }, []);
+
     useEffect(() => {
         if (companies.length > 0) {
             const startIndex = currentPage * itemsPerPage;
@@ -116,14 +126,24 @@ function HomePage() {
         }
     }, [companies]);
 
-    const handleJobClick = (jobId) => {
+    const handleJobClick = (jobId) => { //Favorite job
         console.log("Job Clicked: ", jobId);
         setIsClicked((prevState) => ({
             ...prevState,
-            [jobId]: !prevState[jobId], // Toggle the clicked state for the specific job
+            [jobId]: !prevState[jobId],
         }));
     };
 
+    const handleAddFavoriteJob = async (id) => {
+        console.log(id);
+        try {
+            const response = await applicantApi.addFavoriteJob(id);
+            const job = response.data;
+            console.log(job);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <div>
@@ -227,10 +247,13 @@ function HomePage() {
             <div className='flex justify-center items-center w-full py-16'>
                 <div className="flex flex-row h-12 gap-[50rem]">
                     <div className="text-center text-[#181f33] text-[40px] font-medium font-['Inter'] leading-[48px]">Featured job</div>
-                    <div className="px-6 py-3 rounded-[3px] border border-[#e7f0fa] justify-center items-center gap-3 flex">
-                        <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">View All</div>
+                    <button className="px-6 py-3 rounded-[3px] border border-[#e7f0fa] justify-center items-center gap-3 flex">
+                        <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal"
+                            onClick={() => handleViewAlllJob()}>
+                            View All
+                        </div>
                         <img src={"/image/arrow_right.png"} alt="arrow_right" className="h-4" />
-                    </div>
+                    </button>
                 </div>
             </div>
             <div className='flex flex-col items-center justify-center'>
@@ -268,7 +291,14 @@ function HomePage() {
                             {role === "APPLICANT" &&
                                 <div
                                     className="p-4 bg-[#e7f0fa] rounded justify-start items-start gap-2.5 flex"
-                                    onClick={() => handleJobClick(job.id)}
+                                    onClick={() => {
+                                        handleJobClick(job.id)
+                                        if (isClicked[job.id]) {
+                                            // handleRemoveFavoriteJob(job.id); // Call remove when it's already bookmarked
+                                        } else {
+                                            handleAddFavoriteJob(job.id); // Call add when it's not bookmarked
+                                        }
+                                    }}
                                 >
                                     <div className="w-6 h-6 justify-center items-center flex">
                                         <div className="w-6 h-6 relative">
@@ -370,7 +400,9 @@ function HomePage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[248px] px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex  hover:bg-[#0a65cc] hover:text-white group">
+                            <div className="w-[248px] px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex  hover:bg-[#0a65cc] hover:text-white group"
+                                onClick={() => handleViewDetailCompany(company)}
+                            >
                                 <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal group-hover:text-white">
                                     Open Position
                                 </div>

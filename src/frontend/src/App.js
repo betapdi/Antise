@@ -15,6 +15,8 @@ import Error from './components/Error';
 
 const Job = React.lazy(() => import('./features/JobSeeking'));
 const Company = React.lazy(() => import('./features/Company'));
+const WelcomeEmployee = React.lazy(() => import('./features/Welcome/WelcomeEmployee'));
+const WelcomeEmployer = React.lazy(() => import('./features/Welcome/WelcomeEmployer'));
 
 
 function App() {
