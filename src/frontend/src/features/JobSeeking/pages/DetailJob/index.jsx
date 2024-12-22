@@ -407,6 +407,14 @@ function DetailJob() {
                                             <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.organizationType}</div>
                                         </div>
                                         <div className="w-full justify-between items-center inline-flex">
+                                            <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Team Size:</div>
+                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.size}</div>
+                                        </div>
+                                        <div className="w-full justify-between items-center inline-flex">
+                                            <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Industry Type:</div>
+                                            <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.industry}</div>
+                                        </div>
+                                        <div className="w-full justify-between items-center inline-flex">
                                             <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Phone:</div>
                                             <div className="text-[#18191c] text-base font-normal font-['Inter'] leading-normal">{company.companyPhoneNumber}</div>
                                         </div>

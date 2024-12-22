@@ -3,7 +3,8 @@ import { useState, useEffect, useContext } from 'react';
 import FilterTable from './filter';
 import jobApi from '../../../../api/jobApi.js';
 import companyApi from '../../../../api/companyApi.js';
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import { UserContext } from '../../../../context/UserContext';
 
 
 
@@ -11,7 +12,9 @@ import { useSearchParams } from "react-router-dom";
 function ListJob({ isSearch }) {
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
+    const { role } = useContext(UserContext);
     const itemsPerPage = 5; // Number of jobs to display per page
+    const navigate = useNavigate();
 
 
     const handleNextPage = () => {
@@ -24,6 +27,10 @@ function ListJob({ isSearch }) {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
         }
+    };
+
+    const handleViewDetailJob = (job) => {
+        navigate(`/job/detailjob/${job.id}`);
     };
 
 
@@ -236,14 +243,20 @@ function ListJob({ isSearch }) {
                             </div>
                         </div>
                         <div className="justify-start items-start gap-3 flex">
-                            <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-                                <img src={`/image/bookmark.png`} alt="icon_star" className="w-4 h-4" />
-                            </div>
+                            <>
+                                {role === "applicant" && (
+                                    <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
+                                        <img src={`/image/bookmark.png`} alt="icon_star" className="w-4 h-4" />
+                                    </div>
+                                )}
+                            </>
                             <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                             hover:bg-[#0a65cc] hover:text-white group">
-                                <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
+                                <button className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
+                                    onClick={() => handleViewDetailJob(job)}
+                                >
                                     Apply Now
-                                </div>
+                                </button>
                                 <img
                                     src={`/image/arrow_right.png`}
                                     alt="arrow_right"

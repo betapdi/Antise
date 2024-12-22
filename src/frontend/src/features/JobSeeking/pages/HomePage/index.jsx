@@ -429,7 +429,6 @@ function HomePage() {
                 <div className="grid grid-cols-4 grid-rows-2 gap-2">
                     {currentCompanies.map((company, index) => (
                         <div
-                            key={index}
                             className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
                         >
                             <div className="justify-start items-start gap-4 inline-flex">
@@ -439,13 +438,6 @@ function HomePage() {
                                         <div className="text-[#181f33] text-lg font-medium font-['Inter'] leading-7">
                                             {company.name}
                                         </div>
-                                        {index === 0 && (
-                                            <div className="px-3 py-[3px] bg-[#fceeee] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                                <div className="text-[#e05050] text-sm font-normal font-['Inter'] leading-tight">
-                                                    Featured
-                                                </div>
-                                            </div>
-                                        )}
                                     </div>
                                     <div className="justify-start items-center gap-1.5 inline-flex">
                                         <img src={"/image/icon_map.png"} alt="location_icon" className="h-4" />
@@ -455,13 +447,13 @@ function HomePage() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-[248px] px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex  hover:bg-[#0a65cc] hover:text-white group"
+                            <button className="w-[248px] px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex  hover:bg-[#0a65cc] hover:text-white group"
                                 onClick={() => handleViewDetailCompany(company)}
                             >
                                 <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal group-hover:text-white">
                                     Open Position
                                 </div>
-                            </div>
+                            </button>
                         </div>
                     ))}
                 </div>

@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import companyApi from "../../../../api/companyApi.js";
+import { useNavigate } from "react-router-dom";
 
 function ListCompany() {
   const [companies, setCompanies] = useState([]);
+  const navigate = useNavigate();
   const [logos, setLogos] = useState({});
   const [remainingDays, setRemainingDays] = useState([]);
   const [sortOption, setSortOption] = useState("latest");
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("searchQuery");
   console.log(searchQuery)
+
+  const handleViewDetailCompany = (company) => {
+    navigate(`/job/detailcompany/${company.id}`);
+  };
 
   useEffect(() => {
     companyApi
@@ -92,7 +98,7 @@ function ListCompany() {
                     <img
                       src={`/image/Briefcase.png`}
                       alt="job_icon"
-                      className="h-4"/>
+                      className="h-4" />
                     <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-snug">
                       {company.jobList.length} Open Jobs
                     </div>
@@ -102,8 +108,10 @@ function ListCompany() {
             </div>
             <div className="justify-start items-start gap-3 flex">
               <button className="px-6 py-3 bg-[#e7f0fa] rounded justify-center items-center gap-3 flex">
-                <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">
-                  Open Position
+                <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal"
+                  onClick={() => handleViewDetailCompany(company)}
+                >
+                  View Company
                 </div>
                 <img src="/image/arrow_right.png" alt="arrow_right" />
               </button>
