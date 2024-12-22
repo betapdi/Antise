@@ -1,21 +1,36 @@
 import React from "react";
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import TextField from "../../customFields/TextField";
 import SelectField from "../../customFields/SelectField";
 import RichTextField from "../../customFields/RichTextField";
+import PopupDialog from "./PopupDialog";
 
 const ApplyForm = ({ isCloseChange, job }) => {
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false);
+  }
+
   const navigate = useNavigate();
   const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
   const handleClickSubmit = async (values) => {
     console.log(values);
     try {
-      navigate(`/job/detailjob/${job.id}`);
+      setDialogContent({
+        title: "Submit Form Successfully", 
+        content: "Your form has been submitted!", 
+        buttonLabel: "Close",
+        link: null
+      })
     } catch (error) {
       console.log(error);
     }
+    setIsOpenDialog(true);
   };
   console.log(job);
 
@@ -125,6 +140,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
           )
         }}
       </Formik>
+      <PopupDialog isOpen = {isOpenDialog} handleClose = {handleCloseDialog} content = {dialogContent}/>
     </div>
   );
 };

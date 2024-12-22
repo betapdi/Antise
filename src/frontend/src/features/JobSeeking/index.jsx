@@ -11,20 +11,18 @@ import ListJob from './pages/ListJob';
 import Dashboard from './pages/Dashboard';
 import UploadCV from '../../components/Form/uploadCV';
 import HeaderLoggin from '../../components/Header/Loggin';
-import WelcomeEmployee from './pages/Welcome/WelcomeEmployee';
-import WelcomeEmployer from './pages/Welcome/WelcomeEmployer';
 import ListCompany from './pages/ListCompany';
-
 const JobSeeking = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
 
   return (
     <div>
-      {isAuthenticated ? <HeaderLoggin /> : <HeaderUnloggin />}
+      <div className="sticky top-0 z-50">
+        {isAuthenticated ? <HeaderLoggin /> : <HeaderUnloggin />}
+      </div>
       <Routes>
         <Route exact path='/' element={<Navigate to="/job/homePage" replace />} />
         <Route path="/homePage" element={<HomePage />} />
-        {/* <Route path="/detailjob" element={<DetailJob />} /> */}
         <Route path="/detailjob/:id" element={<DetailJob />} />
         <Route path="/detailcompany/:id" element={<DetailCompany />} />
         <Route path="/welcomeEmployee" element={<WelcomeEmployee />} />
@@ -41,3 +39,4 @@ const JobSeeking = (props) => {
 };
 
 export default JobSeeking;
+
