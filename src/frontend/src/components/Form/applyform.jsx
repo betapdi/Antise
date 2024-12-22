@@ -22,13 +22,19 @@ const ApplyForm = ({ isCloseChange, job }) => {
     console.log(values);
     try {
       setDialogContent({
-        title: "Submit Form Successfully", 
-        content: "Your form has been submitted!", 
+        title: "Submit Form Successfully",
+        content: "Your form has been submitted!",
         buttonLabel: "Close",
         link: null
       })
     } catch (error) {
       console.log(error);
+      setDialogContent({
+        title: "Error",
+        content: "There is an error while submitting your form, please try again later!",
+        buttonLabel: "Close",
+        link: `/job/detailjob/${job.id}`
+      })
     }
     setIsOpenDialog(true);
   };
@@ -127,7 +133,11 @@ const ApplyForm = ({ isCloseChange, job }) => {
                 >
                   <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Cancel</div>
                 </button>
-                <button className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex cursor-pointer">
+                <button
+                  type="button" // Use type="button" for custom behavior
+                  onClick={handleClickSubmit} // Trigger Formik's handleSubmit
+                  className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex cursor-pointer"
+                >
                   <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply Now</div>
                   <img
                     src={"/image/arrow_right_hover.png"}
@@ -140,8 +150,15 @@ const ApplyForm = ({ isCloseChange, job }) => {
           )
         }}
       </Formik>
-      <PopupDialog isOpen = {isOpenDialog} handleClose = {handleCloseDialog} content = {dialogContent}/>
+      {isOpenDialog && (
+        <PopupDialog
+          isOpen={isOpenDialog}
+          handleClose={handleCloseDialog}
+          content={dialogContent}
+        />
+      )}
     </div>
+
   );
 };
 

@@ -198,7 +198,11 @@ const Settings = () => {
                           oldValue={education}
                           label="Education"
                           heightInput="h-12"
-                          placeholder="Enter education details"
+                          options={[{ key: "Select...", value: "" },
+                            { key: "High School", value: "High School" },
+                            { key: "Bachelor", value: "Bachelor" },
+                            { key: "Master", value: "Master" },
+                            { key: "PhD", value: "PhD" }]}
                         />
                       </div>
 
