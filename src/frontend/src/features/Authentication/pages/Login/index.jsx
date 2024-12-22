@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import userApi from "../../../../api/userApi";
 import { Field, Form, Formik } from "formik";
 import { Link, useNavigate , redirect } from "react-router-dom";
@@ -15,6 +15,13 @@ export default function LoginPage() {
   const handleCloseDialog = () => {
     setIsOpenDialog(false);
   }
+
+  useEffect(() => {
+    const isLoggined = localStorage.getItem('accessToken');
+    if (isLoggined) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleLogin = async (values) => {
     try {
