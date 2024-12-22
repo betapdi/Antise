@@ -61,6 +61,11 @@ const applicantApi = {
     const url = `/applicant/removeFavoriteJob/${id}`;
     return axiosPrivate.delete(url);
   },
+
+  getAppliedJob: () => {
+    const url = '/applicant/getAppliedJobs';
+    return axiosPrivate.get(url);
+  },
 }
 
 export default applicantApi;
