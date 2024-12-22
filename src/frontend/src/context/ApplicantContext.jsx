@@ -43,7 +43,7 @@ export const ApplicantProvider = ({children}) => {
             experience, setExperience, nationality, setNationality,
             major, setMajor, biography, setBiography, address, setAddress,
             applications, setApplications, education, setEducation,
-            workEmail, setWorkEmail, phoneNumber, setPhoneNumber
+            workEmail, setWorkEmail, phoneNumber, setPhoneNumber,resetApplicant
         }}>
             {children}
         </ApplicantContext.Provider>

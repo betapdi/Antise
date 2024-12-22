@@ -43,7 +43,7 @@ export const CompanyProvider = ({children}) => {
             location, setLocation, organizationType, setOrganizationType,
             companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
             companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
-            yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants
+            yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants,resetCompany
         }}>
             {children}
         </CompanyContext.Provider>
