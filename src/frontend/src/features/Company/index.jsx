@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  Route, Routes, Navigate, useLocation
+  Route, Routes, Navigate, useLocation, useNavigate
 } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect, useContext} from "react";
 
 import AddCompany from './pages/AddCompany';
 import NavCompany from '../../components/Nav/Company';
@@ -15,11 +15,21 @@ import HeaderLogginComany from '../../components/Header/Company';
 import HeaderUnloggin from '../../components/Header/Unloggin';
 import CompanySetupSuccess from './pages/SuccessPage/companysetupsuccess';
 import ApplyForm from '../../components/Form/applyform';
+import {UserContext} from '../../context/UserContext';
 
 
 const Company = (props) => {
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
+  const {
+        userId, setUserId, email, setEmail, role, setRole, resetUser
+  } = useContext(UserContext);
+  const navigate = useNavigate();
+    useEffect(() => {
+      if (role === "APPLICANT" || role === "ANONYMOUS") {
+        navigate("/job/homepage", { replace: true });
+      }
+    }, [role, navigate]);
   return (
     <div>
       <div className='sticky top-0 z-50'>

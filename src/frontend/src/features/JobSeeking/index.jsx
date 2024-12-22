@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   Route, Routes, Navigate
 } from "react-router-dom";
@@ -14,8 +15,18 @@ import HeaderLoggin from '../../components/Header/Loggin';
 import ListCompany from './pages/ListCompany';
 import WelcomeEmployee from '../Welcome/WelcomeEmployee';
 import WelcomeEmployer from '../Welcome/WelcomeEmployer';
+import {UserContext} from '../../context/UserContext';
 const JobSeeking = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
+  const {
+      userId, setUserId, email, setEmail, role, setRole, resetUser
+  } = useContext(UserContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (role === "COMPANY") {
+      navigate("/company/dashboard", { replace: true });
+    }
+  }, [role, navigate]);
 
   return (
     <div>
@@ -31,9 +42,25 @@ const JobSeeking = (props) => {
         <Route path="/welcomeEmployer" element={<WelcomeEmployer />} />
         <Route path="/listjob" element={<ListJob isSearch={0} />} />
         <Route path="/listjob/search" element={<ListJob isSearch={1} />} />
-        <Route path="/dashboard/*" element={<Dashboard />} />
-        <Route path="/uploadCV" element={<UploadCV />} />
+        {/* <Route path="/dashboard/*" element={<Dashboard />} /> */}
+        {/* <Route path="/uploadCV" element={<UploadCV />} /> */}
         <Route path="/findcompany" element={<ListCompany />} />
+ 
+        <Route
+          path="/dashboard/*"
+          element={
+            role === "ANONYMOUS" ? <Navigate to="/job/homepage" replace /> : <Dashboard />
+          }
+        />
+
+        {/* Restrict access to UploadCV */}
+        <Route
+          path="/uploadCV"
+          element={
+            role === "ANONYMOUS" ? <Navigate to="/job/homepage" replace /> : <UploadCV />
+          }
+        />
+
         <Route path="*" element={<p>NONE</p>} />
       </Routes>
     </div>
