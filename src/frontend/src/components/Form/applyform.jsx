@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -9,10 +9,13 @@ import RichTextField from "../../customFields/RichTextField";
 import PopupDialog from "./PopupDialog";
 import jobApi from "../../api/jobApi";
 import { ApplicantContext } from "../../context/ApplicantContext";
+import { UserContext } from "../../context/UserContext";
 
 const ApplyForm = ({ isCloseChange, job }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+  const {applicant} = useContext(ApplicantContext);
+  const {user} = useContext(UserContext);
 
   useEffect(() => {
     console.log("Dialog open:", isOpenDialog);
@@ -26,17 +29,25 @@ const ApplyForm = ({ isCloseChange, job }) => {
   const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
 
   const handleClickSubmit = async (values) => {
+    console.log("ABC", user);
     try {
       const applyData = {
         ...values,
         jobId: job.id,
-        applicantId: ApplicantContext.applicant.id,
+        applicantId: user,
       };
+      console.log("applyData being sent:", applyData);
 
       const formData = new FormData();
       formData.append("applyData", new Blob([JSON.stringify(applyData)], { type: "application/json" }));
-      const response = await jobApi.applyJob(formData);
-      console.log("HHHH:", response);
+      
+      const response = await jobApi.applyJob(formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      console.log("API response:", response);
 
       setDialogContent({
         title: "Submit Form Successfully",
