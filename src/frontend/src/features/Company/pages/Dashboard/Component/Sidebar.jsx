@@ -63,18 +63,18 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/company/dashboard/candidate"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/candidate")
+                to="/company/dashboard/saved-candidate"
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/saved-candidate")
                   ? "bg-[#e7f0fa] text-[#0a65cc]"
                   : "text-[#767F8C]"
                   } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`${isActive("/company/dashboard/candidate") ? "/image/BlueBookmarkSimple.png" : "/image/BookmarkSimple.png"}`}
+                  src={`${isActive("/company/dashboard/saved-candidate") ? "/image/BlueBookmarkSimple.png" : "/image/BookmarkSimple.png"}`}
                   alt="logo"
                   className="h-auto ml-4 mr-2"
                 />
-                Candidates
+                Save Candidates
               </Link>
             </li>
             <li>
