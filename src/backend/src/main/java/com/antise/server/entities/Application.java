@@ -44,6 +44,8 @@ public class Application {
 
     private String resumeName;
 
+    private String questions;
+
     public void update(ApplicationDto applicationDto) {
         if (applicationDto.getFullName() != null) fullName = applicationDto.getFullName();
         if (applicationDto.getEmail() != null) email = applicationDto.getEmail();
@@ -53,5 +55,7 @@ public class Application {
         if (applicationDto.getJobId() != null) jobId = applicationDto.getJobId();
         if (applicationDto.getStatus() != null) status = applicationDto.getStatus();
         if (applicationDto.getSubmittedDate() != null) submittedDate = applicationDto.getSubmittedDate();
+        if (applicationDto.getResumeUrl() != null) resumeName = applicationDto.getResumeUrl();
+        if (applicationDto.getQuestions() != null) questions = applicationDto.getQuestions();
     }
 }
