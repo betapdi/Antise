@@ -54,7 +54,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
           email: "",
           resume: "",
           coverLetter: "",
-          //questions: "",
+          questions: "",
         }}
         validationSchema={Yup.object({
           fullName: Yup.string().required("Please fill your full name"),
@@ -62,7 +62,9 @@ const ApplyForm = ({ isCloseChange, job }) => {
           email: Yup.string().email("Invalid email").required("Please fill your email"),
           resume: Yup.string().required("Please upload your CV"),
           coverLetter: Yup.string().required("Please fill the cover letter. If not, fill N/A"),
-          //questions: Yup.string().required("Please answer the questions"),
+          ...(job?.questions && {
+            questions: Yup.string().required("Please answer the questions"),
+          }),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
