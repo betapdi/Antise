@@ -116,7 +116,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                 placeholder="Cover Letter"
               />
 
-              {/* {job?.questions && (
+              {job?.questions && (
                 <div className="mt-4 ">
                   <h3 className="text-sm font-medium text-[#18191c]"> Questions</h3>
                   <div className="mb-2">
@@ -133,7 +133,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                     placeholder="Questions"
                   />
                 </div>
-              )} */}
+              )}
               <div className="flex flex-row justify-between">
                 <button className="h-12 px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex"
                   onClick={() => isCloseChange(true)}
