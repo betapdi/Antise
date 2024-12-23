@@ -3,12 +3,36 @@ import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import applicantApi from "../../../../../api/applicantApi";
 import companyApi from "../../../../../api/companyApi";
+import { ApplicantContext } from "../../../../../context/ApplicantContext";
 
 
 function ListJob({ jobs, numberOfJobs }) {
     const navigate = useNavigate();
+    const { profileImageUrl, fullName, favoriteJobs, applications } = useContext(ApplicantContext);
+    const [jobCompanies, setJobCompanies] = useState({});
+
     const handleSettingCompany = (company) => {
         navigate(`/job/dashboard/settings`);
+    };
+    const handleNavigateAppliedJob = () => {
+        navigate(`/job/dashboard/applied-jobs`);
+    };
+
+    const [remainingDays, setRemainingDays] = useState([]);
+    const calculateRemainingDays = () => {
+        for (let i = 0; i < jobs.length; i++) {
+            const targetDateString = jobs[i].expirationDate;
+            const targetDate = new Date(targetDateString);
+            const now = new Date();
+            const diff = targetDate - now;
+            setRemainingDays((prev) => [...prev, Math.ceil(diff / (1000 * 60 * 60 * 24))]);
+        }
+    }
+
+    const getApplicationByJobId = (jobId) => {
+        const application = applications.find((application) => application.jobId === jobId);
+        console.log("Application:", application);
+        return application ? application.submittedDate : null;
     };
 
     useEffect(() => {
@@ -32,20 +56,19 @@ function ListJob({ jobs, numberOfJobs }) {
 
         if (jobs.length > 0) {
             fetchCompanies();
-            console.log("COMPANY", jobCompanies);
+            calculateRemainingDays();
         }
     }, [jobs]);
 
-    const [jobCompanies, setJobCompanies] = useState({});
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
             {/*Display how many job are there, for example, display Favorite Job (13) */}
-            <div className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7 mb-2">Hello, Esther Howard</div>
+            <div className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7 mb-2">Hello, {fullName}</div>
             <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight mb-5">Here is your daily activities and job alerts</div>
             <div className="flex w-full gap-5 mb-5">
                 <div className="w-1/3 pl-6 pr-5 bg-[#e7f0fa] rounded-lg justify-center items-center gap-20 inline-flex">
                     <div className="flex-col justify-start items-start inline-flex mb-2">
-                        <div className=" text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">589</div>
+                        <div className=" text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">{jobs.length}</div>
                         <div className=" opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Applied jobs</div>
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
@@ -54,7 +77,7 @@ function ListJob({ jobs, numberOfJobs }) {
                 </div>
                 <div className="w-1/3 pl-6 pr-5 py-5 bg-[#fff6e6] rounded-lg justify-center items-center gap-20 inline-flex">
                     <div className="flex-col justify-start items-start inline-flex mb-2">
-                        <div className="text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">238</div>
+                        <div className="text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">{favoriteJobs.length}</div>
                         <div className="opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Favorite jobs</div>
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
@@ -77,7 +100,7 @@ function ListJob({ jobs, numberOfJobs }) {
             </div>
             <div className="w-full h-32 p-8 bg-[#e05050] rounded-lg justify-between items-center inline-flex mb-5">
                 <div className="justify-center items-center gap-6 flex">
-                    <img className="w-16 h-16 rounded-full" alt="icon_star" src={`/image/Ellipse 19.png`} />
+                    <img className="w-16 h-16 rounded-full" alt="icon_star" src={"http://172.28.102.169:8080/api/v1" + [profileImageUrl]} />
                     <div className="flex-col justify-start items-start gap-2 inline-flex">
                         <div className="text-white text-lg font-medium font-['Inter'] leading-7">Your profile editing is not completed.</div>
                         <div className="text-white text-sm font-normal font-['Inter'] leading-tight">Complete your profile editing & build your custom Resume</div>
@@ -92,10 +115,23 @@ function ListJob({ jobs, numberOfJobs }) {
             </div>
             <div className="w-full h-6 justify-between items-center inline-flex">
                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Recently Applied</div>
-                <div className="justify-center items-center gap-2 flex">
-                    <div className="text-[#767f8c] text-base font-medium font-['Inter'] leading-normal">View all</div>
-                    <img src={`/image/fi_arrow-right-grey.png`} alt="icon_star" className="w-6 h-6" />
-                </div>
+
+                <button
+                    className="px-3 py-2 rounded-[3px] flex justify-center items-center gap-3 text-[#767f8c] text-base font-semibold font-['Inter'] capitalize leading-normal hover:bg-[#0a65cc] hover:text-white group"
+                    onClick={() => handleNavigateAppliedJob()}
+                >
+                    View All
+                    <img
+                        src={"/image/arrow_right.png"}
+                        alt="arrow_right"
+                        className="h-4 group-hover:hidden"
+                    />
+                    <img
+                        src={"/image/arrow_right_hover.png"}
+                        alt="arrow_right_hover"
+                        className="h-4 hidden group-hover:block"
+                    />
+                </button>
             </div>
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
@@ -116,7 +152,7 @@ function ListJob({ jobs, numberOfJobs }) {
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
                                     <div className="px-3 py-[3px] bg-[#e8f1ff] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                        <div className="text-[#0a65cc] text-sm font-normal font-['Inter'] leading-tight">{job.contractType}</div>
+                                        <div className="text-[#0a65cc] text-sm font-normal font-['Inter'] leading-tight">{job.jobType}</div>
                                     </div>
                                 </div>
                                 <div className="justify-start items-center gap-4 inline-flex">
@@ -126,17 +162,29 @@ function ListJob({ jobs, numberOfJobs }) {
                                     </div>
                                     <div className="justify-start items-center gap-1 flex">
                                         <img src={`/image/icon_salary.png`} alt="salary_icon" className="h-4" />
-                                        <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.salary}</div>
+                                        <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.minSalary} - {job.maxSalary}</div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div className=" text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight mr-10">{job.dateApplied}</div>
+                        <div className=" text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight mr-10">
+                            {new Date(getApplicationByJobId(job.id)).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                            })}
+                        </div>
                         <div className=" mr-5 justify-start items-start gap-3 flex">
-                            <div className="justify-start items-center gap-1.5 flex">
-                                <img src={`/image/Check.png`} alt="icon_star" className="w-4 h-4" />
-                                <div className="text-[#0ba02c] text-sm font-medium font-['Inter'] leading-tight">Active</div>
+                            <div className='justify-start items-center gap-1.5 flex'>
+                                <img
+                                    src={remainingDays[index] > 0 ? `/image/CheckCircle.svg` : `/image/XCircle.png`}
+                                    className='h-6 w-6'
+                                    alt="status"
+                                />
+                                <div className={`${remainingDays[index] > 0 ? "text-[#0ba02c]" : "text-[#d32f2f]"} text-sm font-medium font-['Inter'] leading-tight`}>
+                                    {remainingDays[index] > 0 ? "Active" : "Expired"}
+                                </div>
                             </div>
 
                         </div>
