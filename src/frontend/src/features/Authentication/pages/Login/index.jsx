@@ -5,12 +5,20 @@ import { Field, Form, Formik } from "formik";
 import { Link, useNavigate , redirect } from "react-router-dom";
 import * as Yup from "yup";
 import TextField from "../../../../customFields/TextField";
+import jobApi from "../../../../api/jobApi";
+import companyApi from "../../../../api/companyApi";
+import applicantApi from "../../../../api/applicantApi";
 import RegisterDialog from "../../components/RegisterDialog";
+
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({title: null, content: null, buttonLabel: null, link: null});
+  const [liveJobCount, setLiveJobCount] = useState(0);
+  const [newJobCount, setNewJobCount] = useState(0);
+  const [companyCount, setCompanyCount] = useState(0);
+  const [candidateCount, setCandidateCount] = useState(0);
 
   const handleCloseDialog = () => {
     setIsOpenDialog(false);
@@ -22,6 +30,36 @@ export default function LoginPage() {
       navigate('/');
     }
   }, [navigate]);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const jobResponse = await jobApi.getAllJobs();
+        const jobs = jobResponse.data;
+        const now = new Date();
+        const liveJobs = jobs.filter(
+          (job) => new Date(job.expirationDate) > now
+        );
+        setLiveJobCount(liveJobs.length);
+
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        const newJobs = jobs.filter(
+          (job) => new Date(job.postedDate) >= oneWeekAgo
+        );
+        setNewJobCount(newJobs.length);
+
+        const companyResponse = await companyApi.getAllCompanies();
+        setCompanyCount(companyResponse.data.length);
+
+        setCandidateCount(500);
+      } catch (error) {
+        console.error("Error fetching counts:", error);
+      }
+    };
+
+    fetchCounts();
+  }, []);
 
   const handleLogin = async (values) => {
     try {
@@ -139,18 +177,18 @@ export default function LoginPage() {
       </div>
       <div className="w-1/3 flex flex-col justify-center items-center text-center me-6">
         <img src="/image/bg.png" alt="Logo" className="h-auto w-72" />
-        <h2 className="text-2xl font-semibold text-[#0A65CC] mb-4">Over 1,75,324 candidates waiting for good employees.</h2>
+        <h2 className="text-2xl font-semibold text-[#0A65CC] mb-4">Over {candidateCount} candidates waiting for good employees.</h2>
         <div className="flex space-x-5">
           <div className="text-center">
-            <p className="text-2xl font-bold text-[#0A65CC]">1,75,324</p>
+            <p className="text-2xl font-bold text-[#0A65CC]">{liveJobCount}</p>
             <p className="text-[#0A65CC]">Live Jobs</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-[#0A65CC]">97,354</p>
+            <p className="text-2xl font-bold text-[#0A65CC]">{companyCount}</p>
             <p className="text-[#0A65CC]">Companies</p>
           </div>
           <div className="text-center">
-            <p className="text-2xl font-bold text-[#0A65CC]">7,532</p>
+            <p className="text-2xl font-bold text-[#0A65CC]">{newJobCount}</p>
             <p className="text-[#0A65CC]" >New Jobs</p>
           </div>
         </div>
