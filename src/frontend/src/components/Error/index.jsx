@@ -13,7 +13,7 @@ function Error() {
         <div className="w-full flex flex-col justify-center items-start gap-8 ml-24">
           <div className="flex flex-col justify-start items-start gap-6">
             <div className="text-[#18191c] text-[40px] font-medium font-['Inter'] leading-[48px]">
-              Opps! Page not found
+              Opps! Page not found-+
             </div>
             <div className="w-full text-[#474c54] text-lg font-normal font-['Inter'] leading-7">
               Something went wrong. You cannot access this page.

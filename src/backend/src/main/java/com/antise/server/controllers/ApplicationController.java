@@ -32,7 +32,7 @@ public class ApplicationController {
     private final ApplicationService applicationService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<ApplicationDto>> getAllApplications(@RequestParam String param) {
+    public ResponseEntity<List<ApplicationDto>> getAllApplications() {
         return ResponseEntity.ok(applicationService.getAllApplications());
     }
 }

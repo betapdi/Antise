@@ -1,106 +1,60 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
+import applicantApi from "../../../../../api/applicantApi";
+import companyApi from "../../../../../api/companyApi";
+import { ApplicantContext } from "../../../../../context/ApplicantContext";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
 
-const jobs = [
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 2, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 3, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 4, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 5, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 6, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 7, 2019 19:28",
-    },
-    {
-        title: "Senior UX Designer",
-        companyLogo: "company_1.png",
-        contractType: "Contract Base",
-        location: "Australia",
-        salary: "$30K-$35K",
-        dateApplied: "Feb 8, 2019 19:28",
-    },
-    {
-        title: "Software Engineer",
-        companyLogo: "company_2.png",
-        contractType: "Full Time",
-        location: "USA",
-        salary: "$50K-$70K",
-        dateApplied: "Feb 9, 2019 19:28",
-    },
-    {
-        title: "Product Manager",
-        companyLogo: "company_3.png",
-        contractType: "Part Time",
-        location: "UK",
-        salary: "$40K-$50K",
-        dateApplied: "Feb 10, 2019 19:28",
-    },
-];
 
 function ListJob({ jobs, numberOfJobs }) {
+    const [remainingDays, setRemainingDays] = useState([]);
+    const navigate = useNavigate();
+    const { profileImageUrl, fullName, favoriteJobs, applications } = useContext(ApplicantContext);
+    const [jobCompanies, setJobCompanies] = useState({});
+    const calculateRemainingDays = () => {
+        for (let i = 0; i < jobs.length; i++) {
+            const targetDateString = jobs[i].expirationDate;
+            const targetDate = new Date(targetDateString);
+            const now = new Date();
+            const diff = targetDate - now;
+            setRemainingDays((prev) => [...prev, Math.ceil(diff / (1000 * 60 * 60 * 24))]);
+        }
+    }
+
+    const getApplicationByJobId = (jobId) => {
+        const application = applications.find((application) => application.jobId === jobId);
+        console.log("Application:", application);
+        return application ? application.submittedDate : null;
+    };
+
+    useEffect(() => {
+        const fetchCompanies = async () => {
+            const fetchedCompanies = {};
+
+            try {
+                await Promise.all(
+                    jobs.map(async (job) => {
+                        if (job.companyId && !fetchedCompanies[job.companyId]) {
+                            const response = await companyApi.getCompany(job.companyId);
+                            fetchedCompanies[job.companyId] = response.data; // Store company data keyed by companyId
+                        }
+                    })
+                );
+                setJobCompanies((prevCompanies) => ({ ...prevCompanies, ...fetchedCompanies }));
+            } catch (error) {
+                console.error("Error fetching company data:", error);
+            }
+        };
+
+        if (jobs.length > 0) {
+            fetchCompanies();
+            calculateRemainingDays();
+            console.log(getApplicationByJobId(jobs[0]?.id));
+        }
+    }, [jobs]);
+
     return (
         <div>
             {/*Display how many job are there, for example, display Favorite Job (13) */}
@@ -121,12 +75,12 @@ function ListJob({ jobs, numberOfJobs }) {
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="justify-start items-start gap-5 flex w-1/2">
-                            <img src={`/image/logoCompany/${job.companyLogo}`} alt="job_icon" className="w-16 h-16" />
+                            <img src={"http://172.28.102.169:8080/api/v1" + [jobCompanies[job.companyId]?.logoUrl]} alt="job_icon" className="w-16 h-16" />
                             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
                                     <div className="px-3 py-[3px] bg-[#e8f1ff] rounded-[52px] justify-start items-start gap-2.5 flex">
-                                        <div className="text-[#0a65cc] text-sm font-normal font-['Inter'] leading-tight">{job.contractType}</div>
+                                        <div className="text-[#0a65cc] text-sm font-normal font-['Inter'] leading-tight">{job.jobType}</div>
                                     </div>
                                 </div>
                                 <div className="justify-start items-center gap-4 inline-flex">
@@ -136,26 +90,41 @@ function ListJob({ jobs, numberOfJobs }) {
                                     </div>
                                     <div className="justify-start items-center gap-1 flex">
                                         <img src={`/image/icon_salary.png`} alt="salary_icon" className="h-4" />
-                                        <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.salary}</div>
+                                        <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{job.minSalary} - {job.maxSalary}</div>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
-                        <div className=" text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight mr-10">{job.dateApplied}</div>
                         <div className=" mr-5 justify-start items-start gap-3 flex">
-                            <div className="justify-start items-center gap-1.5 flex">
-                                <img src={`/image/Check.png`} alt="icon_star" className="w-4 h-4" />
-                                <div className="text-[#0ba02c] text-sm font-medium font-['Inter'] leading-tight">Active</div>
+                            <div className=" text-[#5e6670] text-sm font-normal font-['Inter'] leading-tight mr-10">
+                                {new Date(getApplicationByJobId(job.id)).toLocaleDateString('en-GB', {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+                                })}
+                            </div>
+                            <div className=" mr-5 justify-start items-start gap-3 flex">
+                                <div className='justify-start items-center gap-1.5 flex'>
+                                    <img
+                                        src={remainingDays[index] > 0 ? `/image/CheckCircle.svg` : `/image/XCircle.png`}
+                                        className='h-6 w-6'
+                                        alt="status"
+                                    />
+                                    <div className={`${remainingDays[index] > 0 ? "text-[#0ba02c]" : "text-[#d32f2f]"} text-sm font-medium font-['Inter'] leading-tight`}>
+                                        {remainingDays[index] > 0 ? "Active" : "Expired"}
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
-                        <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
+                        <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                                 hover:bg-[#0a65cc] hover:text-white group mr-5">
                             <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                                 View Detail
                             </div>
-                        </div>
+                        </button>
                     </div>
                 ))}
             </div>
@@ -163,12 +132,10 @@ function ListJob({ jobs, numberOfJobs }) {
     )
 }
 
-
 const AppliedJobs = () => {
-
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5; // Number of jobs to display per page
+    const itemsPerPage = 5;
 
 
     const handleNextPage = () => {
@@ -183,12 +150,23 @@ const AppliedJobs = () => {
         }
     };
 
+    const [jobs, setAppliedJob] = useState([]);
+    useEffect(() => {
+        const fetchAppliedJob = async () => {
+            try {
+                const response = await applicantApi.getAppliedJob();
+                console.log("Fetch Applied Jobs: ", response.data);
+                setAppliedJob(response.data);
+            } catch (error) {
+                console.log("Failed to fetch companies: ", error);
+            }
+        };
+        fetchAppliedJob();
+    }, []);
+
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedJobs = jobs.slice(startIndex, startIndex + itemsPerPage);
-
     const totalPages = Math.ceil(jobs.length / itemsPerPage);
-    // Callback function to handle filter data
-
 
     return (
         <div>
