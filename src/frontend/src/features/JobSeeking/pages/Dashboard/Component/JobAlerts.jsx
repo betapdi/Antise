@@ -173,49 +173,73 @@ const JobAlerts = ({ onJobCountChange }) => {
         onJobCountChange(jobs.length);  // Notify parent of job count
     }, [jobs, onJobCountChange]);
 
-    const itemsPerPage = 8; // Number of jobs to display per page
-    const totalPages = Math.ceil(jobs.length / itemsPerPage); // Total number of pages
-    const [currentPage, setCurrentPage] = useState(1);
-
-    const currentJobs = jobs.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
-    const handleNextPage = () => {
-        if (currentPage < totalPages) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
-    const handlePrevPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-
+   // Pagination
+       const [currentPage, setCurrentPage] = useState(1);
+       const itemsPerPage = 5; // Number of jobs to display per page
+   
+   
+       const handleNextPage = () => {
+           if (currentPage < totalPages) {
+               setCurrentPage(currentPage + 1);
+           }
+       };
+   
+       const handlePreviousPage = () => {
+           if (currentPage > 1) {
+               setCurrentPage(currentPage - 1);
+           }
+       };
+   
+       const startIndex = (currentPage - 1) * itemsPerPage;
+       const paginatedJobs = jobs.slice(startIndex, startIndex + itemsPerPage);
+   
+       const totalPages = Math.ceil(jobs.length / itemsPerPage);
     // Callback function to handle filter data
 
 
     return (
         <div>
             <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
-                <ListJob jobs={currentJobs} numberOfJobs={jobs.length} />
+                <ListJob jobs={paginatedJobs} numberOfJobs={jobs.length} />
             </div>
             <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
-                {/* Previous Page Button */}
-                <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex" onClick={handlePrevPage}>
+                {/* Previous Button */}
+                <button
+                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                    onClick={handlePreviousPage}
+                    disabled={currentPage === 1}
+                >
                     <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
-                </div>
+                </button>
 
-                {/* Page Number */}
-                <div className="justify-start items-start flex">
-                    <div className="w-12 h-12 px-2 py-3.5 bg-[#0a65cc] rounded-[50px] justify-center items-center flex ml-2">
-                        <div className="text-center text-white text-sm font-medium font-['Inter'] leading-tight">{currentPage}</div>
-                    </div>
-                </div>
+                {/* Page Numbers */}
+                {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
+                    const startPage = Math.max(1, currentPage - 2); // Ensure startPage is at least 1
+                    const endPage = Math.min(totalPages, currentPage + 2); // Ensure endPage does not exceed totalPages
+                    const displayPage = startPage + index; // Compute the actual page to display
 
-                {/* Next Page Button */}
-                <div className="p-3 bg-[#e7f0fa] rounded-[84px] justify-start items-start gap-2.5 flex" onClick={handleNextPage}>
+                    if (displayPage > totalPages) return null; // Prevent rendering out-of-bounds pages
+
+                    return (
+                        <button
+                            key={displayPage}
+                            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
+                                }`}
+                            onClick={() => setCurrentPage(displayPage)}
+                        >
+                            {displayPage}
+                        </button>
+                    );
+                })}
+
+                {/* Next Button */}
+                <button
+                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                    onClick={handleNextPage}
+                    disabled={currentPage === totalPages}
+                >
                     <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
-                </div>
+                </button>
             </div>
         </div>
     );
