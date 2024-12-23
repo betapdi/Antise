@@ -14,8 +14,8 @@ import { UserContext } from "../../context/UserContext";
 const ApplyForm = ({ isCloseChange, job }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
-  const {applicant} = useContext(ApplicantContext);
-  const {user} = useContext(UserContext);
+  const { userId } = useContext(UserContext);
+  const { resumeUrl } = useContext(ApplicantContext);
 
   useEffect(() => {
     console.log("Dialog open:", isOpenDialog);
@@ -26,27 +26,26 @@ const ApplyForm = ({ isCloseChange, job }) => {
     isCloseChange(true);
   }
 
+  const getFileNameFromUrl = (url, removeExtension = true) => {
+    if (!url) return "";
+    const fileName = url.split("/").pop();
+    if (removeExtension) {
+      return fileName.split('.').slice(0, -1).join('.');
+    }
+    return fileName;
+  };
+
   const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
 
   const handleClickSubmit = async (values) => {
-    console.log("ABC", user);
+    console.log("Form values:", values);
     try {
       const applyData = {
         ...values,
         jobId: job.id,
-        applicantId: user,
+        applicantId: userId,
       };
-      console.log("applyData being sent:", applyData);
-
-      const formData = new FormData();
-      formData.append("applyData", new Blob([JSON.stringify(applyData)], { type: "application/json" }));
-      
-      const response = await jobApi.applyJob(formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
+      const response = await jobApi.applyJob(applyData);
       console.log("API response:", response);
 
       setDialogContent({
@@ -99,7 +98,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
             }
 
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              //alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
               handleClickSubmit(values);
               //isCloseChange(true);
@@ -136,7 +135,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                   component={SelectField}
                   label="Resume"
                   options={[{ key: "Select...", value: "" },
-                  { key: "Resume", value: "Resume" }]}
+                  { key: getFileNameFromUrl(resumeUrl), value: getFileNameFromUrl(resumeUrl) }]}
                 />
 
                 <Field
