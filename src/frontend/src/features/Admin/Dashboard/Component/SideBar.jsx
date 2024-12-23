@@ -14,22 +14,22 @@ const Sidebar = () => {
           <ul className="">
             <li>
               <Link
-                to="/company/dashboard/overview"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/overview")
+                to="/admin/dashboard/overview"
+                className={`flex items-center py-2 gap-4 ${isActive("/admin/dashboard/overview")
                   ? "bg-[#e7f0fa] text-[#0a65cc]"
                   : "text-[#767F8C]"
                   } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`${isActive("/company/dashboard/overview") ? "/image/BlueStack.png" : "/image/Stack.png"}`}
+                  src={`${isActive("/admin/dashboard/overview") ? "/image/BlueStack.png" : "/image/Stack.png"}`}
                   alt="logo"
-                  className={`h-auto ml-4 mr-2 ${isActive("/company/dashboard/overview") ? "filter-blue" : ""
+                  className={`h-auto ml-4 mr-2 ${isActive("/admin/dashboard/overview") ? "filter-blue" : ""
                     }`}
                 />
                 Overview
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 to="/company/dashboard/post-job"
                 className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/post-job")
@@ -63,18 +63,18 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/company/dashboard/saved-candidate"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/saved-candidate")
+                to="/company/dashboard/candidate"
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/candidate")
                   ? "bg-[#e7f0fa] text-[#0a65cc]"
                   : "text-[#767F8C]"
                   } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`${isActive("/company/dashboard/saved-candidate") ? "/image/BlueBookmarkSimple.png" : "/image/BookmarkSimple.png"}`}
+                  src={`${isActive("/company/dashboard/candidate") ? "/image/BlueBookmarkSimple.png" : "/image/BookmarkSimple.png"}`}
                   alt="logo"
                   className="h-auto ml-4 mr-2"
                 />
-                Save Candidates
+                Candidates
               </Link>
             </li>
             <li>
@@ -102,8 +102,8 @@ const Sidebar = () => {
                   className="w-auto h-auto ml-4 mr-2"
                 />
                 Log-out
-              </div>
-            </li>
+              </div> */}
+            {/* </li> */}
           </ul>
         </nav>
       </div>

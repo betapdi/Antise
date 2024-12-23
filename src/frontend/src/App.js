@@ -15,6 +15,7 @@ import Error from './components/Error';
 
 const Job = React.lazy(() => import('./features/JobSeeking'));
 const Company = React.lazy(() => import('./features/Company'));
+const Admin = React.lazy(() => import('./features/Admin'));
 const WelcomeEmployee = React.lazy(() => import('./features/Welcome/WelcomeEmployee'));
 const WelcomeEmployer = React.lazy(() => import('./features/Welcome/WelcomeEmployer'));
 
@@ -129,6 +130,7 @@ function App() {
                 <Route path = "auth/*" element = {<Authentication />} />
                 <Route path = "company/*" element = {<Company />} />
                 <Route path = "error/" element={<Error/>} />
+                <Route path = "admin/*" element = {<Admin />} />
               </Routes>
             </BrowserRouter>
         </Suspense>)
