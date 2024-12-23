@@ -183,7 +183,7 @@ const AppliedJobs = () => {
             <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 {/* Previous Button */}
                 <button
-                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                    className="p-3 bg-[#e7f0fa] rounded-[84px] cursor-pointer"
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
                 >

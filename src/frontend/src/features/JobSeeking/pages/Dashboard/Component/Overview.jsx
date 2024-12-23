@@ -104,10 +104,10 @@ function ListJob({ jobs, numberOfJobs }) {
                 </div>
             </div>
             <>
-                {!isCompleteSetting &&
-                    <div className="w-full h-32 p-8 bg-[#e05050] rounded-lg justify-between items-center inline-flex mb-5">
+                {!isCompleteSetting() &&
+                    <div className="w-full h-32 p-8 bg-[#dc5d5d] rounded-lg justify-between items-center inline-flex mb-5">
                         <div className="justify-center items-center gap-6 flex">
-                            <img className="w-16 h-16 rounded-full" alt="icon_star" src="/path/to/default-image.jpg" />
+                            <img className="w-16 h-16 rounded-full" alt="avatar" src="/image/default_image.png" />
                             <div className="flex-col justify-start items-start gap-2 inline-flex">
                                 <div className="text-white text-lg font-medium font-['Inter'] leading-7">Your profile editing is not completed.</div>
                                 <div className="text-white text-sm font-normal font-['Inter'] leading-tight">Complete your profile editing & build your custom Resume</div>
@@ -259,7 +259,7 @@ const AppliedJobs = () => {
             <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 {/* Previous Button */}
                 <button
-                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                    className="p-3 bg-[#e7f0fa] rounded-[84px] cursor-pointer"
                     onClick={handlePreviousPage}
                     disabled={currentPage === 1}
                 >
