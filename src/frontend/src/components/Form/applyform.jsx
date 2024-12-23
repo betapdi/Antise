@@ -68,7 +68,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            //alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
             handleClickSubmit(values);
             //isCloseChange(true);
