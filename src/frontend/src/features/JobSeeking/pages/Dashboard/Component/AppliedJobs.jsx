@@ -13,6 +13,11 @@ function ListJob({ jobs, numberOfJobs }) {
     const navigate = useNavigate();
     const { profileImageUrl, fullName, favoriteJobs, applications } = useContext(ApplicantContext);
     const [jobCompanies, setJobCompanies] = useState({});
+
+    const handleViewDetailJob = (job) => {
+        navigate(`/job/detailjob/${job.id}`);
+    };
+
     const calculateRemainingDays = () => {
         for (let i = 0; i < jobs.length; i++) {
             const targetDateString = jobs[i].expirationDate;
@@ -120,7 +125,9 @@ function ListJob({ jobs, numberOfJobs }) {
 
                         </div>
                         <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
-                                hover:bg-[#0a65cc] hover:text-white group mr-5">
+                                hover:bg-[#0a65cc] hover:text-white group mr-5"
+                            onClick={() => handleViewDetailJob(job)}
+                        >
                             <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                                 View Detail
                             </div>

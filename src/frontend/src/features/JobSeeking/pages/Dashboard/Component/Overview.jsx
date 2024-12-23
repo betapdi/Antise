@@ -8,14 +8,19 @@ import { ApplicantContext } from "../../../../../context/ApplicantContext";
 
 function ListJob({ jobs, numberOfJobs }) {
     const navigate = useNavigate();
-    const { profileImageUrl, fullName, favoriteJobs, applications } = useContext(ApplicantContext);
+    const { profileImageUrl, fullName, favoriteJobs, applications, isCompleteSetting } = useContext(ApplicantContext);
     const [jobCompanies, setJobCompanies] = useState({});
+    console.log("Complete setting:", isCompleteSetting());
 
     const handleSettingCompany = (company) => {
         navigate(`/job/dashboard/settings`);
     };
     const handleNavigateAppliedJob = () => {
         navigate(`/job/dashboard/applied-jobs`);
+    };
+
+    const handleViewDetailJob = (job) => {
+        navigate(`/job/detailjob/${job.id}`);
     };
 
     const [remainingDays, setRemainingDays] = useState([]);
@@ -98,21 +103,25 @@ function ListJob({ jobs, numberOfJobs }) {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-32 p-8 bg-[#e05050] rounded-lg justify-between items-center inline-flex mb-5">
-                <div className="justify-center items-center gap-6 flex">
-                    <img className="w-16 h-16 rounded-full" alt="icon_star" src={"http://172.28.102.169:8080/api/v1" + [profileImageUrl]} />
-                    <div className="flex-col justify-start items-start gap-2 inline-flex">
-                        <div className="text-white text-lg font-medium font-['Inter'] leading-7">Your profile editing is not completed.</div>
-                        <div className="text-white text-sm font-normal font-['Inter'] leading-tight">Complete your profile editing & build your custom Resume</div>
+            <>
+                {!isCompleteSetting &&
+                    <div className="w-full h-32 p-8 bg-[#e05050] rounded-lg justify-between items-center inline-flex mb-5">
+                        <div className="justify-center items-center gap-6 flex">
+                            <img className="w-16 h-16 rounded-full" alt="icon_star" src="/path/to/default-image.jpg" />
+                            <div className="flex-col justify-start items-start gap-2 inline-flex">
+                                <div className="text-white text-lg font-medium font-['Inter'] leading-7">Your profile editing is not completed.</div>
+                                <div className="text-white text-sm font-normal font-['Inter'] leading-tight">Complete your profile editing & build your custom Resume</div>
+                            </div>
+                        </div>
+                        <button className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 flex">
+                            <div className="text-[#e05050] text-base font-semibold font-['Inter'] capitalize leading-normal"
+                                onClick={() => handleSettingCompany()}
+                            >Edit Profile</div>
+                            <img src={`/image/fi_arrow-right.png`} alt="icon_star" className="w-8 h-8" />
+                        </button>
                     </div>
-                </div>
-                <button className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 flex">
-                    <div className="text-[#e05050] text-base font-semibold font-['Inter'] capitalize leading-normal"
-                        onClick={() => handleSettingCompany()}
-                    >Edit Profile</div>
-                    <img src={`/image/fi_arrow-right.png`} alt="icon_star" className="w-8 h-8" />
-                </button>
-            </div>
+                }
+            </>
             <div className="w-full h-6 justify-between items-center inline-flex">
                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Recently Applied</div>
 
@@ -188,12 +197,14 @@ function ListJob({ jobs, numberOfJobs }) {
                             </div>
 
                         </div>
-                        <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
-                                hover:bg-[#0a65cc] hover:text-white group mr-5">
+                        <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
+                                hover:bg-[#0a65cc] hover:text-white group mr-5"
+                            onClick={() => handleViewDetailJob(job)}
+                        >
                             <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                                 View Detail
                             </div>
-                        </div>
+                        </button>
                     </div>
                 ))}
             </div>

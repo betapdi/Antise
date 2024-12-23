@@ -51,6 +51,14 @@ export const ApplicantProvider = ({ children }) => {
         setFavoriteJobs((prevJobs) => prevJobs.filter((favJob) => favJob.id !== id));
     };
 
+    const isCompleteSetting = () => {
+        if (gender && fullName && profileImageUrl && resumeUrl && dateOfBirth && experience && education
+            && nationality && major && biography && address && workEmail && phoneNumber) {
+            return true;
+        }
+        return false;
+    };
+
     return (
         <ApplicantContext.Provider value={{
             gender, setGender, fullName, setFullName, profileImageUrl, setProfileImageUrl,
@@ -59,7 +67,7 @@ export const ApplicantProvider = ({ children }) => {
             major, setMajor, biography, setBiography, address, setAddress,
             applications, setApplications, education, setEducation,
             workEmail, setWorkEmail, phoneNumber, setPhoneNumber,
-            favoriteJobs, setFavoriteJobs, resetApplicant, removeFavoriteJob, addFavoriteJob
+            favoriteJobs, setFavoriteJobs, resetApplicant, removeFavoriteJob, addFavoriteJob, isCompleteSetting
         }}>
             {children}
         </ApplicantContext.Provider>
