@@ -284,11 +284,6 @@ function ListJob({ isSearch }) {
                         </div>
                         <div className="justify-start items-start gap-3 flex">
                             <>
-                                {/* {role === "APPLICANT" && (
-                                    <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-                                        src={`/image/${isClicked ? 'bookmark_click.png' : 'bookmark.png'}`}
-                                    </div>
-                                )} */}
                                 {role === "APPLICANT" && (
                                     <div
                                         className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex"

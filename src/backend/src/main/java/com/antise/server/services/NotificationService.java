@@ -1,38 +1,34 @@
 package com.antise.server.services;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.antise.server.dto.NotificationDto;
-import com.antise.server.entities.Notification;
-import com.antise.server.repositories.NotificationRepository;
+import com.antise.server.classes.ApplicantNotification;
+import com.antise.server.classes.CompanyNotification;
 
 @Service
 public class NotificationService {
+    public NotificationService() {}
 
-    private final NotificationRepository notificationRepository;
-    private final FileService fileService;
-
-    public NotificationService(NotificationRepository notificationRepository, FileService fileService) {
-        this.notificationRepository = notificationRepository;
-        this.fileService = fileService;
+    public CompanyNotification createCompanyNotification(String applicantName, String applicationId) {
+        CompanyNotification companyNotification = CompanyNotification.builder()
+                                                    .applicationId(applicationId)
+                                                    .applicantName(applicantName)
+                                                    .createdAt(LocalDateTime.now())
+                                                    .status(false)
+                                                    .build();
+        return companyNotification;
     }
 
-    public List<NotificationDto> getAllNotifications() {
-        List<Notification> notifications = notificationRepository.findAll();
-        List<NotificationDto> notificationDtos = new ArrayList<>();
+    public ApplicantNotification createApplicantNotification(String companyName, String jobId) {
+        ApplicantNotification applicantNotification = ApplicantNotification.builder()
+                                                        .companyName(companyName)
+                                                        .jobId(jobId)
+                                                        .createdAt(LocalDateTime.now())
+                                                        .status(false)
+                                                        .build();
 
-        for (Notification item : notifications) {
-            NotificationDto dto = new NotificationDto();
-            dto.update(item);
-            notificationDtos.add(dto);
-        }
-
-        return notificationDtos;
+        return applicantNotification;
     }
 }

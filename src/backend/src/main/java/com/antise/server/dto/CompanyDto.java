@@ -1,6 +1,7 @@
 package com.antise.server.dto;
 
 import com.antise.server.auth.entities.User;
+import com.antise.server.classes.CompanyNotification;
 import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Company;
 import com.antise.server.entities.Job;
@@ -45,6 +46,8 @@ public class CompanyDto extends UserDto {
 
     private String industry;
 
+    private List<CompanyNotification> notifications;
+
     private List<JobDto> jobList;
 
     private List<ApplicantDto> savedApplicants;
@@ -68,6 +71,7 @@ public class CompanyDto extends UserDto {
         if (company.getCompanyPhoneNumber() != null) companyPhoneNumber = company.getCompanyPhoneNumber();
         if (company.getSize() != null) size = company.getSize();
         if (company.getIndustry() != null) industry = company.getIndustry();
+        if (company.getNotifications() != null) notifications = company.getNotifications();
 
         if (company.getSavedApplicants() != null) {
             savedApplicants = new ArrayList<>();

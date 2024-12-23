@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
+import com.antise.server.classes.ApplicantNotification;
+import com.antise.server.classes.CompanyNotification;
 import com.antise.server.controllers.requests.SearchJobRequest;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.ApplicationDto;
@@ -32,13 +34,16 @@ public class JobService {
     private final UserRepository userRepository;
     private final ApplicationRepository applicationRepository;
     private final ApplicationService applicationService;
+    private final NotificationService notificationService;
 
     public JobService(JobRepository jobRepository, UserRepository userRepository, 
-                        ApplicationRepository applicationRepository, ApplicationService applicationService) {
+                        ApplicationRepository applicationRepository, ApplicationService applicationService,
+                        NotificationService notificationService) {
         this.jobRepository = jobRepository;
         this.userRepository = userRepository;
         this.applicationRepository = applicationRepository;
         this.applicationService = applicationService;
+        this.notificationService = notificationService;
     }
     
     public List<JobDto> getAllJobs() {
@@ -69,13 +74,22 @@ public class JobService {
 
         Job job = new Job(); job.update(jobDto); job.setCompanyId(user.getId());
         job.setPostedDate(Date.from((LocalDate.now()).atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        jobRepository.save(job);
+        Job savedJob = jobRepository.save(job);
 
         Company company = (Company)user;
         company.getJobList().add(job);
         userRepository.save(company);
 
         //Create job alert
+        for (String applicantId : company.getNotifiedApplicantIds()) {
+            User applicantUser = userRepository.findById(applicantId).orElseThrow(() -> new UserNotFoundException());
+            Applicant applicant = (Applicant)applicantUser;
+
+            ApplicantNotification notification = notificationService.
+                                                    createApplicantNotification(company.getName(), savedJob.getId());
+            applicant.getNotifications().add(notification);
+            userRepository.save(applicant);
+        }
 
         JobDto response = new JobDto();
         response.update(job);
@@ -132,11 +146,27 @@ public class JobService {
         applicant.getApplications().add(savedApplication);
         userRepository.save(applicant);
 
+        //Add applicant to list of notified 
+        User companyUser = userRepository.findById(job.getCompanyId()).orElseThrow(() -> new UserNotFoundException());
+        Company company = (Company)companyUser; Boolean ok = true;
+
+        for(String applicantId : company.getNotifiedApplicantIds()) {
+            if (applicantId.equals(applicant.getId())) {ok = false; break;}
+        }
+
+        if (ok) {
+            company.getNotifiedApplicantIds().add(applicant.getId());
+            userRepository.save(company);
+        }
+        
+        //Notification
+        CompanyNotification notification = notificationService.
+                                            createCompanyNotification(applicant.getFullName(), savedApplication.getId());
+        company.getNotifications().add(notification);
+        userRepository.save(company);
+        
         ApplicationDto response = new ApplicationDto();
         response.update(savedApplication);
-
-        //Notification
-
         return response;
     }
 

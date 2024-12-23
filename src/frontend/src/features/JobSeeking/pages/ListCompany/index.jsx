@@ -106,15 +106,24 @@ function ListCompany() {
                 </div>
               </div>
             </div>
-            <div className="justify-start items-start gap-3 flex">
-              <button className="px-6 py-3 bg-[#e7f0fa] rounded justify-center items-center gap-3 flex">
-                <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal"
-                  onClick={() => handleViewDetailCompany(company)}
-                >
-                  View Company
-                </div>
-                <img src="/image/arrow_right.png" alt="arrow_right" />
+
+            <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
+                            hover:bg-[#0a65cc] hover:text-white group">
+              <button className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
+                onClick={() => handleViewDetailCompany(company)}
+              >
+                View Company
               </button>
+              <img
+                src={`/image/arrow_right.png`}
+                alt="arrow_right"
+                className="h-4 group-hover:hidden"
+              />
+              <img
+                src={`/image/arrow_right_hover.png`}
+                alt="arrow_right_hover"
+                className="h-4 hidden group-hover:block"
+              />
             </div>
           </div>
         ))}
