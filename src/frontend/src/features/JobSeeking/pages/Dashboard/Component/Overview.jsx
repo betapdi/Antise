@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
-import { useState, useContext } from "react";
+import React from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ApplicantContext } from "../../../../../context/ApplicantContext";
-import jobApi from "../../../../../api/jobApi";
 import applicantApi from "../../../../../api/applicantApi";
+import companyApi from "../../../../../api/companyApi";
 
 
 function ListJob({ jobs, numberOfJobs }) {
@@ -11,6 +10,33 @@ function ListJob({ jobs, numberOfJobs }) {
     const handleSettingCompany = (company) => {
         navigate(`/job/dashboard/settings`);
     };
+
+    useEffect(() => {
+        const fetchCompanies = async () => {
+            const fetchedCompanies = {};
+
+            try {
+                await Promise.all(
+                    jobs.map(async (job) => {
+                        if (job.companyId && !fetchedCompanies[job.companyId]) {
+                            const response = await companyApi.getCompany(job.companyId);
+                            fetchedCompanies[job.companyId] = response.data; // Store company data keyed by companyId
+                        }
+                    })
+                );
+                setJobCompanies((prevCompanies) => ({ ...prevCompanies, ...fetchedCompanies }));
+            } catch (error) {
+                console.error("Error fetching company data:", error);
+            }
+        };
+
+        if (jobs.length > 0) {
+            fetchCompanies();
+            console.log("COMPANY", jobCompanies);
+        }
+    }, [jobs]);
+
+    const [jobCompanies, setJobCompanies] = useState({});
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
             {/*Display how many job are there, for example, display Favorite Job (13) */}
@@ -85,7 +111,7 @@ function ListJob({ jobs, numberOfJobs }) {
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="justify-start items-start gap-5 flex w-1/2">
-                            <img src={`/image/logoCompany/${job.companyLogo}`} alt="job_icon" className="w-16 h-16" />
+                            <img src={"http://172.28.102.169:8080/api/v1" + [jobCompanies[job.companyId]?.logoUrl]} alt="job_icon" className="w-16 h-16" />
                             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
                                 <div className="justify-start items-center gap-2 inline-flex">
                                     <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{job.title}</div>
@@ -145,35 +171,6 @@ const AppliedJobs = () => {
             setCurrentPage(currentPage - 1);
         }
     };
-
-    // const { applications, favoriteJobs } = useContext(ApplicantContext);
-    // const [jobIDs, setJobIDs] = useState([]);
-    // const [jobs, setJobs] = useState([]);
-    // const [isClicked, setIsClicked] = useState(false);
-
-    // useEffect(() => {
-    //     const fetchJobs = async () => {
-    //         try {
-    //             // Fetch job details for each jobId
-    //             const jobPromises = jobIDs.map((jobID) => jobApi.getJob(jobID));
-    //             const jobResponses = await Promise.all(jobPromises);
-    //             const jobData = jobResponses.map((response) => response.data);
-    //             setJobs(jobData);
-
-    //             // Check if any of the jobs are in favoriteJobs
-    //             const isAnyJobFavorite = jobIDs.some((jobID) =>
-    //                 favoriteJobs.some((job) => job.id === jobID)
-    //             );
-    //             setIsClicked(isAnyJobFavorite);
-    //         } catch (error) {
-    //             console.error('Error fetching job data:', error);
-    //         }
-    //     };
-
-    //     if (jobIDs && jobIDs.length > 0) {
-    //         fetchJobs();
-    //     }
-    // }, [jobIDs, favoriteJobs]);
 
     const [appliedJobs, setAppliedJob] = useState([]);
     useEffect(() => {
