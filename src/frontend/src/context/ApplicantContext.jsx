@@ -51,8 +51,6 @@ export const ApplicantProvider = ({ children }) => {
         setFavoriteJobs((prevJobs) => prevJobs.filter((favJob) => favJob.id !== id));
     };
 
-
-
     return (
         <ApplicantContext.Provider value={{
             gender, setGender, fullName, setFullName, profileImageUrl, setProfileImageUrl,

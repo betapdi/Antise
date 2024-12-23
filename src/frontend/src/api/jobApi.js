@@ -17,6 +17,7 @@ const jobApi = {
       },
     });
   },
+
   getAllJobs: () => {
     const url = 'public/job/getAll';
     return axiosClient.get(url);
@@ -38,14 +39,16 @@ const jobApi = {
     });
   },
 
-  applyJob: (applyData) => {
+  applyJob: (rawData) => {
     const url = '/job/apply';
-    return axiosClient.post(url, applyData, {
+    const formData = new FormData();
+    formData.append('application', new Blob([JSON.stringify(rawData)], { type: 'application/json' }));
+    return axiosPrivate.post(url, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-  },
+  }
 }
 
 export default jobApi;

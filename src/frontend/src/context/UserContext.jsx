@@ -3,7 +3,7 @@ import { createContext, useState } from 'react'
 
 export const UserContext = createContext({});
 
-export const UserProvider = ({children}) => {
+export const UserProvider = ({ children }) => {
     //User Data
     const [userId, setUserId] = useState(null);
     const [email, setEmail] = useState(null);
@@ -16,8 +16,8 @@ export const UserProvider = ({children}) => {
         setNotifications(null);
     };
     return (
-        <UserContext.Provider value = {{
-            userId, setUserId, email, setEmail, role, setRole, 
+        <UserContext.Provider value={{
+            userId, setUserId, email, setEmail, role, setRole,
             notifications, setNotifications, resetUser
         }}>
             {children}
