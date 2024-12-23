@@ -14,7 +14,6 @@ import com.antise.server.auth.repositories.UserRepository;
 import com.antise.server.classes.ApplicantNotification;
 import com.antise.server.classes.CompanyNotification;
 import com.antise.server.controllers.requests.SearchJobRequest;
-import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.ApplicationDto;
 import com.antise.server.dto.JobDto;
 import com.antise.server.entities.Applicant;
@@ -33,16 +32,14 @@ public class JobService {
     private final JobRepository jobRepository;
     private final UserRepository userRepository;
     private final ApplicationRepository applicationRepository;
-    private final ApplicationService applicationService;
     private final NotificationService notificationService;
 
     public JobService(JobRepository jobRepository, UserRepository userRepository, 
-                        ApplicationRepository applicationRepository, ApplicationService applicationService,
+                        ApplicationRepository applicationRepository,
                         NotificationService notificationService) {
         this.jobRepository = jobRepository;
         this.userRepository = userRepository;
         this.applicationRepository = applicationRepository;
-        this.applicationService = applicationService;
         this.notificationService = notificationService;
     }
     

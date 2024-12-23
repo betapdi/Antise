@@ -35,6 +35,8 @@ public class ApplicationDto {
 
     private String resumeUrl;
 
+    private String questions;
+
     public void update(Application application) {
         if (application.getId() != null) id = application.getId();
         if (application.getEmail() != null) email = application.getEmail();
@@ -44,6 +46,7 @@ public class ApplicationDto {
         if (application.getJobId() != null) jobId = application.getJobId();
         if (application.getStatus() != null) status = application.getStatus();
         if (application.getSubmittedDate() != null) submittedDate = application.getSubmittedDate();
+        if (application.getQuestions() != null) questions = application.getQuestions();
         if (application.getResumeName() != null) {
             resumeUrl = "/pdf/" + application.getResumeName();
         }
