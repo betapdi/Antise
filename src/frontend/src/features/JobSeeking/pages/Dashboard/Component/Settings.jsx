@@ -10,7 +10,7 @@ import ResumeField from "../../../../../customFields/ResumeField";
 import ImageField from "../../../../../customFields/ImageField";
 import applicantApi from "../../../../../api/applicantApi";
 import { ApplicantContext } from "../../../../../context/ApplicantContext";
-import PopupDialog from "../../../components/PopupDialog"; // Adjust the import based on your project structure
+import PopupDialog from "../../../components/PopupDialog";
 
 const Settings = () => {
   const {

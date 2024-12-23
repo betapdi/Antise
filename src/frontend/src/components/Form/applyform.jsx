@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -12,37 +12,41 @@ const ApplyForm = ({ isCloseChange, job }) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
 
+  useEffect(() => {
+    console.log("Dialog open:", isOpenDialog);
+  }, [isOpenDialog]); // Logs when isOpenDialog changes
+
   const handleCloseDialog = () => {
     setIsOpenDialog(false);
+    isCloseChange(true);
   }
 
-  const navigate = useNavigate();
   const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
   const handleClickSubmit = async (values) => {
-    console.log(values);
     try {
       setDialogContent({
         title: "Submit Form Successfully",
         content: "Your form has been submitted!",
         buttonLabel: "Close",
-        link: null
-      })
+        link: null,
+      });
     } catch (error) {
-      console.log(error);
+      console.error("Error submitting form:", error);
       setDialogContent({
         title: "Error",
-        content: "There is an error while submitting your form, please try again later!",
+        content: "There was an error submitting your form. Please try again later!",
         buttonLabel: "Close",
-        link: `/job/detailjob/${job.id}`
-      })
+        link: null,
+      });
     }
     setIsOpenDialog(true);
   };
-  console.log(job);
+
 
   return (
     <div className="w-full mx-auto p-8 bg-white shadow-md rounded">
       <h1 className="text-[#18191c] mb-3 text-lg font-medium font-['Inter'] leading-7">{job.title}</h1>
+      <div>
       <Formik
         initialValues={{
           fullName: "",
@@ -50,7 +54,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
           email: "",
           resume: "",
           coverLetter: "",
-          questions: "",
+          //questions: "",
         }}
         validationSchema={Yup.object({
           fullName: Yup.string().required("Please fill your full name"),
@@ -58,18 +62,19 @@ const ApplyForm = ({ isCloseChange, job }) => {
           email: Yup.string().email("Invalid email").required("Please fill your email"),
           resume: Yup.string().required("Please upload your CV"),
           coverLetter: Yup.string().required("Please fill the cover letter. If not, fill N/A"),
-          questions: Yup.string().required("Please answer the questions"),
+          //questions: Yup.string().required("Please answer the questions"),
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
             handleClickSubmit(values);
-            isCloseChange(true);
+            //isCloseChange(true);
           }, 400);
         }}
       >
         {({ values, errors, touched, setFieldValue, isSubmitting }) => {
+          console.log("Formik errors:", errors);
           return (
             <Form className="space-y-4">
               <Field
@@ -109,7 +114,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                 placeholder="Cover Letter"
               />
 
-              {job?.questions && (
+              {/* {job?.questions && (
                 <div className="mt-4 ">
                   <h3 className="text-sm font-medium text-[#18191c]"> Questions</h3>
                   <div className="mb-2">
@@ -126,7 +131,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                     placeholder="Questions"
                   />
                 </div>
-              )}
+              )} */}
               <div className="flex flex-row justify-between">
                 <button className="h-12 px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex"
                   onClick={() => isCloseChange(true)}
@@ -134,9 +139,8 @@ const ApplyForm = ({ isCloseChange, job }) => {
                   <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Cancel</div>
                 </button>
                 <button
-                  type="submit" // Use type="button" for custom behavior
+                  type="submit"
                   className="h-12 px-6 py-3 bg-[#0a65cc] rounded-[3px] justify-center items-center gap-3 inline-flex cursor-pointer"
-                  disabled={isSubmitting}
                 >
                   <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply Now</div>
                   <img
@@ -150,6 +154,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
           )
         }}
       </Formik>
+      </div>
       {isOpenDialog && (
         <PopupDialog
           isOpen={isOpenDialog}
