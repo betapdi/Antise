@@ -195,7 +195,7 @@ const AppliedJobs = () => {
             <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
                 <ListJob jobs={paginatedJobs} numberOfJobs={jobs.length} />
             </div>
-            <div className="h-12 justify-center items-center gap-2 inline-flex">
+            <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 {/* Previous Button */}
                 <button
                     className="p-3 bg-[#e7f0fa] rounded-[84px]"

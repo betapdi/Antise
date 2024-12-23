@@ -93,7 +93,7 @@ function ListJob({ jobList }) {
                     </div>
                 </div>
             ))}
-            <div className="h-12 justify-center items-center gap-2 inline-flex">
+            <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 {/* Previous Button */}
                 <button
                     className="p-3 bg-[#e7f0fa] rounded-[84px]"
