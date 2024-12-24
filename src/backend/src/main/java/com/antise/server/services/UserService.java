@@ -38,10 +38,35 @@ public class UserService {
 
     public long countPendingCompanies() {
         Query query = new Query();
-        query.addCriteria(Criteria.where("_class").is("Company"));
+        query.addCriteria(Criteria.where("_class").is("com.antise.server.entities.Company"));
         query.addCriteria(Criteria.where("verified").is(false));
         
         return mongoTemplate.count(query, User.class);
+    }
+
+    public List<Object> getAllUsers(String email) {
+        List<User> users = userRepository.findAll();
+
+        List<Object> response = new ArrayList<>();
+        for (User user : users) {
+            if (user instanceof Company) {
+                Company company = (Company)user;
+                CompanyDto dto = new CompanyDto();
+                dto.update(company);
+    
+                response.add(dto);
+            }
+    
+            else if (user instanceof Applicant) {
+                Applicant applicant = (Applicant)user;
+                ApplicantDto dto = new ApplicantDto();
+                dto.update(applicant);
+    
+                response.add(dto);
+            }
+        }
+    
+        return response;
     }
 
     public Object getUserData(String email) {
