@@ -29,81 +29,38 @@ const Sidebar = () => {
                 Overview
               </Link>
             </li>
-            {/* <li>
+            <li>
               <Link
-                to="/company/dashboard/post-job"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/post-job")
+                to="/admin/dashboard/pending-companies"
+                className={`flex items-center py-2 gap-4 ${isActive("/admin/dashboard/pending-companies")
                   ? "bg-[#e7f0fa] text-[#0a65cc]"
                   : "text-[#767F8C]"
                   } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`${isActive("/company/dashboard/post-job") ? "/image/BluePlusCircle.png" : "/image/PlusCircle.png"}`}
+                  src={`${isActive("/admin/dashboard/pending-companies") ? "/image/BluePlusCircle.png" : "/image/PlusCircle.png"}`}
                   alt="logo"
                   className="h-auto ml-4 mr-2"
                 />
-                Post a Job
+                Pending Companies
               </Link>
             </li>
             <li>
               <Link
-                to="/company/dashboard/my-job"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/my-job")
+                to="/admin/dashboard/users"
+                className={`flex items-center py-2 gap-4 ${isActive("/admin/dashboard/users")
                   ? "bg-[#e7f0fa] text-[#0a65cc]"
                   : "text-[#767F8C]"
                   } hover:bg-[#e7f0fa] relative`}
               >
                 <img
-                  src={`${isActive("/company/dashboard/my-job") ? "/image/BlueBriefcase.png" : "/image/Briefcase.png"}`}
+                  src={`${isActive("/admin/dashboard/users") ? "/image/BlueUser.png" : "/image/user.png"}`}
                   alt="logo"
                   className="h-auto ml-4 mr-2"
                 />
-                My Jobs
+                Users
               </Link>
             </li>
-            <li>
-              <Link
-                to="/company/dashboard/candidate"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/candidate")
-                  ? "bg-[#e7f0fa] text-[#0a65cc]"
-                  : "text-[#767F8C]"
-                  } hover:bg-[#e7f0fa] relative`}
-              >
-                <img
-                  src={`${isActive("/company/dashboard/candidate") ? "/image/BlueBookmarkSimple.png" : "/image/BookmarkSimple.png"}`}
-                  alt="logo"
-                  className="h-auto ml-4 mr-2"
-                />
-                Candidates
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/company/dashboard/settings"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/settings")
-                  ? "bg-[#e7f0fa] text-[#0a65cc]"
-                  : "text-[#767F8C]"
-                  } hover:bg-[#e7f0fa]`}
-              >
-                <img
-                  src={`${isActive("/company/dashboard/settings") ? "/image/BlueGear.png" : "/image/setting_btn.svg"}`}
-                  alt="logo"
-                  className={`w-auto h-auto ml-4 mr-2 ${isActive("/company/dashboard/settings") ? "filter-blue" : ""
-                    }`}
-                />
-                Settings
-              </Link>
-            </li>
-            <li>
-              <div className="flex items-center py-2.5 text-[#767F8C] hover:bg-[#e7f0fa] relative mt-64">
-                <img
-                  src={`/image/SignOut.png`}
-                  alt="logo"
-                  className="w-auto h-auto ml-4 mr-2"
-                />
-                Log-out
-              </div> */}
-            {/* </li> */}
           </ul>
         </nav>
       </div>

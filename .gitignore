@@ -3,3 +3,5 @@
 node_modules
 .env
 resources
+src/frontend/package-lock.json
+src/frontend/package.json
