@@ -15,18 +15,19 @@ import Dashboard from './Dashboard';
 const Admin = (props) => {
   const location = useLocation();
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("accessToken") ? true : false);
-//   const {
-//         userId, setUserId, email, setEmail, role, setRole, resetUser
-//   } = useContext(UserContext);
-//   const navigate = useNavigate();
-//     useEffect(() => {
-//       if (role === "APPLICANT" || role === "ANONYMOUS") {
-//         navigate("/job/homepage", { replace: true });
-//       }
-//     //   if (role === "COMPANY") {
-//     //     navigate("/company/dashboard", { replace: true });
-//     //   }
-//     }, [role, navigate]);
+
+  // const {
+  //       userId, setUserId, email, setEmail, role, setRole, resetUser
+  // } = useContext(UserContext);
+  // const navigate = useNavigate();
+  //   useEffect(() => {
+  //     if (role === "APPLICANT" || role === "ANONYMOUS") {
+  //       navigate("/job/homepage", { replace: true });
+  //     }
+  //   //   if (role === "COMPANY") {
+  //   //     navigate("/company/dashboard", { replace: true });
+  //   //   }
+  //   }, [role, navigate]);
   return (
     <div>
       <div className='sticky top-0 z-50'>
