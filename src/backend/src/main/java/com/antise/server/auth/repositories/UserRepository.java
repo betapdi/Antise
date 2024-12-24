@@ -14,6 +14,6 @@ public interface UserRepository extends MongoRepository<User, String> {
      
     Optional<User> findByEmail(String email);
 
-    @Query("{ '_class': 'Company' }")
+    @Query("{ '_class': 'com.antise.server.entities.Company' }")
     List<Company> findAllCompanies();
 }

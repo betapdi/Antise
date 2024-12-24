@@ -33,6 +33,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @AllArgsConstructor
 public class UserController {
         private final UserService userService;
+
+        @GetMapping("/getAll")
+        public ResponseEntity<List<Object>> getAllUsers(@AuthenticationPrincipal UserDetails userDetails) {
+            List<Object> user = userService.getAllUsers(userDetails.getUsername());
+
+           return new ResponseEntity<>(user, HttpStatus.OK);
+        }
     
         @GetMapping("/get")
         public ResponseEntity<Object> getUserData(@AuthenticationPrincipal UserDetails userDetails) {
