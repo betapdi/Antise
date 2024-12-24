@@ -7,7 +7,7 @@ import { useState, useEffect, useContext} from "react";
 
 import {UserContext} from '../../context/UserContext';
 import Error from '../../components/Error';
-import HeaderLogginComany from '../../components/Header/Company';
+import HeaderLogginAdmin from '../../components/Header/Admin';
 import HeaderUnloggin from '../../components/Header/Unloggin';
 import Dashboard from './Dashboard';
 
@@ -30,7 +30,7 @@ const Admin = (props) => {
   return (
     <div>
       <div className='sticky top-0 z-50'>
-      {isAuthenticated ? <HeaderLogginComany /> : <HeaderUnloggin />}
+      {isAuthenticated ? <HeaderLogginAdmin /> : <HeaderLogginAdmin />}
       </div>
       <Routes>
         <Route exact path='/' element={<Navigate to="/admin/dashboard" replace />} />
