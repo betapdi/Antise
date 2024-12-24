@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { Route, useNavigate, useLocation } from "react-router-dom";
 import { ApplicantContext } from "../../../context/ApplicantContext";
 import { useSearchParams } from "react-router-dom";
@@ -19,10 +19,24 @@ function Nav({ isAuthen }) {
   const [isDropdownAvatarVisible, setIsDropdownAvatarVisible] = useState(false);
 
   const [isNotiDropdownOpen, setIsNotiDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleNotiDropdown = () => {
     setIsNotiDropdownOpen(!isNotiDropdownOpen);
   };
+
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsNotiDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleAvatarClick = () => {
     setIsDropdownAvatarVisible((prev) => !prev);
@@ -48,6 +62,7 @@ function Nav({ isAuthen }) {
   const handleSignUpClick = () => {
     navigate("/auth/register"); // Route for Sign Up
   };
+  
   const handleSearchChange = () => {
     console.log(searchQuery);
 
@@ -57,6 +72,7 @@ function Nav({ isAuthen }) {
       navigate(`/job/findcompany?${params.toString()}`);
     }
   };
+
   const handleItemClick = (action) => {
     switch (action) {
       case "profile":
@@ -212,7 +228,7 @@ function Nav({ isAuthen }) {
             <span className="animate-ping absolute top-1 right-0.5 block h-1 w-1 rounded-full ring-2 ring-[#E05151] bg-[#E05151]"></span>
           </button>
           {isNotiDropdownOpen && (
-            <div className="absolute right-[100px] mt-2 w-64 bg-white shadow-lg rounded-lg">
+            <div ref={dropdownRef} className="absolute right-[100px] mt-2 w-64 bg-white shadow-lg rounded-lg">
               <NotificationDropdown />
             </div>
           )}
