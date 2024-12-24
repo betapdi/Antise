@@ -1,29 +1,6 @@
 import React, { useState, useEffect } from "react";
+import companyApi from "../../../../api/companyApi";
 
-const companies = [
-    {
-        name: "Tech Innovators",
-        logo: "company_1.png",
-        location: "Australia",
-        industry: "Technology",
-        daysPending: 4,
-    },
-    {
-        name: "Apple Inc.",
-        logo: "company_2.png",
-        location: "USA",
-        industry: "Technology",
-        daysPending: 7,
-    },
-    {
-        name: "Green Solutions",
-        logo: "company_3.png",
-        location: "UK",
-        industry: "Environment",
-        daysPending: 10,
-    },
-    // Add more companies as needed
-];
 
 function ListCompany({ companies, totalCompanies }) {
     const handleApprove = (companyName) => {
@@ -47,7 +24,7 @@ function ListCompany({ companies, totalCompanies }) {
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="w-1/3 justify-start items-start gap-5 flex">
-                            <img src={`/image/logoCompany/${company.logo}`} alt="company_logo" className="w-16 h-16 mt-4" />
+                            <img src={"http://172.28.102.169:8080/api/v1" + company.logoUrl} alt="company_logo" className="w-16 h-16 mt-4" />
                             <div className="flex-col justify-start items-start gap-2 inline-flex">
                                 <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{company.name}</div>
                                 <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{company.industry}</div>
@@ -57,12 +34,7 @@ function ListCompany({ companies, totalCompanies }) {
                                 </div>
                             </div>
                         </div>
-                        <div className="justify-start items-start gap-1.5 flex">
-                            <img src={`/image/icon_calander.png`} alt="calendar_icon" className="h-4" />
-                            <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">
-                                {company.daysPending} Days Pending
-                            </div>
-                        </div>
+                       
                         <div className="flex">
                             <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                                 hover:bg-[#0a65cc] hover:text-white group mr-3"
@@ -88,6 +60,21 @@ function ListCompany({ companies, totalCompanies }) {
 
 
 const PendingCompanies = () => {
+    const [companies, setCompanies] = useState([]);
+    useEffect(() => {
+        const fetchCompanies = async () => {
+          try {
+            const response = await companyApi.getAllCompanies();
+            const allCompanies = response.data;
+            const pendingCompanies = allCompanies.filter((company) => company.verified === false);
+            setCompanies(pendingCompanies);
+          } catch (error) {
+            console.log("Failed to fetch companies: ", error);
+          }
+        };
+        fetchCompanies();
+    }, []);
+    
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;

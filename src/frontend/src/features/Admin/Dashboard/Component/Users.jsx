@@ -1,37 +1,23 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import userApi  from "../../../../api/userApi";
 
-const users = [
-    {
-        name: "John Doe",
-        avatar: "user_1.png",
-        email: "john.doe@example.com",
-        joinedDate: "2023-10-01",
-        type: "Applicant",
-    },
-    {
-        name: "Jane Smith",
-        avatar: "user_2.png",
-        email: "jane.smith@example.com",
-        joinedDate: "2023-11-15",
-        type: "Applicant",
-    },
-    {
-        name: "Tech Innovators",
-        avatar: "company_1.png",
-        email: "contact@techinnovators.com",
-        joinedDate: "2024-01-05",
-        type: "Company",
-    },
-    {
-        name: "Green Solutions",
-        avatar: "company_2.png",
-        email: "info@greensolutions.co.uk",
-        joinedDate: "2023-12-22",
-        type: "Company",
-    },
-];
+
+
 
 function UserList() {
+    const [users,setUsers] = useState([]);
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await userApi.getAllUsers();
+                const allUsers = response.data;
+                setUsers(allUsers);
+            } catch (error) {
+                console.log("Failed to fetch users: ", error);
+            }
+        };
+        fetchUsers();
+    }, []);
 
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -69,7 +55,7 @@ function UserList() {
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="w-1/3 justify-start items-start gap-5 flex">
-                            <img src={`/image/avatar/${user.avatar}`} alt="user_avatar" className="w-16 h-16 mt-6 rounded-full" />
+                            <img src={"http://172.28.102.169:8080/api/v1" + user.profileImageUrl} alt="user_avatar" className="w-16 h-16 mt-6 rounded-full" />
                             <div className="flex-col justify-start items-start gap-2 inline-flex">
                                 <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">{user.name}</div>
                                 <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">{user.email}</div>
@@ -87,7 +73,7 @@ function UserList() {
                                 hover:bg-[#0a65cc] hover:text-white group mr-0"
                         >
                             <div className="text-[#cc0a0a] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
-                                Ban
+                                Delete
                             </div>
                         </button>
                     </div>

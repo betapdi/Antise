@@ -8,6 +8,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Overview() {
   const [stats, setStats] = useState([]);
+  const [roleData, setRoleData] = useState({ labels: [], data: [] });
+  const [organizationData, setOrganizationData] = useState({
+    labels: [],
+    data: [],
+  });
   useEffect(() => {
     const fetchStat = async () => {
       try {
@@ -25,8 +30,28 @@ function Overview() {
         ];
 
         setStats(updatedStats);
+        const roleLabels = stat.roleCount
+          .filter((item) => item.first !== "admin")
+          .map((item) => item.first);
+
+        console.log(roleLabels);
+        const roleValues = stat.roleCount
+          .filter((item) => item.first !== "admin")
+          .map((item) => item.second);
+
+        const organizationLabels = stat.organizationTypeCount.map(
+          (item) => item.first
+        );
+        const organizationValues = stat.organizationTypeCount.map(
+          (item) => item.second
+        );
+        setRoleData({ labels: roleLabels, data: roleValues });
+        setOrganizationData({
+          labels: organizationLabels,
+          data: organizationValues,
+        });
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -35,28 +60,28 @@ function Overview() {
 
   // Data for the pie chart
   const pieCompanyType = {
-    labels: ["Technology", "Healthcare", "Finance", "Retail", "Other"],
+    labels: organizationData.labels,
     datasets: [
       {
         label: "Company Types",
-        data: [40, 25, 15, 10, 10], // Example data (replace with your data)
+        data: organizationData.data, // Example data (replace with your data)
         backgroundColor: [
-          "#4F46E5", // Technology
-          "#10B981", // Healthcare
-          "#F59E0B", // Finance
-          "#EF4444", // Retail
-          "#6366F1", // Other
+          "#4F46E5",
+          "#10B981", 
+          "#F59E0B", 
+          "#EF4444", 
+          "#6366F1", 
         ],
         borderWidth: 1,
       },
     ],
   };
   const pieRole = {
-    labels: ["Applicant", "Company"],
+    labels: roleData.labels,
     datasets: [
       {
         label: "Company Types",
-        data: [40, 25], // Example data (replace with your data)
+        data: roleData.data, // Example data (replace with your data)
         backgroundColor: ["#4F46E5", "#10B981"],
         borderWidth: 1,
       },
