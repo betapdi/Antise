@@ -1,15 +1,37 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import adminApi from "../../../../api/adminApi";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function Overview() {
-  const stats = [
-    { label: "Number of Applications", value: "100" },
-    { label: "Number of Pending Companies", value: "100" },
-    { label: "Number of Active Jobs", value: "100" },
-  ];
+  const [stats, setStats] = useState([]);
+  useEffect(() => {
+    const fetchStat = async () => {
+      try {
+        const response = await adminApi.getWebStats();
+        const stat = response.data;
+
+        // Update the stats array dynamically
+        const updatedStats = [
+          { label: "Number of Applications", value: stat.applications || "0" },
+          {
+            label: "Number of Pending Companies",
+            value: stat.pendingCompanies || "0",
+          },
+          { label: "Number of Active Jobs", value: stat.jobs || "0" },
+        ];
+
+        setStats(updatedStats);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchStat();
+  }, []);
 
   // Data for the pie chart
   const pieCompanyType = {
@@ -35,10 +57,7 @@ function Overview() {
       {
         label: "Company Types",
         data: [40, 25], // Example data (replace with your data)
-        backgroundColor: [
-          "#4F46E5", 
-          "#10B981", 
-        ],
+        backgroundColor: ["#4F46E5", "#10B981"],
         borderWidth: 1,
       },
     ],
@@ -85,9 +104,7 @@ function Overview() {
           <Pie data={pieCompanyType} options={pieOptions} />
         </div>
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-medium mb-4">
-            Role Distribution
-          </h3>
+          <h3 className="text-lg font-medium mb-4">Role Distribution</h3>
           <Pie data={pieRole} options={pieOptions} />
         </div>
       </div>

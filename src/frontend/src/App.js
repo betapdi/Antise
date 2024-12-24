@@ -116,21 +116,23 @@ function App() {
         <Suspense fallback = {<div>Loading...</div>}>
             <BrowserRouter>
               <Routes>
+                <Route path = "auth/*" element = {<Authentication />} />
                 <Route path = "/" element={
                                   role === "APPLICANT" ? (
                                     <Job />
                                   ) : role === "COMPANY" ? (
                                     <Company />
+                                  ) : role === "ADMIN" ?(
+                                    <Admin />
                                   ) : (
                                     <Navigate to="/job/homepage" replace />
                                   )
                                 }
                 />
+                <Route path = "admin/*" element = {<Admin />} /> 
                 <Route path = "job/*" element = {<Job />} />
-                <Route path = "auth/*" element = {<Authentication />} />
                 <Route path = "company/*" element = {<Company />} />
                 <Route path = "error/" element={<Error/>} />
-                <Route path = "admin/*" element = {<Admin />} />
               </Routes>
             </BrowserRouter>
         </Suspense>)
