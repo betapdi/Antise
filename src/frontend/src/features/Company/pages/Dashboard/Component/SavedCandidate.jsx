@@ -46,7 +46,7 @@ const savedCandidateList = [
 
 function SavedCandidate() {
     return (
-        <div className='w-full flex flex-col p-4'>
+        <div className='w-full flex flex-col'>
             <div className='flex flex-row justify-between items-center'>
                 <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
                     My Applicants <span className="text-gray ml-2">({savedCandidateList.length})</span>

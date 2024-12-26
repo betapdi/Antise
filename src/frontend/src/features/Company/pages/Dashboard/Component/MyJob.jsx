@@ -12,7 +12,7 @@ function MyJob() {
     );
   }, [jobList]);
   return (
-    <div className="w-full flex flex-col p-4">
+    <div className="w-full flex flex-col">
       <div className="flex flex-row justify-between items-center">
         <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
           My Jobs <span className="text-gray ml-2">({jobList.length})</span>
