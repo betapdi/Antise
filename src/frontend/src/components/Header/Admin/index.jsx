@@ -7,7 +7,7 @@ const HeaderLogginAdmin = () => {
   return (
     <div className="w-full flex flex-col justify-center bg-[#f1f2f4] border-b border-[#e4e7eb]">
       <div className="w-full flex items-center justify-center">
-        <div className="w-[65rem] flex items-center justify-start">
+        <div className="w-[80rem] flex items-center justify-start">
           <div className="h-12 justify-start items-center inline-flex">
             <div className="justify-start gap-6 flex">
               <a

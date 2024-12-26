@@ -70,9 +70,16 @@ public class CompanyController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/saveApplicant")
-    public ResponseEntity<CompanyDto> saveApplicant(@RequestPart("applicantId") String applicantId, @AuthenticationPrincipal UserDetails userDetails) {
-        CompanyDto response = companyService.saveApplicant(applicantId, userDetails.getUsername());
+    @PostMapping("/saveApplication")
+    public ResponseEntity<CompanyDto> saveApplication(@RequestPart("applicationId") String applicationId, @AuthenticationPrincipal UserDetails userDetails) {
+        CompanyDto response = companyService.saveApplication(applicationId, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/removeSavedApplication")
+    public ResponseEntity<String> removeSavedApplication(@RequestPart("applicationId") String applicationId, @AuthenticationPrincipal UserDetails userDetails) {
+        String response = companyService.removeSavedApplication(applicationId, userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

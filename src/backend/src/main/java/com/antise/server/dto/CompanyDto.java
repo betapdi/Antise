@@ -3,6 +3,7 @@ package com.antise.server.dto;
 import com.antise.server.auth.entities.User;
 import com.antise.server.classes.CompanyNotification;
 import com.antise.server.entities.Applicant;
+import com.antise.server.entities.Application;
 import com.antise.server.entities.Company;
 import com.antise.server.entities.Job;
 
@@ -10,7 +11,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.mongodb.core.mapping.DBRef;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -50,7 +54,7 @@ public class CompanyDto extends UserDto {
 
     private List<JobDto> jobList;
 
-    private List<ApplicantDto> savedApplicants;
+    private List<ApplicationDto> savedApplications;
 
     private Boolean verified;
 
@@ -73,14 +77,14 @@ public class CompanyDto extends UserDto {
         if (company.getIndustry() != null) industry = company.getIndustry();
         if (company.getNotifications() != null) notifications = company.getNotifications();
 
-        if (company.getSavedApplicants() != null) {
-            savedApplicants = new ArrayList<>();
+        if (company.getSavedApplications() != null) {
+            savedApplications = new ArrayList<>();
 
-            for (Applicant applicant : company.getSavedApplicants()) {
-                ApplicantDto dto = new ApplicantDto();
-                dto.update(applicant);
+            for (Application application : company.getSavedApplications()) {
+                ApplicationDto dto = new ApplicationDto();
+                dto.update(application);
 
-                savedApplicants.add(dto);
+                savedApplications.add(dto);
             }
         }
         
