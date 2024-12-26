@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { use } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function ListJob({ jobList }) {
     // Pagination
+    const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // Number of jobs to display per page
 
@@ -39,6 +41,10 @@ function ListJob({ jobList }) {
     useEffect(() => {
         calculateRemainingDays();
     }, []);
+
+    const handleViewJobsApplications = (job) => {
+        navigate(`/company/dashboard/my-job/list-candidate/${job.id}`);
+    };
 
     return (
         <div className="w-full flex flex-col mt-4 gap-4">
@@ -79,7 +85,9 @@ function ListJob({ jobList }) {
                     </div>
 
                     {/* View Applications Button */}
-                    <button className="h-12 px-1 py-3 bg-white border-blue border rounded-[3px] justify-center items-center gap-3 inline-flex w-2/12">
+                    <button className="h-12 px-1 py-3 bg-white border-blue border rounded-[3px] justify-center items-center gap-3 inline-flex w-2/12"
+                        onClick={() => handleViewJobsApplications(job)}
+                    >
                         <span className="text-[#0a65cc] text-sm font-semibold font-['Inter'] capitalize leading-normal">View Applications</span>
                     </button>
 
@@ -133,7 +141,7 @@ function ListJob({ jobList }) {
                 </button>
             </div>
         </div>
-        
+
     )
 }
 

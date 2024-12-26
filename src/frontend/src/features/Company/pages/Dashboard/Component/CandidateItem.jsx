@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
+import applicantApi from "../../../../../api/applicantApi";
 
 function CandidateItem({ candidate }) {
+    // const [applicant, setApplicant] = useState(null);
+    // useEffect(() => {
+    //     const fetchApplicantById = async (id) => {
+    //       try {
+    //         const response = await applicantApi.getApplicant(id);
+    //         const data = response.data;
+    //         setApplicant(data);
+    //       } catch (error) {
+    //         console.error('Error fetching job data:', error);
+    //       }
+    //     };
+
+    //     if (jobID != null) {
+    //       fetchJobById(jobID);
+    //     }
+    //   }, [candidate]);
+    console.log(candidate);
+
     return (
         <div className="bg-white p-7 mx-auto rounded-md shadow border border-[#e4e5e8] w-full">
             <div className="flex flex-row items-center mb-4 gap-4">
