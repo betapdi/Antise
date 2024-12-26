@@ -94,16 +94,6 @@ const Sidebar = () => {
                 Settings
               </Link>
             </li>
-            <li>
-              <div className="flex items-center py-2.5 text-[#767F8C] hover:bg-[#e7f0fa] relative mt-64">
-                <img
-                  src={`/image/SignOut.png`}
-                  alt="logo"
-                  className="w-auto h-auto ml-4 mr-2"
-                />
-                Log-out
-              </div>
-            </li>
           </ul>
         </nav>
       </div>

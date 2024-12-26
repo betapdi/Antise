@@ -12,7 +12,7 @@ const HeaderLogginAdmin = () => {
             <div className="justify-start gap-6 flex">
               <a
                 href="/admin/dashboard"
-                className={`py-3.5 ${location.pathname.toLowerCase().startsWith('/company/dashboard') ? 'text-blue' : 'text-[#5e6670]'
+                className={`py-3.5 ${location.pathname.toLowerCase().startsWith('/admin/dashboard') ? 'text-blue' : 'text-[#5e6670]'
                   } font-normal font-['Inter'] leading-tight`}
               >
                 Dashboard

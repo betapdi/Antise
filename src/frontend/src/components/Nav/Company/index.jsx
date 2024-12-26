@@ -31,6 +31,10 @@ function NavCompany() {
     ) {
       setIsDropdownAvatarVisible(false);
     }
+
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsNotiDropdownOpen(false);
+    }
   };
 
   useEffect(() => {
