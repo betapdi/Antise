@@ -10,7 +10,6 @@ import { ApplicantContext } from '../../../../context/ApplicantContext';
 import PopupDialog from '../../components/PopupDialog';
 
 function DetailJob() {
-
     const [isOpenDialog, setIsOpenDialog] = useState(false);
     const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
 
@@ -39,7 +38,6 @@ function DetailJob() {
     const { role } = useContext(UserContext);
     const { favoriteJobs, removeFavoriteJob, addFavoriteJob, isCompleteSetting } = useContext(ApplicantContext)
     const itemsPerPage = 6;
-
 
     useEffect(() => {
         setJobID(params.id);
@@ -245,7 +243,7 @@ function DetailJob() {
                                     </div>
                                 </div>
                             }
-                            {role != "APPLICANT" && role != "COMPANY" &&
+                            {role !== "APPLICANT" && role !== "COMPANY" &&
                                 <div className="flex-col justify-center items-end gap-3 inline-flex">
                                     <div className="justify-center items-center gap-3 inline-flex">
                                         <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"

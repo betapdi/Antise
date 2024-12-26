@@ -3,7 +3,7 @@ import { createContext, useState } from 'react'
 
 export const CompanyContext = createContext({});
 
-export const CompanyProvider = ({children}) => {
+export const CompanyProvider = ({ children }) => {
     //Company Data
     const [bannerUrl, setBannerUrl] = useState(null);
     const [benefit, setBenefit] = useState(null);
@@ -41,8 +41,21 @@ export const CompanyProvider = ({children}) => {
         setIndustry(null);
     }
 
+    // const addFavoriteApplication = (application) => {
+    //     setFavoriteJobs((prevJobs) => {
+    //         if (!prevJobs.some((favJob) => favJob.id === job.id)) {
+    //             return [...prevJobs, job];
+    //         }
+    //         return prevJobs;
+    //     });
+    // };
+
+    // const removeFavoriteApplication = (application) => {
+    //     setFavoriteJobs((prevJobs) => prevJobs.filter((favJob) => favJob.id !== id));
+    // };
+
     return (
-        <CompanyContext.Provider value = {{
+        <CompanyContext.Provider value={{
             companyName, setCompanyName, logoUrl, setLogoUrl, bannerUrl, setBannerUrl,
             description, setDescription, benefit, setBenefit,
             location, setLocation, organizationType, setOrganizationType,

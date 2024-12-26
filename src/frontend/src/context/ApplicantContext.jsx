@@ -52,7 +52,7 @@ export const ApplicantProvider = ({ children }) => {
     };
 
     const isCompleteSetting = () => {
-        if (gender && fullName && profileImageUrl && resumeUrl && dateOfBirth && experience && education
+        if (gender != null && fullName && profileImageUrl && resumeUrl && dateOfBirth && experience && education
             && nationality && major && biography && address && workEmail && phoneNumber) {
             return true;
         }

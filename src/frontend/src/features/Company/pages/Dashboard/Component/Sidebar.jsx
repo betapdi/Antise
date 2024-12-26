@@ -74,7 +74,7 @@ const Sidebar = () => {
                   alt="logo"
                   className="h-auto ml-4 mr-2"
                 />
-                Save Candidates
+                Saved Applications
               </Link>
             </li>
             <li>
