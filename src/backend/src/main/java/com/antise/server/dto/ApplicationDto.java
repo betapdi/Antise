@@ -39,6 +39,7 @@ public class ApplicationDto {
 
     public void update(Application application) {
         if (application.getId() != null) id = application.getId();
+        if (application.getFullName() != null) fullName = application.getFullName();
         if (application.getEmail() != null) email = application.getEmail();
         if (application.getPhoneNumber() != null) phoneNumber = application.getPhoneNumber();
         if (application.getCoverLetter() != null) coverLetter = application.getCoverLetter();

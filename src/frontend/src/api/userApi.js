@@ -21,6 +21,7 @@ const userApi = {
     return axiosPrivate.get(url);
   },
 
+  
 }
 
 export default userApi;

@@ -65,7 +65,7 @@ public class Company extends User {
 
     @DBRef
     @Builder.Default
-    private List<Applicant> savedApplicants = new ArrayList<>();
+    private List<Application> savedApplications = new ArrayList<>();
 
     @Builder.Default
     private List<String> notifiedApplicantIds = new ArrayList<>();

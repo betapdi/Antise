@@ -58,6 +58,9 @@ public class AdminService {
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException());
         if (user.getRole() == UserRole.ADMIN) throw new UserRoleNotQualifiedException();
 
+        List<User> users = userRepository.findAll();
+
+
         if (user.getRole() == UserRole.COMPANY) {
             Company company = (Company)user;
             List<Job> jobs = company.getJobList();
@@ -75,6 +78,22 @@ public class AdminService {
                     applicationRepository.deleteById(application.getId());
                 }
                 job.getApplications().removeAll(applications);
+
+                for (User userApplicant : users) {
+                    if (userApplicant instanceof Applicant) {
+                        Applicant applicant = (Applicant)userApplicant;
+                        
+                        Job chosen = null;
+                        for (Job favoJob : applicant.getFavoriteJobs()) {
+                            if (favoJob.getId().equals(job.getId())) chosen = favoJob;
+                        }
+
+                        if (chosen != null) {
+                            applicant.getFavoriteJobs().remove(chosen);
+                            userRepository.save(applicant);
+                        }
+                    }
+                }
 
                 //delete job
                 jobRepository.deleteById(job.getId());

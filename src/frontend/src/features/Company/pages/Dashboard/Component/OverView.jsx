@@ -32,7 +32,7 @@ function OverView() {
                 <div className="w-1/3 pl-6 pr-5 py-5 bg-[#fff6e6] rounded-lg justify-center items-center gap-20 inline-flex">
                     <div className="flex-col justify-start items-start inline-flex mb-2">
                         <div className="text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">{totalApplicants}</div>
-                        <div className="opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Candidates</div>
+                        <div className="opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Applications</div>
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">
                         <div className="justify-center items-center flex">
