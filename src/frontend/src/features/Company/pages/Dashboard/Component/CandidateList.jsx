@@ -71,7 +71,6 @@ function CandidateList() {
 
     if (jobID != null) {
       fetchJobById(jobID);
-      console.log(job.applications);
     }
   }, [jobID]);
 
@@ -84,7 +83,7 @@ function CandidateList() {
         {/* Candidate List */}
 
         <>
-          {job.applications == [] && (
+          {job.applications != null && (
             <div className="grid grid-cols-2 gap-5">
               {job.applications.map((item, index) => (
                 <CandidateItem key={index} candidate={item} />
