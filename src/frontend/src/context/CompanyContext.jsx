@@ -50,8 +50,8 @@ export const CompanyProvider = ({ children }) => {
         });
     };
 
-    const removeSavedApplication = (application) => {
-        setSavedApplications((savedApplications) => savedApplications.filter((savedApplication) => savedApplication.id !== application.id));
+    const removeSavedApplications = (id) => {
+        setSavedApplications((savedApplications) => savedApplications.filter((savedApplication) => savedApplication.id !== id));
     };
 
     return (
@@ -62,7 +62,7 @@ export const CompanyProvider = ({ children }) => {
             companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
             companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
             yearOfEstablishment, setYearOfEstablishment, savedApplications, setSavedApplications,
-            size, setSize, industry, setIndustry, resetCompany, addSavedApplications, removeSavedApplication
+            size, setSize, industry, setIndustry, resetCompany, addSavedApplications, removeSavedApplications
         }}>
             {children}
         </CompanyContext.Provider>
