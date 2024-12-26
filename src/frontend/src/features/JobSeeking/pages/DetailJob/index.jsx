@@ -7,8 +7,28 @@ import jobApi from '../../../../api/jobApi';
 import applicantApi from '../../../../api/applicantApi';
 import { UserContext } from '../../../../context/UserContext';
 import { ApplicantContext } from '../../../../context/ApplicantContext';
+import PopupDialog from '../../components/PopupDialog';
 
 function DetailJob() {
+
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
+    const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+
+    // Handle dialog close
+    const handleCloseDialog = () => {
+        setIsOpenDialog(false);
+    };
+
+    const popUpAlreadyApplied = () => {
+        setDialogContent({
+            title: "Already Applied",
+            content: "You have already applied for this job. Please contact the employer via email.",
+            buttonLabel: "Close",
+            link: null,
+        });
+        setIsOpenDialog(true);
+    };
+
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -73,6 +93,13 @@ function DetailJob() {
         } else {
             setIsFormOpen(false);
             // Show popup if settings are incomplete
+            setDialogContent({
+                title: "Incomplete Profile",
+                content: "Please complete your profile settings in Dashboard before apply for a job.",
+                buttonLabel: "Close",
+                link: null, // Update this to the actual settings page route
+            });
+            setIsOpenDialog(true);
         }
     };
 
@@ -534,7 +561,13 @@ function DetailJob() {
                         </div>
 
                     )}
-
+                    {isOpenDialog && (
+                        <PopupDialog
+                            isOpen={isOpenDialog}
+                            handleClose={handleCloseDialog}
+                            content={dialogContent}
+                        />
+                    )}
                 </div>
 
             }

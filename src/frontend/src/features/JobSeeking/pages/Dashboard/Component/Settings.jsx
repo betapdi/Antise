@@ -22,6 +22,7 @@ const Settings = () => {
     workEmail, setWorkEmail, phoneNumber, setPhoneNumber
   } = useContext(ApplicantContext);
 
+
   const [oldResume, setOldResume] = useState(null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
