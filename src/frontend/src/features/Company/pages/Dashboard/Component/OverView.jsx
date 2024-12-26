@@ -44,10 +44,6 @@ function OverView() {
 
             <div className="w-full h-6 justify-between items-center inline-flex">
                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Recently Posted Jobs</div>
-                <div className="justify-center items-center gap-2 flex">
-                    <div className="text-[#767f8c] text-base font-medium font-['Inter'] leading-normal">View all</div>
-                    <img src={`/image/fi_arrow-right-grey.png`} alt="icon_star" className="w-6 h-6" />
-                </div>
             </div>
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
