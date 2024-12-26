@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import applicantApi from '../../../../../api/applicantApi';
+import companyApi from '../../../../../api/companyApi';
+import { useContext } from 'react';
+import { CompanyContext } from '../../../../../context/CompanyContext';
 
 function ViewCandidate({ application }) {
     const [applicant, setApplicant] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
-    console.log(application);
+    const { addSavedApplication, removeSavedApplication } = useContext(CompanyContext);
 
     useEffect(() => {
         const fetchApplicantById = async (applicantId) => {
@@ -23,40 +26,31 @@ function ViewCandidate({ application }) {
             fetchApplicantById(application.applicantId);
         }
     }, [application.id]);
+
     if (!application) return null;
-    const getFileNameFromUrl = (url, removeExtension = true) => {
-        if (!url) return "";
-        const fileName = url.split("/").pop();
-        if (removeExtension) {
-            return fileName.split('.').slice(0, -1).join('.');
+
+    const handleAddSavedApplication = async (id) => {
+        console.log(id);
+        try {
+            const response = await companyApi.addSavedApplication(id);
+            const application = response.data;
+            console.log('ADD', application);
+            addSavedApplication(application);
+        } catch (error) {
+            console.log(error);
         }
-        return fileName;
     };
 
-    // const handleAddFavoriteApplicant = async (id) => {
-    //     console.log(id);
-    //     try {
-    //         const response = await companyApi.addFavoriteApplicant(id);
-    //         const applicant = response.data;
-    //         console.log(applicant);
-    //         addFavoriteApplicant(applicant);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    // const handleRemoveFavoriteApplicant = async (id) => {
-    //     try {
-    //         const response = await companyApi.removeFavoriteApplicant(id);
-    //         const applicant = response.data;
-    //         console.log('REMOVE', applicant);
-    //         removeFavoriteApplicant(id);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-
+    const handleRemoveSavedApplication = async (id) => {
+        try {
+            const response = await companyApi.removeSavedApplication(id);
+            const application = response.data;
+            console.log('REMOVE', application);
+            removeSavedApplication(id);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <>
@@ -78,11 +72,11 @@ function ViewCandidate({ application }) {
                             <button className="p-3 bg-[#e7f0fa] rounded-[5px] justify-start items-start flex"
                                 onClick={() => {
                                     setIsClicked(!isClicked);
-                                    // if (isClicked) {
-                                    //     handleRemoveFavoriteApplication(application.id); // Call remove when it's already bookmarked
-                                    // } else {
-                                    //     handleAddFavoriteApplication(application.id); // Call add when it's not bookmarked
-                                    // }
+                                    if (isClicked) {
+                                        handleRemoveSavedApplication(application.id); // Call remove when it's already bookmarked
+                                    } else {
+                                        handleAddSavedApplication(application.id); // Call add when it's not bookmarked
+                                    }
                                 }}
                             >
                                 <div className="w-6 h-6 justify-center items-center flex">
@@ -92,22 +86,6 @@ function ViewCandidate({ application }) {
                                     />
                                 </div>
                             </button>
-                            {/* <div className="px-6 py-3 rounded-[3px] border-2 border-[#0a65cc] justify-center items-center gap-3 flex">
-                                <div className="w-6 h-6 justify-center items-center flex">
-                                    <img
-                                        src={`/image/Envelope.png`}
-                                        alt="Envelope"
-                                    />
-                                </div>
-                                <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">Send Mail</div>
-                            </div>
-                            <div className="px-6 py-3 rounded-[3px]  bg-[#0a65cc] border-2 border-[#0a65cc] justify-center items-center gap-3 flex">
-                                <img
-                                    src={`/image/fi_arrow-right-circle.png`}
-                                    alt="Envelope"
-                                />
-                                <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Hire Candidates</div>
-                            </div> */}
                         </div>
                     </div>
                     <div className="w-full flex gap-[72px]">

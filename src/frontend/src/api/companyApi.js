@@ -39,7 +39,7 @@ const companyApi = {
     const url = `public/company/get/${id}`;
     return axiosClient.get(url);
   },
-  
+
   getAllCompanies: () => {
     const url = 'public/company/getAll';
     return axiosClient.get(url);
@@ -47,8 +47,38 @@ const companyApi = {
 
   searchCompany: (searchPattern) => {
     const url = `public/company/search/${searchPattern}`;
-    return axiosClient.post(url); 
+    return axiosClient.post(url);
   },
+
+  addSavedApplication: (id) => {
+    console.log(id);
+    const url = `/company/saveApplication`;
+    const formData = new FormData();
+    formData.append('applicationId', new Blob([JSON.stringify(id)], { type: 'application/json' }));
+    return axiosPrivate.post(url, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+  },
+
+
+  // removeSavedApplication: (id) => {
+  //   const url = `/company/removeSavedApplication`;
+
+  // },
+
+  removeSavedApplication: (id) => {
+    const url = `/company/removeSavedApplication`;
+    const formData = new FormData();
+    formData.append('applicationId', id);
+    return axiosPrivate.delete(url, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      data: formData,
+    })
+  }
 }
 
 export default companyApi;

@@ -98,16 +98,15 @@ function ListJob({ jobList }) {
                             alt="status"
                         />
                         <div
-                            className={`${
-                                remainingDays[index] > 0
-                                    ? "text-[#0ba02c]"
-                                    : "text-[#d32f2f]"
-                            } text-sm font-medium font-['Inter'] leading-tight`}
+                            className={`${remainingDays[index] > 0
+                                ? "text-[#0ba02c]"
+                                : "text-[#d32f2f]"
+                                } text-sm font-medium font-['Inter'] leading-tight`}
                         >
                             {remainingDays[index] > 0 ? "Active" : "Expired"}
                         </div>
                     </div>
-                    <div className="inline-flex gap-1 items-center w-3/12">
+                    <div className="inline-flex gap-1 items-center w-3/12 ">
                         <img
                             src={`/image/Users.svg`}
                             className="h-6 w-6"
@@ -125,7 +124,7 @@ function ListJob({ jobList }) {
                             View Applications
                         </span>
                     </button>
-                    <div className="h-12 py-3 rounded-[5px] justify-start items-start gap-2.5 inline-flex">
+                    <div className="h-12 py-3 px-5 rounded-[5px] justify-start items-start gap-2.5 inline-flex">
                         <button>
                             <img
                                 src={`/image/DotsThreeVertical.png`}
@@ -166,11 +165,10 @@ function ListJob({ jobList }) {
                     return (
                         <button
                             key={displayPage}
-                            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${
-                                currentPage === displayPage
-                                    ? "bg-[#0a65cc] text-white"
-                                    : "text-[#5e6670]"
-                            }`}
+                            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage
+                                ? "bg-[#0a65cc] text-white"
+                                : "text-[#5e6670]"
+                                }`}
                             onClick={() => setCurrentPage(displayPage)}
                         >
                             {displayPage}
