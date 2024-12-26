@@ -2,8 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import companyApi from "../../../../api/companyApi.js";
 import { useNavigate } from "react-router-dom";
+import PopupDialog from "../../components/PopupDialog.js";
 
 function ListCompany() {
+  // Set Show Dialog
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+
+  // Handle dialog close
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false);
+  };
   const [companies, setCompanies] = useState([]);
   const navigate = useNavigate();
   const [logos, setLogos] = useState({});
@@ -23,10 +32,27 @@ function ListCompany() {
       .then((response) => {
         console.log("Search results:", response.data);
         setCompanies(response.data);
+        if (response.data.length === 0) {
+          setDialogContent({
+            title: "No companies found!",
+            content: "There are no companies that match your search criteria. Please try again.",
+            buttonLabel: "Close",
+            link: null
+          });
+          setIsOpenDialog(true);
+        }
       })
       .catch((error) => {
         console.error("Error searching for company:", error);
+        setDialogContent({
+          title: "Error!",
+          content: "An error occurred while searching jobs. Please try again later.",
+          buttonLabel: "Close",
+          link: null
+        });
+        setIsOpenDialog(true);
       });
+
   }, [searchQuery]);
 
   useEffect(() => {
@@ -127,6 +153,13 @@ function ListCompany() {
             </div>
           </div>
         ))}
+        {isOpenDialog && (
+          <PopupDialog
+            isOpen={isOpenDialog}
+            handleClose={handleCloseDialog}
+            content={dialogContent}
+          />
+        )}
       </div>
     </div>
   );
