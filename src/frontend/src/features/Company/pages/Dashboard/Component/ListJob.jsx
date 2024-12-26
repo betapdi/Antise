@@ -76,6 +76,7 @@ function ListJob({ jobList }) {
                     <div className="flex flex-col w-1/2 gap-2">
                         <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">
                             {job.title}
+                            {job.PostedDate}
                         </div>
                         <div className="inline-flex items-center gap-4">
                             <span className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">
