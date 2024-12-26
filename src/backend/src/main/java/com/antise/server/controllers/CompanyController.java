@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.antise.server.auth.services.AuthService;
 import com.antise.server.auth.services.JwtService;
 import com.antise.server.auth.services.RefreshTokenService;
+import com.antise.server.classes.CompanyNotification;
 import com.antise.server.dto.CompanyDto;
 import com.antise.server.services.CompanyService;
 
@@ -90,5 +91,11 @@ public class CompanyController {
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    
+ 
+    @PostMapping("/readNotification/{applicationId}")
+    public ResponseEntity<CompanyNotification> readNotification(@PathVariable("applicationId") String applicationId, @AuthenticationPrincipal UserDetails userDetails) {
+        CompanyNotification response = companyService.readNotification(applicationId, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

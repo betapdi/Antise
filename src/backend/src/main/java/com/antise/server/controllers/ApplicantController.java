@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.antise.server.classes.ApplicantNotification;
+import com.antise.server.classes.CompanyNotification;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.JobDto;
 import com.antise.server.services.ApplicantService;
@@ -87,4 +89,10 @@ public class ApplicantController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     
+    @PostMapping("/readNotification/{jobId}")
+    public ResponseEntity<ApplicantNotification> readNotification(@PathVariable("jobId") String jobId, @AuthenticationPrincipal UserDetails userDetails) {
+        ApplicantNotification response = applicantService.readNotification(jobId, userDetails.getUsername());
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }
