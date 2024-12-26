@@ -36,8 +36,8 @@ export default function SignUpPage() {
       const value = response.data;
   
       // console.log(response);
-      localStorage.setItem('accessToken', value.accessToken);
-      localStorage.setItem('refreshToken', value.refreshToken);
+      // localStorage.setItem('accessToken', value.accessToken);
+      // localStorage.setItem('refreshToken', value.refreshToken);
       
       if (rawData.role === "applicant") {
         const response = await applicantApi.createApplicantAccount();
