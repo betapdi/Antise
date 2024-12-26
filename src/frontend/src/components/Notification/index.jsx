@@ -50,28 +50,6 @@ const NotificationDropdown = () => {
     );
   }
 
-
-  // const notifications = [
-  //   {
-  //     id: 1,
-  //     title: "John Doe has applied for the Software Engineer position.",
-  //     time: "Last Wednesday at 9:42 AM",
-  //     unread: true,
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "Your job posting for Marketing Specialist has received 5 new applications.",
-  //     time: "Last Wednesday at 9:42 AM",
-  //     unread: false,
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "The application period for your UI/UX Designer job posting has ended.",
-  //     time: "Last Wednesday at 9:42 AM",
-  //     unread: false,
-  //   },
-  // ];
-
   return (
     <div className="w-96 bg-white rounded-lg shadow-lg p-4">
       <div className="flex items-center justify-between mb-4">
