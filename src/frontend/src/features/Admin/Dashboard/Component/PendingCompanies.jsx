@@ -3,12 +3,12 @@ import companyApi from "../../../../api/companyApi";
 import adminApi from "../../../../api/adminApi";
 
 
-function ListCompany({ companies, totalCompanies, deletedCompany}) {
+function ListCompany({ companies, totalCompanies, onApprove}) {
     const handleApprove = async (company) => {
         try {
             await adminApi.verifyCompany(company.id);
             console.log(`Company with ID ${company.id} has been verified successfully`);
-            deletedCompany(company.id);       
+            onApprove(company.id);       
         } catch (error) {
             console.error("Error verifying company:", error);
         }
@@ -18,7 +18,7 @@ function ListCompany({ companies, totalCompanies, deletedCompany}) {
         try {
             await adminApi.deleteUser(company.id);
             console.log(`Company with ID ${company.id} has been deleted successfully`);
-            deletedCompany(company.id);
+            onApprove(company.id);
         } catch (error) {
             console.error("Error deleting company:", error);
         }
@@ -87,7 +87,7 @@ const PendingCompanies = () => {
         };
         fetchCompanies();
     }, []);  
-    const deletedCompany = (companyId) => {
+    const handleApprove = (companyId) => {
         setCompanies(companies.filter((company) => company.id!== companyId));
     };
 
@@ -114,7 +114,7 @@ const PendingCompanies = () => {
     return (
         <div>
             <div className={`w-100 overflow-y-auto ml-8 mb-5`}>
-                <ListCompany companies={paginatedCompanies} totalCompanies={companies.length} />
+                <ListCompany companies={paginatedCompanies} totalCompanies={companies.length} onApprove={handleApprove} />
             </div>
             <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                 <button

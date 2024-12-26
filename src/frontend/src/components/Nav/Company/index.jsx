@@ -41,7 +41,7 @@ function NavCompany() {
       case "logout":
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        navigate("/auth/login");
+        window.location.href = "/auth/login";
         break;
       default:
         console.log("Unhandled action");
