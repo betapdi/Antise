@@ -7,8 +7,28 @@ import jobApi from '../../../../api/jobApi';
 import applicantApi from '../../../../api/applicantApi';
 import { UserContext } from '../../../../context/UserContext';
 import { ApplicantContext } from '../../../../context/ApplicantContext';
+import PopupDialog from '../../components/PopupDialog';
 
 function DetailJob() {
+
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
+    const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+
+    // Handle dialog close
+    const handleCloseDialog = () => {
+        setIsOpenDialog(false);
+    };
+
+    const popUpAlreadyApplied = () => {
+        setDialogContent({
+            title: "Already Applied",
+            content: "You have already applied for this job. Please contact the employer via email.",
+            buttonLabel: "Close",
+            link: null,
+        });
+        setIsOpenDialog(true);
+    };
+
     const [isClicked, setIsClicked] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
     const [isFormOpen, setIsFormOpen] = useState(false);
@@ -17,7 +37,7 @@ function DetailJob() {
     const [jobID, setJobID] = useState(null);
     const params = useParams();
     const { role } = useContext(UserContext);
-    const { favoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext)
+    const { favoriteJobs, removeFavoriteJob, addFavoriteJob, isCompleteSetting } = useContext(ApplicantContext)
     const itemsPerPage = 6;
 
 
@@ -64,6 +84,22 @@ function DetailJob() {
             newPage < Math.ceil(company.jobList.length / itemsPerPage)
         ) {
             setCurrentPage(newPage);
+        }
+    };
+
+    const handleClickApply = () => {
+        if (isCompleteSetting()) {
+            setIsFormOpen(true);
+        } else {
+            setIsFormOpen(false);
+            // Show popup if settings are incomplete
+            setDialogContent({
+                title: "Incomplete Profile",
+                content: "Please complete your profile settings in Dashboard before apply for a job.",
+                buttonLabel: "Close",
+                link: null, // Update this to the actual settings page route
+            });
+            setIsOpenDialog(true);
         }
     };
 
@@ -187,7 +223,7 @@ function DetailJob() {
                                         </div>
 
                                         <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
-                                            onClick={() => setIsFormOpen(true)}
+                                            onClick={() => handleClickApply()}
                                         >
                                             <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
                                             <img
@@ -525,7 +561,13 @@ function DetailJob() {
                         </div>
 
                     )}
-
+                    {isOpenDialog && (
+                        <PopupDialog
+                            isOpen={isOpenDialog}
+                            handleClose={handleCloseDialog}
+                            content={dialogContent}
+                        />
+                    )}
                 </div>
 
             }

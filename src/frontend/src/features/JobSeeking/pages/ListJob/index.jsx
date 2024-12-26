@@ -7,11 +7,20 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 import { UserContext } from '../../../../context/UserContext';
 import { ApplicantContext } from '../../../../context/ApplicantContext';
 import applicantApi from '../../../../api/applicantApi';
+import PopupDialog from '../../components/PopupDialog.js';
 
 
 
 
 function ListJob({ isSearch }) {
+    // Set Show Dialog
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
+    const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+
+    // Handle dialog close
+    const handleCloseDialog = () => {
+        setIsOpenDialog(false);
+    };
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
     const { role } = useContext(UserContext);
@@ -100,8 +109,24 @@ function ListJob({ isSearch }) {
                 const response = await jobApi.searchJob(searchData);
                 console.log("Search Jobs: ", response.data);
                 setJobs(response.data);
+                if (response.data.length === 0) {
+                    setDialogContent({
+                        title: "No jobs found!",
+                        content: "There are no jobs that match your search criteria. Please try again.",
+                        buttonLabel: "Close",
+                        link: null
+                    });
+                    setIsOpenDialog(true);
+                }
             } catch (error) {
                 console.error("Error searching jobs:", error);
+                setDialogContent({
+                    title: "Error!",
+                    content: "An error occurred while searching jobs. Please try again later.",
+                    buttonLabel: "Close",
+                    link: null
+                });
+                setIsOpenDialog(true);
             }
         }
         search();
@@ -379,6 +404,13 @@ function ListJob({ isSearch }) {
                     </div>
                 </div>
 
+            )}
+            {isOpenDialog && (
+                <PopupDialog
+                    isOpen={isOpenDialog}
+                    handleClose={handleCloseDialog}
+                    content={dialogContent}
+                />
             )}
         </div>
     )

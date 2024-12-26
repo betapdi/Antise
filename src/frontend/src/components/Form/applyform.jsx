@@ -77,7 +77,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
             fullName: "",
             phoneNumber: "",
             email: "",
-            resume: "",
+            resumeUrl: "",
             coverLetter: "",
             questions: "",
           }}
@@ -85,7 +85,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
             fullName: Yup.string().required("Please fill your full name"),
             phoneNumber: Yup.string().matches(phoneRegExp, "Please enter a valid phone number").required("Please fill your telephone number"),
             email: Yup.string().email("Invalid email").required("Please fill your email"),
-            resume: Yup.string().required("Please upload your CV"),
+            resumeUrl: Yup.string().required("Please upload your CV"),
             coverLetter: Yup.string().required("Please fill the cover letter. If not, fill N/A"),
             ...(job?.questions && {
               questions: Yup.string().required("Please answer the questions"),
@@ -131,7 +131,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                 />
 
                 <Field
-                  name="resume"
+                  name="resumeUrl"
                   component={SelectField}
                   label="Resume"
                   options={[{ key: "Select...", value: "" },
@@ -163,6 +163,10 @@ const ApplyForm = ({ isCloseChange, job }) => {
                     />
                   </div>
                 )}
+
+                <div className="flex items-center gap-3 text-[#FF0000] text-justify italic">  Please complete the application carefully,
+                  as you can only submit it once. Once submitted, you will not be able to reapply </div>
+
                 <div className="flex flex-row justify-between">
                   <button className="h-12 px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex"
                     onClick={() => isCloseChange(true)}

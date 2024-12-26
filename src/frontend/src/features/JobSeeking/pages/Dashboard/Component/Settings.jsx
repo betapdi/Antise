@@ -22,6 +22,7 @@ const Settings = () => {
     workEmail, setWorkEmail, phoneNumber, setPhoneNumber
   } = useContext(ApplicantContext);
 
+
   const [oldResume, setOldResume] = useState(null);
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
@@ -126,11 +127,11 @@ const Settings = () => {
                 address: Yup.string().required("Please provide your location"),
                 phoneNumber: Yup.string()
                   .required("Please enter your phone number")
-                  .matches(/^\d+$/, "Please enter a valid number.")
+                  .matches(/^\d+$/, "Please enter a valid number. A valid number include only digits")
                   .matches(/^\d{10,15}$/, "Phone number must be between 10 and 15 digits"),
                 workEmail: Yup.string()
                   .required("Please provide your email")
-                  .email("Invalid email address"),
+                  .email("Invalid email address. An email address should include @ and domain"),
                 biography: Yup.string().required("Please write a short biography"),
               })}
               onSubmit={(values, { setSubmitting }) => {
@@ -326,18 +327,18 @@ const Settings = () => {
               }}
             </Formik>
           </div>
-          </div>
-      )}
-          {isOpenDialog && (
-            <PopupDialog
-              isOpen={isOpenDialog}
-              handleClose={handleCloseDialog}
-              content={dialogContent}
-            />
-          )}
         </div>
-      );
+      )}
+      {isOpenDialog && (
+        <PopupDialog
+          isOpen={isOpenDialog}
+          handleClose={handleCloseDialog}
+          content={dialogContent}
+        />
+      )}
+    </div>
+  );
 };
 
-      export default Settings;
+export default Settings;
 
