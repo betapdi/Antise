@@ -75,24 +75,26 @@ function CandidateList() {
   }, [jobID]);
 
   return (
-    <> {job && (
-      <div className="w-full flex flex-col gap-4">
-        <div className="text-[#18191c] text-xl font-medium font-['Inter'] leading-tight">
-          {job.title} Applications
-        </div>
-        {/* Candidate List */}
-
-        <>
-          {job.applications != null && (
+    <>
+      {job && (
+        <div className="w-full flex flex-col gap-4">
+          <div className="text-[#18191c] text-xl font-medium font-['Inter'] leading-tight">
+            {job.title} Applications
+          </div>
+          {/* Candidate List */}
+          {job.applications && job.applications.length > 0 ? (
             <div className="grid grid-cols-2 gap-5">
               {job.applications.map((item, index) => (
                 <CandidateItem key={index} candidate={item} />
               ))}
-            </div>)
-          }
-        </>
-      </div >)
-    }
+            </div>
+          ) : (
+            <div className="w-full flex flex-col mt-5">
+              No applications yet
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }
