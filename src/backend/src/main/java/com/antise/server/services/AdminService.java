@@ -1,22 +1,14 @@
 package com.antise.server.services;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
 import com.antise.server.controllers.responses.WebStatisticsResponse;
-import com.antise.server.dto.ApplicantDto;
-import com.antise.server.dto.JobDto;
 import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Application;
 import com.antise.server.entities.Company;
@@ -65,7 +57,47 @@ public class AdminService {
 
         User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException());
         if (user.getRole() == UserRole.ADMIN) throw new UserRoleNotQualifiedException();
-        userRepository.deleteById(userId);
+
+        if (user.getRole() == UserRole.COMPANY) {
+            Company company = (Company)user;
+            List<Job> jobs = company.getJobList();
+    
+            for (Job job : jobs) {
+                List<Application> applications = job.getApplications();
+                for (Application application : applications) {
+                    User userApplicant = userRepository.findById(application.getApplicantId()).orElseThrow(() -> new UserNotFoundException());
+                    Applicant applicant = (Applicant)userApplicant;
+
+                    applicant.getApplications().remove(application);
+                    userRepository.save(applicant);
+
+                    //delete application
+                    applicationRepository.deleteById(application.getId());
+                }
+                job.getApplications().removeAll(applications);
+
+                //delete job
+                jobRepository.deleteById(job.getId());
+            }
+
+            userRepository.deleteById(userId);
+        }
+
+        else if (user.getRole() == UserRole.APPLICANT) {
+            Applicant applicant = (Applicant)user;
+            List<Application> applications = applicant.getApplications();
+
+            for (Application application : applications) {
+                Job job = jobRepository.findById(application.getJobId()).orElseThrow(() -> new JobNotFoundException());
+                job.getApplications().remove(application);
+                jobRepository.save(job);
+
+                applicationRepository.deleteById(application.getId());
+            }
+
+            applicant.getApplications().removeAll(applications);
+            userRepository.deleteById(userId);
+        }
 
         String response = "User with id: " + userId + "has been deleted!";
         return response;
@@ -96,6 +128,7 @@ public class AdminService {
         List<Company> companies = userRepository.findAllCompanies();
         int LLC = 0, corporation = 0, nonProfit = 0;
         for(Company company : companies) {
+            if (company.getOrganizationType() == null) continue;
             if (company.getOrganizationType().equals("LLC")) ++LLC;
             else if (company.getOrganizationType().equals("Corporation")) ++corporation;
             else ++nonProfit;

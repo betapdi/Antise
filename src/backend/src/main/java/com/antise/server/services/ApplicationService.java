@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.antise.server.dto.ApplicationDto;
 import com.antise.server.entities.Application;
+import com.antise.server.exceptions.ApplicationNotFoundException;
 import com.antise.server.repositories.ApplicationRepository;
 
 @Service
@@ -36,5 +37,14 @@ public class ApplicationService {
         }
 
         return applicationDtos;
+    }
+
+    public ApplicationDto getApplication(String applicationId) {
+        Application application = applicationRepository.findById(applicationId).orElseThrow(() -> new ApplicationNotFoundException());
+
+        ApplicationDto response = new ApplicationDto();
+        response.update(application);
+
+        return response;
     }
 }
