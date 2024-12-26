@@ -40,15 +40,12 @@ function UserList() {
 
   const handleBanUser = async (user) => {
     try {
-        await adminApi.deleteUser(user.id);
-        console.log(
-          `User with ID ${user.id} has been deleted successfully`
-        );
-        setUsers(users.filter((item) => item.id !== user.id));
-      } catch (error) {
-        console.error("Error deleting company:", error);
-      }
-    
+      await adminApi.deleteUser(user.id);
+      console.log(`User with ID ${user.id} has been deleted successfully`);
+      setUsers(users.filter((item) => item.id !== user.id));
+    } catch (error) {
+      console.error("Error deleting company:", error);
+    }
   };
 
   return (
@@ -58,7 +55,7 @@ function UserList() {
       </span>
       <div className="flex flex-col gap-3 items-center justify-center w-full mt-5">
         {paginatedUsers
-          .filter((user) => user.role !== "ADMIN") 
+          .filter((user) => user.role !== "ADMIN")
           .map((user, index) => (
             <div
               key={user.id}
@@ -79,7 +76,9 @@ function UserList() {
                 />
                 <div className="flex-col justify-start items-start gap-2 inline-flex">
                   <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">
-                    {user.name}
+                    {user.role === "APPLICANT"
+                      ? user.fullName || "No name"
+                      : user.name || "No name"}
                   </div>
                   <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">
                     {user.email}

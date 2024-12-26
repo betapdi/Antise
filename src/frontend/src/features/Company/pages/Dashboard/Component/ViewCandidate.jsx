@@ -5,6 +5,7 @@ import applicantApi from '../../../../../api/applicantApi';
 function ViewCandidate({ application }) {
     const [applicant, setApplicant] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
+    console.log(application);
 
     useEffect(() => {
         const fetchApplicantById = async (applicantId) => {
@@ -69,7 +70,7 @@ function ViewCandidate({ application }) {
                                 className="w-20 h-20 rounded-full border"
                             />
                             <div className="flex-col justify-start items-start gap-2 inline-flex">
-                                <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">{applicant.fullName}</div>
+                                <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">{application.fullName}</div>
                                 <div className="text-[#767f8c] text-base font-normal font-['Inter'] leading-normal">{applicant.major}</div>
                             </div>
                         </div>
@@ -192,27 +193,30 @@ function ViewCandidate({ application }) {
                             </div>
                             <div className="w-full p-6 bg-white rounded-lg border border-[#cee0f5]/70 flex-col justify-start items-start gap-4 flex">
                                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Download My Resume</div>
-                                <div className="rounded-lg justify-between items-center inline-flex gap-10">
-                                    <div className="justify-start items-center gap-3 flex">
+                                <div className="w-full rounded-lg flex items-center justify-between">
+                                    <div className="flex-row justify-start items-center gap-3 flex">
                                         <img
                                             src={`/image/fi_file-text.png`}
-                                            alt="star"
+                                            alt="file icon"
                                         />
                                         <div className="flex-col justify-start items-start gap-1 inline-flex">
-                                            <div className="text-[#767f8c] text-xs font-normal font-['Inter'] leading-[18px]">{getFileNameFromUrl(applicant.resumeUrl)}</div>
+                                            <div className="w-2/3 text-[#767f8c] text-xs font-normal font-['Inter'] leading-[18px]">
+                                                {application.fullName}.pdf
+                                            </div>
                                             <div className="text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">PDF</div>
                                         </div>
                                     </div>
-                                    <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-                                        <div className="w-6 h-6 justify-center items-center flex">
+                                    <div className=" rounded-[5px] flex justify-center items-center">
+                                        <div className="w-6 h-6 flex justify-center items-center">
                                             <img
                                                 src={`/image/DownloadSimple.png`}
-                                                alt="star"
+                                                alt="download icon"
                                             />
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div className="w-full p-6 bg-white rounded-lg border border-[#cee0f5]/70 flex-col justify-start items-start gap-6 flex">
                                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Contact Information</div>
                                 <div className="flex-col justify-start items-start gap-5 flex">

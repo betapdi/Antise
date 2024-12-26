@@ -36,7 +36,7 @@ function CandidateItem({ application, onClick }) {
                         />
                         <div className="flex flex-col">
                             <div className="self-stretch text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">
-                                {applicant.fullName}
+                                {application.fullName}
                             </div>
                             <div className="self-stretch text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">
                                 {applicant.major}
