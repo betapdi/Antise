@@ -49,6 +49,7 @@ const jobApi = {
       },
     });
   },
+  
   deleteJob: (jobId) => {
     const url = `/job/delete/${jobId}`;
     return axiosPrivate.delete(url);

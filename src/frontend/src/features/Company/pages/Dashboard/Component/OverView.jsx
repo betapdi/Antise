@@ -3,16 +3,21 @@ import { useContext, useMemo } from "react";
 
 import ListJob from "./ListJob";
 import { CompanyContext } from "../../../../../context/CompanyContext";
+import { useNavigate } from "react-router-dom";
 
 
 function OverView() {
     const { companyName, jobList } = useContext(CompanyContext);
+    const navigate = useNavigate();
     const totalApplicants = useMemo(() => {
         return jobList.reduce(
             (sum, job) => sum + (job.applications?.length || 0),
             0
         );
     }, [jobList]);
+    const handleNavigateMyJob = () => {
+        navigate(`/company/dashboard/my-job`);
+    };
 
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
@@ -44,10 +49,26 @@ function OverView() {
 
             <div className="w-full h-6 justify-between items-center inline-flex">
                 <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">Recently Posted Jobs</div>
+                <button
+                    className="px-3 py-2 rounded-[3px] flex justify-center items-center gap-3 text-[#767f8c] text-base font-semibold font-['Inter'] capitalize leading-normal hover:bg-[#0a65cc] hover:text-white group"
+                    onClick={() => handleNavigateMyJob()}
+                >
+                    View All
+                    <img
+                        src={"/image/fi_arrow-right-grey.png"}
+                        alt="arrow_right"
+                        className="h-4 group-hover:hidden"
+                    />
+                    <img
+                        src={"/image/arrow_right_hover.png"}
+                        alt="arrow_right_hover"
+                        className="h-4 hidden group-hover:block"
+                    />
+                </button>
             </div>
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
-                <div className="w-full px-5 py-2.5 bg-[#f1f2f4] rounded gap-5 inline-flex">
+                <div className="w-full px-5 py-2.5 bg-[#f1f2f4] rounded inline-flex">
                     <div className="w-5/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
                         JOBS
                     </div>

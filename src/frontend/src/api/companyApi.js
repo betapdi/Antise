@@ -39,7 +39,7 @@ const companyApi = {
     const url = `public/company/get/${id}`;
     return axiosClient.get(url);
   },
-  
+
   getAllCompanies: () => {
     const url = 'public/company/getAll';
     return axiosClient.get(url);
@@ -47,8 +47,25 @@ const companyApi = {
 
   searchCompany: (searchPattern) => {
     const url = `public/company/search/${searchPattern}`;
-    return axiosClient.post(url); 
+    return axiosClient.post(url);
   },
+
+  addSavedApplication: (id) => {
+    console.log(id);
+    const url = `/company/saveApplication/${id}`;
+    return axiosPrivate.post(url);
+  },
+
+
+  // removeSavedApplication: (id) => {
+  //   const url = `/company/removeSavedApplication`;
+
+  // },
+
+  removeSavedApplication: (id) => {
+    const url = `/company/removeSavedApplication/${id}`;
+    return axiosPrivate.delete(url);
+  }
 }
 
 export default companyApi;

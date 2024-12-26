@@ -131,7 +131,7 @@ function ListJob({ jobs, numberOfJobs }) {
                 >
                     View All
                     <img
-                        src={"/image/arrow_right.png"}
+                        src={"/image/fi_arrow-right-grey.png"}
                         alt="arrow_right"
                         className="h-4 group-hover:hidden"
                     />

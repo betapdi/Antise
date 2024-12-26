@@ -18,7 +18,7 @@ export const CompanyProvider = ({ children }) => {
     const [organizationType, setOrganizationType] = useState(null);
     const [verified, setVerified] = useState(null);
     const [yearOfEstablishment, setYearOfEstablishment] = useState(null);
-    const [savedApplicants, setSavedApplicants] = useState(null);
+    const [savedApplications, setSavedApplications] = useState(null);
     const [size, setSize] = useState(null);
     const [industry, setIndustry] = useState(null);
 
@@ -36,23 +36,23 @@ export const CompanyProvider = ({ children }) => {
         setOrganizationType(null);
         setVerified(null);
         setYearOfEstablishment(null);
-        setSavedApplicants(null);
+        setSavedApplications(null);
         setSize(null);
         setIndustry(null);
     }
 
-    // const addFavoriteApplication = (application) => {
-    //     setFavoriteJobs((prevJobs) => {
-    //         if (!prevJobs.some((favJob) => favJob.id === job.id)) {
-    //             return [...prevJobs, job];
-    //         }
-    //         return prevJobs;
-    //     });
-    // };
+    const addSavedApplications = (application) => {
+        setSavedApplications((savedApplications) => {
+            if (!savedApplications.some((savedApplication) => savedApplication.id === application.id)) {
+                return [...savedApplications, application];
+            }
+            return savedApplications;
+        });
+    };
 
-    // const removeFavoriteApplication = (application) => {
-    //     setFavoriteJobs((prevJobs) => prevJobs.filter((favJob) => favJob.id !== id));
-    // };
+    const removeSavedApplication = (application) => {
+        setSavedApplications((savedApplications) => savedApplications.filter((savedApplication) => savedApplication.id !== application.id));
+    };
 
     return (
         <CompanyContext.Provider value={{
@@ -61,8 +61,8 @@ export const CompanyProvider = ({ children }) => {
             location, setLocation, organizationType, setOrganizationType,
             companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
             companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
-            yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants,
-            size, setSize, industry, setIndustry, resetCompany
+            yearOfEstablishment, setYearOfEstablishment, savedApplications, setSavedApplications,
+            size, setSize, industry, setIndustry, resetCompany, addSavedApplications, removeSavedApplication
         }}>
             {children}
         </CompanyContext.Provider>
