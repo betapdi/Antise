@@ -23,10 +23,18 @@ function SavedApplication() {
                 </div>
             </div>
 
-            <ListSavedApplication
-                savedApplications={savedApplications}
-                onViewProfile={handleViewProfile}
-            />
+
+
+            {savedApplications && savedApplications.length > 0 ? (
+                <ListSavedApplication
+                    savedApplications={savedApplications}
+                    onViewProfile={handleViewProfile}
+                />
+            ) : (
+                <div className="w-full flex flex-col mt-5">
+                    No saved applications yet
+                </div>
+            )}
 
             {selectedApplication && (
                 <div
