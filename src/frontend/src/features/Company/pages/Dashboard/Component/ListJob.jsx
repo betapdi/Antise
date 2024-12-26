@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { use } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import jobApi from "../../../../../api/jobApi";
+import {UserContext} from "../../../../../context/UserContext";
+import {CompanyContext} from "../../../../../context/CompanyContext";
 
 
-function ListJob({ jobList }) {
+function ListJob({ jobList}) {
+    const {setJobList} = useContext(CompanyContext);
+    const {
+        userId, setUserId, email, setEmail, role, setRole,
+        notifications, setNotifications, resetUser
+      } = useContext(UserContext);
     // Pagination
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,10 +40,17 @@ function ListJob({ jobList }) {
         }));
     };
 
-    const handleDeleteJob = (jobId) => {
-        // Add logic to delete the job from the backend or state
-        console.log(`Deleting job with ID: ${jobId}`);
-        // Example: Call a delete API and update the job list
+    const handleDeleteJob = async (job) => {
+        try{
+            const response = await jobApi.deleteJob(job.id);
+            const data = response.data;
+            const updatedJobList = jobList.filter((item) => item.id !== job.id);
+            setJobList(updatedJobList);
+            console.log(data);
+        }catch (error){
+            console.log(userId, " ",job.companyId);
+            console.log("Error deleting job",error);
+        }
     };
 
 
@@ -66,7 +81,7 @@ function ListJob({ jobList }) {
     return (
         <div className="w-full flex flex-col mt-4 gap-4">
             {paginatedJobs.map((job, index) => (
-                <div key={index} className='flex flex-row bg-white shadow-md p-5 rounded-lg'>
+                <div key={job.id} className='flex flex-row bg-white shadow-md p-5 rounded-lg'>
                     {/* Job Title and Info */}
                     <div className='flex flex-col w-1/2 gap-2'>
                         <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">{job.title}</div>
@@ -121,7 +136,7 @@ function ListJob({ jobList }) {
                         {dropdownOpen[job.id] && (
                             <button
                                 className="mt-7 right-10 flex items-center absolute bg-white gap-2 px-4 py-2 text-left shadow-md"
-                                onClick={() => handleDeleteJob(job.id)}
+                                onClick={() => handleDeleteJob(job)}
                             >
                                 <img
                                     src="/image/Trash.png" // Replace with the correct path to your trash can icon

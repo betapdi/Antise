@@ -4,13 +4,14 @@ import ListJob from "./ListJob";
 import { CompanyContext } from "../../../../../context/CompanyContext";
 
 function MyJob() {
-  const { companyName, jobList } = useContext(CompanyContext);
+  const { companyName, jobList, setJobList} = useContext(CompanyContext);
   const totalApplicants = useMemo(() => {
     return jobList.reduce(
       (sum, job) => sum + (job.applications?.length || 0),
       0
     );
   }, [jobList]);
+ 
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-row justify-between items-center">
