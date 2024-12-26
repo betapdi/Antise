@@ -18,6 +18,7 @@ const NotificationDropdown = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { notifications, setNotifications } = useContext(UserContext);
+  console.log(notifications);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -46,6 +47,7 @@ const NotificationDropdown = () => {
     }));
     setNotifications(updatedNotifications);
   };
+
   const handleNotificationClick = (notification) =>{
     toggleNotificationReadStatus(notification.id);
     setIsDropdownOpen(false);
@@ -70,6 +72,10 @@ const NotificationDropdown = () => {
     );
   }
 
+  const latestNotifications = notifications
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 5);
+
   return (
     <div className="w-96 bg-white rounded-lg shadow-lg p-4">
       <div className="flex items-center justify-between mb-4">
@@ -82,7 +88,7 @@ const NotificationDropdown = () => {
         </button>
       </div>
       <ul className="space-y-4">
-        {notifications.map((notification) => (
+        {latestNotifications.map((notification) => (
           <li
             key={notification.id}
             onClick={() => handleNotificationClick(notification)}
