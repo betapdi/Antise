@@ -12,6 +12,7 @@ import PopupDialog from '../../components/PopupDialog';
 function DetailJob() {
     const [isOpenDialog, setIsOpenDialog] = useState(false);
     const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+    const { userId } = useContext(UserContext);
 
     // Handle dialog close
     const handleCloseDialog = () => {
@@ -85,17 +86,38 @@ function DetailJob() {
         }
     };
 
+    const checkApplied = () => {
+        if (job != null && job.applications != null) {
+            if (role === "APPLICANT") {
+                if (job.applications.some((application) => application.applicantId === userId)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
     const handleClickApply = () => {
-        if (isCompleteSetting()) {
+
+        if (isCompleteSetting() && !checkApplied()) {
             setIsFormOpen(true);
-        } else {
+        } else if (checkApplied()) {
             setIsFormOpen(false);
-            // Show popup if settings are incomplete
+            setDialogContent({
+                title: "Already Applied",
+                content: "You have already applied for this job. Please contact the employer via email.",
+                buttonLabel: "Close",
+                link: null,
+            });
+            setIsOpenDialog(true);
+
+        } else if (!isCompleteSetting()) {
+            setIsFormOpen(false);
             setDialogContent({
                 title: "Incomplete Profile",
                 content: "Please complete your profile settings in Dashboard before apply for a job.",
                 buttonLabel: "Close",
-                link: null, // Update this to the actual settings page route
+                link: null,
             });
             setIsOpenDialog(true);
         }
@@ -116,9 +138,6 @@ function DetailJob() {
             console.log('companyID', job.companyId);
         }
     }, [job])
-
-
-
 
     const handleAddFavoriteJob = async (id) => {
         console.log(id);
