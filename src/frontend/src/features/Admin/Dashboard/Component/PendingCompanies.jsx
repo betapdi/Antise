@@ -14,9 +14,14 @@ function ListCompany({ companies, totalCompanies, deletedCompany}) {
         }
     };
 
-    const handleDeny = (companyName) => {
-        console.log(`Denied: ${companyName}`);
-        // Add your denial logic here
+    const handleDeny = async (company) => {
+        try {
+            await adminApi.deleteUser(company.id);
+            console.log(`Company with ID ${company.id} has been deleted successfully`);
+            deletedCompany(company.id);
+        } catch (error) {
+            console.error("Error deleting company:", error);
+        }
     };
 
     return (
@@ -52,6 +57,7 @@ function ListCompany({ companies, totalCompanies, deletedCompany}) {
                             </button>
                             <button className="px-6 py-3 bg-[#fae7e7] rounded-[3px] justify-center items-center gap-3 flex
                                 hover:bg-[#cc0a0a] hover:text-white group mr-0"
+                                onClick={() => handleDeny(company)}
                             >
                                 <div className="text-[#cc0a0a] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                                     Reject
