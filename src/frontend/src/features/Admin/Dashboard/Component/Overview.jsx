@@ -67,10 +67,10 @@ function Overview() {
         data: organizationData.data, // Example data (replace with your data)
         backgroundColor: [
           "#4F46E5",
-          "#10B981", 
-          "#F59E0B", 
-          "#EF4444", 
-          "#6366F1", 
+          "#10B981",
+          "#F59E0B",
+          "#EF4444",
+          "#6366F1",
         ],
         borderWidth: 1,
       },

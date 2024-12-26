@@ -66,6 +66,11 @@ const applicantApi = {
     const url = '/applicant/getAppliedJobs';
     return axiosPrivate.get(url);
   },
+
+  getApplicant: (id) => {
+    const url = `/applicant/get/${id}`;
+    return axiosPrivate.get(url);
+  }
 }
 
 export default applicantApi;
