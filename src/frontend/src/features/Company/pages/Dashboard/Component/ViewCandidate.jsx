@@ -1,7 +1,17 @@
 import React from 'react';
-
+import { useLocation } from 'react-router-dom';
 
 function ViewCandidate() {
+    const location = useLocation();
+    const { application } = location.state || {}; // Destructure the passed application
+    console.log('application', application);
+    console.log("Received state in ViewCandidate:", location.state);
+
+
+    // if (!application) {
+    //     return <div>No application data available.</div>;
+    // }
+
     return (
         <div className="w-full relative bg-white rounded-xl">
             <div className="w-full justify-between items-center inline-flex mb-8">

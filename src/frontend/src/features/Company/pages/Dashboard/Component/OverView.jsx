@@ -52,10 +52,18 @@ function OverView() {
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
                 <div className="w-full px-5 py-2.5 bg-[#f1f2f4] rounded gap-5 inline-flex">
-                    <div className="w-1/2 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">JOBS</div>
-                    <div className="w-1/6 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">DATE APPLIED</div>
-                    <div className="w-1/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">STATUS</div>
-                    <div className="w-1/6 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">ACTION</div>
+                    <div className="w-5/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+                        JOBS
+                    </div>
+                    <div className="w-2/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+                        STATUS
+                    </div>
+                    <div className="w-3/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+                        APPLICATIONS
+                    </div>
+                    <div className=" text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+                        ACTION
+                    </div>
                 </div>
                 <ListJob jobList={jobList} />
             </div>

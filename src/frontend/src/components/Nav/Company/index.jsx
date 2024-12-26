@@ -6,6 +6,7 @@ function NavCompany() {
   const navigate = useNavigate();
   const [isDropdownAvatarVisible, setIsDropdownAvatarVisible] = useState(false);
   const avatarDropdownRef = useRef(null);
+  const { verified } = useContext(CompanyContext);
 
   const { logoUrl } = useContext(CompanyContext);
 
@@ -63,12 +64,14 @@ function NavCompany() {
           </div>
         </div>
         <div className="h-12 justify-start items-center gap-7 inline-flex">
-          <button
-            className="h-12 px-6 py-3 rounded-[3px] border-2 border-[#0a65cc] justify-center items-center gap-3 text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal inline-flex hover:bg-[#0a65cc] hover:text-white"
-            onClick={handleNavigateToPostJob}
-          >
-            Post a Job
-          </button>
+          {verified == true && (
+            <button
+              className="h-12 px-6 py-3 rounded-[3px] border-2 border-[#0a65cc] justify-center items-center gap-3 text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal inline-flex hover:bg-[#0a65cc] hover:text-white"
+              onClick={handleNavigateToPostJob}
+            >
+              Post a Job
+            </button>
+          )}
 
           <div className="relative">
             <img

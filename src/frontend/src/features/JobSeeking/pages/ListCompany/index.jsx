@@ -46,7 +46,7 @@ function ListCompany() {
         console.error("Error searching for company:", error);
         setDialogContent({
           title: "Error!",
-          content: "An error occurred while searching jobs. Please try again later.",
+          content: "An error occurred while searching companies. Please try again later.",
           buttonLabel: "Close",
           link: null
         });
