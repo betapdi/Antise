@@ -163,6 +163,10 @@ const ApplyForm = ({ isCloseChange, job }) => {
                     />
                   </div>
                 )}
+
+                <div className="flex items-center gap-3 text-[#FF0000] text-justify italic">  Please complete the application carefully,
+                  as you can only submit it once. Once submitted, you will not be able to reapply </div>
+
                 <div className="flex flex-row justify-between">
                   <button className="h-12 px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex"
                     onClick={() => isCloseChange(true)}
