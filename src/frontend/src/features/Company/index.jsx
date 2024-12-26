@@ -17,6 +17,7 @@ import CompanySetupSuccess from './pages/SuccessPage/companysetupsuccess';
 import ApplyForm from '../../components/Form/applyform';
 import {UserContext} from '../../context/UserContext';
 import Error from '../../components/Error';
+import {CompanyContext} from '../../context/CompanyContext';
 
 
 const Company = (props) => {
@@ -25,10 +26,14 @@ const Company = (props) => {
   const {
         userId, setUserId, email, setEmail, role, setRole, resetUser
   } = useContext(UserContext);
+  const {verified}= useContext(CompanyContext);
   const navigate = useNavigate();
     useEffect(() => {
       if (role === "APPLICANT" || role === "ANONYMOUS") {
         navigate("/job/homepage", { replace: true });
+      }
+      if (role === "ADMIN") {
+        navigate("/admin/dashboard", { replace: true });
       }
     }, [role, navigate]);
   return (
