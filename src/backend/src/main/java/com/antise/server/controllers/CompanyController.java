@@ -70,15 +70,15 @@ public class CompanyController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("/saveApplication")
-    public ResponseEntity<CompanyDto> saveApplication(@RequestPart("applicationId") String applicationId, @AuthenticationPrincipal UserDetails userDetails) {
+    @PostMapping("/saveApplication/{applicationId}")
+    public ResponseEntity<CompanyDto> saveApplication(@PathVariable("applicationId") String applicationId, @AuthenticationPrincipal UserDetails userDetails) {
         CompanyDto response = companyService.saveApplication(applicationId, userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping("/removeSavedApplication")
-    public ResponseEntity<String> removeSavedApplication(@RequestPart("applicationId") String applicationId, @AuthenticationPrincipal UserDetails userDetails) {
+    @DeleteMapping("/removeSavedApplication/{applicationId}")
+    public ResponseEntity<String> removeSavedApplication(@PathVariable("applicationId") String applicationId, @AuthenticationPrincipal UserDetails userDetails) {
         String response = companyService.removeSavedApplication(applicationId, userDetails.getUsername());
         
         return new ResponseEntity<>(response, HttpStatus.OK);

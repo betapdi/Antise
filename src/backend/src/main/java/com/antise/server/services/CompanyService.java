@@ -103,7 +103,7 @@ public class CompanyService {
     }
 
     public CompanyDto saveApplication(String applicationId, String email) {
-        Application application = (Application)(applicationRepository.findById(applicationId).orElseThrow(() -> new ApplicationNotFoundException()));
+        Application application = applicationRepository.findById(applicationId).orElseThrow(() -> new ApplicationNotFoundException());
         Company company = (Company)(userRepository.findByEmail(email).orElseThrow(() -> new CompanyNotFoundException()));
 
         Boolean ok = true;
@@ -146,15 +146,14 @@ public class CompanyService {
         List<User> users = userRepository.findAll();
         List<Company> companies = users.stream().filter(user -> user instanceof Company).
                                     map(user -> (Company)user).collect(Collectors.toList());
-        
-        List<CompanyDto> response = new ArrayList<>();
 
+        List<CompanyDto> response = new ArrayList<>();
         for (Company company : companies) {
             if (company.getName() == null) continue;
             String companyName = (company.getName()).toLowerCase();
             String searchPatternLowercase = searchPattern.toLowerCase();
 
-            if (companyName.contains(searchPatternLowercase)) {
+            if (searchPattern == null || searchPattern.equals("null") || companyName.contains(searchPatternLowercase)) {
                 CompanyDto dto = new CompanyDto();
                 dto.update(company);
                 response.add(dto);

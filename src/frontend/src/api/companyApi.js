@@ -52,14 +52,8 @@ const companyApi = {
 
   addSavedApplication: (id) => {
     console.log(id);
-    const url = `/company/saveApplication`;
-    const formData = new FormData();
-    formData.append('applicationId', new Blob([JSON.stringify(id)], { type: 'application/json' }));
-    return axiosPrivate.post(url, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const url = `/company/saveApplication/${id}`;
+    return axiosPrivate.post(url);
   },
 
 
@@ -69,15 +63,8 @@ const companyApi = {
   // },
 
   removeSavedApplication: (id) => {
-    const url = `/company/removeSavedApplication`;
-    const formData = new FormData();
-    formData.append('applicationId', id);
-    return axiosPrivate.delete(url, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-      data: formData,
-    })
+    const url = `/company/removeSavedApplication/${id}`;
+    return axiosPrivate.delete(url);
   }
 }
 
