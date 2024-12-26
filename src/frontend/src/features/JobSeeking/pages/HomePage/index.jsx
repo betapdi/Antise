@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { UserContext } from "../../../../context/UserContext";
 import applicantApi from "../../../../api/applicantApi";
 import { ApplicantContext } from "../../../../context/ApplicantContext";
+import userApi from "../../../../api/userApi";
 
 function HomePage() {
   const [listJob, setListJobs] = useState([]);
@@ -50,7 +51,6 @@ function HomePage() {
 
   // Handle page change (next and previous page)
   const handlePageChange = (newPage) => {
-    // Ensure the new page is within valid bounds
     if (newPage >= 0 && newPage < Math.ceil(companies.length / itemsPerPage)) {
       setCurrentPage(newPage);
     }
@@ -105,7 +105,9 @@ function HomePage() {
       try {
         const response = await companyApi.getAllCompanies();
         console.log("Fetch Companies: ", response.data);
-        setcompanies(response.data);
+        const result = response.data;
+        result = result.filter(company => company.verified);
+        setcompanies(result);
       } catch (error) {
         console.log("Failed to fetch companies: ", error);
       }
@@ -151,13 +153,23 @@ function HomePage() {
         const companyResponse = await companyApi.getAllCompanies();
         setCompanyCount(companyResponse.data.length);
 
-        setCandidateCount(500);
       } catch (error) {
         console.error("Error fetching counts:", error);
       }
     };
 
     fetchCounts();
+  }, []);
+  useEffect(() => {
+    const fetchCandidate = async () => {
+      try {
+        const candidateResponse = await userApi.getNumUser();
+        setCandidateCount(candidateResponse.data);
+      } catch (error) {
+        console.error("Error fetching counts:", error);
+      }
+    };
+    fetchCandidate();
   }, []);
 
   const handleJobFavoriteClick = (jobId) => {
@@ -345,7 +357,7 @@ function HomePage() {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center">
-        {listJob.map((job, index) => (
+        {listJob.slice(0, Math.min(10, listJob.length)).map((job, index) => (
           <div
             key={index}
             className="w-[1200px] h-[132px] p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-4 transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
@@ -496,7 +508,7 @@ function HomePage() {
       </div>
       <div className="flex justify-center items-center w-full py-16">
         <div className="grid grid-cols-4 grid-rows-2 gap-2">
-          {currentCompanies.map((company, index) => (
+          {currentCompanies.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).map((company, index) =>(
             <div className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]">
               <div className="justify-start items-start gap-4 inline-flex">
                 <img
@@ -532,68 +544,6 @@ function HomePage() {
               </button>
             </div>
           ))}
-        </div>
-      </div>
-      <div className="flex flex-row justify-center gap-16 py-16">
-        <div className="h-[20rem] p-7 bg-[#e4e5e8] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
-          <div className="flex-col justify-start items-start gap-4 flex">
-            <div className="w-[500px] text-[#181f33] text-[32px] font-medium font-['Inter'] leading-10">
-              Become a Candidate
-            </div>
-            <div className="w-[312px] opacity-80 text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">
-              Take the first step towards your dream job. Create your profile,
-              upload your resume, and discover opportunities tailored to your
-              skills and ambitions.
-            </div>
-          </div>
-          <button
-            className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group"
-            onClick={() => handleSignUpClick()}
-          >
-            <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
-              Register now
-            </div>
-            <img
-              src={"/image/arrow_right.png"}
-              alt="arrow_right"
-              className="h-4 group-hover:hidden"
-            />
-            <img
-              src={"/image/arrow_right_hover.png"}
-              alt="arrow_right_hover"
-              className="h-4 hidden group-hover:block"
-            />
-          </button>
-        </div>
-        <div className="h-[20rem] p-7 bg-[#0851a3] rounded-xl flex-col justify-start items-start gap-[26px] inline-flex">
-          <div className="flex-col justify-start items-start gap-4 flex">
-            <div className="w-[500px] text-white text-[32px] font-medium font-['Inter'] leading-10">
-              Become a Employers
-            </div>
-            <div className="w-[312px] opacity-80 text-white text-sm font-normal font-['Inter'] leading-tight">
-              Join our platform to find the best talent for your business. Post
-              job listings, manage applications, and build a successful team
-              effortlessly.
-            </div>
-          </div>
-          <button
-            className="px-6 py-3 bg-white rounded-[3px] justify-center items-center gap-3 inline-flex hover:bg-[#0a65cc] hover:text-white group"
-            onClick={() => handleSignUpClick()}
-          >
-            <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
-              Register now
-            </div>
-            <img
-              src={"/image/arrow_right.png"}
-              alt="arrow_right"
-              className="h-4 group-hover:hidden"
-            />
-            <img
-              src={"/image/arrow_right_hover.png"}
-              alt="arrow_right_hover"
-              className="h-4 hidden group-hover:block"
-            />
-          </button>
         </div>
       </div>
       <Footer />

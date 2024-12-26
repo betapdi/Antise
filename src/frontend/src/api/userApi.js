@@ -21,6 +21,10 @@ const userApi = {
     const url = '/user/getAll';
     return axiosPrivate.get(url);
   },
+  getNumUser: () => {
+    const url = 'public/user/getNum';
+    return axiosClient.get(url);
+  },
 
 
 }
