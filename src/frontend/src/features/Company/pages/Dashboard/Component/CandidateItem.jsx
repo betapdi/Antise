@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import applicantApi from "../../../../../api/applicantApi";
 import { useParams, useNavigate } from "react-router-dom";
 
-function CandidateItem({ application }) {
+function CandidateItem({ application, onClick }) {
     const [applicant, setApplicant] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchApplicantById = async (applicantId) => {
@@ -23,29 +22,11 @@ function CandidateItem({ application }) {
         }
     }, [application.id]);
 
-    // const handleNavigationToProfile = (application) => {
-    //     navigate(`/company/dashboard/viewCandidate/${application.id}`);
-    // };
-
-    // const handleNavigationToProfile = (application) => {
-    //     navigate(`/company/dashboard/viewCandidate/${application.id}`, { state: { application } });
-    // };
-    const handleNavigationToProfile = (application) => {
-        if (!application) {
-            console.error("Application is undefined or null.");
-            return;
-        }
-        navigate(`/company/dashboard/my-job/viewCandidate/${application.id}`, {
-            state: { application },
-        });
-    };
-
-
     return (
         <>
             {applicant && (
                 <div className="bg-white p-7 mx-auto rounded-md shadow border border-[#e4e5e8] w-full"
-                    // onClick={handleNavigationToProfile(application)}
+                    onClick={onClick}
                 >
                     <div className="flex flex-row items-center mb-4 gap-4">
                         <img
@@ -79,14 +60,14 @@ function CandidateItem({ application }) {
                             </li>
                         </ul>
                     </div>
-                    <button className="bg-blue-500 text-blue py-2 rounded-md w-full flex items-center justify-start space-x-2">
+                    {/* <button className="bg-blue-500 text-blue py-2 rounded-md w-full flex items-center justify-start space-x-2">
                         <img
                             src="/image/download.png"
                             alt="Download Icon"
                             className="w-5 h-5"
                         />
                         <span>Download CV</span>
-                    </button>
+                    </button> */}
                 </div>)
             }
         </>
