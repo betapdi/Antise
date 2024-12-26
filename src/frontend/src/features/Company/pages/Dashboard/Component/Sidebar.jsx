@@ -63,7 +63,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/company/dashboard/saved-candidate"
+                to="/company/dashboard/saved-application"
                 className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/saved-application")
                   ? "bg-[#e7f0fa] text-[#0a65cc]"
                   : "text-[#767F8C]"

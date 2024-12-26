@@ -3,7 +3,7 @@ import CandidateItem from "./CandidateItem";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import jobApi from "../../../../../api/jobApi";
-import ViewCandidate from "./ViewCandidate";
+import ViewApplication from "./ViewApplication";
 import { useContext } from "react";
 import { CompanyContext } from "../../../../../context/CompanyContext";
 
@@ -40,7 +40,7 @@ function CandidateList() {
     setSelectedApplication(application);
   };
 
-  const closeViewCandidate = () => {
+  const closeViewApplication = () => {
     setSelectedApplication(null);
   };
 
@@ -78,7 +78,7 @@ function CandidateList() {
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="text-xl font-semibold">Application Details</h2>
                   <button
-                    onClick={closeViewCandidate}
+                    onClick={closeViewApplication}
                     className="text-gray-500 hover:text-gray-800"
                   >
                     <svg
@@ -98,7 +98,7 @@ function CandidateList() {
                   </button>
                 </div>
 
-                <ViewCandidate application={selectedApplication} />
+                <ViewApplication application={selectedApplication} />
               </div>
             </div>
           )}

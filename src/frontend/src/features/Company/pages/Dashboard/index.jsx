@@ -6,7 +6,7 @@ import MyJob from "./Component/MyJob";
 import OverView from "./Component/OverView";
 import CandidateList from "./Component/CandidateList";
 import SavedApplication from "./Component/SavedApplication";
-import ViewCandidate from "./Component/ViewCandidate";
+import ViewApplication from "./Component/ViewApplication";
 import Settings from "./Component/Settings";
 
 
@@ -24,7 +24,7 @@ const Dashboard = () => {
             <Route path="/post-job" element={<PostJob />} />
             <Route path="/saved-application" element={<SavedApplication />} />
             <Route path="/my-job" element={<MyJob />} />
-            <Route path="/my-job/viewCandidate/:id" element={<ViewCandidate />} />
+            <Route path="/my-job/viewApplication/:id" element={<ViewApplication />} />
             <Route path="/my-job/list-candidate/:id" element={<CandidateList />} />
             <Route path="Settings" element={<Settings />} />
           </Routes>

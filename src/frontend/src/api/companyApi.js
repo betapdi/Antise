@@ -57,11 +57,6 @@ const companyApi = {
   },
 
 
-  // removeSavedApplication: (id) => {
-  //   const url = `/company/removeSavedApplication`;
-
-  // },
-
   removeSavedApplication: (id) => {
     const url = `/company/removeSavedApplication/${id}`;
     return axiosPrivate.delete(url);

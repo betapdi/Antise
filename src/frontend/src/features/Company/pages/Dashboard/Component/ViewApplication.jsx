@@ -4,13 +4,15 @@ import applicantApi from '../../../../../api/applicantApi';
 import companyApi from '../../../../../api/companyApi';
 import { useContext } from 'react';
 import { CompanyContext } from '../../../../../context/CompanyContext';
+import { use } from 'react';
 
-function ViewCandidate({ application }) {
+function ViewApplication({ application }) {
     const [applicant, setApplicant] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
     const { addSavedApplications, removeSavedApplications, savedApplications } = useContext(CompanyContext);
-    console.log('List', savedApplications);
-    console.log('application', application);
+    console.log('L', savedApplications);
+    console.log('hi', application.id);
+
 
     useEffect(() => {
         const fetchApplicantById = async (applicantId) => {
@@ -30,34 +32,31 @@ function ViewCandidate({ application }) {
 
         if (savedApplications.some((applications) => applications.id === application.id)) {
             setIsClicked(true);
-            console.log('Haha', isClicked);
         } else {
             setIsClicked(false);
-            console.log('Haha', isClicked);
         }
-        console.log('Haha', isClicked);
+
     }, []);
 
     if (!application) return null;
 
-    const handleAddSavedApplication = async (id) => {
-        console.log(id);
+    const handleAddSavedApplication = async (app) => {
         try {
-            const response = await companyApi.addSavedApplication(id);
-            const application = response.data;
-            console.log('ADD', application);
-            addSavedApplications(application);
+            const response = await companyApi.addSavedApplication(app.id);
+            const data = response.data;
+            addSavedApplications(app);
+            setIsClicked(true);
         } catch (error) {
             console.log(error);
         }
     };
 
-    const handleRemoveSavedApplication = async (id) => {
+    const handleRemoveSavedApplication = async (app) => {
         try {
-            const response = await companyApi.removeSavedApplication(id);
-            const application = response.data;
-            console.log('REMOVE', application);
-            removeSavedApplications(id);
+            const response = await companyApi.removeSavedApplication(application.id);
+            const data = response.data;
+            removeSavedApplications(app.id);
+            setIsClicked(false);
         } catch (error) {
             console.log(error);
         }
@@ -82,11 +81,11 @@ function ViewCandidate({ application }) {
                         <div className="h-12 justify-start items-start gap-6 inline-flex mr-4">
                             <button className="p-3 bg-[#e7f0fa] rounded-[5px] justify-start items-start flex"
                                 onClick={() => {
-                                    setIsClicked(!isClicked);
+                                    // setIsClicked(!isClicked);
                                     if (isClicked) {
-                                        handleRemoveSavedApplication(application.id); // Call remove when it's already bookmarked
+                                        handleRemoveSavedApplication(application); // Call remove when it's already bookmarked
                                     } else {
-                                        handleAddSavedApplication(application.id); // Call add when it's not bookmarked
+                                        handleAddSavedApplication(application); // Call add when it's not bookmarked
                                     }
                                 }}
                             >
@@ -256,4 +255,4 @@ function ViewCandidate({ application }) {
     );
 };
 
-export default ViewCandidate;
+export default ViewApplication;
