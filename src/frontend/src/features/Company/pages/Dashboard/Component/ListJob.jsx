@@ -22,6 +22,23 @@ function ListJob({ jobList }) {
         }
     };
 
+    //Delete Job Option
+    const [dropdownOpen, setDropdownOpen] = useState({});
+
+    const toggleDropdown = (jobId) => {
+        setDropdownOpen((prev) => ({
+            ...prev,
+            [jobId]: !prev[jobId],
+        }));
+    };
+
+    const handleDeleteJob = (jobId) => {
+        // Add logic to delete the job from the backend or state
+        console.log(`Deleting job with ID: ${jobId}`);
+        // Example: Call a delete API and update the job list
+    };
+
+
     const [remainingDays, setRemainingDays] = useState([]);
     const calculateRemainingDays = () => {
         console.log(jobList);
@@ -51,7 +68,7 @@ function ListJob({ jobList }) {
             {paginatedJobs.map((job, index) => (
                 <div key={index} className='flex flex-row bg-white shadow-md p-5 rounded-lg'>
                     {/* Job Title and Info */}
-                    <div className='flex flex-col w-5/12 gap-2'>
+                    <div className='flex flex-col w-1/2 gap-2'>
                         <div className="text-[#18191c] text-base font-medium font-['Inter'] leading-normal">{job.title}</div>
                         <div className="inline-flex items-center gap-4">
                             <span className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">{job.jobType}</span>
@@ -60,7 +77,7 @@ function ListJob({ jobList }) {
                     </div>
 
                     {/* Job Status */}
-                    <div className='inline-flex gap-1 items-center w-2/12'>
+                    <div className='inline-flex gap-1 items-center w-1/5'>
                         <img
                             src={remainingDays[index] > 0 ? `/image/CheckCircle.svg` : `/image/XCircle.png`}
                             className='h-6 w-6'
@@ -92,12 +109,28 @@ function ListJob({ jobList }) {
                     </button>
 
                     {/* Arrow Icon */}
-                    <div className="h-12 p-3 rounded-[5px] justify-start items-start gap-2.5 inline-flex">
-                        <img
-                            src={`/image/arrow_right.png`}
-                            className='h-6 w-6'
-                            alt="arrow"
-                        />
+                    <div className="h-12 py-3 rounded-[5px] justify-start items-start gap-2.5 inline-flex">
+                        <button>
+                            <img
+                                src={`/image/DotsThreeVertical.png`}
+                                className='h-6 w-6'
+                                alt="options"
+                                onClick={() => toggleDropdown(job.id)}
+                            />
+                        </button>
+                        {dropdownOpen[job.id] && (
+                            <button
+                                className="mt-7 flex items-center absolute bg-white gap-2 px-4 py-2 text-red-600 text-left"
+                                onClick={() => handleDeleteJob(job.id)}
+                            >
+                                <img
+                                    src="/image/Trash.png" // Replace with the correct path to your trash can icon
+                                    alt="Delete Icon"
+                                    className="w-5 h-5"
+                                />
+                                <span className="text-[#E05151]">Delete</span>
+                            </button>
+                        )}
                     </div>
                 </div>
             ))}

@@ -6,6 +6,7 @@ const RegisterDialog = (props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
+    props.handleClose();
     navigate(props.content.link);
   }
 
