@@ -1,12 +1,25 @@
-import React, {useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 
+const formatDate = (dateString) => {
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return dateString;
+
+    return `${String(date.getDate()).padStart(2, "0")}-${String(
+      date.getMonth() + 1
+    ).padStart(2, "0")}-${date.getFullYear()}`;
+  } catch (error) {
+    return dateString;
+  }
+};
 const NotificationDropdown = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { notifications, setNotifications } = useContext(UserContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-
-  // console.log("Noti", notifications);
 
   const toggleDropdown = (e) => {
     e.stopPropagation();
@@ -33,6 +46,11 @@ const NotificationDropdown = () => {
     }));
     setNotifications(updatedNotifications);
   };
+  const handleNotificationClick = (notification) =>{
+    toggleNotificationReadStatus(notification.id);
+    setIsDropdownOpen(false);
+    window.location.href = `/job/detailjob/${notification.jobId}`;
+  }
 
   const toggleNotificationReadStatus = (id) => {
     const updatedNotifications = notifications.map((notification) =>
@@ -44,7 +62,9 @@ const NotificationDropdown = () => {
   if (!notifications || notifications.length === 0) {
     return (
       <div className="w-96 bg-white rounded-lg shadow-lg p-4">
-        <h2 className="text-lg font-semibold text-gray-800 mb-4">Notifications</h2>
+        <h2 className="text-lg font-semibold text-gray-800 mb-4">
+          Notifications
+        </h2>
         <p className="text-sm text-gray-600">No notifications available.</p>
       </div>
     );
@@ -54,7 +74,10 @@ const NotificationDropdown = () => {
     <div className="w-96 bg-white rounded-lg shadow-lg p-4">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-800">Notification</h2>
-        <button onClick={markAllAsRead} className="text-sm text-blue-600 hover:underline">
+        <button
+          onClick={markAllAsRead}
+          className="text-sm text-blue-600 hover:underline"
+        >
           Mark all as read
         </button>
       </div>
@@ -62,20 +85,20 @@ const NotificationDropdown = () => {
         {notifications.map((notification) => (
           <li
             key={notification.id}
-            onClick={() => toggleNotificationReadStatus(notification.id)}
+            onClick={() => handleNotificationClick(notification)}
             className={`flex flex-col ${
-              notification.unread ? "bg-blue-50" : "bg-white"
-            } p-4 rounded-lg shadow-sm hover:bg-gray hover:bg-opacity-50 cursor-pointer transition`}
+              notification.unread ? "bg-blue" : "bg-white"
+            } p-4 rounded-lg shadow-sm hover:bg-gray/100 hover:bg-opacity-50 cursor-pointer transition`}
           >
             <p
               className={`text-sm font-medium ${
-                notification.unread ? "text-gray-900" : "text-gray-700"
+                notification.unread ? "text-black" : "text-black"
               }`}
             >
-              {notification.title}
+              New Job from {notification.companyName == null ? "No name" : notification.companyName }
             </p>
-            <span className="text-xs text-gray-500 mt-1">
-              {notification.time}
+            <span className="text-xs text-black mt-1">
+              {formatDate(notification.createdAt)}
             </span>
           </li>
         ))}
