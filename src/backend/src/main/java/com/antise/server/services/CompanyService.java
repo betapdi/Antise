@@ -106,7 +106,15 @@ public class CompanyService {
         Application application = (Application)(applicationRepository.findById(applicationId).orElseThrow(() -> new ApplicationNotFoundException()));
         Company company = (Company)(userRepository.findByEmail(email).orElseThrow(() -> new CompanyNotFoundException()));
 
-        company.getSavedApplications().add(application);
+        Boolean ok = true;
+        for (Application savedApplication : company.getSavedApplications()) {
+            if (savedApplication.getId().equals(applicationId)) {
+                ok = false; 
+                break;
+            }
+        }
+
+        if (ok) company.getSavedApplications().add(application);
         Company savedCompany = userRepository.save(company);
 
         CompanyDto response = new CompanyDto();
