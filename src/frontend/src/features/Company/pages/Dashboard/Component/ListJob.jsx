@@ -120,7 +120,7 @@ function ListJob({ jobList }) {
                         </button>
                         {dropdownOpen[job.id] && (
                             <button
-                                className="mt-7 flex items-center absolute bg-white gap-2 px-4 py-2 text-red-600 text-left"
+                                className="mt-7 right-10 flex items-center absolute bg-white gap-2 px-4 py-2 text-left shadow-md"
                                 onClick={() => handleDeleteJob(job.id)}
                             >
                                 <img
