@@ -1,22 +1,44 @@
 import React from "react";
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useState } from "react";
 import ListJob from "./ListJob";
 import { CompanyContext } from "../../../../../context/CompanyContext";
 
 function MyJob() {
   const { companyName, jobList, setJobList} = useContext(CompanyContext);
+  const [filter, setFilter] = useState("All");
   const totalApplicants = useMemo(() => {
     return jobList.reduce(
       (sum, job) => sum + (job.applications?.length || 0),
       0
     );
   }, [jobList]);
+
+  const filteredJobs = useMemo(() => {
+    if (filter === "Active") {
+      return jobList.filter((job) => {
+        const remainingDays =
+          (new Date(job.expirationDate) - new Date()) / (1000 * 60 * 60 * 24);
+        return remainingDays > 0;
+      });
+    } else if (filter === "Inactive") {
+      return jobList.filter((job) => {
+        const remainingDays =
+          (new Date(job.expirationDate) - new Date()) / (1000 * 60 * 60 * 24);
+        return remainingDays <= 0;
+      });
+    }
+    return jobList; // Return all jobs for "All" filter
+  }, [filter, jobList]);
+
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value); // Update the filter state based on the dropdown selection
+  };
  
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-row justify-between items-center">
         <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
-          My Jobs <span className="text-gray ml-2">({jobList.length})</span>
+          My Jobs <span className="text-gray ml-2">({filteredJobs.length})</span>
         </div>
         <div className="h-12 justify-center items-center gap-6 inline-flex">
           <div className="text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">
@@ -25,10 +47,12 @@ function MyJob() {
           <select
             id="type"
             className="bg-white border border-gray/100 text-black rounded-lg p-2"
+            onChange={handleFilterChange} // Attach the change handler
+            value={filter}
           >
-            <option value="Employee">All Jobs</option>
-            <option value="Employer">Active Jobs</option>
-            <option value="Employer">Inactive Jobs</option>
+            <option value="All">All Jobs</option>
+            <option value="Active">Active Jobs</option>
+            <option value="Inactive">Inactive Jobs</option>
           </select>
         </div>
       </div>
@@ -47,7 +71,7 @@ function MyJob() {
         </div>
       </div>
 
-      <ListJob jobList={jobList} />
+      <ListJob jobList={filteredJobs} />
     </div>
   );
 }
