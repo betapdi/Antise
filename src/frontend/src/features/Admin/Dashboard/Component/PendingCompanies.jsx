@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
 import companyApi from "../../../../api/companyApi";
+import adminApi from "../../../../api/adminApi";
 
 
-function ListCompany({ companies, totalCompanies }) {
-    const handleApprove = (companyName) => {
-        console.log(`Approved: ${companyName}`);
-        // Add your approval logic here
+function ListCompany({ companies, totalCompanies, deletedCompany}) {
+    const handleApprove = async (company) => {
+        try {
+            await adminApi.verifyCompany(company.id);
+            console.log(`Company with ID ${company.id} has been verified successfully`);
+            deletedCompany(company.id);       
+        } catch (error) {
+            console.error("Error verifying company:", error);
+        }
     };
 
     const handleDeny = (companyName) => {
@@ -20,7 +26,7 @@ function ListCompany({ companies, totalCompanies }) {
             <div className="flex flex-col gap-3 items-center justify-center w-full mt-5">
                 {companies.map((company, index) => (
                     <div
-                        key={index}
+                        key={company.id}
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
                     >
                         <div className="w-1/3 justify-start items-start gap-5 flex">
@@ -38,13 +44,14 @@ function ListCompany({ companies, totalCompanies }) {
                         <div className="flex">
                             <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                                 hover:bg-[#0a65cc] hover:text-white group mr-3"
+                                onClick={() => handleApprove(company)}
                             >
                                 <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                                     Approve
                                 </div>
                             </button>
                             <button className="px-6 py-3 bg-[#fae7e7] rounded-[3px] justify-center items-center gap-3 flex
-                                hover:bg-[#0a65cc] hover:text-white group mr-0"
+                                hover:bg-[#cc0a0a] hover:text-white group mr-0"
                             >
                                 <div className="text-[#cc0a0a] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                                     Reject
@@ -73,8 +80,10 @@ const PendingCompanies = () => {
           }
         };
         fetchCompanies();
-    }, []);
-    
+    }, []);  
+    const deletedCompany = (companyId) => {
+        setCompanies(companies.filter((company) => company.id!== companyId));
+    };
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
