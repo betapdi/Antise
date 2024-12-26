@@ -46,7 +46,7 @@ const companyApi = {
   },
 
   searchCompany: (searchPattern) => {
-    const url = `public/company/search/${searchPattern}`;
+    const url = `company/search/${searchPattern}`;
     return axiosClient.post(url); 
   },
 }
