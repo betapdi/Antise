@@ -1,11 +1,11 @@
-import React from "react";
-import { useContext, useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import ListJob from "./ListJob";
 import { CompanyContext } from "../../../../../context/CompanyContext";
 
 function MyJob() {
-  const { companyName, jobList, setJobList} = useContext(CompanyContext);
+  const { companyName, jobList, setJobList } = useContext(CompanyContext);
   const [filter, setFilter] = useState("All");
+
   const totalApplicants = useMemo(() => {
     return jobList.reduce(
       (sum, job) => sum + (job.applications?.length || 0),
@@ -14,26 +14,17 @@ function MyJob() {
   }, [jobList]);
 
   const filteredJobs = useMemo(() => {
-    if (filter === "Active") {
-      return jobList.filter((job) => {
-        const remainingDays =
-          (new Date(job.expirationDate) - new Date()) / (1000 * 60 * 60 * 24);
-        return remainingDays > 0;
-      });
-    } else if (filter === "Inactive") {
-      return jobList.filter((job) => {
-        const remainingDays =
-          (new Date(job.expirationDate) - new Date()) / (1000 * 60 * 60 * 24);
-        return remainingDays <= 0;
-      });
+    // If filter is "Latest", sort jobs by posted date (descending order)
+    if (filter === "Latest") {
+      return [...jobList].sort((a, b) => new Date(b.postedDate) - new Date(a.postedDate));
     }
-    return jobList; // Return all jobs for "All" filter
+    return jobList; // If no filter or "All", return all jobs
   }, [filter, jobList]);
 
   const handleFilterChange = (event) => {
     setFilter(event.target.value); // Update the filter state based on the dropdown selection
   };
- 
+
   return (
     <div className="w-full flex flex-col">
       <div className="flex flex-row justify-between items-center">
@@ -48,11 +39,10 @@ function MyJob() {
             id="type"
             className="bg-white border border-gray/100 text-black rounded-lg p-2"
             onChange={handleFilterChange} // Attach the change handler
-            value={filter}
+            value={filter} // Bind the filter state to the dropdown
           >
             <option value="All">All Jobs</option>
-            <option value="Active">Active Jobs</option>
-            <option value="Inactive">Inactive Jobs</option>
+            <option value="Latest">Latest Jobs</option>
           </select>
         </div>
       </div>
