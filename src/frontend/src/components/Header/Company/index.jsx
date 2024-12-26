@@ -11,13 +11,6 @@ const HeaderLogginComany = () => {
           <div className="h-12 justify-start items-center inline-flex">
             <div className="justify-start gap-6 flex">
               <a
-                href="/"
-                className={`py-3.5 ${location.pathname.toLowerCase() === '/' ? 'text-blue' : 'text-[#5e6670]'
-                  } font-normal font-['Inter'] leading-tight`}
-              >
-                Find Employees
-              </a>
-              <a
                 href="/company/dashboard"
                 className={`py-3.5 ${location.pathname.toLowerCase().startsWith('/company/dashboard') ? 'text-blue' : 'text-[#5e6670]'
                   } font-normal font-['Inter'] leading-tight`}
