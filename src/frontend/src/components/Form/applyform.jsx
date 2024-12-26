@@ -77,7 +77,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
             fullName: "",
             phoneNumber: "",
             email: "",
-            resume: "",
+            resumeUrl: "",
             coverLetter: "",
             questions: "",
           }}
@@ -85,7 +85,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
             fullName: Yup.string().required("Please fill your full name"),
             phoneNumber: Yup.string().matches(phoneRegExp, "Please enter a valid phone number").required("Please fill your telephone number"),
             email: Yup.string().email("Invalid email").required("Please fill your email"),
-            resume: Yup.string().required("Please upload your CV"),
+            resumeUrl: Yup.string().required("Please upload your CV"),
             coverLetter: Yup.string().required("Please fill the cover letter. If not, fill N/A"),
             ...(job?.questions && {
               questions: Yup.string().required("Please answer the questions"),
@@ -131,7 +131,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                 />
 
                 <Field
-                  name="resume"
+                  name="resumeUrl"
                   component={SelectField}
                   label="Resume"
                   options={[{ key: "Select...", value: "" },
