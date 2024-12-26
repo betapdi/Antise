@@ -14,6 +14,7 @@ import com.antise.server.dto.CompanyDto;
 import com.antise.server.dto.JobDto;
 import com.antise.server.services.CompanyService;
 import com.antise.server.services.JobService;
+import com.antise.server.services.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -35,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PublicController {
     private final JobService jobService;
     private final CompanyService companyService;
+    private final UserService userService;
 
     @GetMapping("/job/getAll")
     public ResponseEntity<List<JobDto>> getAllJobs() throws IOException {
@@ -72,5 +74,10 @@ public class PublicController {
         List<CompanyDto> response = companyService.searchCompany(searchPattern);
         
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/getNum")
+    public ResponseEntity<Integer> getNumUser() {
+        return ResponseEntity.ok(userService.getNumUser());
     }
 }

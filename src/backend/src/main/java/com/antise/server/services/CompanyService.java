@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
+import com.antise.server.classes.CompanyNotification;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.CompanyDto;
 import com.antise.server.entities.Applicant;
@@ -141,7 +142,6 @@ public class CompanyService {
         return response;
     }
 
-
     public List<CompanyDto> searchCompany(String searchPattern) {
         List<User> users = userRepository.findAll();
         List<Company> companies = users.stream().filter(user -> user instanceof Company).
@@ -160,6 +160,21 @@ public class CompanyService {
             }
         }
 
+        return response;
+    }
+
+    public CompanyNotification readNotification(String applicationId, String email) {
+        Company company = (Company)userRepository.findByEmail(email).orElseThrow(() -> new CompanyNotFoundException());
+        
+        CompanyNotification response = null;
+        for (CompanyNotification notification : company.getNotifications()) {
+            if (notification.getApplicationId().equals(applicationId)) {
+                notification.setStatus(true);
+                response = notification;
+            }
+        }
+
+        userRepository.save(company);
         return response;
     }
 }

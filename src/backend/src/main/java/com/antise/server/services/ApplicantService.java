@@ -13,12 +13,15 @@ import org.springframework.web.multipart.MultipartFile;
 import com.antise.server.auth.entities.User;
 import com.antise.server.auth.entities.UserRole;
 import com.antise.server.auth.repositories.UserRepository;
+import com.antise.server.classes.ApplicantNotification;
+import com.antise.server.classes.CompanyNotification;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.JobDto;
 import com.antise.server.entities.Applicant;
 import com.antise.server.entities.Application;
 import com.antise.server.entities.Company;
 import com.antise.server.entities.Job;
+import com.antise.server.exceptions.ApplicantNotFoundException;
 import com.antise.server.exceptions.CompanyNotFoundException;
 import com.antise.server.exceptions.JobNotFoundException;
 import com.antise.server.exceptions.UserNotFoundException;
@@ -182,6 +185,21 @@ public class ApplicantService {
             response.add(dto);
         }
         
+        return response;
+    }
+
+    public ApplicantNotification readNotification(String jobId, String email) {
+        Applicant applicant = (Applicant)userRepository.findByEmail(email).orElseThrow(() -> new ApplicantNotFoundException());
+        
+        ApplicantNotification response = null;
+        for (ApplicantNotification notification : applicant.getNotifications()) {
+            if (notification.getJobId().equals(jobId)) {
+                notification.setStatus(true);
+                response = notification;
+            }
+        }
+
+        userRepository.save(applicant);
         return response;
     }
 }
