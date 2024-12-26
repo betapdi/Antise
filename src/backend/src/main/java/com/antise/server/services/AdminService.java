@@ -60,7 +60,6 @@ public class AdminService {
 
         List<User> users = userRepository.findAll();
 
-
         if (user.getRole() == UserRole.COMPANY) {
             Company company = (Company)user;
             List<Job> jobs = company.getJobList();
@@ -111,8 +110,25 @@ public class AdminService {
                 job.getApplications().remove(application);
                 jobRepository.save(job);
 
+                for (User userCompany : users) {
+                    if (userCompany instanceof Company) {
+                        Company company = (Company)userCompany;
+                        
+                        Application chosen = null;
+                        for (Application savedApplication : company.getSavedApplications()) {
+                            if (savedApplication.getId().equals(application.getId())) chosen = savedApplication;
+                        }
+    
+                        if (chosen != null) {
+                            company.getSavedApplications().remove(chosen);
+                            userRepository.save(company);
+                        }
+                    }
+                }
+
                 applicationRepository.deleteById(application.getId());
             }
+
 
             applicant.getApplications().removeAll(applications);
             userRepository.deleteById(userId);
