@@ -27,8 +27,10 @@ function ListCompany() {
   };
 
   useEffect(() => {
+    const query = searchQuery === "" ? null : searchQuery;
+    console.log("Searching for companies with query:", query);
     companyApi
-      .searchCompany(searchQuery)
+      .searchCompany(query)
       .then((response) => {
         console.log("Search results:", response.data);
         setCompanies(response.data);
