@@ -1,30 +1,44 @@
-import React from "react";
-import { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CompanyContext } from "../../../context/CompanyContext";
 
 function NavCompany() {
   const navigate = useNavigate();
   const [isDropdownAvatarVisible, setIsDropdownAvatarVisible] = useState(false);
+  const avatarDropdownRef = useRef(null);
 
-  const handleNavigateToPostJob = () => {
-    navigate("dashboard/post-job");
-  };
   const { logoUrl } = useContext(CompanyContext);
-  const handleAvatarClick = () => {
+
+  const handleAvatarClick = (e) => {
+    e.stopPropagation();
     setIsDropdownAvatarVisible((prev) => !prev);
   };
+
+  const handleClickOutside = (e) => {
+    if (
+      avatarDropdownRef.current &&
+      !avatarDropdownRef.current.contains(e.target)
+    ) {
+      setIsDropdownAvatarVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleItemClick = (action) => {
     switch (action) {
       case "profile":
-        console.log("View profile clicked");
         navigate("dashboard/settings");
         break;
       case "dashboard":
         navigate("dashboard");
         break;
       case "logout":
-        console.log("Logout clicked");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         navigate("/auth/login");
@@ -32,13 +46,17 @@ function NavCompany() {
       default:
         console.log("Unhandled action");
     }
-    handleAvatarClick();
+    setIsDropdownAvatarVisible(false);
+  };
+
+  const handleNavigateToPostJob = () => {
+    navigate("dashboard/post-job");
   };
 
   return (
-    <div className="w-full py-5 gap-20 items-center bg-white flex justify-center ">
+    <div className="w-full py-5 gap-20 items-center bg-white flex justify-center">
       <div className="flex flex-row justify-between max-w-screen-xl w-[90%]">
-        <div className=" items-center gap-2 flex">
+        <div className="items-center gap-2 flex">
           <img src="/image/logo_job.png" alt="logo" />
           <div className="text-[#18191c] text-2xl font-semibold font-inter leading-10">
             Antise
@@ -47,7 +65,7 @@ function NavCompany() {
         <div className="h-12 justify-start items-center gap-7 inline-flex">
           <button
             className="h-12 px-6 py-3 rounded-[3px] border-2 border-[#0a65cc] justify-center items-center gap-3 text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal inline-flex hover:bg-[#0a65cc] hover:text-white"
-            onClick={handleNavigateToPostJob} // Navigate to Post Job
+            onClick={handleNavigateToPostJob}
           >
             Post a Job
           </button>
@@ -61,7 +79,10 @@ function NavCompany() {
             />
 
             {isDropdownAvatarVisible && (
-              <div className="absolute right-0 mt-2 w-40 shadow-lg bg-white rounded-lg py-2 z-[1000]">
+              <div
+                ref={avatarDropdownRef}
+                className="absolute right-0 mt-2 w-40 shadow-lg bg-white rounded-lg py-2 z-[1000]"
+              >
                 <ul id="dropdownMenu" className="max-h-96 overflow-auto">
                   <li
                     className="py-2.5 px-5 flex items-center hover:bg-gray-100 text-[#333] text-sm cursor-pointer"
