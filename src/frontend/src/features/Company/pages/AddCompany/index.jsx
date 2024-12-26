@@ -1,4 +1,5 @@
 import React from "react";
+import { useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -9,18 +10,44 @@ import DateField from "../../../../customFields/DateField";
 import IconTextField from "../../../../customFields/IconTextField";
 import ImageField from "../../../../customFields/ImageField";
 import companyApi from "../../../../api/companyApi.js";
+import {CompanyContext} from '../../../../context/CompanyContext';
 
 function AddCompany() {
   const navigate = useNavigate();
+  const {
+      companyName, setCompanyName, logoUrl, setLogoUrl, bannerUrl, setBannerUrl,
+      description, setDescription, benefit, setBenefit,
+      location, setLocation, organizationType, setOrganizationType,
+      companyUrl, setCompanyUrl, jobList, setJobList, verified, setVerified,
+      companyEmail, setCompanyEmail, companyPhoneNumber, setCompanyPhoneNumber,
+      yearOfEstablishment, setYearOfEstablishment, savedApplicants, setSavedApplicants, 
+      size, setSize, industry, setIndustry, resetCompany
+    } = useContext(CompanyContext);
   const handleClickSubmit = async (values) => {
     console.log(values);
 
     try {
       const response = await companyApi.editCompany(values);
       const company = response.data;
-      //update context
-
-      navigate("/company/SucessCompanyUpload");
+      console.log(company);
+      setCompanyName(company.name);
+      setLogoUrl(company.logoUrl);
+      setBannerUrl(company.bannerUrl);
+      setDescription(company.description);
+      setBenefit(company.benefit);
+      setLocation(company.location);
+      setOrganizationType(company.organizationType);
+      setCompanyUrl(company.companyUrl);
+      setJobList(company.jobList);
+      setVerified(company.verified);
+      setCompanyEmail(company.companyEmail);
+      setCompanyPhoneNumber(company.companyPhoneNumber);
+      setYearOfEstablishment((company.yearOfEstablishment != null) ? (company.yearOfEstablishment).substring(0, 10) : null);
+      setSavedApplicants(company.savedApplicants);
+      setIndustry(company.industry);
+      setSize(company.size);
+      navigate("/company/dashboard", { replace: true });
+      
     } catch (error) {
       console.log(error);
     }
