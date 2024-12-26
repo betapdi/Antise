@@ -7,7 +7,7 @@ import { ApplicantContext } from "../../../../../context/ApplicantContext";
 import applicantApi from "../../../../../api/applicantApi";
 
 
-function ListSavedApplication({ savedApplications }) {
+function ListSavedApplication({ savedApplications, onViewProfile }) {
     const [isClicked, setIsClicked] = useState({});
     const { addSavedApplications, removeSavedApplications } = useContext(CompanyContext);
     const { profileImageUrl } = useContext(ApplicantContext);
@@ -126,7 +126,10 @@ function ListSavedApplication({ savedApplications }) {
                         </button>
 
                         {/* View Profile Button */}
-                        <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex">
+                        <button
+                            className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 inline-flex"
+                            onClick={() => onViewProfile(application)}
+                        >
                             <div className="text-[#0a65cc] text-base font-semibold font-['Inter'] capitalize leading-normal">
                                 View Profile
                             </div>

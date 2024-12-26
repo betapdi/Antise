@@ -44,6 +44,17 @@ public class UserService {
         return mongoTemplate.count(query, User.class);
     }
 
+    public Integer getNumUser() {
+        List<User> users = userRepository.findAll();
+
+        Integer response = 0;
+        for (User user : users) {
+            if (user instanceof Applicant) ++response;
+        }
+
+        return response;
+    }
+
     public List<Object> getAllUsers(String email) {
         List<User> users = userRepository.findAll();
 
