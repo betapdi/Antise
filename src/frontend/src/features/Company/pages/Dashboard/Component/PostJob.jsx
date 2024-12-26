@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -10,18 +11,30 @@ import IconTextField from "../../../../../customFields/IconTextField";
 import RichTextField from "../../../../../customFields/RichTextField";
 import ResumeField from "../../../../../customFields/ResumeField";
 import ImageField from "../../../../../customFields/ImageField";
-
+import PopupDialog from '../../../components/PopupDialog.js';
+import {CompanyContext} from '../../../../../context/CompanyContext';
 const PostJob = () => {
   const navigate = useNavigate();
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+  const {setJobList} = useContext(CompanyContext);
+  const handleCloseDialog = () => {
+    setIsOpenDialog(false);
+  };
   const handleSaveChange = async (values) => {
     console.log(values);
     try {
       const response = await jobApi.createJob(values);
       const job = response.data;
-
-      //Update context and show popup
-      console.log("job", job);
-      navigate("/company/postjobsuccess");
+      setJobList((prev) => [job, ...prev]);
+      setDialogContent({
+        title: "Success Postng JobJob!",
+        content: "Your job has been posted successfully. You can view it in the job list.",
+        buttonLabel: "View your job",
+        link: null
+      });
+      setIsOpenDialog(true);
+      
     } catch (error) {
       console.log(error);
     }
@@ -222,6 +235,13 @@ const PostJob = () => {
           }}
         </Formik>
       </div>
+      {isOpenDialog && (
+                <PopupDialog
+                    isOpen={isOpenDialog}
+                    handleClose={handleCloseDialog}
+                    content={dialogContent}
+                />
+      )}
     </div>
   );
 };

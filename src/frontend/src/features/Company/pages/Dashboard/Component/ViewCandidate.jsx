@@ -8,7 +8,9 @@ import { CompanyContext } from '../../../../../context/CompanyContext';
 function ViewCandidate({ application }) {
     const [applicant, setApplicant] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
-    const { addSavedApplication, removeSavedApplication } = useContext(CompanyContext);
+    const { addSavedApplications, removeSavedApplications, savedApplications } = useContext(CompanyContext);
+    console.log('List', savedApplications);
+    console.log('application', application);
 
     useEffect(() => {
         const fetchApplicantById = async (applicantId) => {
@@ -25,7 +27,16 @@ function ViewCandidate({ application }) {
         if (application.applicantId) {
             fetchApplicantById(application.applicantId);
         }
-    }, [application.id]);
+
+        if (savedApplications.some((applications) => applications.id === application.id)) {
+            setIsClicked(true);
+            console.log('Haha', isClicked);
+        } else {
+            setIsClicked(false);
+            console.log('Haha', isClicked);
+        }
+        console.log('Haha', isClicked);
+    }, []);
 
     if (!application) return null;
 
@@ -35,7 +46,7 @@ function ViewCandidate({ application }) {
             const response = await companyApi.addSavedApplication(id);
             const application = response.data;
             console.log('ADD', application);
-            addSavedApplication(application);
+            addSavedApplications(application);
         } catch (error) {
             console.log(error);
         }
@@ -46,7 +57,7 @@ function ViewCandidate({ application }) {
             const response = await companyApi.removeSavedApplication(id);
             const application = response.data;
             console.log('REMOVE', application);
-            removeSavedApplication(id);
+            removeSavedApplications(id);
         } catch (error) {
             console.log(error);
         }

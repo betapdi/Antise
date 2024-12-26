@@ -1,7 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext} from "react";
 import { useNavigate } from "react-router-dom";
+import jobApi from "../../../../../api/jobApi";
+import {UserContext} from "../../../../../context/UserContext";
+import {CompanyContext} from "../../../../../context/CompanyContext";
 
 function ListJob({ jobList }) {
+    const {setJobList} = useContext(CompanyContext);
+    const {
+        userId, setUserId, email, setEmail, role, setRole,
+        notifications, setNotifications, resetUser
+      } = useContext(UserContext);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // Number of jobs to display per page
@@ -24,8 +32,17 @@ function ListJob({ jobList }) {
         setDropdownOpen((prev) => (prev === jobId ? null : jobId));
     };
 
-    const handleDeleteJob = (jobId) => {
-        console.log(`Deleting job with ID: ${jobId}`);
+    const handleDeleteJob = async (job) => {
+        try{
+            const response = await jobApi.deleteJob(job.id);
+            const data = response.data;
+            const updatedJobList = jobList.filter((item) => item.id !== job.id);
+            setJobList(updatedJobList);
+            console.log(data);
+        }catch (error){
+            console.log(userId, " ",job.companyId);
+            console.log("Error deleting job",error);
+        }
     };
 
     const [remainingDays, setRemainingDays] = useState([]);
@@ -136,7 +153,7 @@ function ListJob({ jobList }) {
                         {dropdownOpen === job.id && (
                             <button
                                 className="mt-9 ml-[-65px] flex items-center absolute bg-white gap-2 px-4 py-2 text-left shadow-md"
-                                onClick={() => handleDeleteJob(job.id)}
+                                onClick={() => handleDeleteJob(job)}
                             >
                                 <img
                                     src="/image/Trash.png"

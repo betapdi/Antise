@@ -98,7 +98,6 @@ function DetailJob() {
     };
 
     const handleClickApply = () => {
-
         if (isCompleteSetting() && !checkApplied()) {
             setIsFormOpen(true);
         } else if (checkApplied()) {

@@ -4,11 +4,15 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import jobApi from "../../../../../api/jobApi";
 import ViewCandidate from "./ViewCandidate";
+import { useContext } from "react";
+import { CompanyContext } from "../../../../../context/CompanyContext";
 
 function CandidateList() {
   const params = useParams();
   const [jobID, setJobID] = useState(null);
   const [job, setJob] = useState(null);
+  const { savedApplications } = useContext(CompanyContext);
+  console.log(savedApplications);
 
   useEffect(() => {
     setJobID(params.id);
