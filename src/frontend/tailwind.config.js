@@ -10,6 +10,7 @@ module.exports = {
       'white': '#FFFFFF',
       'gray/100': '#E4E5E8',
       'red': '#FF0000',
+      'yellow': '#F6F7C4',
     },
     fontFamily: {
       inter: ['Inter', 'sans-serif'], 

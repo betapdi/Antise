@@ -15,7 +15,11 @@ const userApi = {
   getUserData: () => {
     const url = '/user/get';
     return axiosPrivate.get(url);
-  }
+  },
+  getAllUsers: () => {
+    const url = '/user/getAll';
+    return axiosPrivate.get(url);
+  },
 
 }
 

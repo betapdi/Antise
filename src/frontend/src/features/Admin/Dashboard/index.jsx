@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Sidebar from "./Component/SideBar.jsx";
-import OverView from "../../Company/pages/Dashboard/Component/OverView.jsx";
+import Overview from "./Component/Overview.jsx";
+import PendingCompanies from "./Component/PendingCompanies.jsx";
+import Users from "./Component/Users.jsx";
 
 
 const Dashboard = () => {
@@ -14,7 +16,9 @@ const Dashboard = () => {
         <div className="w-3/4">
           <Routes>
             <Route exact path='/' element={<Navigate to="/admin/dashboard/overview" replace />} />
-            <Route path="/overview" element={<OverView/>} />
+            <Route path="/overview" element={<Overview/>} />
+            <Route path="/pending-companies" element={<PendingCompanies/>} />
+            <Route path="/users" element={<Users/>} />
           </Routes>
         </div>
       </div>

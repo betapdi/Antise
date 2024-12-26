@@ -1,6 +1,7 @@
 package com.antise.server.services;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -132,6 +133,7 @@ public class JobService {
 
         Application application = new Application();
         application.update(applicationDto);
+        application.setSubmittedDate(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         
         Application savedApplication = applicationRepository.save(application);
 
