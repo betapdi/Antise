@@ -74,8 +74,8 @@ public class ApplicantDto extends UserDto {
         if (applicant.getFavoriteJobs() != null) {
             favoriteJobs = new ArrayList<>();
 
-            for (Job job : applicant.getFavoriteJobs()) {
-                System.out.println(job);
+            for (Job job : applicant.getFavoriteJobs()) {   
+                if (job == null) continue;  
                 JobDto dto = new JobDto();
                 dto.update(job);
 

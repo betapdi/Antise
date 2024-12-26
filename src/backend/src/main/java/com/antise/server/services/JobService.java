@@ -116,7 +116,7 @@ public class JobService {
         if (user.getRole() != UserRole.ADMIN && user.getRole() != UserRole.COMPANY) throw new UserRoleNotQualifiedException();
         
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
-        if (user.getRole() == UserRole.COMPANY && job.getCompanyId() != user.getId()) throw new ObjectOwnershipException();
+        if (user.getRole() == UserRole.COMPANY && !job.getCompanyId().equals(user.getId())) throw new ObjectOwnershipException();
 
         Company company = (Company)user;
         company.getJobList().remove(job);

@@ -15,14 +15,18 @@ import com.antise.server.auth.repositories.UserRepository;
 import com.antise.server.dto.ApplicantDto;
 import com.antise.server.dto.CompanyDto;
 import com.antise.server.entities.Applicant;
+import com.antise.server.entities.Application;
 import com.antise.server.entities.Company;
 import com.antise.server.exceptions.ApplicantNotFoundException;
+import com.antise.server.exceptions.ApplicationNotFoundException;
 import com.antise.server.exceptions.CompanyNotFoundException;
 import com.antise.server.exceptions.UserNotFoundException;
+import com.antise.server.repositories.ApplicationRepository;
 
 @Service
 public class CompanyService {
     private final UserRepository userRepository;
+    private final ApplicationRepository applicationRepository;
     private final FileService fileService;
 
     @Value("${project.image}")
@@ -31,9 +35,10 @@ public class CompanyService {
     @Value("${base.url}")
     private String baseUrl;
 
-    public CompanyService(FileService fileService, UserRepository userRepository) {
+    public CompanyService(FileService fileService, UserRepository userRepository, ApplicationRepository applicationRepository) {
         this.fileService = fileService;
         this.userRepository = userRepository;
+        this.applicationRepository = applicationRepository;
     }
 
     public List<CompanyDto> getAllCompanies() {
@@ -97,17 +102,37 @@ public class CompanyService {
         return response;
     }
 
-    public CompanyDto saveApplicant(String applicantId, String email) {
-        Applicant applicant = (Applicant)(userRepository.findById(applicantId).orElseThrow(() -> new ApplicantNotFoundException()));
+    public CompanyDto saveApplication(String applicationId, String email) {
+        Application application = (Application)(applicationRepository.findById(applicationId).orElseThrow(() -> new ApplicationNotFoundException()));
         Company company = (Company)(userRepository.findByEmail(email).orElseThrow(() -> new CompanyNotFoundException()));
 
-        company.getSavedApplicants().add(applicant);
+        company.getSavedApplications().add(application);
         Company savedCompany = userRepository.save(company);
 
         CompanyDto response = new CompanyDto();
         response.update(savedCompany);
         return response;
     }
+
+    public String removeSavedApplication(String applicationId, String email) {
+        Company company = (Company)(userRepository.findByEmail(email).orElseThrow(() -> new CompanyNotFoundException()));
+
+        Application chosen = null;
+        for (Application application : company.getSavedApplications()) {
+            if (application.getId().equals(applicationId)) {
+                chosen = application;
+            }
+        }
+
+        if (chosen != null) {
+            company.getSavedApplications().remove(chosen);
+            userRepository.save(company);
+        }
+
+        String response = "Application with id: " + applicationId + " has been removed from savedApplications successfully!";
+        return response;
+    }
+
 
     public List<CompanyDto> searchCompany(String searchPattern) {
         List<User> users = userRepository.findAll();
