@@ -35,4 +35,11 @@ public class ApplicationController {
     public ResponseEntity<List<ApplicationDto>> getAllApplications() {
         return ResponseEntity.ok(applicationService.getAllApplications());
     }
+
+    @GetMapping("/get/{applicationId}")
+    public ResponseEntity<ApplicationDto> getApplication(@PathVariable("applicationId") String applicationId) {
+        ApplicationDto response = applicationService.getApplication(applicationId);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

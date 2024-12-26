@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
       <div className="w-screen flex justify-center">
         <div className="w-[90%] max-w-screen-xl flex flex-row mt-5">
-          <div className="w-1/4 border-r border-[#adb5bd] ">
+          <div className="w-1/4 border-r border-[#adb5bd] h-screen">
             <Sidebar numberOfJobs={numberOfJobs}/>
           </div>
           <div className="w-3/4">

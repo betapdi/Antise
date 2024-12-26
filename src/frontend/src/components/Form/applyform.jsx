@@ -113,7 +113,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                   label="Full Name"
                   name="fullName"
                   component={TextField}
-                  placeholder="Company Name"
+                  placeholder="Full Name"
                 />
 
                 <Field
