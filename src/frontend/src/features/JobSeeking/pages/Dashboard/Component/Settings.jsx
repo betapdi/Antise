@@ -37,7 +37,6 @@ const Settings = () => {
     const fetchResume = async () => {
       try {
         const response = await applicantApi.getResume(resumeUrl);
-        console.log(response.data);
         setOldResume(response.data);
       } catch (error) {
         console.log(error);

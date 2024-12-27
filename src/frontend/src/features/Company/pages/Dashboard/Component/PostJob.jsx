@@ -22,7 +22,6 @@ const PostJob = () => {
     setIsOpenDialog(false);
   };
   const handleSaveChange = async (values) => {
-    console.log(values);
     try {
       const response = await jobApi.createJob(values);
       const job = response.data;
@@ -93,13 +92,6 @@ const PostJob = () => {
             setFieldValue,
             isSubmitting,
           }) => {
-            console.log({
-              values,
-              errors,
-              touched,
-              handleSubmit,
-              isSubmitting,
-            });
             return (
               <Form onSubmit={handleSubmit} className="space-y-4 w-full mb-9">
                 <h1 className="w-full text-[#18191c] text-2xl font-medium font-inter leading-loose">

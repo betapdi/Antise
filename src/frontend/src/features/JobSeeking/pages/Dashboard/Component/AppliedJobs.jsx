@@ -31,7 +31,6 @@ function ListJob({ jobs, numberOfJobs }) {
 
     const getApplicationByJobId = (jobId) => {
         const application = applications.find((application) => application.jobId === jobId);
-        console.log("Application:", application);
         return application ? application.submittedDate : null;
     };
 
@@ -57,7 +56,6 @@ function ListJob({ jobs, numberOfJobs }) {
         if (jobs.length > 0) {
             fetchCompanies();
             calculateRemainingDays();
-            console.log(getApplicationByJobId(jobs[0]?.id));
         }
     }, [jobs]);
 
@@ -161,7 +159,6 @@ const AppliedJobs = () => {
         const fetchAppliedJob = async () => {
             try {
                 const response = await applicantApi.getAppliedJob();
-                console.log("Fetch Applied Jobs: ", response.data);
                 setAppliedJob(response.data);
             } catch (error) {
                 console.log("Failed to fetch companies: ", error);
