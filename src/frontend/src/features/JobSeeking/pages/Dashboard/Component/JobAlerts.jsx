@@ -68,7 +68,7 @@ const JobAlerts = ({ onJobCountChange }) => {
           notifications.map(async (notification) => {
             if (notification.jobId) {
               try {
-                console.log("Fetching job details for jobId:", notification.jobId);
+                // console.log("Fetching job details for jobId:", notification.jobId);
                 const response = await jobApi.getJob(notification.jobId);
                 return {
                   ...notification,

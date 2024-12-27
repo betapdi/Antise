@@ -24,12 +24,12 @@ function AddCompany() {
       size, setSize, industry, setIndustry, resetCompany
     } = useContext(CompanyContext);
   const handleClickSubmit = async (values) => {
-    console.log(values);
+    // console.log(values);
 
     try {
       const response = await companyApi.editCompany(values);
       const company = response.data;
-      console.log(company);
+      // console.log(company);
       setCompanyName(company.name);
       setLogoUrl(company.logoUrl);
       setBannerUrl(company.bannerUrl);
@@ -129,7 +129,7 @@ function AddCompany() {
           })}
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+              // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
               handleClickSubmit(values);
             }, 400);
