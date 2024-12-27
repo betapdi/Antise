@@ -271,7 +271,7 @@ function DetailJob() {
                                                 title: "Login Required",
                                                 content: "You need to login to apply for this job.",
                                                 buttonLabel: "Login",
-                                                link: "\auth\login",
+                                                link: "/auth/login",
                                             });
                                             setIsOpenDialog(true);
                                         }}
