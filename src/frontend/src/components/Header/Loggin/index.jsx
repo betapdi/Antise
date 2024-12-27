@@ -8,7 +8,7 @@ const HeaderLoggin = () => {
   return (
     <div className="w-full flex flex-col justify-center bg-[#f1f2f4]">
       <div className="w-full flex items-center justify-center">
-        <div className="w-[65rem] flex items-center justify-start">
+        <div className="w-[65rem] flex flex-row items-center justify-between">
           <div className="h-12 justify-start items-center inline-flex">
             <div className="justify-start gap-6 flex">
               <Link
@@ -45,6 +45,7 @@ const HeaderLoggin = () => {
               </Link>
             </div>
           </div>
+          <img src="/image/help.jpg"  alt="logo" className="items-center justify-center h-4" />
         </div>
       </div>
       <Nav isAuthen={1} />
