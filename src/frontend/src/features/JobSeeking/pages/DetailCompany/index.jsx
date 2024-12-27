@@ -54,16 +54,10 @@ function DetailCompany() {
                         <div className='flex flex-row justify-between items-start w-full max-w-7xl gap-10'>
                             <div className="w-full h-40 p-10 bg-white rounded-xl border border-[#e4e5e8] justify-between items-center inline-flex">
                                 <div className="justify-start items-center gap-6 flex">
-                                    <img className="w-20 h-20 rounded-md" src="https://via.placeholder.com/80x80" />
+                                    <img className="w-20 h-20 rounded-md" src={"http://172.28.102.169:8080/api/v1" + company.logoUrl}/>
                                     <div className="flex-col justify-start items-start gap-2.5 inline-flex">
                                         <div className="text-[#18191c] text-2xl font-medium font-['Inter'] leading-loose">{company.name}</div>
                                         <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">{company.industry}</div>
-                                    </div>
-                                </div>
-                                <div className="px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex">
-                                    <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">View Open Position</div>
-                                    <div className="w-6 h-6 relative">
-                                        <img src={`/image/arrow_right_hover.png`} alt="icon" />
                                     </div>
                                 </div>
                             </div>
