@@ -19,6 +19,8 @@ function ListCompany() {
   const [logos, setLogos] = useState({});
   const [remainingDays, setRemainingDays] = useState([]);
   const [sortOption, setSortOption] = useState("latest");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("searchQuery");
 
@@ -83,6 +85,22 @@ function ListCompany() {
     setCompanies(sortedCompanies);
   };
 
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedCompanies = companies.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(companies.length / itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <div className="flex flex-col gap-12 justify-center items-center w-full py-16">
       <div className="flex flex-row justify-center items-center gap-[52rem] mt-3 mb-3">
@@ -101,7 +119,7 @@ function ListCompany() {
         </select>
       </div>
       <div className="flex flex-col gap-3 items-center justify-center flex-grow h-full w-full">
-        {companies.map((company, index) => (
+        {paginatedCompanies.map((company, index) => (
           <div className="w-[70rem] h-28 p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex">
             <div className="justify-start items-center gap-5 flex">
               <img
@@ -139,9 +157,9 @@ function ListCompany() {
 
             <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                             hover:bg-[#0a65cc] hover:text-white group"
-                            onClick={() => handleViewDetailCompany(company)}>
+              onClick={() => handleViewDetailCompany(company)}>
               <button className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
-                
+
               >
                 View Company
               </button>
@@ -156,6 +174,7 @@ function ListCompany() {
                 className="h-4 hidden group-hover:block"
               />
             </button>
+            
           </div>
         ))}
         {isOpenDialog && (
@@ -165,6 +184,34 @@ function ListCompany() {
             content={dialogContent}
           />
         )}
+        <div className="h-12 mt-3 justify-center items-center gap-2 inline-flex w-full">
+              <button
+                className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+              >
+                <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
+              </button>
+
+              {Array.from({ length: totalPages }, (_, index) => (
+                <button
+                  key={index}
+                  className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === index + 1 ? 'bg-[#0a65cc] text-white' : 'text-[#5e6670]'
+                    }`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+
+              <button
+                className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              >
+                <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
+              </button>
+            </div>
       </div>
     </div>
   );

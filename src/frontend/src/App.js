@@ -129,6 +129,8 @@ function App() {
                 )
               }
               />
+              <Route path="welcome/employee" element={<WelcomeEmployee />} />
+              <Route path="welcome/employer" element={<WelcomeEmployer />} />
               <Route path="admin/*" element={<Admin />} />
               <Route path="job/*" element={<Job />} />
               <Route path="company/*" element={<Company />} />
