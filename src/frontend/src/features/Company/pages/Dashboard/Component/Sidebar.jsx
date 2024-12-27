@@ -86,7 +86,7 @@ const Sidebar = () => {
                   } hover:bg-[#e7f0fa]`}
               >
                 <img
-                  src={`${isActive("/company/dashboard/notifications") ? "/image/BlueBellRinging.png" : "/image/BellRinging.svg"}`}
+                  src={`${isActive("/company/dashboard/notifications") ? "/image/BlueBellRinging.png" : "/image/BellRinging.png"}`}
                   alt="logo"
                   className={`w-auto h-auto ml-4 mr-2 ${isActive("/company/dashboard/notifications") ? "filter-blue" : ""
                     }`}
