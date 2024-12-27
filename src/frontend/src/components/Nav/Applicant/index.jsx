@@ -78,14 +78,14 @@ function Nav({ isAuthen }) {
   const handleItemClick = (action) => {
     switch (action) {
       case "profile":
-        console.log("View profile clicked");
+        // console.log("View profile clicked");
         navigate("dashboard/settings");
         break;
       case "dashboard":
         navigate("dashboard");
         break;
       case "logout":
-        console.log("Logout clicked");
+        // console.log("Logout clicked");
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         window.location.reload("/job/homepage");

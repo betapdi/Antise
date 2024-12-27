@@ -18,7 +18,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
   const { resumeUrl } = useContext(ApplicantContext);
 
   useEffect(() => {
-    console.log("Dialog open:", isOpenDialog);
+    // console.log("Dialog open:", isOpenDialog);
   }, [isOpenDialog]); // Logs when isOpenDialog changes
 
   const handleCloseDialog = () => {
@@ -39,7 +39,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
   const phoneRegExp = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/
 
   const handleClickSubmit = async (values) => {
-    console.log("Form values:", values);
+    // console.log("Form values:", values);
     try {
       const applyData = {
         ...values,
@@ -47,7 +47,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
         applicantId: userId,
       };
       const response = await jobApi.applyJob(applyData);
-      console.log("API response:", response);
+      // console.log("API response:", response);
 
       setDialogContent({
         title: "Submit Form Successfully",
@@ -107,7 +107,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
           }}
         >
           {({ values, errors, touched, setFieldValue, isSubmitting }) => {
-            console.log("Formik errors:", errors);
+            {/* console.log("Formik errors:", errors); */}
             return (
               <Form className="space-y-4">
                 <Field

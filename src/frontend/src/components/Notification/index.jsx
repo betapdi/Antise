@@ -25,7 +25,7 @@ const NotificationDropdown = () => {
   const getJob = async (jobId) => {
     try {
       const response = await jobApi.getJob(jobId);
-      console.log("Fetched job:", response.data);
+      // console.log("Fetched job:", response.data);
       return response.data.title || null;
     } catch (error) {
       console.error("Error fetching job title for jobId:", jobId, error);
@@ -139,7 +139,7 @@ const NotificationDropdown = () => {
       </div>
       <ul className="space-y-4">
         {latestNotifications.map((notification) => {
-          console.log("Notification details:", notification); 
+          {/* console.log("Notification details:", notification);  */}
           return (
             <li
               key={notification.id}
