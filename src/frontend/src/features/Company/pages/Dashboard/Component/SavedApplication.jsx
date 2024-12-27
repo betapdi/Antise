@@ -35,43 +35,21 @@ function SavedApplication() {
                     No saved applications yet
                 </div>
             )}
-
             {selectedApplication && (
-                <div
-                    className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center"
-                    onClick={closeViewProfile}
-                >
-                    <div
-                        className="relative bg-white p-4 rounded-md w-3/5 shadow-lg"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-semibold">Application Details</h2>
-                            <button
-                                onClick={closeViewProfile}
-                                className="text-gray-500 hover:text-gray-800"
-                            >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth={2}
-                                    stroke="currentColor"
-                                    className="w-6 h-6"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
-
-                        <ViewApplication application={selectedApplication} />
-                    </div>
-                </div>
-            )}
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div 
+            className="relative bg-white rounded-md w-3/5 flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+        >
+            <div className="flex justify-between items-center p-4">
+                <h2 className="text-xl font-semibold">Application Details</h2>
+                <button onClick={closeViewProfile} className="text-gray-500 hover:text-gray-800">
+                </button>
+            </div>
+                <ViewApplication application={selectedApplication} />
+        </div>
+    </div>
+)}
         </div>
     );
 }

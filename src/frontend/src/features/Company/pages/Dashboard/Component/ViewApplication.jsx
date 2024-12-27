@@ -62,7 +62,7 @@ function ViewApplication({ application }) {
     return (
         <>
             {applicant && (
-                <div className="w-full relative bg-white rounded-xl">
+                <div className="w-full max-h-[85vh] relative bg-white pt-5 px-5 rounded-xl overflow-y-auto overflow-x-hidden m-2 -scroll-ml-1.5">
                     <div className="w-full justify-between items-center inline-flex mb-8">
                         <div className="justify-center items-center gap-6 flex">
                             <img
@@ -95,7 +95,7 @@ function ViewApplication({ application }) {
                             </button>
                         </div>
                     </div>
-                    <div className="w-full flex gap-[72px]">
+                    <div className="w-full flex gap-9">
                         <div className="flex-col justify-start items-start gap-8 inline-flex w-2/3">
                             <div className="flex-col justify-start items-start gap-6 flex">
                                 <div className="text-[#18191c] text-lg font-medium font-['Inter'] leading-[18px]">BIOGRAPHY</div>
@@ -103,9 +103,9 @@ function ViewApplication({ application }) {
                                     <div className=" text-[#5e6670] text-base font-normal font-['Inter'] leading-normal text-justify">{applicant.biography}</div>
                                 </div>
                             </div>
-                            <div className="w-full h-[0px] border border-[#e4e5e8]"></div>
+                            <div className="w-full h-0 border border-[#e4e5e8]"></div>
                             <div className="flex-col justify-start items-start gap-6 flex">
-                                <div className=" text-[#18191c] text-lg font-medium font-['Inter'] leading-[18px]">COVER LETTER</div>
+                                <div className=" text-[#18191c] text-lg font-medium font-['Inter'] leading-4">COVER LETTER</div>
                                 <div className="flex-col justify-start items-start gap-3 flex">
                                     <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">
                                         {application.coverLetter.split('\n').map((line, index) => (
@@ -119,7 +119,7 @@ function ViewApplication({ application }) {
                             </div>
                         </div>
 
-                        <div className="mr-4 flex-col justify-start items-end gap-6 inline-flex w-1/3">
+                        <div className="mr-4 flex-col justify-start items-end gap-6 inline-flex">
                             <div className="w-full p-6 bg-white rounded-lg border border-[#e7f0fa] flex-col justify-end items-start gap-6 inline-flex">
                                 <div className="w-full justify-start gap-20 items-start inline-flex">
                                     <div className="justify-start items-start gap-4 flex">
@@ -131,7 +131,7 @@ function ViewApplication({ application }) {
                                                 />
                                             </div>
                                             <div className="rem flex-col justify-start items-start gap-1 flex">
-                                                <div className="self-stretch text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">Gender</div>
+                                                <div className="self-stretch text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-4">Gender</div>
                                                 <div className="self-stretch text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">{applicant.gender === 1 ? 'Male' : 'Female'}</div>
                                             </div>
                                         </div>
@@ -158,7 +158,7 @@ function ViewApplication({ application }) {
                                             />
                                         </div>
                                         <div className="flex-col justify-start items-start gap-1 flex">
-                                            <div className="self-stretch text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-[18px]">Experience</div>
+                                            <div className="self-stretch text-[#767f8c] text-xs font-normal font-['Inter'] uppercase leading-4">Experience</div>
                                             <div className="self-stretch text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">{applicant.experience}</div>
                                         </div>
                                     </div>
@@ -191,7 +191,7 @@ function ViewApplication({ application }) {
                                             <div className="text-[#18191c] text-sm font-medium font-['Inter'] leading-tight">PDF</div>
                                         </div>
                                     </div>
-                                    <div className=" rounded-[5px] flex justify-center items-center">
+                                    <div className=" rounded-sm flex justify-center items-center">
                                         <div className="w-6 h-6 flex justify-center items-center">
                                             <img
                                                 src={`/image/DownloadSimple.png`}
@@ -217,7 +217,7 @@ function ViewApplication({ application }) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="h-[0px] border border-[#e4e5e8]"></div>
+                                    <div className="h-0 border border-[#e4e5e8]"></div>
                                     <div className="justify-start items-start gap-4 inline-flex">
                                         <img
                                             src={`/image/phone-call-duotone 1.png`}
