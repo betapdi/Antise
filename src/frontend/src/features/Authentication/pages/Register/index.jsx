@@ -142,7 +142,6 @@ export default function SignUpPage() {
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                              alert(JSON.stringify(values, null, 2));
                               handleSignUp(values)
                               setSubmitting(false);
                           }, 400);

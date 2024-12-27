@@ -116,7 +116,6 @@ export default function LoginPage() {
             })}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
-                              alert(JSON.stringify(values, null, 2));
                               handleLogin(values)
                               setSubmitting(false);
                           }, 400);
