@@ -137,11 +137,11 @@ function ListSavedApplication({ savedApplications, onViewProfile }) {
                         </button>
 
                         {/* See More Icon */}
-                        <button className="rounded-[5px] justify-start items-start gap-2.5 inline-flex">
+                        {/* <button className="rounded-[5px] justify-start items-start gap-2.5 inline-flex">
                             <div className="w-12 h-12 relative">
                                 <img src="/image/icon_see_more.png" className="w-12 h-12" alt="see more" />
                             </div>
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             ))}
