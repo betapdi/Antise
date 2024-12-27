@@ -53,7 +53,7 @@ const Company = (props) => {
       <div className='sticky top-0 z-50'>
       {isAuthenticated ? <HeaderLogginComany /> : <HeaderUnloggin />}
       </div>
-      <div className={shouldShowBlur ? 'relative' : ''}>
+      <div className={`relative ${shouldShowBlur ? 'pointer-events-none' : ''}`}>
         <Routes>
           <Route exact path='/' element={<Navigate to="/company/dashboard" replace />} />
           <Route path="/AddCompany" element={<AddCompany />} />
