@@ -175,7 +175,7 @@ export default function LoginPage() {
         <img src="/image/bg.png" alt="Logo" className="h-auto w-72" />
         
         </button>
-        <h2 className="text-2xl font-semibold text-[#0A65CC] mb-4">Over {candidateCount} candidates waiting for good employees.</h2>
+        <h2 className="text-2xl font-semibold text-[#0A65CC] mb-4">Over {candidateCount - 1} candidates waiting for good employees.</h2>
         <div className="flex space-x-5">
           <div className="text-center">
             <p className="text-2xl font-bold text-[#0A65CC]">{liveJobCount}</p>

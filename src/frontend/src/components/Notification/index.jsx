@@ -25,7 +25,6 @@ const NotificationDropdown = () => {
   const getJob = async (jobId) => {
     try {
       const response = await jobApi.getJob(jobId);
-      // console.log("Fetched job:", response.data);
       return response.data.title || null;
     } catch (error) {
       console.error("Error fetching job title for jobId:", jobId, error);

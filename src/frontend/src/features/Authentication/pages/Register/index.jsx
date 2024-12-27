@@ -231,7 +231,7 @@ export default function SignUpPage() {
           className="h-auto w-72"
         />
         <h2 className="text-2xl font-semibold text-[#0A65CC] mb-4">
-          Over {candidateCount} candidates waiting for good employees.
+          Over {candidateCount - 1} candidates waiting for good employees.
         </h2>
         <div className="flex space-x-5">
           <div className="text-center">
