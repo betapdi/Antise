@@ -166,7 +166,7 @@ function Settings() {
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               handleSaveChange(values);
-              alert(JSON.stringify(values, null, 2));
+              // alert(JSON.stringify(values, null, 2));
               setSubmitting(false);
             }, 400);
           }}
