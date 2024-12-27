@@ -11,7 +11,7 @@ function ListJob({ jobs, numberOfJobs }) {
     const navigate = useNavigate();
     const { profileImageUrl, fullName, favoriteJobs, applications, isCompleteSetting } = useContext(ApplicantContext);
     const [jobCompanies, setJobCompanies] = useState({});
-    const {notifications} = useContext(UserContext);
+    const { notifications } = useContext(UserContext);
 
     const handleSettingCompany = (company) => {
         navigate(`/job/dashboard/settings`);
@@ -248,7 +248,6 @@ const AppliedJobs = () => {
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const paginatedJobs = appliedJobs.slice(startIndex, startIndex + itemsPerPage);
-
     const totalPages = Math.ceil(appliedJobs.length / itemsPerPage);
 
     return (
@@ -256,45 +255,51 @@ const AppliedJobs = () => {
             <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
                 <ListJob jobs={paginatedJobs} numberOfJobs={appliedJobs.length} />
             </div>
-            <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
-                {/* Previous Button */}
-                <button
-                    className="p-3 bg-[#e7f0fa] rounded-[84px] cursor-pointer"
-                    onClick={handlePreviousPage}
-                    disabled={currentPage === 1}
-                >
-                    <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
-                </button>
 
-                {/* Page Numbers */}
-                {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
-                    const startPage = Math.max(1, currentPage - 2); // Ensure startPage is at least 1
-                    const endPage = Math.min(totalPages, currentPage + 2); // Ensure endPage does not exceed totalPages
-                    const displayPage = startPage + index; // Compute the actual page to display
-
-                    if (displayPage > totalPages) return null; // Prevent rendering out-of-bounds pages
-
-                    return (
+            {appliedJobs && appliedJobs.length > 0 && (
+                <>
+                    <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
+                        {/* Previous Button */}
                         <button
-                            key={displayPage}
-                            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
-                                }`}
-                            onClick={() => setCurrentPage(displayPage)}
+                            className="p-3 bg-[#e7f0fa] rounded-[84px] cursor-pointer"
+                            onClick={handlePreviousPage}
+                            disabled={currentPage === 1}
                         >
-                            {displayPage}
+                            <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
                         </button>
-                    );
-                })}
 
-                {/* Next Button */}
-                <button
-                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
-                    onClick={handleNextPage}
-                    disabled={currentPage === totalPages}
-                >
-                    <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
-                </button>
-            </div>
+                        {/* Page Numbers */}
+                        {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
+                            const startPage = Math.max(1, currentPage - 2); // Ensure startPage is at least 1
+                            const endPage = Math.min(totalPages, currentPage + 2); // Ensure endPage does not exceed totalPages
+                            const displayPage = startPage + index; // Compute the actual page to display
+
+                            if (displayPage > totalPages) return null; // Prevent rendering out-of-bounds pages
+
+                            return (
+                                <button
+                                    key={displayPage}
+                                    className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
+                                        }`}
+                                    onClick={() => setCurrentPage(displayPage)}
+                                >
+                                    {displayPage}
+                                </button>
+                            );
+                        })}
+
+                        {/* Next Button */}
+                        <button
+                            className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                            onClick={handleNextPage}
+                            disabled={currentPage === totalPages}
+                        >
+                            <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
+                        </button>
+                    </div>
+                </>
+            )
+            }
         </div>
     );
 }

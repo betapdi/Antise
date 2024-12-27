@@ -61,7 +61,7 @@ function ListJob({ jobs, numberOfJobs }) {
 
     return (
         <div>
-            
+
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
                 <div className="w-full px-5 py-2.5 bg-[#f1f2f4] rounded gap-5 inline-flex">
@@ -168,6 +168,8 @@ const AppliedJobs = () => {
 
 
     const totalPages = Math.ceil(jobs.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedJobs = jobs.slice(startIndex, startIndex + itemsPerPage);
 
     return (
         <>
@@ -180,7 +182,7 @@ const AppliedJobs = () => {
             {jobs && jobs.length > 0 ? (
                 <div>
                     <div className="w-100 overflow-y-auto ml-8 mb-5">
-                        <ListJob jobs={jobs} numberOfJobs={jobs.length} />
+                        <ListJob jobs={paginatedJobs} numberOfJobs={jobs.length} />
                     </div>
                     <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                         {/* Previous Button */}

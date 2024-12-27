@@ -12,7 +12,7 @@ function MyJob() {
       0
     );
   }, [jobList]);
-  
+
 
   const filteredJobs = useMemo(() => {
     // If filter is "Latest", sort jobs by posted date (descending order)
@@ -47,22 +47,30 @@ function MyJob() {
           </select>
         </div>
       </div>
-      <div className="w-full px-5 py-3 mt-4 bg-[#f1f2f4] rounded gap-5 inline-flex">
-        <div className="w-5/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
-          JOBS
-        </div>
-        <div className="w-2/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
-          STATUS
-        </div>
-        <div className="w-3/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
-          APPLICATIONS
-        </div>
-        <div className=" text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
-          ACTION
-        </div>
-      </div>
 
-      <ListJob jobList={filteredJobs} />
+      {filteredJobs && filteredJobs.length > 0 ? (
+        <>
+          <div className="w-full px-5 py-3 mt-4 bg-[#f1f2f4] rounded gap-5 inline-flex">
+            <div className="w-5/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+              JOBS
+            </div>
+            <div className="w-2/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+              STATUS
+            </div>
+            <div className="w-3/12 text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+              APPLICATIONS
+            </div>
+            <div className=" text-[#474c54] text-xs font-normal font-['Inter'] leading-[18px]">
+              ACTION
+            </div>
+          </div>
+
+          <ListJob jobList={filteredJobs} />
+        </>) : (
+        <div className="w-full flex flex-col mt-5">
+          No job yet
+        </div>
+      )}
     </div>
   );
 }

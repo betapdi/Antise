@@ -18,10 +18,9 @@ const ListJob = ({ jobs, numberOfJobs }) => {
       {jobs.map((job, index) => (
         <div
           key={index}
-          onClick = {() => navigate(`/company/dashboard/my-job/list-candidate/${job.jobId}`, { replace: true })}
-          className={`w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2] ${
-            job.isRead ? "bg-[#f0f0f0]" : "bg-[#e7f0fa]"
-          }`}
+          onClick={() => navigate(`/company/dashboard/my-job/list-candidate/${job.jobId}`, { replace: true })}
+          className={`w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2] ${job.isRead ? "bg-[#f0f0f0]" : "bg-[#e7f0fa]"
+            }`}
         >
           <div className="justify-start items-start gap-5 flex">
             <img
@@ -32,9 +31,8 @@ const ListJob = ({ jobs, numberOfJobs }) => {
             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
               <div className="justify-start items-center gap-2 inline-flex">
                 <div className="text-[#181f33] text-sm font-medium font-['Inter'] leading-loose">
-                  {`${job.applicantName || "An applicant"} has applied for job ${
-                    job.jobName || "Unknown Job"
-                  }`}
+                  {`${job.applicantName || "An applicant"} has applied for job ${job.jobName || "Unknown Job"
+                    }`}
                 </div>
               </div>
               <div className="justify-start items-center gap-4 inline-flex">
@@ -48,7 +46,7 @@ const ListJob = ({ jobs, numberOfJobs }) => {
       ))}
     </div>
   </div>
-);
+  );
 }
 
 const Notifications = ({ onJobCountChange }) => {
@@ -126,38 +124,50 @@ const Notifications = ({ onJobCountChange }) => {
 
   return (
     <div>
-      <div className="w-[90%] overflow-y-auto ml-8 mb-5">
-        <ListJob jobs={paginatedJobs} numberOfJobs={enrichedNotifications.length} />
+      <div className="flex flex-row justify-between items-center">
+        <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
+          Notification <span className="text-gray ml-2">({enrichedNotifications && enrichedNotifications.length})</span>
+        </div>
       </div>
-      <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
-        <button
-          className="p-3 bg-[#e7f0fa] rounded-[84px]"
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-        >
-          <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
-        </button>
 
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index}
-            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${
-              currentPage === index + 1 ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
-            }`}
-            onClick={() => setCurrentPage(index + 1)}
-          >
-            {index + 1}
-          </button>
-        ))}
+      {enrichedNotifications && enrichedNotifications.length > 0 ? (
+        <>
+          <div className="w-[90%] overflow-y-auto ml-8 mb-5">
+            <ListJob jobs={paginatedJobs} numberOfJobs={enrichedNotifications.length} />
+          </div>
+          <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
+            <button
+              className="p-3 bg-[#e7f0fa] rounded-[84px]"
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+            >
+              <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
+            </button>
 
-        <button
-          className="p-3 bg-[#e7f0fa] rounded-[84px]"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
-        </button>
-      </div>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index}
+                className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === index + 1 ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
+                  }`}
+                onClick={() => setCurrentPage(index + 1)}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            <button
+              className="p-3 bg-[#e7f0fa] rounded-[84px]"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
+            </button>
+          </div>
+        </>) : (
+        <div className="w-full flex flex-col mt-5">
+          No notification yet
+        </div>
+      )}
     </div>
   );
 };

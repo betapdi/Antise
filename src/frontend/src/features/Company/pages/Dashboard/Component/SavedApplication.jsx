@@ -19,7 +19,7 @@ function SavedApplication() {
         <div className="w-full flex flex-col">
             <div className="flex flex-row justify-between items-center">
                 <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
-                    My Saved Applications <span className="text-gray ml-2">({savedApplications.length})</span>
+                    My Saved Applications <span className="text-gray ml-2">({savedApplications && savedApplications.length})</span>
                 </div>
             </div>
 

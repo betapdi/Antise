@@ -150,7 +150,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
                   <div className="mt-4 ">
                     <h3 className="text-sm font-medium text-[#18191c]"> Questions</h3>
                     <div className="mb-2">
-                      {job.responsibility.split('\n').map((line, index) => (
+                      {job.questions.split('\n').map((line, index) => (
                         <div key={index} className="flex items-start">
                           <span className="text-sm font-small text-[#18191c] px-1">•</span>
                           <span>{line}</span>
