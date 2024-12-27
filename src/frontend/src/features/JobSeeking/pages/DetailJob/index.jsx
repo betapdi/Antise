@@ -168,7 +168,7 @@ function DetailJob() {
                 <div className="w-full flex flex-col justify-center items-center">
                     <div className="w-3/4 mx-auto flex flex-col justify-center items-center mt-20 mb-20">
                         {/* Job Title */}
-                        <div className='flex flex-row justify-between items-start w-full max-w-7xl gap-10'>
+                        <div className='flex flex-row justify-between items-start w-full max-w-7xl gap-7'>
                             <div className="flex-row justify-start items-center gap-10 flex">
                                 <img className="w-24 h-24 rounded-[100px]" src={"http://172.28.102.169:8080/api/v1" + [company.logoUrl]} alt={company.name} />
                                 <div className="flex-col justify-start items-start gap-[13px] inline-flex">
@@ -178,30 +178,30 @@ function DetailJob() {
                                             <div className="text-[#0065ff] text-sm font-normal font-['Inter'] leading-tight">{job.jobType}</div>
                                         </div>
                                     </div>
-                                    <div className="justify-start items-center gap-5 inline-flex">
+                                    <div className="justify-start items-center flex flex-row gap-2">
                                         <div className="justify-start items-center gap-2 flex">
-                                            <div className="w-5 h-5 relative">
+                                            <div className="w-4 h-4 relative">
                                                 <img
                                                     src={`/image/icon_link.svg`}
                                                     alt="icon"
                                                     className="transition-opacity duration-300 group-hover:opacity-0">
                                                 </img>
                                             </div>
-                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">{company.companyUrl}</div>
+                                            <div className="text-[#474c54] text-wrap font-normal font-['Inter'] text-sm leading-normal">{company.companyUrl}</div>
                                         </div>
                                         <div className="justify-start items-center gap-1.5 flex">
-                                            <div className="w-6 h-6 relative">
+                                            <div className="w-4 h-4 relative">
                                                 <img
                                                     src={`/image/icon_phone.svg`}
                                                     alt="icon"
                                                     className="transition-opacity duration-300 group-hover:opacity-0">
                                                 </img>
                                             </div>
-                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">{company.companyPhoneNumber}</div>
+                                            <div className="text-[#474c54] font-normal font-['Inter'] text-sm leading-normal">{company.companyPhoneNumber}</div>
                                         </div>
                                         <div className="justify-start items-center gap-1.5 flex">
-                                            <div className="w-6 h-6 justify-center items-center flex">
-                                                <div className="w-6 h-6 relative">
+                                            <div className="justify-center items-center flex">
+                                                <div className="w-4 h-4 relative">
                                                     <img
                                                         src={`/image/icon_envelop.svg`}
                                                         alt="icon"
@@ -209,7 +209,7 @@ function DetailJob() {
                                                     </img>
                                                 </div>
                                             </div>
-                                            <div className="text-[#474c54] text-base font-normal font-['Inter'] leading-normal">{company.companyEmail}</div>
+                                            <div className="text-[#474c54] text-sm font-normal font-['Inter'] leading-normal">{company.companyEmail}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@ function DetailJob() {
                                             </div>
                                         </div>
 
-                                        <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
+                                        <button className="h-14 px-3 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
                                             onClick={() => handleClickApply()}
                                         >
                                             <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
@@ -262,22 +262,31 @@ function DetailJob() {
                                 </div>
                             }
                             {role !== "APPLICANT" && role !== "COMPANY" &&
-                                <div className="flex-col justify-center items-end gap-3 inline-flex">
-                                    <div className="justify-center items-center gap-3 inline-flex">
-                                        <button className="h-14 px-8 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
-                                            onClick={() => setIsFormOpen(false)}
+                                <div className="flex-col justify-center items-end gap-3 flex">
+                                    <button className="h-14 px-3 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
+                                            onClick={() =>{
+
+                                             setIsFormOpen(false);
+                                             setDialogContent({
+                                                title: "Login Required",
+                                                content: "You need to login to apply for this job.",
+                                                buttonLabel: "Login",
+                                                link: "\auth\login",
+                                            });
+                                            setIsOpenDialog(true);
+                                        }}
                                         >
                                             <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
                                             <img
                                                 src={`/image/arrow_right_hover.png`}
                                                 alt="icon"
                                             />
-                                        </button>
-                                    </div>
+                                    </button>
+                                 
 
                                     <div className="justify-start items-start inline-flex">
-                                        <div className="text-[#767f8c] text-sm font-normal font-['Inter'] leading-tight">Job expire in: </div>
-                                        <div className="text-[#e05050] text-sm font-medium font-['Inter'] leading-tight px-1">
+                                        <div className="text-[#767f8c] text-sm font-normal font-inter leading-tight">Job expire in: </div>
+                                        <div className="text-[#e05050] text-sm font-medium font-inter leading-tight px-1">
                                             {new Date(job.expirationDate).toLocaleDateString('en-GB', {
                                                 day: '2-digit',
                                                 month: '2-digit',

@@ -105,7 +105,7 @@ function HomePage() {
       try {
         const response = await companyApi.getAllCompanies();
         console.log("Fetch Companies: ", response.data);
-        const result = response.data;
+        let result = response.data;
         result = result.filter(company => company.verified);
         setcompanies(result);
       } catch (error) {
@@ -117,10 +117,6 @@ function HomePage() {
 
   useEffect(() => {
     if (companies.length > 0) {
-      const startIndex = currentPage * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-      setCurrentCompanies(companies, startIndex, endIndex);
-
       const idToLogoMap = {};
       for (const company of companies) {
         console.log("Company: ", company.id, " id: ", company.logoUrl);
@@ -359,7 +355,7 @@ function HomePage() {
       <div className="flex flex-col items-center justify-center">
         {listJob.slice(0, Math.min(10, listJob.length)).map((job, index) => (
           <div
-            key={index}
+            key={job.id}
             className="w-[1200px] h-[132px] p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-4 transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]"
           >
             <div className="justify-start items-start gap-5 flex">
@@ -508,7 +504,7 @@ function HomePage() {
       </div>
       <div className="flex justify-center items-center w-full py-16">
         <div className="grid grid-cols-4 grid-rows-2 gap-2">
-          {currentCompanies.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).map((company, index) =>(
+          {companies.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).map((company, index) =>(
             <div className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]">
               <div className="justify-start items-start gap-4 inline-flex">
                 <img
