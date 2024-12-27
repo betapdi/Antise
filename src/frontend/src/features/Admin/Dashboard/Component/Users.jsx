@@ -10,7 +10,7 @@ function UserList() {
         const response = await userApi.getAllUsers();
         const allUsers = response.data;
         setUsers(allUsers);
-        console.log(allUsers);
+        // console.log(allUsers);
       } catch (error) {
         console.log("Failed to fetch users: ", error);
       }
@@ -41,7 +41,7 @@ function UserList() {
   const handleBanUser = async (user) => {
     try {
       await adminApi.deleteUser(user.id);
-      console.log(`User with ID ${user.id} has been deleted successfully`);
+      // console.log(`User with ID ${user.id} has been deleted successfully`);
       setUsers(users.filter((item) => item.id !== user.id));
     } catch (error) {
       console.error("Error deleting company:", error);

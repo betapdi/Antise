@@ -149,6 +149,7 @@ public class CompanyService {
 
         List<CompanyDto> response = new ArrayList<>();
         for (Company company : companies) {
+            if (company.getVerified().equals(false)) continue;
             if (company.getName() == null) continue;
             String companyName = (company.getName()).toLowerCase();
             String searchPatternLowercase = searchPattern.toLowerCase();

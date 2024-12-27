@@ -6,9 +6,9 @@ function ListCompany({ companies, totalCompanies, onApprove }) {
   const handleApprove = async (company) => {
     try {
       await adminApi.verifyCompany(company.id);
-      console.log(
-        `Company with ID ${company.id} has been verified successfully`
-      );
+      // console.log(
+      //   `Company with ID ${company.id} has been verified successfully`
+      // );
       onApprove(company.id);
     } catch (error) {
       console.error("Error verifying company:", error);
@@ -17,9 +17,9 @@ function ListCompany({ companies, totalCompanies, onApprove }) {
   const handleDeny = async (company) => {
     try {
       await adminApi.deleteUser(company.id);
-      console.log(
-        `Company with ID ${company.id} has been deleted successfully`
-      );
+      // console.log(
+      //   `Company with ID ${company.id} has been deleted successfully`
+      // );
       onApprove(company.id);
     } catch (error) {
       console.error("Error deleting company:", error);
