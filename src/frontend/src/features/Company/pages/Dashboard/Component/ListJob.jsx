@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef, useContext} from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import jobApi from "../../../../../api/jobApi";
-import {UserContext} from "../../../../../context/UserContext";
-import {CompanyContext} from "../../../../../context/CompanyContext";
+import { UserContext } from "../../../../../context/UserContext";
+import { CompanyContext } from "../../../../../context/CompanyContext";
+import PopupDialog from "../../../components/PopupDialog";
 
 function ListJob({ jobList }) {
-    const {setJobList} = useContext(CompanyContext);
+    const { setJobList } = useContext(CompanyContext);
     const {
         userId, setUserId, email, setEmail, role, setRole,
         notifications, setNotifications, resetUser
-      } = useContext(UserContext);
+    } = useContext(UserContext);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // Number of jobs to display per page
@@ -33,15 +34,15 @@ function ListJob({ jobList }) {
     };
 
     const handleDeleteJob = async (job) => {
-        try{
+        try {
             const response = await jobApi.deleteJob(job.id);
             const data = response.data;
             const updatedJobList = jobList.filter((item) => item.id !== job.id);
             setJobList(updatedJobList);
             console.log(data);
-        }catch (error){
-            console.log(userId, " ",job.companyId);
-            console.log("Error deleting job",error);
+        } catch (error) {
+            console.log(userId, " ", job.companyId);
+            console.log("Error deleting job", error);
         }
     };
 
@@ -85,6 +86,35 @@ function ListJob({ jobList }) {
     const handleViewJobsApplications = (job) => {
         navigate(`/company/dashboard/my-job/list-candidate/${job.id}`);
     };
+
+    const [isOpenDialog, setIsOpenDialog] = useState(false);
+    const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+
+    // Handle dialog close
+    const handleCloseDialog = () => {
+        setIsOpenDialog(false);
+    };
+
+    const confirmDeleteJob = (job) => {
+        setDialogContent({
+            title: "Confirm Deletion",
+            content: `Are you sure you want to delete the job: ${job.title}?`,
+            buttonLabel: "Delete",
+            link: null, // Not used here
+        });
+        setIsOpenDialog(true);
+    
+        // Callback on dialog action
+        const onConfirmDelete = async () => {
+            setIsOpenDialog(false);
+            handleDeleteJob(job);
+        };
+        setDialogContent((prev) => ({
+            ...prev,
+            onConfirm: onConfirmDelete, // Add callback to dialog
+        }));
+    };
+    
 
     return (
         <div className="w-full flex flex-col mt-4 gap-4" ref={dropdownRef}>
@@ -153,7 +183,7 @@ function ListJob({ jobList }) {
                         {dropdownOpen === job.id && (
                             <button
                                 className="mt-9 ml-[-65px] flex items-center absolute bg-white gap-2 px-4 py-2 text-left shadow-md"
-                                onClick={() => handleDeleteJob(job)}
+                                onClick={() => confirmDeleteJob(job)}
                             >
                                 <img
                                     src="/image/Trash.png"
@@ -200,6 +230,13 @@ function ListJob({ jobList }) {
                     <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
                 </button>
             </div>
+            {isOpenDialog && (
+                <PopupDialog
+                    isOpen={isOpenDialog}
+                    handleClose={handleCloseDialog}
+                    content={dialogContent}
+                />
+            )}
         </div>
     );
 }
