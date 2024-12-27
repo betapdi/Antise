@@ -24,6 +24,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
   const handleCloseDialog = () => {
     setIsOpenDialog(false);
     isCloseChange(true);
+    window.location.reload();
   }
 
   const getFileNameFromUrl = (url, removeExtension = true) => {

@@ -204,9 +204,6 @@ const FavoriteJobs = () => {
         }
     };
 
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const paginatedJobs = favoriteJobs.slice(startIndex, startIndex + itemsPerPage);
-
     const totalPages = Math.ceil(favoriteJobs.length / itemsPerPage);
 
     return (
