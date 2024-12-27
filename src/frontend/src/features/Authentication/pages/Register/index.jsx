@@ -121,14 +121,12 @@ export default function SignUpPage() {
           </div>
           <Formik
             initialValues={{
-              fullName: "",
               email: "",
               password: "",
               role: "",
               confirmedPassword: "",
             }}
             validationSchema = {Yup.object().shape({
-              fullName: Yup.string().required("Please fill your full name"),
               role: Yup.string().required("Please select your role"),
               email: Yup.string()
                     .required("Please provide your email")
@@ -171,14 +169,6 @@ export default function SignUpPage() {
                     />
                   </div>
                   <div className="space-y-2 mb-8 w-full">
-                    <Field
-                      name = "fullName"
-                      component = {TextField}
-                      placeholder = "Full Name"
-                      focusStyle = "focus:outline-none focus:ring-2 focus:ring-blue-400"
-                      borderColor = "border-[#b8b6b6]"
-                      heightInput = "h-11"
-                    />
 
                     <Field
                       name = "email"
@@ -217,7 +207,7 @@ export default function SignUpPage() {
                     </div>
                     <span className="text-white text-1xl">→</span>
                   </button>
-                  <div className="my-4 text-center text-gray">or</div>
+                  {/* <div className="my-4 text-center text-gray">or</div>
                   <div className="flex justify-center items-center mb-3 w-full">
                     <button className="bg-white py-2 px-8 rounded-md text-sm border border-gray/100 flex items-center justify-center">
                       <img
@@ -227,7 +217,7 @@ export default function SignUpPage() {
                       />
                       <span className="font-['Inter'] font-normal">Sign up with Google</span>
                     </button>
-                  </div>
+                  </div> */}
                 </Form>
               )
             }}
