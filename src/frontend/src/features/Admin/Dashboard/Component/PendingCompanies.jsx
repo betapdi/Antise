@@ -28,12 +28,6 @@ function ListCompany({ companies, totalCompanies, onApprove }) {
 
   return (
     <div>
-      <span className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7">
-        Pending Companies{" "}
-      </span>
-      <span className="text-[#9199a3] text-base font-normal font-['Inter'] leading-normal">
-        ({totalCompanies} pending)
-      </span>
       <div className="flex flex-col gap-3 items-center justify-center w-full mt-5">
         {companies.map((company, index) => (
           <div
@@ -139,53 +133,64 @@ const PendingCompanies = () => {
 
   return (
     <div>
-      <div className={`w-100 overflow-y-auto ml-8 mb-5`}>
-        <ListCompany
-          companies={paginatedCompanies}
-          totalCompanies={companies.length}
-          onApprove={handleApprove}
-        />
+      <div className="flex flex-row justify-between items-center ml-8">
+        <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
+          Pending Company <span className="text-gray ml-2">({companies && companies.length > 0 ? (companies.length) : '0'})</span>
+        </div>
       </div>
-      <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
-        <button
-          className="p-3 bg-[#e7f0fa] rounded-[84px]"
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-        >
-          <img
-            src={`/image/arrow_left.png`}
-            alt="icon_arrow"
-            className="w-6 h-6"
-          />
-        </button>
-        {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
-          const displayPage = index + 1;
-          return (
+      {companies && companies.length > 0 ? (
+        <>
+          <div className={`w-100 overflow-y-auto ml-8 mb-5`}>
+            <ListCompany
+              companies={paginatedCompanies}
+              totalCompanies={companies.length}
+              onApprove={handleApprove}
+            />
+          </div>
+          <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
             <button
-              key={displayPage}
-              className={`w-12 h-12 px-2 py-3 rounded-[50px] ${
-                currentPage === displayPage
-                  ? "bg-[#0a65cc] text-white"
-                  : "text-[#5e6670]"
-              }`}
-              onClick={() => setCurrentPage(displayPage)}
+              className="p-3 bg-[#e7f0fa] rounded-[84px]"
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
             >
-              {displayPage}
+              <img
+                src={`/image/arrow_left.png`}
+                alt="icon_arrow"
+                className="w-6 h-6"
+              />
             </button>
-          );
-        })}
-        <button
-          className="p-3 bg-[#e7f0fa] rounded-[84px]"
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          <img
-            src={`/image/arrow_right.png`}
-            alt="icon_arrow"
-            className="w-6 h-6"
-          />
-        </button>
-      </div>
+            {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
+              const displayPage = index + 1;
+              return (
+                <button
+                  key={displayPage}
+                  className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage
+                    ? "bg-[#0a65cc] text-white"
+                    : "text-[#5e6670]"
+                    }`}
+                  onClick={() => setCurrentPage(displayPage)}
+                >
+                  {displayPage}
+                </button>
+              );
+            })}
+            <button
+              className="p-3 bg-[#e7f0fa] rounded-[84px]"
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+            >
+              <img
+                src={`/image/arrow_right.png`}
+                alt="icon_arrow"
+                className="w-6 h-6"
+              />
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="w-full ml-10 flex flex-col mt-5">No pending companies yet</div>
+      )
+      }
     </div>
   );
 };
