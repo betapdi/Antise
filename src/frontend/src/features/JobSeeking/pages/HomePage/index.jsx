@@ -81,7 +81,6 @@ function HomePage() {
         const response = await jobApi.getAllJobs();
         setListJobs(response.data);
       } catch (error) {
-        console.log("Failed to fetch jobs: ", error);
       }
     };
     fetchJobs();
@@ -107,7 +106,6 @@ function HomePage() {
         result = result.filter(company => company.verified);
         setcompanies(result);
       } catch (error) {
-        console.log("Failed to fetch companies: ", error);
       }
     };
     fetchCompanies();
@@ -147,7 +145,6 @@ function HomePage() {
         setCompanyCount(companyResponse.data.length);
 
       } catch (error) {
-        console.error("Error fetching counts:", error);
       }
     };
 
@@ -159,7 +156,6 @@ function HomePage() {
         const candidateResponse = await userApi.getNumUser();
         setCandidateCount(candidateResponse.data);
       } catch (error) {
-        console.error("Error fetching counts:", error);
       }
     };
     fetchCandidate();
@@ -183,7 +179,6 @@ function HomePage() {
       const job = response.data;
       addFavoriteJob(job);
     } catch (error) {
-      console.log(error);
     }
   };
 
@@ -193,7 +188,6 @@ function HomePage() {
       const job = response.data;
       removeFavoriteJob(id);
     } catch (error) {
-      console.log(error);
     }
   };
 

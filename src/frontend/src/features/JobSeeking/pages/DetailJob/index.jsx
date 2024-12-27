@@ -50,13 +50,11 @@ function DetailJob() {
 
     useEffect(() => {
         const fetchJobById = async (jobID) => {
-            // console.log('haa', jobID);
             try {
                 const response = await jobApi.getJob(jobID);
                 const data = response.data;
                 setJob(data);
             } catch (error) {
-                console.error('Error fetching job data:', error);
             }
         };
 
@@ -129,24 +127,19 @@ function DetailJob() {
                 const company = response.data;
                 setCompany(company);
             } catch (error) {
-                console.log(error);
             }
         }
         if (job != null) {
             fetchCompany(job.companyId);
-            console.log('companyID', job.companyId);
         }
     }, [job])
 
     const handleAddFavoriteJob = async (id) => {
-        console.log(id);
         try {
             const response = await applicantApi.addFavoriteJob(id);
             const job = response.data;
-            console.log(job);
             addFavoriteJob(job);
         } catch (error) {
-            console.log(error);
         }
     };
 
@@ -154,10 +147,8 @@ function DetailJob() {
         try {
             const response = await applicantApi.removeFavoriteJob(id);
             const job = response.data;
-            console.log('REMOVE', job);
             removeFavoriteJob(id);
         } catch (error) {
-            console.log(error);
         }
     };
 

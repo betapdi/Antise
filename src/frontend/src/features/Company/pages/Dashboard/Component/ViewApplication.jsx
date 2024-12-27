@@ -10,8 +10,6 @@ function ViewApplication({ application }) {
     const [applicant, setApplicant] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
     const { addSavedApplications, removeSavedApplications, savedApplications } = useContext(CompanyContext);
-    console.log('L', savedApplications);
-    console.log('hi', application.id);
 
 
     useEffect(() => {
@@ -20,9 +18,7 @@ function ViewApplication({ application }) {
                 const response = await applicantApi.getApplicant(applicantId);
                 const data = response.data;
                 setApplicant(data);
-                console.log(data);
             } catch (error) {
-                console.error("Error fetching applicant data:", error);
             }
         };
 
@@ -47,7 +43,6 @@ function ViewApplication({ application }) {
             addSavedApplications(app);
             setIsClicked(true);
         } catch (error) {
-            console.log(error);
         }
     };
 
@@ -58,7 +53,6 @@ function ViewApplication({ application }) {
             removeSavedApplications(app.id);
             setIsClicked(false);
         } catch (error) {
-            console.log(error);
         }
     };
 

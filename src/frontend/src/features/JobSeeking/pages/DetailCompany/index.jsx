@@ -13,8 +13,6 @@ function DetailCompany() {
     const params = useParams();
     const itemsPerPage = 6;
 
-    console.log('params', params);
-
     const handleViewDetailJob = (job) => {
         navigate(`/job/detailjob/${job.id}`);
     };
@@ -35,9 +33,7 @@ function DetailCompany() {
                 const response = await companyApi.getCompany(companyID);
                 const company = response.data;
                 setCompany(company);
-                console.log('hh', company);
             } catch (error) {
-                console.log(error);
             }
         }
         if (companyID != null) {
