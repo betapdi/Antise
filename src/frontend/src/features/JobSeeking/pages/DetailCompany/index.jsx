@@ -75,16 +75,15 @@ function DetailCompany() {
                             <div className="w-3/5 flex-col justify-start items-start gap-8 inline-flex">
                                 <div className="flex-col justify-start items-start gap-4 flex">
                                     <div className="text-black text-lg font-medium font-['Inter'] leading-7">Description</div>
-                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Integer aliquet pretium consequat. Donec et sapien id leo accumsan pellentesque eget maximus tellus. Duis et est ac leo rhoncus tincidunt vitae vehicula augue. Donec in suscipit diam. Pellentesque quis justo sit amet arcu commodo sollicitudin. Integer finibus blandit condimentum. Vivamus sit amet ligula ullamcorper, pulvinar ante id, tristique erat. Quisque sit amet aliquam urna. Maecenas blandit felis id massa sodales finibus. Integer bibendum eu nulla eu sollicitudin. Sed lobortis diam tincidunt accumsan faucibus. Quisque blandit augue quis turpis auctor, dapibus euismod ante ultricies. Ut non felis lacinia turpis feugiat euismod at id magna. Sed ut orci arcu. Suspendisse sollicitudin faucibus aliquet.</div>
-
+                                    <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal text-justify">{company.description}</div>
                                 </div>
-                                <div className="flex-col justify-start items-start gap-4 flex">
+                                {/* <div className="flex-col justify-start items-start gap-4 flex">
                                     <div className="text-black text-lg font-medium font-['Inter'] leading-7">Company Benefits</div>
                                     <div className="flex-col justify-start items-start gap-3 flex">
                                         <div className="text-[#5e6670] text-base font-normal font-['Inter'] leading-normal">Quisque semper gravida est et consectetur.</div>
 
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
 
                             {/* Company Overview */}
