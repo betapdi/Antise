@@ -8,12 +8,6 @@ import { useNavigate } from "react-router-dom";
 const ListJob = ({ jobs, numberOfJobs }) => {
   const navigate = useNavigate();
   return (<div>
-    <span className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7">
-      Job Alerts
-    </span>
-    <span className="text-[#9199a3] text-base font-normal font-['Inter'] leading-normal">
-      ({numberOfJobs} new jobs)
-    </span>
     <div className="flex flex-col gap-3 items-center justify-center w-full mt-5">
       {jobs.map((job, index) => (
         <div
