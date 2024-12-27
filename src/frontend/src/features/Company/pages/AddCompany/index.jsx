@@ -39,11 +39,10 @@ function AddCompany() {
       setOrganizationType(company.organizationType);
       setCompanyUrl(company.companyUrl);
       setJobList(company.jobList);
-      setVerified(company.verified);
+      setVerified(false);
       setCompanyEmail(company.companyEmail);
       setCompanyPhoneNumber(company.companyPhoneNumber);
       setYearOfEstablishment((company.yearOfEstablishment != null) ? (company.yearOfEstablishment).substring(0, 10) : null);
-      setSavedApplicants(company.savedApplicants);
       setIndustry(company.industry);
       setSize(company.size);
       navigate("/company/dashboard", { replace: true });
