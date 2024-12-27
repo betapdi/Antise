@@ -28,10 +28,10 @@ const PostJob = () => {
       const job = response.data;
       setJobList((prev) => [job, ...prev]);
       setDialogContent({
-        title: "Success Postng JobJob!",
+        title: "Success Posting Job!",
         content: "Your job has been posted successfully. You can view it in the job list.",
-        buttonLabel: "View your job",
-        link: null
+        buttonLabel: "View job list",
+        link: "/company/dashboard/my-job",
       });
       setIsOpenDialog(true);
       
