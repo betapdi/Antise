@@ -195,7 +195,7 @@ const Settings = () => {
                           {/* Education */}
                           <Field
                             name="education"
-                            component={TextField}
+                            component={SelectField}
                             oldValue={education}
                             label="Education"
                             heightInput="h-12"
