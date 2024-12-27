@@ -118,6 +118,37 @@ public class JobService {
         Job job = jobRepository.findById(jobId).orElseThrow(() -> new JobNotFoundException());
         if (user.getRole() == UserRole.COMPANY && !job.getCompanyId().equals(user.getId())) throw new ObjectOwnershipException();
 
+        List<User> users = userRepository.findAll();
+
+        List<Application> applications = job.getApplications();
+        for (Application application : applications) {
+            User userApplicant = userRepository.findById(application.getApplicantId()).orElseThrow(() -> new UserNotFoundException());
+            Applicant applicant = (Applicant)userApplicant;
+
+            applicant.getApplications().remove(application);
+            userRepository.save(applicant);
+
+            //delete application
+            applicationRepository.deleteById(application.getId());
+        }
+        job.getApplications().removeAll(applications);
+
+        for (User userApplicant : users) {
+            if (userApplicant instanceof Applicant) {
+                Applicant applicant = (Applicant)userApplicant;
+                
+                Job chosen = null;
+                for (Job favoJob : applicant.getFavoriteJobs()) {
+                    if (favoJob.getId().equals(job.getId())) chosen = favoJob;
+                }
+
+                if (chosen != null) {
+                    applicant.getFavoriteJobs().remove(chosen);
+                    userRepository.save(applicant);
+                }
+            }
+        }
+
         Company company = (Company)user;
         company.getJobList().remove(job);
         userRepository.save(company);
