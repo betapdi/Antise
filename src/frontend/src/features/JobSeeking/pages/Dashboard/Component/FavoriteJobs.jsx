@@ -103,8 +103,6 @@ function ListJob() {
 
     return (
         <div>
-            <span className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7">Favorite job </span>
-            <span className="text-[#9199a3] text-base font-normal font-['Inter'] leading-normal">({numberOfJobs})</span>
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
                 {favoriteJobs.map((job, index) => (
@@ -212,49 +210,65 @@ const FavoriteJobs = () => {
     const totalPages = Math.ceil(favoriteJobs.length / itemsPerPage);
 
     return (
+
         <div>
-            <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
-                <ListJob />
+            <div className="flex flex-row justify-between items-center ml-8">
+                <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
+                    My Favorite Job <span className="text-gray ml-2">({favoriteJobs && favoriteJobs.length})</span>
+                </div>
             </div>
-            <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
-                {/* Previous Button */}
-                <button
-                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
-                    onClick={handlePreviousPage}
-                    disabled={currentPage === 1}
-                >
-                    <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
-                </button>
 
-                {/* Page Numbers */}
-                {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
-                    const startPage = Math.max(1, currentPage - 2); // Ensure startPage is at least 1
-                    const endPage = Math.min(totalPages, currentPage + 2); // Ensure endPage does not exceed totalPages
-                    const displayPage = startPage + index; // Compute the actual page to display
+            <>
+                {favoriteJobs && favoriteJobs.length > 0 ? (
+                    <>
+                        <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
+                            <ListJob />
+                        </div>
+                        <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
+                            {/* Previous Button */}
+                            <button
+                                className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                                onClick={handlePreviousPage}
+                                disabled={currentPage === 1}
+                            >
+                                <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
+                            </button>
 
-                    if (displayPage > totalPages) return null; // Prevent rendering out-of-bounds pages
+                            {/* Page Numbers */}
+                            {Array.from({ length: Math.min(5, totalPages) }, (_, index) => {
+                                const startPage = Math.max(1, currentPage - 2); // Ensure startPage is at least 1
+                                const endPage = Math.min(totalPages, currentPage + 2); // Ensure endPage does not exceed totalPages
+                                const displayPage = startPage + index; // Compute the actual page to display
 
-                    return (
-                        <button
-                            key={displayPage}
-                            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
-                                }`}
-                            onClick={() => setCurrentPage(displayPage)}
-                        >
-                            {displayPage}
-                        </button>
-                    );
-                })}
+                                if (displayPage > totalPages) return null; // Prevent rendering out-of-bounds pages
 
-                {/* Next Button */}
-                <button
-                    className="p-3 bg-[#e7f0fa] rounded-[84px]"
-                    onClick={handleNextPage}
-                    disabled={currentPage === totalPages}
-                >
-                    <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
-                </button>
-            </div>
+                                return (
+                                    <button
+                                        key={displayPage}
+                                        className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage ? "bg-[#0a65cc] text-white" : "text-[#5e6670]"
+                                            }`}
+                                        onClick={() => setCurrentPage(displayPage)}
+                                    >
+                                        {displayPage}
+                                    </button>
+                                );
+                            })}
+
+                            {/* Next Button */}
+                            <button
+                                className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                                onClick={handleNextPage}
+                                disabled={currentPage === totalPages}
+                            >
+                                <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
+                            </button>
+                        </div>
+                    </>
+                ) : (
+                    <div className="w-full ml-10 flex flex-col mt-5">No favorite jobs yet</div>
+                )
+                }
+            </>
         </div>
     );
 }
