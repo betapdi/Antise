@@ -70,7 +70,7 @@ function ListCompany() {
         console.error("Failed to fetch company list: ", error);
       }
     };
-    fetchCompanies();
+    if (searchQuery === "")  fetchCompanies();
   }, []);
   const handleSortChange = (e) => {
     const selectedSort = e.target.value;

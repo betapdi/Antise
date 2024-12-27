@@ -163,7 +163,7 @@ function ListJob({ isSearch }) {
                 console.log("Failed to fetch jobs: ", error);
             }
         }
-        fetchJobs();
+        if (searchQuery === "") fetchJobs();
     }, []);
 
     useEffect(() => {
