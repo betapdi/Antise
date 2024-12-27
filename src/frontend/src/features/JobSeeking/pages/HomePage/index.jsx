@@ -79,7 +79,6 @@ function HomePage() {
     const fetchJobs = async () => {
       try {
         const response = await jobApi.getAllJobs();
-        console.log("Fetch Jobs: ", response.data);
         setListJobs(response.data);
       } catch (error) {
         console.log("Failed to fetch jobs: ", error);
@@ -104,7 +103,6 @@ function HomePage() {
     const fetchCompanies = async () => {
       try {
         const response = await companyApi.getAllCompanies();
-        console.log("Fetch Companies: ", response.data);
         let result = response.data;
         result = result.filter(company => company.verified);
         setcompanies(result);
@@ -119,7 +117,6 @@ function HomePage() {
     if (companies.length > 0) {
       const idToLogoMap = {};
       for (const company of companies) {
-        console.log("Company: ", company.id, " id: ", company.logoUrl);
         if (company.id && company.logoUrl) {
           idToLogoMap[company.id] = company.logoUrl;
         }
@@ -181,11 +178,9 @@ function HomePage() {
   }, []);
 
   const handleAddFavoriteJob = async (id) => {
-    console.log(id);
     try {
       const response = await applicantApi.addFavoriteJob(id);
       const job = response.data;
-      console.log(job);
       addFavoriteJob(job);
     } catch (error) {
       console.log(error);
@@ -196,7 +191,6 @@ function HomePage() {
     try {
       const response = await applicantApi.removeFavoriteJob(id);
       const job = response.data;
-      console.log("REMOVE", job);
       removeFavoriteJob(id);
     } catch (error) {
       console.log(error);
@@ -505,7 +499,9 @@ function HomePage() {
       <div className="flex justify-center items-center w-full py-16">
         <div className="grid grid-cols-4 grid-rows-2 gap-2">
           {companies.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage).map((company, index) =>(
-            <div className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]">
+            <div 
+              key={company.id} 
+              className="h-[200px] p-8 bg-white rounded-xl border border-[#edeff4] flex-col justify-start items-start gap-8 flex transform transition-transform duration-300 hover:scale-105 hover:border-[#1877f2]">
               <div className="justify-start items-start gap-4 inline-flex">
                 <img
                   src={"http://172.28.102.169:8080/api/v1" + company.logoUrl}

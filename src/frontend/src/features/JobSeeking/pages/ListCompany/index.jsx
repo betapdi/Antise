@@ -8,7 +8,12 @@ function ListCompany() {
   const location = useLocation();
   // Set Show Dialog
   const [isOpenDialog, setIsOpenDialog] = useState(false);
-  const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
+  const [dialogContent, setDialogContent] = useState({
+    title: null,
+    content: null,
+    buttonLabel: null,
+    link: null,
+  });
 
   // Handle dialog close
   const handleCloseDialog = () => {
@@ -30,18 +35,17 @@ function ListCompany() {
 
   useEffect(() => {
     const query = searchQuery === "" ? null : searchQuery;
-    console.log("Searching for companies with query:", query);
     companyApi
       .searchCompany(query)
       .then((response) => {
-        console.log("Search results:", response.data);
         setCompanies(response.data);
         if (response.data.length === 0) {
           setDialogContent({
             title: "No companies found!",
-            content: "There are no companies that match your search criteria. Please try again.",
+            content:
+              "There are no companies that match your search criteria. Please try again.",
             buttonLabel: "Close",
-            link: null
+            link: null,
           });
           setIsOpenDialog(true);
         }
@@ -50,13 +54,13 @@ function ListCompany() {
         console.error("Error searching for company:", error);
         setDialogContent({
           title: "Error!",
-          content: "An error occurred while searching companies. Please try again later.",
+          content:
+            "An error occurred while searching companies. Please try again later.",
           buttonLabel: "Close",
-          link: null
+          link: null,
         });
         setIsOpenDialog(true);
       });
-
   }, [location]);
 
   useEffect(() => {
@@ -64,13 +68,13 @@ function ListCompany() {
       try {
         const response = await companyApi.getAllCompanies();
         let result = response.data;
-        result = result.filter(company => company.verified);
+        result = result.filter((company) => company.verified);
         setCompanies(result);
       } catch (error) {
         console.error("Failed to fetch company list: ", error);
       }
     };
-    if (searchQuery === "")  fetchCompanies();
+    if (searchQuery === "") fetchCompanies();
   }, []);
   const handleSortChange = (e) => {
     const selectedSort = e.target.value;
@@ -86,7 +90,10 @@ function ListCompany() {
   };
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedCompanies = companies.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedCompanies = companies.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
   const totalPages = Math.ceil(companies.length / itemsPerPage);
 
   const handleNextPage = () => {
@@ -120,7 +127,10 @@ function ListCompany() {
       </div>
       <div className="flex flex-col gap-3 items-center justify-center flex-grow h-full w-full">
         {paginatedCompanies.map((company, index) => (
-          <div className="w-[70rem] h-28 p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex">
+          <div
+            key={company.id}
+            className="w-[70rem] h-28 p-8 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex"
+          >
             <div className="justify-start items-center gap-5 flex">
               <img
                 src={"http://172.28.102.169:8080/api/v1" + company.logoUrl}
@@ -146,7 +156,8 @@ function ListCompany() {
                     <img
                       src={`/image/Briefcase.png`}
                       alt="job_icon"
-                      className="h-4" />
+                      className="h-4"
+                    />
                     <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-snug">
                       {company.jobList.length} Open Jobs
                     </div>
@@ -155,12 +166,12 @@ function ListCompany() {
               </div>
             </div>
 
-            <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
+            <button
+              className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
                             hover:bg-[#0a65cc] hover:text-white group"
-              onClick={() => handleViewDetailCompany(company)}>
-              <button className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
-
-              >
+              onClick={() => handleViewDetailCompany(company)}
+            >
+              <button className="text-[#0a65cc] group group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                 View Company
               </button>
               <img
@@ -174,7 +185,6 @@ function ListCompany() {
                 className="h-4 hidden group-hover:block"
               />
             </button>
-            
           </div>
         ))}
         {isOpenDialog && (
@@ -185,33 +195,44 @@ function ListCompany() {
           />
         )}
         <div className="h-12 mt-3 justify-center items-center gap-2 inline-flex w-full">
-              <button
-                className="p-3 bg-[#e7f0fa] rounded-[84px]"
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-              >
-                <img src={`/image/arrow_left.png`} alt="icon_arrow" className="w-6 h-6" />
-              </button>
+          <button
+            className="p-3 bg-[#e7f0fa] rounded-[84px]"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          >
+            <img
+              src={`/image/arrow_left.png`}
+              alt="icon_arrow"
+              className="w-6 h-6"
+            />
+          </button>
 
-              {Array.from({ length: totalPages }, (_, index) => (
-                <button
-                  key={index}
-                  className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === index + 1 ? 'bg-[#0a65cc] text-white' : 'text-[#5e6670]'
-                    }`}
-                  onClick={() => setCurrentPage(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              ))}
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              className={`w-12 h-12 px-2 py-3 rounded-[50px] ${
+                currentPage === index + 1
+                  ? "bg-[#0a65cc] text-white"
+                  : "text-[#5e6670]"
+              }`}
+              onClick={() => setCurrentPage(index + 1)}
+            >
+              {index + 1}
+            </button>
+          ))}
 
-              <button
-                className="p-3 bg-[#e7f0fa] rounded-[84px]"
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-              >
-                <img src={`/image/arrow_right.png`} alt="icon_arrow" className="w-6 h-6" />
-              </button>
-            </div>
+          <button
+            className="p-3 bg-[#e7f0fa] rounded-[84px]"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            <img
+              src={`/image/arrow_right.png`}
+              alt="icon_arrow"
+              className="w-6 h-6"
+            />
+          </button>
+        </div>
       </div>
     </div>
   );

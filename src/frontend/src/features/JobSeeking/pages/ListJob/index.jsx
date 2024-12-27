@@ -103,11 +103,8 @@ function ListJob({ isSearch }) {
                 education: filters.Education,
                 searchPattern: searchQuery !== "" ? searchQuery : null
             };
-            console.log(searchData);
             try {
-                console.log(searchData);
                 const response = await jobApi.searchJob(searchData);
-                console.log("Search Jobs: ", response.data);
                 setJobs(response.data);
                 if (response.data.length === 0) {
                     setDialogContent({
@@ -157,7 +154,6 @@ function ListJob({ isSearch }) {
         const fetchJobs = async () => {
             try {
                 const response = await jobApi.getAllJobs();
-                console.log("Fetch Jobs: ", response.data);
                 setJobs(response.data);
             } catch (error) {
                 console.log("Failed to fetch jobs: ", error);
@@ -181,7 +177,6 @@ function ListJob({ isSearch }) {
         const fetchCompanies = async () => {
             try {
                 const response = await companyApi.getAllCompanies();
-                console.log("Fetch Companies: ", response.data);
                 setcompanies(response.data);
             } catch (error) {
                 console.log("Failed to fetch companies: ", error);
@@ -193,7 +188,6 @@ function ListJob({ isSearch }) {
         if (companies.length > 0) {
             const idToLogoMap = {}
             for (const company of companies) {
-                console.log("Company: ", company.id, " id: ", company.logoUrl);
                 if (company.id && company.logoUrl) {
                     idToLogoMap[company.id] = company.logoUrl;
                 }
@@ -226,11 +220,9 @@ function ListJob({ isSearch }) {
     }, []);
 
     const handleAddFavoriteJob = async (id) => {
-        console.log(id);
         try {
             const response = await applicantApi.addFavoriteJob(id);
             const job = response.data;
-            console.log(job);
             addFavoriteJob(job);
         } catch (error) {
             console.log(error);
@@ -241,7 +233,6 @@ function ListJob({ isSearch }) {
         try {
             const response = await applicantApi.removeFavoriteJob(id);
             const job = response.data;
-            console.log("REMOVE", job);
             removeFavoriteJob(id);
         } catch (error) {
             console.log(error);
@@ -267,7 +258,7 @@ function ListJob({ isSearch }) {
                 ) : (
                     <div className="text-center text-[#181f33] text-[40px] font-medium font-['Inter'] leading-[48px]">Featured job</div>
                 )}
-                <select id="sort" class="bg-white border border-gray/100 text-black rounded-lg p-2"
+                <select id="sort" className="bg-white border border-gray/100 text-black rounded-lg p-2"
                     value={sortOption}
                     onChange={handleSortChange}
                 >

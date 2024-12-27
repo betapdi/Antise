@@ -4,7 +4,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const HeaderUnloggin = () => {
   const location = useLocation();
-
   return (
     <div className="w-full flex flex-col justify-center bg-[#f1f2f4]">
       <div className="w-full flex items-center justify-center">
