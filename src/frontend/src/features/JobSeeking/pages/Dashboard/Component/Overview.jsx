@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import applicantApi from "../../../../../api/applicantApi";
 import companyApi from "../../../../../api/companyApi";
 import { ApplicantContext } from "../../../../../context/ApplicantContext";
+import { UserContext } from "../../../../../context/UserContext";
 
 
 function ListJob({ jobs, numberOfJobs }) {
     const navigate = useNavigate();
     const { profileImageUrl, fullName, favoriteJobs, applications, isCompleteSetting } = useContext(ApplicantContext);
     const [jobCompanies, setJobCompanies] = useState({});
+    const {notifications} = useContext(UserContext);
 
     const handleSettingCompany = (company) => {
         navigate(`/job/dashboard/settings`);
@@ -63,6 +65,7 @@ function ListJob({ jobs, numberOfJobs }) {
         }
     }, [jobs]);
 
+
     return (
         <div classname="space-y-5 flex-col justify-start items-start gap-5 inline-flex border ">
             {/*Display how many job are there, for example, display Favorite Job (13) */}
@@ -91,7 +94,7 @@ function ListJob({ jobs, numberOfJobs }) {
                 </div>
                 <div className="w-1/3 pl-6 pr-5 py-5 bg-[#e7f6ea] rounded-lg justify-center items-center gap-20 inline-flex">
                     <div className="flex-col justify-start items-start inline-flex">
-                        <div className=" text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">574</div>
+                        <div className=" text-[#18191c] text-2xl font-semibold font-['Inter'] leading-loose">{notifications.length}</div>
                         <div className="opacity-80 text-[#18191c] text-sm font-normal font-['Inter'] leading-tight">Job Alerts</div>
                     </div>
                     <div className="p-4 bg-white rounded-[5px] justify-start items-start gap-2.5 flex">

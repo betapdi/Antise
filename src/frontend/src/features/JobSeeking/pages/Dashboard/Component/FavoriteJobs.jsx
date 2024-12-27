@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ApplicantContext } from "../../../../../context/ApplicantContext";
 import companyApi from "../../../../../api/companyApi";
 import applicantApi from "../../../../../api/applicantApi";
+import { useNavigate } from "react-router-dom";
 
 function ListJob() {
     const { favoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext);
@@ -10,6 +11,7 @@ function ListJob() {
     const [jobCompanies, setJobCompanies] = useState({});
     const [remainingDays, setRemainingDays] = useState([]);
     const [isClicked, setIsClicked] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCompanies = async () => {
@@ -155,8 +157,10 @@ function ListJob() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
-                                hover:bg-[#0a65cc] hover:text-white group">
+                            <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
+                                hover:bg-[#0a65cc] hover:text-white group"
+                                onClick={() => navigate(`/job/detailjob/${job.id}`, { replace: true })}
+                            >
                                 <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
                                     Apply Now
                                 </div>
@@ -170,7 +174,7 @@ function ListJob() {
                                     alt="arrow_right_hover"
                                     className="h-4 hidden group-hover:block"
                                 />
-                            </div>
+                            </button>
                         </div>
                     </div>
                 ))}

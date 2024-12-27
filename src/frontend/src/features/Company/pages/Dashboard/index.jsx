@@ -9,6 +9,7 @@ import SavedApplication from "./Component/SavedApplication";
 import ViewApplication from "./Component/ViewApplication";
 import Settings from "./Component/Settings";
 import Notifications from "./Component/Notifications";
+import Error from "../../../../components/Error";
 
 
 const Dashboard = () => {
@@ -29,6 +30,7 @@ const Dashboard = () => {
             <Route path="/my-job/list-candidate/:id" element={<CandidateList />} />
             <Route path="Notifications" element={<Notifications />} />
             <Route path="Settings" element={<Settings />} />
+            <Route path="*" element={<Error/>} />
           </Routes>
         </div>
       </div>

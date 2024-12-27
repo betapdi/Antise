@@ -4,6 +4,7 @@ import Sidebar from "./Component/SideBar.jsx";
 import Overview from "./Component/Overview.jsx";
 import PendingCompanies from "./Component/PendingCompanies.jsx";
 import Users from "./Component/Users.jsx";
+import Error from "../../../components/Error";
 
 
 const Dashboard = () => {
@@ -19,6 +20,7 @@ const Dashboard = () => {
             <Route path="/overview" element={<Overview/>} />
             <Route path="/pending-companies" element={<PendingCompanies/>} />
             <Route path="/users" element={<Users/>} />
+            <Route path="*" element={<Error/>} />
           </Routes>
         </div>
       </div>

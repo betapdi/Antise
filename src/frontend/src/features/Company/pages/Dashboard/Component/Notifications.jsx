@@ -3,9 +3,11 @@ import { CompanyContext } from "../../../../../context/CompanyContext";
 import { UserContext } from "../../../../../context/UserContext";
 import jobApi from "../../../../../api/jobApi";
 import applicationApi from "../../../../../api/applicationApi";
+import { useNavigate } from "react-router-dom";
 
-const ListJob = ({ jobs, numberOfJobs }) => (
-  <div>
+const ListJob = ({ jobs, numberOfJobs }) => {
+  const navigate = useNavigate();
+  return (<div>
     <span className="text-[#18191c] text-lg font-medium font-['Inter'] leading-7">
       Job Alerts
     </span>
@@ -16,6 +18,7 @@ const ListJob = ({ jobs, numberOfJobs }) => (
       {jobs.map((job, index) => (
         <div
           key={index}
+          onClick = {() => navigate(`/company/dashboard/my-job/list-candidate/${job.jobId}`, { replace: true })}
           className={`w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2] ${
             job.isRead ? "bg-[#f0f0f0]" : "bg-[#e7f0fa]"
           }`}
@@ -46,6 +49,7 @@ const ListJob = ({ jobs, numberOfJobs }) => (
     </div>
   </div>
 );
+}
 
 const Notifications = ({ onJobCountChange }) => {
   const { notifications } = useContext(UserContext);
@@ -71,6 +75,13 @@ const Notifications = ({ onJobCountChange }) => {
               const jobResponse = await jobApi.getJob(jobId);
               jobName = jobResponse.data.title || "Unknown Job";
               applicantName = applicationResponse.data.applicantName || "An applicant";
+              return {
+                ...notification,
+                jobId,
+                jobName,
+                applicantName,
+                companyLogo,
+              }
             } else if (notification.jobId) {
               const jobResponse = await jobApi.getJob(notification.jobId);
               jobName = jobResponse.data.title || "Unknown Job";
@@ -78,13 +89,6 @@ const Notifications = ({ onJobCountChange }) => {
           } catch (error) {
             console.error(`Error fetching job details for notification:`, error);
           }
-
-          return {
-            ...notification,
-            jobName,
-            applicantName,
-            companyLogo,
-          };
         })
       );
 

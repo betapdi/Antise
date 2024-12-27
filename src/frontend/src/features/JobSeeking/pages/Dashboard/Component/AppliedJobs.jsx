@@ -61,8 +61,7 @@ function ListJob({ jobs, numberOfJobs }) {
 
     return (
         <div>
-            {/*Display how many job are there, for example, display Favorite Job (13) */}
-            <span className="text-[#9199a3] text-base font-normal font-['Inter'] leading-normal">({numberOfJobs})</span>
+            
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
                 <div className="w-full px-5 py-2.5 bg-[#f1f2f4] rounded gap-5 inline-flex">

@@ -105,7 +105,7 @@ const NotificationDropdown = () => {
     if (notification.jobId) {
       window.location.href = `/job/detailjob/${notification.jobId}`;
     } else if (notification.applicationId && jobInfos[notification.applicationId]) {
-      window.location.href = `/job/detailjob/${jobInfos[notification.applicationId].jobId}`;
+      window.location.href = `/company/dashboard/my-job/list-candidate/${jobInfos[notification.applicationId].jobId}`;
     }
   };
 

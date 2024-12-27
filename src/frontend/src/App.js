@@ -134,7 +134,7 @@ function App() {
               <Route path="admin/*" element={<Admin />} />
               <Route path="job/*" element={<Job />} />
               <Route path="company/*" element={<Company />} />
-              <Route path="error/" element={<Error />} />
+              <Route path="*" element={<Error />} />
             </Routes>
           </BrowserRouter>
         </Suspense>)

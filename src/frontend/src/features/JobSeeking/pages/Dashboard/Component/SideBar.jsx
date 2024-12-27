@@ -1,8 +1,11 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../../../../context/UserContext";
 
 const Sidebar = ({ numberOfJobs }) => {
   const location = useLocation(); // Get the current location/path
+  const {notifications} = useContext(UserContext);
 
   const isActive = (path) => location.pathname.toLowerCase() === path; // Check if the link is active
 
@@ -65,7 +68,7 @@ const Sidebar = ({ numberOfJobs }) => {
                 />
                 Job Alert
                 <div className="absolute right-0 bg-[#e7f0fa] text-[#18191c] text-xs font-medium font-['Inter'] rounded-sm px-2 py-1">
-                  {numberOfJobs}
+                  {notifications.length}
                 </div>
               </Link>
             </li>
