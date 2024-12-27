@@ -165,11 +165,6 @@ export default function LoginPage() {
                     </div>
                     <span className="text-white text-1xl">→</span>
                   </button>
-                  <div className="my-4 text-center text-gray">or</div>
-                  <button className="w-full ml-2 bg-white py-2 rounded-md text-sm border border-[#b8b6b6] pl-1 flex items-center justify-center">
-                    <img src="/image/logo_gg.png" alt="Google" className="mr-2"/>
-                    <span>Sign in with Google</span>
-                  </button>
                 </Form>
               )
             }}
@@ -177,7 +172,10 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="w-1/3 flex flex-col justify-center items-center text-center me-6">
+      <button onClick={() => {navigate('/job/homepage/')}}>
         <img src="/image/bg.png" alt="Logo" className="h-auto w-72" />
+        
+        </button>
         <h2 className="text-2xl font-semibold text-[#0A65CC] mb-4">Over {candidateCount} candidates waiting for good employees.</h2>
         <div className="flex space-x-5">
           <div className="text-center">
