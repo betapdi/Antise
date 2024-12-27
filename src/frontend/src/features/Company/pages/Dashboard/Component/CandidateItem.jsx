@@ -11,7 +11,6 @@ function CandidateItem({ application, onClick }) {
                 const response = await applicantApi.getApplicant(applicantId);
                 const data = response.data;
                 setApplicant(data);
-                console.log(data);
             } catch (error) {
                 console.error("Error fetching applicant data:", error);
             }

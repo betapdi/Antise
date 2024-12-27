@@ -56,7 +56,6 @@ function Settings() {
   };
 
   const handleSaveChange = async (values) => {
-    console.log(values);
     try {
       const response = await companyApi.editCompany(values);
       const company = response.data;
@@ -180,13 +179,6 @@ function Settings() {
             setFieldValue,
             isSubmitting,
           }) => {
-            console.log({
-              values,
-              errors,
-              touched,
-              handleSubmit,
-              isSubmitting,
-            });
             return (
               <Form
                 onSubmit={handleSubmit}
