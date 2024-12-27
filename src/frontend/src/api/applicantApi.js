@@ -70,6 +70,11 @@ const applicantApi = {
   getApplicant: (id) => {
     const url = `/applicant/get/${id}`;
     return axiosPrivate.get(url);
+  },
+
+  readnotification: (id) => {
+    const url = `/applicant/readNotification/${id}`;
+    return axiosPrivate.post(url);
   }
 }
 

@@ -35,6 +35,7 @@ const companyApi = {
       },
     });
   },
+  
   getCompany: (id) => {
     const url = `public/company/get/${id}`;
     return axiosClient.get(url);
@@ -60,7 +61,12 @@ const companyApi = {
   removeSavedApplication: (id) => {
     const url = `/company/removeSavedApplication/${id}`;
     return axiosPrivate.delete(url);
-  }
+  },
+
+  readNotification: (applicationId) => {
+    const url = `/company/readNotification/${applicationId}`;
+    return axiosPrivate.post(url);
+  },
 }
 
 export default companyApi;
