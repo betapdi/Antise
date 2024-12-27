@@ -52,11 +52,11 @@ function UserList() {
     <div>
       <div className="flex flex-row justify-between items-center ml-8">
         <div className="inline-block text-[#18191c] text-xl font-medium font-['Inter'] leading-loose">
-          Users <span className="text-gray ml-2">({users && users.length > 0 ? (users.length) : '0'})</span>
+          Users <span className="text-gray ml-2">({users && (users.length - 1) > 0 ? (users.length - 1) : '0'})</span>
         </div>
       </div>
 
-      {users && users.length > 0 ? (
+      {users && users.length - 1 > 0 ? (
         <>
           <div className="flex flex-col gap-3 items-center justify-center w-full mt-5">
             {paginatedUsers
