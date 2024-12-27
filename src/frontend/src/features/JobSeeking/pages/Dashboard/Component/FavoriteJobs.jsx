@@ -5,9 +5,8 @@ import companyApi from "../../../../../api/companyApi";
 import applicantApi from "../../../../../api/applicantApi";
 import { useNavigate } from "react-router-dom";
 
-function ListJob() {
-    const { favoriteJobs, removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext);
-    const numberOfJobs = favoriteJobs.length;
+function ListJob({ jobs, numberOfJobs }) {
+    const { removeFavoriteJob, addFavoriteJob } = useContext(ApplicantContext);
     const [jobCompanies, setJobCompanies] = useState({});
     const [remainingDays, setRemainingDays] = useState([]);
     const [isClicked, setIsClicked] = useState({});
@@ -19,7 +18,7 @@ function ListJob() {
 
             try {
                 await Promise.all(
-                    favoriteJobs.map(async (job) => {
+                    jobs.map(async (job) => {
                         if (job.companyId && !fetchedCompanies[job.companyId]) {
                             const response = await companyApi.getCompany(job.companyId);
                             fetchedCompanies[job.companyId] = response.data; // Store company data keyed by companyId
@@ -32,16 +31,16 @@ function ListJob() {
             }
         };
 
-        if (favoriteJobs.length > 0) {
+        if (jobs.length > 0) {
             fetchCompanies();
         }
-    }, [favoriteJobs]);
+    }, [jobs]);
 
     const calculateRemainingDays = () => {
         const remainingDaysList = [];
         let check = false;
-        for (let i = 0; i < favoriteJobs.length; i++) {
-            const targetDateString = favoriteJobs[i].expirationDate;
+        for (let i = 0; i < jobs.length; i++) {
+            const targetDateString = jobs[i].expirationDate;
             const targetDate = new Date(targetDateString);
             const now = new Date();
             const diff = targetDate - now;
@@ -57,7 +56,7 @@ function ListJob() {
 
     useEffect(() => {
         calculateRemainingDays();
-        if (favoriteJobs.length > 0) {
+        if (jobs.length > 0) {
             const interval = setInterval(() => {
                 calculateRemainingDays();
             }, 5000);
@@ -65,19 +64,19 @@ function ListJob() {
             // Cleanup interval on component unmount
             return () => clearInterval(interval);
         }
-    }, [favoriteJobs]);
+    }, []);
 
     const handleJobFavoriteClick = (jobId) => {
         setIsClicked((prev) => ({ ...prev, [jobId]: !prev[jobId] }));
     };
 
     useEffect(() => {
-        if (favoriteJobs != null) {
-            favoriteJobs.forEach((job) => {
+        if (jobs != null) {
+            jobs.forEach((job) => {
                 setIsClicked((prev) => ({ ...prev, [job.id]: true }));
             });
         }
-    }, []);
+    }, [jobs]);
 
     const handleAddFavoriteJob = async (id) => {
         try {
@@ -103,7 +102,7 @@ function ListJob() {
         <div>
             {/* Job List */}
             <div className='flex flex-col gap-3 items-center justify-center w-full mt-5'>
-                {favoriteJobs.map((job, index) => (
+                {jobs.map((job, index) => (
                     <div
                         key={index}
                         className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
@@ -138,7 +137,7 @@ function ListJob() {
                                 className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex"
                                 onClick={() => {
                                     handleJobFavoriteClick(job.id);
-                                    if (!favoriteJobs.some((favJob) => favJob.id === job.id)) {
+                                    if (!jobs.some((favJob) => favJob.id === job.id)) {
                                         handleAddFavoriteJob(job.id);
                                     } else {
                                         handleRemoveFavoriteJob(job.id);
@@ -205,6 +204,8 @@ const FavoriteJobs = () => {
     };
 
     const totalPages = Math.ceil(favoriteJobs.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const paginatedJobs = favoriteJobs.slice(startIndex, startIndex + itemsPerPage);
 
     return (
 
@@ -219,7 +220,8 @@ const FavoriteJobs = () => {
                 {favoriteJobs && favoriteJobs.length > 0 ? (
                     <>
                         <div className={`w-100 overflow-y-auto ml-8 mb-5 `}>
-                            <ListJob />
+                            <ListJob jobs={paginatedJobs}
+                                numberOfJobs={favoriteJobs.length} />
                         </div>
                         <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
                             {/* Previous Button */}

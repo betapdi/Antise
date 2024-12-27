@@ -290,7 +290,7 @@ const AppliedJobs = () => {
 
                         {/* Next Button */}
                         <button
-                            className="p-3 bg-[#e7f0fa] rounded-[84px]"
+                            className="p-3 bg-[#e7f0fa] rounded-[84px] cursor-pointer"
                             onClick={handleNextPage}
                             disabled={currentPage === totalPages}
                         >
