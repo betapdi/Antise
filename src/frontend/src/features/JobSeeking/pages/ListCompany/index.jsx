@@ -74,7 +74,7 @@ function ListCompany() {
         console.error("Failed to fetch company list: ", error);
       }
     };
-    if (searchQuery === "") fetchCompanies();
+    if (searchQuery === "" || searchQuery === null) fetchCompanies();
   }, []);
   const handleSortChange = (e) => {
     const selectedSort = e.target.value;

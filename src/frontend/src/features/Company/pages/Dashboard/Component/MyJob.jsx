@@ -12,6 +12,7 @@ function MyJob() {
       0
     );
   }, [jobList]);
+  
 
   const filteredJobs = useMemo(() => {
     // If filter is "Latest", sort jobs by posted date (descending order)
