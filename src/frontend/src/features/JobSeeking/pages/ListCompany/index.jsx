@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import companyApi from "../../../../api/companyApi.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import PopupDialog from "../../components/PopupDialog.js";
 
 function ListCompany() {
+  const location = useLocation();
   // Set Show Dialog
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [dialogContent, setDialogContent] = useState({ title: null, content: null, buttonLabel: null, link: null });
@@ -20,7 +21,6 @@ function ListCompany() {
   const [sortOption, setSortOption] = useState("latest");
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("searchQuery");
-  console.log(searchQuery)
 
   const handleViewDetailCompany = (company) => {
     navigate(`/job/detailcompany/${company.id}`);
@@ -55,13 +55,15 @@ function ListCompany() {
         setIsOpenDialog(true);
       });
 
-  }, [searchQuery]);
+  }, [location]);
 
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
         const response = await companyApi.getAllCompanies();
-        setCompanies(response.data);
+        let result = response.data;
+        result = result.filter(company => company.verified);
+        setCompanies(result);
       } catch (error) {
         console.error("Failed to fetch company list: ", error);
       }
