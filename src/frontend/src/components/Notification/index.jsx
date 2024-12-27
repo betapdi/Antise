@@ -123,7 +123,7 @@ const NotificationDropdown = () => {
         <h2 className="text-lg font-semibold text-gray-800 mb-4">
           Notifications
         </h2>
-        <p className="text-sm text-gray-600">No notifications available.</p>
+        <p className="text-sm text-gray">No notifications available.</p>
       </div>
     );
   }
@@ -144,32 +144,31 @@ const NotificationDropdown = () => {
         </button>
       </div>
       <ul className="space-y-4">
-        {latestNotifications.map((notification) => (
-          <li
-            key={notification.id}
-            onClick={() => handleNotificationClick(notification)}
-            className={`flex flex-col ${
-              notification.unread ? "bg-blue-50" : "bg-white"
-            } p-4 rounded-lg shadow-sm hover:bg-gray-100 cursor-pointer transition`}
-          >
-            <p
-              className={`text-sm font-medium ${
-                notification.unread ? "text-black" : "text-gray-700"
-              }`}
+        {latestNotifications.map((notification) => {
+          console.log("Notification details:", notification); // Log each notification's details
+          return (
+            <li
+              key={notification.id}
+              onClick={() => handleNotificationClick(notification)}
+              className={`flex flex-col ${notification.unread ? "bg-blue-50" : "bg-white"} p-4 rounded-lg shadow-sm hover:bg-gray-100 cursor-pointer transition`}
             >
-              {notification.jobId ? (
-                `New Job from ${notification.companyName || "No name"}`
-              ) : (
-                `${notification.applicantName} has applied for ${
-                  jobInfos[notification.applicationId]?.title || "loading..."
-                }`
-              )}
-            </p>
-            <span className="text-xs text-gray-500 mt-1">
-              {formatDate(notification.createdAt)}
-            </span>
-          </li>
-        ))}
+              <p
+                className={`text-sm font-medium ${notification.unread ? "text-black" : "text-gray-700"}`}
+              >
+                {notification.jobId ? (
+                  `New Job from ${notification.companyName || "No name"}`
+                ) : (
+                  `${notification.applicantName} has applied for ${
+                    jobInfos[notification.applicationId]?.title || "loading..."
+                  }`
+                )}
+              </p>
+              <span className="text-xs text-gray-500 mt-1">
+                {formatDate(notification.createdAt)}
+              </span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

@@ -3,104 +3,18 @@ import { UserContext } from "../../../../../context/UserContext";
 import jobApi from "../../../../../api/jobApi";
 
 // lúc nào test fetch noti thì comment nguyên cái khúc notifications này (5-102) và bỏ dấu comment ở dòng 173
-// const notifications = [
-//     {
-//         title: "Senior UX Designer",
-//         companyLogo: "company_1.png",
-//         contractType: "Contract Base",
-//         location: "Australia",
-//         salary: "$30K-$35K",
-//         daysRemaining: 4,
-//     },
-//     {
-//         title: "Software Engineer",
-//         companyLogo: "company_2.png",
-//         contractType: "Full Time",
-//         location: "USA",
-//         salary: "$50K-$70K",
-//         daysRemaining: 7,
-//     },
-//     {
-//         title: "Product Manager",
-//         companyLogo: "company_3.png",
-//         contractType: "Part Time",
-//         location: "UK",
-//         salary: "$40K-$50K",
-//         daysRemaining: 10,
-//     },
-//     {
-//         title: "Senior UX Designer",
-//         companyLogo: "company_1.png",
-//         contractType: "Contract Base",
-//         location: "Australia",
-//         salary: "$30K-$35K",
-//         daysRemaining: 4,
-//     },
-//     {
-//         title: "Software Engineer",
-//         companyLogo: "company_2.png",
-//         contractType: "Full Time",
-//         location: "USA",
-//         salary: "$50K-$70K",
-//         daysRemaining: 7,
-//     },
-//     {
-//         title: "Product Manager",
-//         companyLogo: "company_3.png",
-//         contractType: "Part Time",
-//         location: "UK",
-//         salary: "$40K-$50K",
-//         daysRemaining: 10,
-//     },
-//     {
-//         title: "Senior UX Designer",
-//         companyLogo: "company_1.png",
-//         contractType: "Contract Base",
-//         location: "Australia",
-//         salary: "$30K-$35K",
-//         daysRemaining: 4,
-//     },
-//     {
-//         title: "Software Engineer",
-//         companyLogo: "company_2.png",
-//         contractType: "Full Time",
-//         location: "USA",
-//         salary: "$50K-$70K",
-//         daysRemaining: 7,
-//     },
-//     {
-//         title: "Product Manager",
-//         companyLogo: "company_3.png",
-//         contractType: "Part Time",
-//         location: "UK",
-//         salary: "$40K-$50K",
-//         daysRemaining: 10,
-//     },
-//     {
-//         title: "Senior UX Designer",
-//         companyLogo: "company_1.png",
-//         contractType: "Contract Base",
-//         location: "Australia",
-//         salary: "$30K-$35K",
-//         daysRemaining: 4,
-//     },
-//     {
-//         title: "Software Engineer",
-//         companyLogo: "company_2.png",
-//         contractType: "Full Time",
-//         location: "USA",
-//         salary: "$50K-$70K",
-//         daysRemaining: 7,
-//     },
-//     {
-//         title: "Product Manager",
-//         companyLogo: "company_3.png",
-//         contractType: "Part Time",
-//         location: "UK",
-//         salary: "$40K-$50K",
-//         daysRemaining: 10,
-//     },
-// ];
+const notificationsList = [
+  { companyName: "Company A", jobName: "Software Engineer", createdAt: "2024-12-01T08:00:00Z", isRead: false },
+  { companyName: "Company B", jobName: "Data Scientist", createdAt: "2024-12-02T09:30:00Z", isRead: true },
+  { companyName: "Company C", jobName: "UX Designer", createdAt: "2024-12-03T10:15:00Z", isRead: false },
+  { companyName: "Company D", jobName: "Product Manager", createdAt: "2024-12-04T11:45:00Z", isRead: true },
+  { companyName: "Company E", jobName: "Full Stack Developer", createdAt: "2024-12-05T12:00:00Z", isRead: false },
+  { companyName: "Company F", jobName: "Backend Developer", createdAt: "2024-12-06T13:20:00Z", isRead: true },
+  { companyName: "Company G", jobName: "Frontend Developer", createdAt: "2024-12-07T14:30:00Z", isRead: false },
+  { companyName: "Company H", jobName: "Marketing Specialist", createdAt: "2024-12-08T15:40:00Z", isRead: true },
+  { companyName: "Company I", jobName: "Quality Analyst", createdAt: "2024-12-09T16:50:00Z", isRead: false },
+  { companyName: "Company J", jobName: "Sales Executive", createdAt: "2024-12-10T17:10:00Z", isRead: true },
+];
 
 const ListJob = ({ jobs, numberOfJobs }) => (
   <div>
@@ -114,65 +28,22 @@ const ListJob = ({ jobs, numberOfJobs }) => (
       {jobs.map((job, index) => (
         <div
           key={index}
-          className="w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2]"
+          className={`w-full h-[132px] p-6 bg-white rounded-xl border border-[#edeff4] justify-between items-center inline-flex mb-0 transform transition-transform duration-300 hover:border-[#1877f2] ${
+            job.isRead ? 'bg-[#f0f0f0]' : 'bg-[#e7f0fa]'
+          }`}
         >
           <div className="justify-start items-start gap-5 flex">
-            <img
-              src={`/image/logoCompany/${job.companyLogo || "default.png"}`}
-              alt="job_icon"
-              className="w-16 h-16"
-            />
             <div className="flex-col justify-start items-start gap-3.5 inline-flex">
               <div className="justify-start items-center gap-2 inline-flex">
-                <div className="text-[#181f33] text-xl font-medium font-['Inter'] leading-loose">
-                  {job.title}
-                </div>
-                <div className="px-3 py-[3px] bg-[#e8f1ff] rounded-[52px] justify-start items-start gap-2.5 flex">
-                  <div className="text-[#0a65cc] text-sm font-normal font-['Inter'] leading-tight">
-                    {job.contractType}
-                  </div>
+                <div className="text-[#181f33] text-sm font-medium font-['Inter'] leading-loose">
+                  {`New Job at ${job.companyName}`}
                 </div>
               </div>
               <div className="justify-start items-center gap-4 inline-flex">
-                <div className="justify-start items-center gap-1.5 flex">
-                  <img src={`/image/icon_map.png`} alt="location_icon" className="h-4" />
-                  <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">
-                    {job.location}
-                  </div>
-                </div>
-                <div className="justify-start items-center gap-1 flex">
-                  <img src={`/image/icon_salary.png`} alt="salary_icon" className="h-4" />
-                  <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">
-                    {job.minSalary}$ - {job.maxSalary}$
-                  </div>
-                </div>
-                <div className="justify-start items-center gap-1.5 flex">
-                  <img src={`/image/icon_calander.png`} alt="calendar_icon" className="h-4" />
-                  <div className="text-[#636a7f] text-sm font-normal font-['Inter'] leading-tight">
-                    {job.daysRemaining} Days Remaining
-                  </div>
+                <div className="text-[#181f33] text-sm font-normal font-['Inter'] leading-loose">
+                  {`${job.companyName} posted a ${job.jobName} job at ${new Date(job.createdAt).toLocaleString()}`}
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="justify-start items-start gap-3 flex">
-            <div className="p-3 rounded-[5px] justify-start items-start gap-2.5 flex">
-              <img src={`/image/bookmark.png`} alt="icon_star" className="w-4 h-4" />
-            </div>
-            <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex hover:bg-[#0a65cc] hover:text-white group">
-              <div className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal">
-                Apply Now
-              </div>
-              <img
-                src={`/image/arrow_right.png`}
-                alt="arrow_right"
-                className="h-4 group-hover:hidden"
-              />
-              <img
-                src={`/image/arrow_right_hover.png`}
-                alt="arrow_right_hover"
-                className="h-4 hidden group-hover:block"
-              />
             </div>
           </div>
         </div>
@@ -190,13 +61,13 @@ const JobAlerts = ({ onJobCountChange }) => {
   const calculateDaysRemaining = (expirationDate, postedDate) => {
     const expiryDate = new Date(expirationDate);
     const postDate = new Date(postedDate);
-  
+
     const timeDiff = expiryDate - postDate;
     const daysRemaining = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-  
+
     return daysRemaining > 0 ? daysRemaining : 0;
   };
-  
+
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -221,8 +92,8 @@ const JobAlerts = ({ onJobCountChange }) => {
   }, [notifications]);
 
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedJobs = enrichedNotifications.slice(startIndex, startIndex + itemsPerPage);
-  const totalPages = Math.ceil(enrichedNotifications.length / itemsPerPage);
+  const paginatedJobs = notificationsList.slice(startIndex, startIndex + itemsPerPage);
+  const totalPages = Math.ceil(notificationsList.length / itemsPerPage);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -244,7 +115,7 @@ const JobAlerts = ({ onJobCountChange }) => {
 
   return (
     <div>
-      <div className="w-100 overflow-y-auto ml-8 mb-5">
+      <div className="w-[90%] overflow-y-auto ml-8 mb-5">
         <ListJob jobs={paginatedJobs} numberOfJobs={enrichedNotifications.length} />
       </div>
       <div className="h-12 justify-center items-center gap-2 inline-flex w-full">
@@ -259,9 +130,8 @@ const JobAlerts = ({ onJobCountChange }) => {
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
-            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${
-              currentPage === index + 1 ? 'bg-[#0a65cc] text-white' : 'text-[#5e6670]'
-            }`}
+            className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === index + 1 ? 'bg-[#0a65cc] text-white' : 'text-[#5e6670]'
+              }`}
             onClick={() => setCurrentPage(index + 1)}
           >
             {index + 1}
