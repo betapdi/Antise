@@ -264,10 +264,10 @@ function DetailJob() {
                             {role !== "APPLICANT" && role !== "COMPANY" &&
                                 <div className="flex-col justify-center items-end gap-3 flex">
                                     <button className="h-14 px-3 py-4 bg-[#0a65cc] rounded justify-center items-center gap-3 flex"
-                                            onClick={() =>{
+                                        onClick={() => {
 
-                                             setIsFormOpen(false);
-                                             setDialogContent({
+                                            setIsFormOpen(false);
+                                            setDialogContent({
                                                 title: "Login Required",
                                                 content: "You need to login to apply for this job.",
                                                 buttonLabel: "Login",
@@ -275,14 +275,14 @@ function DetailJob() {
                                             });
                                             setIsOpenDialog(true);
                                         }}
-                                        >
-                                            <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
-                                            <img
-                                                src={`/image/arrow_right_hover.png`}
-                                                alt="icon"
-                                            />
+                                    >
+                                        <div className="text-white text-base font-semibold font-['Inter'] capitalize leading-normal">Apply now</div>
+                                        <img
+                                            src={`/image/arrow_right_hover.png`}
+                                            alt="icon"
+                                        />
                                     </button>
-                                 
+
 
                                     <div className="justify-start items-start inline-flex">
                                         <div className="text-[#767f8c] text-sm font-normal font-inter leading-tight">Job expire in: </div>
