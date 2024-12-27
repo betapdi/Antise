@@ -52,7 +52,6 @@ const companyApi = {
   },
 
   addSavedApplication: (id) => {
-    console.log(id);
     const url = `/company/saveApplication/${id}`;
     return axiosPrivate.post(url);
   },

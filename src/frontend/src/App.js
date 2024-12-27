@@ -51,7 +51,7 @@ function App() {
       try {
         const response = await userApi.getUserData();
         const userData = response.data;
-        console.log(userData);
+        //console.log(userData);
 
         setUserId(userData.id);
         setEmail(userData.email);
