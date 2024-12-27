@@ -135,10 +135,11 @@ function ListCompany() {
               </div>
             </div>
 
-            <div className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
-                            hover:bg-[#0a65cc] hover:text-white group">
+            <button className="px-6 py-3 bg-[#e7f0fa] rounded-[3px] justify-center items-center gap-3 flex
+                            hover:bg-[#0a65cc] hover:text-white group"
+                            onClick={() => handleViewDetailCompany(company)}>
               <button className="text-[#0a65cc] group-hover:text-white text-base font-semibold font-['Inter'] capitalize leading-normal"
-                onClick={() => handleViewDetailCompany(company)}
+                
               >
                 View Company
               </button>
@@ -152,7 +153,7 @@ function ListCompany() {
                 alt="arrow_right_hover"
                 className="h-4 hidden group-hover:block"
               />
-            </div>
+            </button>
           </div>
         ))}
         {isOpenDialog && (
