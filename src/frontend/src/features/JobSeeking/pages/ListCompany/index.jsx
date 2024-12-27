@@ -51,6 +51,7 @@ function ListCompany() {
         }
       })
       .catch((error) => {
+        console.error("Error searching for company:", error);
         setDialogContent({
           title: "Error!",
           content:
@@ -70,6 +71,7 @@ function ListCompany() {
         result = result.filter((company) => company.verified);
         setCompanies(result);
       } catch (error) {
+        console.error("Failed to fetch company list: ", error);
       }
     };
     if (searchQuery === "" || searchQuery === null) fetchCompanies();

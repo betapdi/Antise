@@ -48,6 +48,7 @@ function ListSavedApplication({ savedApplications, onViewProfile }) {
                 setApplicationApplicants((prevApplicants) => ({ ...prevApplicants, ...fetchedApplicants }));
 
             } catch (error) {
+                console.error("Error fetching company data:", error);
             }
         };
 
@@ -60,8 +61,10 @@ function ListSavedApplication({ savedApplications, onViewProfile }) {
         try {
             const response = await companyApi.addSavedApplication(application.id);
             const application = response.data;
+            console.log('ADD', application);
             addSavedApplications(application);
         } catch (error) {
+            console.log(error);
         }
     };
 
@@ -69,8 +72,10 @@ function ListSavedApplication({ savedApplications, onViewProfile }) {
         try {
             const response = await companyApi.removeSavedApplication(id);
             const application = response.data;
+            console.log('REMOVE', application);
             removeSavedApplications(id);
         } catch (error) {
+            console.log(error);
         }
     };
 

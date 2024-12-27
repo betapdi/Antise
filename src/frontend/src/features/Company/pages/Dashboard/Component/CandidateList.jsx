@@ -12,6 +12,7 @@ function CandidateList() {
   const [jobID, setJobID] = useState(null);
   const [job, setJob] = useState(null);
   const { savedApplications } = useContext(CompanyContext);
+  console.log(savedApplications);
 
   useEffect(() => {
     setJobID(params.id);
@@ -24,6 +25,7 @@ function CandidateList() {
         const data = response.data;
         setJob(data);
       } catch (error) {
+        console.error('Error fetching job data:', error);
       }
     };
 

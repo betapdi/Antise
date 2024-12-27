@@ -118,6 +118,7 @@ function ListJob({ isSearch }) {
           setIsOpenDialog(true);
         }
       } catch (error) {
+        console.error("Error searching jobs:", error);
         setDialogContent({
           title: "Error!",
           content:
@@ -132,7 +133,7 @@ function ListJob({ isSearch }) {
   }, [searchQuery, filters]);
   const calculateRemainingDays = () => {
     const updatedListJobs = [];
-    const remainingDaysMap = {};
+    const remainingDaysMap = {}; 
     let check = false;
 
     for (let i = 0; i < jobs.length; i++) {
@@ -161,6 +162,7 @@ function ListJob({ isSearch }) {
         const response = await jobApi.getAllJobs();
         setJobs(response.data);
       } catch (error) {
+        console.log("Failed to fetch jobs: ", error);
       }
     };
     if (searchQuery === "" || searchQuery === null) fetchJobs();
@@ -183,6 +185,7 @@ function ListJob({ isSearch }) {
         const response = await companyApi.getAllCompanies();
         setcompanies(response.data);
       } catch (error) {
+        console.log("Failed to fetch companies: ", error);
       }
     };
     fetchCompanies();
@@ -229,6 +232,7 @@ function ListJob({ isSearch }) {
       const job = response.data;
       addFavoriteJob(job);
     } catch (error) {
+      console.log(error);
     }
   };
 
@@ -238,6 +242,7 @@ function ListJob({ isSearch }) {
       const job = response.data;
       removeFavoriteJob(id);
     } catch (error) {
+      console.log(error);
     }
   };
 
@@ -246,8 +251,9 @@ function ListJob({ isSearch }) {
       className={`flex flex-col gap-12 justify-center items-center w-full py-16`}
     >
       <div
-        className={`flex flex-row h-12 mb-8 ${isSearch === 1 ? "gap-[55rem]" : "gap-[44rem]"
-          }`}
+        className={`flex flex-row h-12 mb-8 ${
+          isSearch === 1 ? "gap-[55rem]" : "gap-[44rem]"
+        }`}
       >
         {isSearch === 1 ? (
           <button
@@ -359,10 +365,11 @@ function ListJob({ isSearch }) {
                     <div className="w-6 h-6 justify-center items-center flex">
                       <div className="w-6 h-6 relative">
                         <img
-                          src={`/image/${isClicked[job.id]
+                          src={`/image/${
+                            isClicked[job.id]
                               ? "bookmark_click.png"
                               : "bookmark.png"
-                            }`}
+                          }`}
                           alt="icon"
                         />
                       </div>
@@ -420,10 +427,11 @@ function ListJob({ isSearch }) {
           return (
             <button
               key={displayPage}
-              className={`w-12 h-12 px-2 py-3 rounded-[50px] ${currentPage === displayPage
+              className={`w-12 h-12 px-2 py-3 rounded-[50px] ${
+                currentPage === displayPage
                   ? "bg-[#0a65cc] text-white"
                   : "text-[#5e6670]"
-                }`}
+              }`}
               onClick={() => setCurrentPage(displayPage)}
             >
               {displayPage}

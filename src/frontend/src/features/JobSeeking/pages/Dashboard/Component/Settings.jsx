@@ -37,8 +37,10 @@ const Settings = () => {
     const fetchResume = async () => {
       try {
         const response = await applicantApi.getResume(resumeUrl);
+        console.log(response.data);
         setOldResume(response.data);
       } catch (error) {
+        console.log(error);
         setOldResume({ size: 0 });
       }
     };
@@ -75,6 +77,7 @@ const Settings = () => {
         link: null
       });
     } catch (error) {
+      console.error(error);
 
       // Set error dialog
       setDialogContent({
@@ -139,6 +142,7 @@ const Settings = () => {
               }}
             >
               {({ values, errors, touched, handleSubmit, setFieldValue, isSubmitting }) => {
+                console.log({ values, errors, touched, handleSubmit, isSubmitting });
                 return (
                   <Form onSubmit={handleSubmit}>
                     {/* Basic Information */}

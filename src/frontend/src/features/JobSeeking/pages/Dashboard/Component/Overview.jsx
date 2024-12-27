@@ -10,6 +10,7 @@ function ListJob({ jobs, numberOfJobs }) {
     const navigate = useNavigate();
     const { profileImageUrl, fullName, favoriteJobs, applications, isCompleteSetting } = useContext(ApplicantContext);
     const [jobCompanies, setJobCompanies] = useState({});
+    console.log("Complete setting:", isCompleteSetting());
 
     const handleSettingCompany = (company) => {
         navigate(`/job/dashboard/settings`);
@@ -35,6 +36,7 @@ function ListJob({ jobs, numberOfJobs }) {
 
     const getApplicationByJobId = (jobId) => {
         const application = applications.find((application) => application.jobId === jobId);
+        console.log("Application:", application);
         return application ? application.submittedDate : null;
     };
 
@@ -53,6 +55,7 @@ function ListJob({ jobs, numberOfJobs }) {
                 );
                 setJobCompanies((prevCompanies) => ({ ...prevCompanies, ...fetchedCompanies }));
             } catch (error) {
+                console.error("Error fetching company data:", error);
             }
         };
 
@@ -233,8 +236,10 @@ const AppliedJobs = () => {
         const fetchAppliedJob = async () => {
             try {
                 const response = await applicantApi.getAppliedJob();
+                console.log("Fetch Applied Jobs: ", response.data);
                 setAppliedJob(response.data);
             } catch (error) {
+                console.log("Failed to fetch companies: ", error);
             }
         };
         fetchAppliedJob();

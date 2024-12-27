@@ -56,6 +56,7 @@ function Settings() {
   };
 
   const handleSaveChange = async (values) => {
+    console.log(values);
     try {
       const response = await companyApi.editCompany(values);
       const company = response.data;
@@ -84,6 +85,7 @@ function Settings() {
         link: null
       });
     } catch (error) {
+      console.error(error);
 
       // Set error dialog
       setDialogContent({
@@ -178,6 +180,13 @@ function Settings() {
             setFieldValue,
             isSubmitting,
           }) => {
+            console.log({
+              values,
+              errors,
+              touched,
+              handleSubmit,
+              isSubmitting,
+            });
             return (
               <Form
                 onSubmit={handleSubmit}

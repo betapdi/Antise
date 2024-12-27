@@ -47,6 +47,7 @@ function ListJob({ jobList }) {
       const updatedJobList = jobList.filter((item) => item.id !== job.id);
       setJobList(updatedJobList);
     } catch (error) {
+      console.log("Error deleting job", error);
     }
   };
 

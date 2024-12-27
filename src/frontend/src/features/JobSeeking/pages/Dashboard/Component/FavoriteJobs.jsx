@@ -26,11 +26,13 @@ function ListJob() {
                 );
                 setJobCompanies((prevCompanies) => ({ ...prevCompanies, ...fetchedCompanies }));
             } catch (error) {
+                console.error("Error fetching company data:", error);
             }
         };
 
         if (favoriteJobs.length > 0) {
             fetchCompanies();
+            console.log("COMPANY", jobCompanies);
         }
     }, [favoriteJobs]);
 
@@ -77,11 +79,14 @@ function ListJob() {
     }, []);
 
     const handleAddFavoriteJob = async (id) => {
+        console.log(id);
         try {
             const response = await applicantApi.addFavoriteJob(id);
             const job = response.data;
+            console.log(job);
             addFavoriteJob(job);
         } catch (error) {
+            console.log(error);
         }
     };
 
@@ -89,8 +94,10 @@ function ListJob() {
         try {
             const response = await applicantApi.removeFavoriteJob(id);
             const job = response.data;
+            console.log("REMOVE", job);
             removeFavoriteJob(id);
         } catch (error) {
+            console.log(error);
         }
     };
 
