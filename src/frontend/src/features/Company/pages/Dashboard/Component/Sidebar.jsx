@@ -79,16 +79,16 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/company/dashboard/settings"
-                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/settings")
+                to="/company/dashboard/notifications"
+                className={`flex items-center py-2 gap-4 ${isActive("/company/dashboard/notifications")
                   ? "bg-[#e7f0fa] text-[#0a65cc]"
                   : "text-[#767F8C]"
                   } hover:bg-[#e7f0fa]`}
               >
                 <img
-                  src={`${isActive("/company/dashboard/settings") ? "/image/BlueGear.png" : "/image/setting_btn.svg"}`}
+                  src={`${isActive("/company/dashboard/notifications") ? "/image/BlueBellRinging.png" : "/image/BellRinging.svg"}`}
                   alt="logo"
-                  className={`w-auto h-auto ml-4 mr-2 ${isActive("/company/dashboard/settings") ? "filter-blue" : ""
+                  className={`w-auto h-auto ml-4 mr-2 ${isActive("/company/dashboard/notifications") ? "filter-blue" : ""
                     }`}
                 />
                 Notifications

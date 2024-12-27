@@ -8,6 +8,7 @@ import CandidateList from "./Component/CandidateList";
 import SavedApplication from "./Component/SavedApplication";
 import ViewApplication from "./Component/ViewApplication";
 import Settings from "./Component/Settings";
+import Notifications from "./Component/Notifications";
 
 
 const Dashboard = () => {
@@ -26,6 +27,7 @@ const Dashboard = () => {
             <Route path="/my-job" element={<MyJob />} />
             <Route path="/my-job/viewApplication/:id" element={<ViewApplication />} />
             <Route path="/my-job/list-candidate/:id" element={<CandidateList />} />
+            <Route path="Notifications" element={<Notifications />} />
             <Route path="Settings" element={<Settings />} />
           </Routes>
         </div>
