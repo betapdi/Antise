@@ -70,7 +70,7 @@ const ApplyForm = ({ isCloseChange, job }) => {
 
 
   return (
-    <div className="w-full mx-auto p-8 bg-white shadow-md rounded">
+    <div className="w-full mx-auto p-6 bg-white shadow-md rounded">
       <h1 className="text-[#18191c] mb-3 text-lg font-medium font-['Inter'] leading-7">{job.title}</h1>
       <div>
         <Formik
