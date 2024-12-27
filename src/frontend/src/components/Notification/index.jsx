@@ -136,16 +136,10 @@ const NotificationDropdown = () => {
     <div className="w-96 bg-white rounded-lg shadow-lg p-4">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-800">Notification</h2>
-        <button
-          onClick={markAllAsRead}
-          className="text-sm text-blue-600 hover:underline"
-        >
-          Mark all as read
-        </button>
       </div>
       <ul className="space-y-4">
         {latestNotifications.map((notification) => {
-          console.log("Notification details:", notification); // Log each notification's details
+          console.log("Notification details:", notification); 
           return (
             <li
               key={notification.id}
