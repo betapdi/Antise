@@ -56,7 +56,7 @@ const ListJob = ({ jobs, numberOfJobs }) => (
   </div>
 );
 
-const JobAlerts = ({ onJobCountChange }) => {
+const Notifications = ({ onJobCountChange }) => {
   const { notifications } = useContext(UserContext);
   const [enrichedNotifications, setEnrichedNotifications] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -154,4 +154,4 @@ const JobAlerts = ({ onJobCountChange }) => {
   );
 };
 
-export default JobAlerts;
+export default Notifications;

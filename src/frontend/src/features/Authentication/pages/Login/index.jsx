@@ -52,7 +52,8 @@ export default function LoginPage() {
         const companyResponse = await companyApi.getAllCompanies();
         setCompanyCount(companyResponse.data.length);
 
-        setCandidateCount(500);
+        const candidateResponse = await userApi.getNumUser();
+        setCandidateCount(candidateResponse.data);
       } catch (error) {
         console.error("Error fetching counts:", error);
       }
