@@ -134,16 +134,16 @@ function DetailJob() {
         }
         if (job != null) {
             fetchCompany(job.companyId);
-            console.log('companyID', job.companyId);
+            // console.log('companyID', job.companyId);
         }
     }, [job])
 
     const handleAddFavoriteJob = async (id) => {
-        console.log(id);
+        // console.log(id);
         try {
             const response = await applicantApi.addFavoriteJob(id);
             const job = response.data;
-            console.log(job);
+            // console.log(job);
             addFavoriteJob(job);
         } catch (error) {
             console.log(error);
@@ -154,7 +154,7 @@ function DetailJob() {
         try {
             const response = await applicantApi.removeFavoriteJob(id);
             const job = response.data;
-            console.log('REMOVE', job);
+            // console.log('REMOVE', job);
             removeFavoriteJob(id);
         } catch (error) {
             console.log(error);

@@ -141,7 +141,7 @@ const Settings = () => {
               }}
             >
               {({ values, errors, touched, handleSubmit, setFieldValue, isSubmitting }) => {
-                console.log({ values, errors, touched, handleSubmit, isSubmitting });
+                {/* console.log({ values, errors, touched, handleSubmit, isSubmitting }); */}
                 return (
                   <Form onSubmit={handleSubmit}>
                     {/* Basic Information */}
