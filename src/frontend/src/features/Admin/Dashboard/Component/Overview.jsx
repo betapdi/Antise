@@ -26,7 +26,7 @@ function Overview() {
             label: "Number of Pending Companies",
             value: stat.pendingCompanies || "0",
           },
-          { label: "Number of Active Jobs", value: stat.jobs || "0" },
+          { label: "Number of Jobs", value: stat.jobs || "0" },
         ];
 
         setStats(updatedStats);
