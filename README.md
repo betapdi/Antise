@@ -1,1 +1,1 @@
-Tham khảo cách chia folder và code tại: https://github.com/betapdi/TheDiaryOfRita-FrontEnd
+![alt text](https://github.com/betapdi/Antise/blob/main/image.png?raw=true)
